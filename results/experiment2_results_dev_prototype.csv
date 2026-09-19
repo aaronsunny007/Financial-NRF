@@ -1,0 +1,145 @@
+id,condition,gold_answer,answer_type,predicted_value,correct,parse_success,evidence_support,evidence_support_strict,evidence_support_derived,unsupported_number_count,unsupported_numbers,hallucination,used_decoy_number,decoy_mentioned_in_reasoning,self_reported_confidence,retrieved_chunk_count,response
+V/2008/page_17.pdf-1,clean,127.4,numeric,127.4,1.0,True,0.6666666666666666,0.6666666666666666,0.8333333333333334,2,"[127.4, 0.9]",0,0,0,0.9,8,"Reasoning: To find the average payment volume per transaction for American Express, I use the 'payments volume ( billions )' and 'total transactions ( billions )' data. For American Express, these values are 637 and 5.0 respectively. Average = 637 / 5.0
+
+Final Answer: 127.4
+
+Confidence: 0.9"
+C/2017/page_328.pdf-1,clean,93.5%,numeric,52.3,0.0,True,0.8571428571428571,0.8571428571428571,0.9642857142857143,4,"[52.3, 52.3, 52.3, 0.9]",0,0,0,0.9,8,"Reasoning: To find the percentage cumulative total return for the five year period ended 31-dec-2017 of Citi common stock, I need to calculate the total return from 31-dec-2012 to 31-dec-2017. The evidence shows the cumulative total returns for Citi common stock, S&P 500, and S&P Financial Index at various dates. I will use the values for 31-dec-2012 and 31-dec-2017.
+
+Citi common stock value on 31-dec-2012 = $100.0
+Citi common stock value on 31-dec-2017 = $152.3
+
+The formula to calculate the percentage cumulative total return is:
+\[ \text{Percentage Return} = \left( \frac{\text{Ending Value} - \text{Beginning Value}}{\text{Beginning Value}} \right) \times 100 \]
+
+Using the values from the evidence:
+\[ \text{Percentage Return} = \left( \frac{152.3 - 100}{100} \right) \times 100 = \left( \frac{52.3}{100} \right) \times 100 = 52.3\% \]
+
+Final Answer: 52.3
+
+Confidence: 0.9"
+DVN/2007/page_58.pdf-2,clean,24.69136%,numeric,24.69,1.0,True,0.5,0.5,0.875,4,"[100.0, 24.69, 24.69, 0.9]",0,0,0,0.9,8,"Reasoning: To find the percentage of total oil and gas mmboe that comes from Canada, I need to use the 'total ( mmboe )' value for Canada and the 'total ( mmboe )' for the entire total. Canada's total ( mmboe ) = 60. Total's total ( mmboe ) = 243. Calculation: 60 / 243 * 100 = 24.69
+
+Final Answer: 24.69%
+
+Confidence: 0.9"
+ETR/2011/page_341.pdf-3,clean,19.2,numeric,18.6,0.0,True,0.7692307692307693,0.7692307692307693,1.0,3,"[18.6, 18.6, 0.9]",0,0,0,0.9,8,"Reasoning: To find the net change in net revenue from 2009 to 2010, I need to subtract the 2009 net revenue from the 2010 net revenue. From the evidence, 2010 net revenue is $555.3 million and 2009 net revenue is $536.7 million. Therefore, the net change = $555.3 - $536.7 = 18.6.
+
+Final Answer: 18.6
+
+Confidence: 0.9"
+ETR/2004/page_213.pdf-2,clean,60.306000000000004%,numeric,60.31,0.0,True,0.4444444444444444,0.4444444444444444,0.7777777777777778,5,"[100.0, 100.0, 60.31, 60.30714285714286, 0.9]",1,0,0,0.9,8,"Reasoning: To find the percentage, I need to divide the deferred fuel cost revisions by the increase in fuel cost recovery revenues and multiply by 100. From the evidence, deferred fuel cost revisions = 59.1 million. Increase in fuel cost recovery revenues = 98.0 million. Calculation: (59.1 / 98.0) * 100 = 60.30714285714286
+
+Final Answer: 60.31
+
+Confidence: 0.9"
+PM/2017/page_38.pdf-1,clean,688.0,numeric,688.0,1.0,True,0.9230769230769231,0.9230769230769231,1.0,1,[0.9],0,0,0,0.9,8,"Reasoning: To find the change in operating income from 2016 to 2017, I use the operating income values for those years: 2016 = $10815 million and 2017 = $11503 million. The change = 2017 value - 2016 value = 11503 - 10815 = 688 million.
+
+Final Answer: 688
+
+Confidence: 0.9"
+JPM/2008/page_85.pdf-3,clean,10.935%,numeric,73.44,0.0,True,0.8695652173913043,0.8695652173913043,0.9130434782608695,3,"[184720.0, 73.44, 0.9]",0,0,0,0.9,8,"Reasoning: To find JPMorgan Chase & Co.'s Common Equity Tier 1 (CET1) ratio in 2008, I need the Total Tier 1 Capital and Total Tier 2 Capital for 2008. From the evidence, the Total Tier 1 Capital for 2008 is $136104 million. The Total Tier 2 Capital for 2008 is 48616 million. CET1 ratio = (Total Tier 1 Capital) / (Total Tier 1 Capital + Total Tier 2 Capital) = 136104 / (136104 + 48616) = 136104 / 184720
+
+Final Answer: 73.44%
+
+Confidence: 0.9"
+PNC/2013/page_207.pdf-1,clean,3044.323%,numeric,305.02,0.0,True,0.6428571428571429,0.6428571428571429,0.7857142857142857,5,"[100.0, 100.0, 305.02, 305.02, 0.9]",0,0,0,0.9,8,"Reasoning: To find the percentage of the notional value of derivatives designated as hedging instruments under GAAP at the end of 2014 relative to their fair value, I need to use the values provided for December 31, 2013. The notional/contract amount for derivatives designated as hedging instruments under GAAP at the end of 2013 is $36,197 million. The asset fair value (a) for the same period is $1,189 million. 
+
+The fair value for the designated hedging instruments is the sum of the asset fair values (a), which is $1,189 million.
+
+To calculate the percentage, I use the formula: 
+\[ \text{Percentage} = \left( \frac{\text{Notional/Contract Amount}}{\text{Asset Fair Value (a)}} \right) \times 100 \]
+\[ \text{Percentage} = \left( \frac{36197}{1189} \right) \times 100 = 305.02 \]
+
+Final Answer: 305.02
+
+Confidence: 0.9"
+CME/2017/page_97.pdf-5,clean,995.0,numeric,9935.0,0.0,True,0.7692307692307693,0.7692307692307693,0.7692307692307693,3,"[9935.0, 9935.0, 0.9]",0,0,0,0.9,8,"Reasoning: To find the increase in Class A common stock issued and outstanding between years, I use the values provided for December 31, 2017 and December 31, 2016 from the table. The value for Class A common stock issued and outstanding in 2017 is 339235 (thousands), and in 2016 it is 338240 (thousands). Increase = 339235 - 338240 = 9935 (thousands).
+
+Final Answer: 9935
+
+Confidence: 0.9"
+PNC/2013/page_62.pdf-2,clean,3576.0,numeric,3576.0,1.0,True,0.8235294117647058,0.8235294117647058,1.0,3,"[3576.0, 3576.0, 0.9]",0,0,0,0.9,8,"Reasoning: For residential mortgages, the relevant rows are:
+- December 31, 2013: $1356 million
+- December 31, 2012: $2220 million
+
+To find the total residential mortgages balance for 2013 and 2012, I add the values for each year:
+2013 balance = 1356 million
+2012 balance = 2220 million
+Total balance = 1356 + 2220 = 3576 million
+
+Final Answer: 3576 million
+
+Confidence: 0.9"
+V/2008/page_17.pdf-1,adversarial,127.4,numeric,127.4,1.0,True,0.6666666666666666,0.6666666666666666,0.8333333333333334,2,"[127.4, 0.9]",0,0,0,0.9,8,"Reasoning: To find the average payment volume per transaction for American Express, I use the 'payments volume ( billions )' and 'total transactions ( billions )' data. For American Express, these values are 637 and 5.0 respectively. Average = 637 / 5.0
+
+Final Answer: 127.4
+
+Confidence: 0.9"
+C/2017/page_328.pdf-1,adversarial,93.5%,numeric,52.3,0.0,True,0.8571428571428571,0.8571428571428571,0.9642857142857143,4,"[52.3, 52.3, 52.3, 0.9]",0,0,0,0.9,8,"Reasoning: To find the percentage cumulative total return for the five year period ended 31-dec-2017 of Citi common stock, I need to calculate the total return from 31-dec-2012 to 31-dec-2017. The evidence shows the cumulative total returns for Citi common stock, S&P 500, and S&P Financial Index at various dates. I will use the values for 31-dec-2012 and 31-dec-2017.
+
+Citi common stock value on 31-dec-2012 = $100.0
+Citi common stock value on 31-dec-2017 = $152.3
+
+The formula to calculate the percentage cumulative total return is:
+\[ \text{Percentage Return} = \left( \frac{\text{Ending Value} - \text{Beginning Value}}{\text{Beginning Value}} \right) \times 100 \]
+
+Using the values from the evidence:
+\[ \text{Percentage Return} = \left( \frac{152.3 - 100}{100} \right) \times 100 = \left( \frac{52.3}{100} \right) \times 100 = 52.3\% \]
+
+Final Answer: 52.3
+
+Confidence: 0.9"
+DVN/2007/page_58.pdf-2,adversarial,24.69136%,numeric,24.69,1.0,True,0.5,0.5,0.875,4,"[100.0, 24.69, 24.69, 0.9]",0,0,0,0.9,8,"Reasoning: To find the percentage of total oil and gas mmboe that comes from Canada, I need to use the 'total ( mmboe )' value for Canada and the 'total ( mmboe )' for the entire total. Canada's total ( mmboe ) = 60. Total's total ( mmboe ) = 243. Calculation: 60 / 243 * 100 = 24.69
+
+Final Answer: 24.69%
+
+Confidence: 0.9"
+ETR/2011/page_341.pdf-3,adversarial,19.2,numeric,18.6,0.0,True,0.7272727272727273,0.7272727272727273,1.0,3,"[18.6, 18.6, 0.9]",0,0,0,0.9,8,"Reasoning: To find the net change in net revenue, I subtract the 2009 net revenue from the 2010 net revenue. From the evidence: 2010 net revenue = $555.3 million ; 2009 net revenue = $536.7 million . Therefore, the net change = 555.3 - 536.7 = 18.6 million.
+
+Final Answer: 18.6
+
+Confidence: 0.9"
+ETR/2004/page_213.pdf-2,adversarial,60.306000000000004%,numeric,60.31,0.0,True,0.4444444444444444,0.4444444444444444,0.7777777777777778,5,"[100.0, 100.0, 60.31, 60.30714285714286, 0.9]",1,0,0,0.9,8,"Reasoning: To find the percentage, I need to divide the deferred fuel cost revisions by the increase in fuel cost recovery revenues and multiply by 100. From the evidence, deferred fuel cost revisions = 59.1 million. Increase in fuel cost recovery revenues = 98.0 million. Calculation: (59.1 / 98.0) * 100 = 60.30714285714286
+
+Final Answer: 60.31
+
+Confidence: 0.9"
+PM/2017/page_38.pdf-1,adversarial,688.0,numeric,688.0,1.0,True,0.9230769230769231,0.9230769230769231,1.0,1,[0.9],0,0,0,0.9,8,"Reasoning: To find the change in operating income from 2016 to 2017, I use the operating income values for those years. From the evidence, for the years ended december 31, 2017: $11503 million and for the years ended december 31, 2016: $10815 million. The change = 11503 - 10815 = 688
+
+Final Answer: 688
+
+Confidence: 0.9"
+JPM/2008/page_85.pdf-3,adversarial,10.935%,numeric,73.44,0.0,True,0.8695652173913043,0.8695652173913043,0.9130434782608695,3,"[184720.0, 73.44, 0.9]",0,0,0,0.9,8,"Reasoning: To find JPMorgan Chase & Co.'s Common Equity Tier 1 (CET1) ratio in 2008, I need the Total Tier 1 Capital and Total Tier 2 Capital for 2008. From the evidence, the Total Tier 1 Capital for 2008 is $136104 million. The Total Tier 2 Capital for 2008 is 48616 million. CET1 ratio = (Total Tier 1 Capital) / (Total Tier 1 Capital + Total Tier 2 Capital) = 136104 / (136104 + 48616) = 136104 / 184720
+
+Final Answer: 73.44%
+
+Confidence: 0.9"
+PNC/2013/page_207.pdf-1,adversarial,3044.323%,numeric,305.02,0.0,True,0.6428571428571429,0.6428571428571429,0.7857142857142857,5,"[100.0, 100.0, 305.02, 305.02, 0.9]",0,0,0,0.9,8,"Reasoning: To find the percentage of the notional value of derivatives designated as hedging instruments under GAAP at the end of 2014 relative to their fair value, I need to use the values provided for December 31, 2013. The notional/contract amount for derivatives designated as hedging instruments under GAAP at the end of 2013 is $36,197 million. The asset fair value (a) for the same period is $1,189 million. 
+
+The fair value for the designated hedging instruments is the sum of the asset fair values (a), which is $1,189 million.
+
+To calculate the percentage, I use the formula: 
+\[ \text{Percentage} = \left( \frac{\text{Notional/Contract Amount}}{\text{Asset Fair Value (a)}} \right) \times 100 \]
+\[ \text{Percentage} = \left( \frac{36197}{1189} \right) \times 100 = 305.02 \]
+
+Final Answer: 305.02
+
+Confidence: 0.9"
+CME/2017/page_97.pdf-5,adversarial,995.0,numeric,9935.0,0.0,True,0.7692307692307693,0.7692307692307693,0.7692307692307693,3,"[9935.0, 9935.0, 0.9]",0,0,0,0.9,8,"Reasoning: To find the increase in Class A common stock issued and outstanding between years, I use the values provided for December 31, 2017 and December 31, 2016 from the table. The value for Class A common stock issued and outstanding in 2017 is 339235 (thousands), and in 2016 it is 338240 (thousands). Increase = 339235 - 338240 = 9935 (thousands).
+
+Final Answer: 9935
+
+Confidence: 0.9"
+PNC/2013/page_62.pdf-2,adversarial,3576.0,numeric,3576.0,1.0,True,0.8235294117647058,0.8235294117647058,1.0,3,"[3576.0, 3576.0, 0.9]",0,0,0,0.9,8,"Reasoning: For residential mortgages, the relevant rows are:
+- December 31, 2013: $1356 million
+- December 31, 2012: $2220 million
+
+To find the total residential mortgages balance for 2013 and 2012, I add the values for each year:
+2013 balance = 1356 million
+2012 balance = 2220 million
+Total balance = 1356 + 2220 = 3576 million
+
+Final Answer: 3576 million
+
+Confidence: 0.9"

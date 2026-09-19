@@ -1,0 +1,379 @@
+example,gold_answer,predicted_number,correct,confidence,faithfulness,hallucination,response
+1,94,94.0,1,1.0,0.8,0,"Reasoning: 
+To find the net change in net revenue, we need to subtract the 2014 net revenue from the 2015 net revenue.
+
+Final Answer: $5829 - $5735 = $94 million
+
+Confidence: 1"
+2,14%,30.7,0,1.0,0.8,1,"Reasoning: To find the percentage of total facilities that are leased, we need to divide the number of leased facilities by the total number of facilities and then multiply by 100.
+
+Final Answer: 17.2 / 56.0 * 100 = 30.7%
+
+Confidence: 1"
+3,9.9%,2010.0,0,1.0,0.8,1,"Reasoning: To calculate the percentage change, we need to find the difference between the 2011 and 2010 figures and then divide by the 2010 figure.
+
+Final Answer: The percentage change in cash flow hedges in 2011 compared to 2010 is calculated as follows:
+(153.7 - 139.9) / 139.9 * 100 = 11.8%
+
+Confidence: 1"
+4,2.9%,2.91,1,0.99,0.8,0,"Reasoning: The total purchase price is $4,187.8 million. The value of metavante stock awards is $121.4 million.
+
+Final Answer: 121.4 / 4187.8 = 0.0291 or approximately 2.91%
+
+Confidence: 0.99"
+5,,500.0,0,0.5,0.8,1,"To calculate the difference in percentage cumulative total shareholder return on Masco common stock versus the S&P 500 index over the five-year period, we need to follow these steps:
+
+1. Calculate the cumulative total returns for both Masco and the S&P 500 index.
+2. Determine the percentage change for each year.
+3. Find the overall percentage change by averaging the yearly changes.
+
+### Step 1: Cumulative Total Returns
+
+- **Masco**: 
+  - 2013: $138.48
+  - 2014: $155.26
+  - 2015: $200.79
+  - 2016: $227.08
+  - 2017: $318.46
+  - Cumulative Total Return = ($318.46 / $100) * 100% = 318.46%
+
+- **S&P 500"
+6,7%,8.1,0,1.0,0.8,1,"Reasoning: To calculate the percentage change, we need to use the formula:
+\[ \text{Percentage Change} = \left( \frac{\text{New Value} - \text{Old Value}}{\text{Old Value}} \right) \times 100 \]
+Here, the old value is the total rental expense in July 2005 ($92,710,000), and the new value is the total rental expense in July 2006 ($100,690,000).
+
+Final Answer: The percentage change in total rental expense under operating leases from July 2, 2005 to July 1, 2006 is \( \frac{(100,690,000 - 92,710,000)}{92,710,000} \times 100 = 8.1\%\)
+
+Confidence: 1"
+7,10%,34.5,0,1.0,0.8,1,"Reasoning: To find the percentage of total recourse debt that is current, we need to sum up the annual maturities for each year from 2011 to 2015 and then divide by the total recourse debt.
+
+Current maturities = $463 + $2014 + $2014 + $497 + $500 = $1577 million
+
+Total recourse debt = $4612 million
+
+Percentage of total recourse debt = ($1577 / $4612) * 100 = 34.5%
+
+Final Answer: 34.5%
+
+Confidence: 1"
+8,12%,11.77,0,1.0,0.8,1,"Reasoning: To find the percentage of future minimum rental payments due in 2018, we need to divide the amount due in 2018 by the total future minimum rental payments and then multiply by 100.
+
+Total future minimum rental payments = $2575 million
+Amount due in 2018 = $301 million
+
+Percentage = ($301 / $2575) * 100 = 11.77%
+
+Final Answer: 11.77%
+Confidence: 1"
+9,yes,500.0,0,1.0,0.8,1,"Reasoning: We need to compare the cumulative total returns of Altria Group, Inc., with those of the S&P 500 over the past five years.
+
+Final Answer: Yes, Altria outperformed the S&P 500.
+
+Confidence: 1"
+10,-35,35.0,0,1.0,0.8,1,"Reasoning: To calculate the change in unrecognized tax benefits, we need to subtract the balance at the end of 2014 from the balance at the end of 2015.
+
+Final Answer: $1136 - $1171 = -$35 million
+
+Confidence: 1"
+11,-4.4%,-4.27,0,1.0,0.8,1,"Reasoning: To calculate the growth rate, we use the formula:
+\[ \text{Growth Rate} = \left( \frac{\text{New Value} - \text{Old Value}}{\text{Old Value}} \right) \times 100\% \]
+For standby letters of credit:
+\[ \text{Growth Rate} = \left( \frac{4711 - 4926}{4926} \right) \times 100\% = -4.27\% \]
+
+Final Answer: -4.27%
+
+Confidence: 1"
+12,22.4%,0.225,0,1.0,0.8,1,"Reasoning: To calculate the debt-to-assets ratio, we need to divide total debt by total assets.
+
+Total Debt = $81,738,800
+Total Assets = $364,433,100
+
+Debt-to-Avsetment Ratio = Total Debt / Total Assets
+= $81,738,800 / $364,433,100
+≈ 0.225
+
+Final Answer: 0.225
+
+Confidence: 1"
+13,24.6%,100.0,0,1.0,0.8,1,"Reasoning: To find the portion of the total noncancelable future lease commitments due in fiscal year 2019, we need to divide the amount due in 2019 by the total noncancelable future lease commitments.
+
+Total noncancelable future lease commitments = $559.3 million
+Amount due in 2019 = $137.4 million
+
+Final Answer: 24.7% (calculated as 137.4 / 559.3 * 100)
+
+Confidence: 1"
+14,no,2019.0,0,1.0,0.8,1,"Reasoning: We need to calculate the total return for both the 2019 peer group and the 2018 peer group, then compare them.
+
+For the 2019 peer group:
+Total Return = (Ending Value / Beginning Value) - 1
+= (281.09 / 100) - 1
+= 2.8109 - 1
+= 1.8109 or 181.09%
+
+For the 2018 peer group:
+Total Return = (Ending Value / Beginning Value) - 1
+= (286.22 / 100) - 1
+= 2.8622 - 1
+= 1.8622 or 186.22%
+
+Since 186.22% > 181.09%, the 2019 peer group had a higher total return.
+
+Final Answer: Yes
+
+Confidence: 1"
+15,1.7%,2014.0,0,0.99,0.8,1,"Reasoning: To calculate the percentage change, we need to find the difference between the two values and then divide it by the initial value.
+
+Final Answer: The percentage change in deferred tax assets and regulatory assets from 2013 to 2014 is calculated as follows:
+(Change in Regulatory Assets + Change in Deferred Tax Assets) / Initial Value = (-$6348 + $6241) / $195237 * 100 = -1%
+Confidence: 0.99"
+16,3298,3297.67,1,1.0,0.8,0,"Reasoning: To find the average, we need to sum up the values from each year and divide by the number of years.
+
+Sum = 4648 + 3625 + 1620 = 9893 million
+Number of years = 3
+
+Average = 9893 / 3 = 3297.67 million
+
+Final Answer: 3297.67 million
+
+Confidence: 1"
+17,65,65.0,1,1.0,0.8,0,"Reasoning: To find out how many destinations each continent has, we need to divide the total number of destinations by the number of continents.
+
+Total destinations = 455
+Number of continents = 7
+
+Final Answer: Each continent has approximately **65 destinations**.
+
+Confidence: 1"
+18,704.25,704.25,1,1.0,0.8,0,"Reasoning: To find the average net revenue, we need to add the net revenue values from both years and divide by two.
+
+Final Answer: ($705.4 + $703.1) / 2 = $704.25 million
+
+Confidence: 1"
+19,11.0%,10.5,0,0.99,0.8,1,"Reasoning: To find the percentage, we need to divide the accrued interest and penalties by the ending balance and multiply by 100.
+
+Final Answer: 10.5%
+
+Confidence: 0.99"
+20,68.9,10.2,0,1.0,0.8,1,"Reasoning: The fair value of the segregated assets is given directly in the table.
+
+Final Answer: $10.2 billion
+
+Confidence: 1"
+21,-8.4%,-8.0,0,1.0,0.8,1,"Reasoning: To calculate the percentage change, we need to use the formula:
+\[ \text{Percentage Change} = \left( \frac{\text{New Value} - \text{Old Value}}{\text{Old Value}} \right) \times 100 \]
+Here, the old value is the balance at December 31, 2008 ($843 million), and the new value is the balance at December 31, 2009 ($772 million).
+
+Final Answer: The percentage change is calculated as follows:
+\[ \left( \frac{772 - 843}{843} \right) \times 100 = -8.00\% \]
+
+Confidence: 1"
+22,113.63%,72.5,0,1.0,0.8,1,"Reasoning: To calculate the difference in percentage, we need to find the cumulative total returns for both Fidelity National Information Services Inc. and the S&P 500 over the five years from December 31, 2011 to December 31, 2016.
+
+Fidelity's cumulative total return = 311.81
+S&P 500 cumulative total return = 198.18
+
+Difference in percentage = ((Fidelity - S&P) / S&P) * 100
+= ((311.81 - 198.18) / 198.18) * 100
+≈ 72.5%
+
+Final Answer: 72.5%
+
+Confidence: 1"
+23,9.3%,8.55,0,1.0,0.8,1,"Reasoning: To calculate the percentage change, we need to find the difference between the highest and lowest prices, then divide by the highest price and multiply by 100.
+
+Highest Price: $101.88
+Lowest Price: $93.21
+
+Difference = Highest - Lowest = $101.88 - $93.21 = $8.67
+
+Percentage Change = (Difference / Highest) * 100 = ($8.67 / $101.88) * 100 ≈ 8.55%
+
+Final Answer: 8.55%
+
+Confidence: 1"
+24,2%,18.0,0,1.0,0.8,1,"Reasoning: To calculate the percentage, we need to divide the amount due to capital lease obligations by the total contractual obligations and then multiply by 100.
+
+Final Answer: 18%
+
+Confidence: 1"
+25,1.6,1.57,0,0.99,0.8,1,"Reasoning: 
+To find the ratio, we need to divide the total number of flight attendants by the total number of maintenance personnel.
+
+Total Flight Attendants = 24700 + 2200 = 26900
+Total Maintenance Personnel = 14900 + 2000 = 16900
+
+Ratio = Total Flight Attendants / Total Maintenance Personnel
+      = 26900 / 16900
+      ≈ 1.57
+
+Final Answer: 1.57
+
+Confidence: 0.99"
+26,2.64,2.62,1,1.0,0.8,0,"Reasoning: To find the ratio, we need to divide the square footage of Alpharetta Georgia by the square footage of Charlotte North Carolina.
+
+Final Answer: The ratio is 219,000 / 83,000 = 2.62
+
+Confidence: 1"
+27,34.8%,-34.6,0,0.99,0.8,1,"Reasoning: The income tax benefit for 2010 is -$6.3, and the share-based compensation cost is $18.1. To find the percentage, divide the income tax benefit by the share-based compensation cost and multiply by 100.
+
+Final Answer: (-$6.3 / $18.1) * 100 = -34.6%
+
+Confidence: 0.99"
+28,-30.9%,-30.8,1,1.0,0.8,0,"Reasoning: To calculate the percentage change, we need to find the difference between the ending balance and the beginning balance, then divide by the beginning balance and multiply by 100.
+
+Ending Balance = $139,549
+Beginning Balance = $201,808
+
+Percentage Change = ((Ending Balance - Beginning Balance) / Beginning Balance) * 100
+= (($139,549 - $201,808) / $201,808) * 100
+= (-$62,259 / $201,808) * 100
+≈ -30.8%
+
+Final Answer: -30.8%
+
+Confidence: 1"
+29,5.8,5.8,1,1.0,0.8,0,"Reasoning: To calculate the total impairment costs from 2003 to 2005, we need to sum up the impairment charges reported for those years.
+
+Total impairment charge from 2003 to 2005 = $0.5 million + $0.6 million + $4.7 million = $5.8 million
+
+Final Answer: 5.8
+
+Confidence: 1"
+30,114%,98.0,0,1.0,0.8,1,"Reasoning: To calculate the borrowing under the term loan facility as a percentage of the total contractual maturities, we need to divide the amount outstanding on the term loan by the sum of all contractual maturities.
+
+Total contractual maturities = $3081 + $15 + $485 = $3571
+
+Borrowing under the term loan facility = $3500
+
+Percentage = ($3500 / $3571) * 100 ≈ 98.00%
+
+Final Answer: 98.00%
+
+Confidence: 1"
+31,16.4%,17.5,0,1.0,0.8,1,"Reasoning: To find the percentage, divide the revenue from agricultural products by the total operating revenues and multiply by 100.
+
+Final Answer: 17.5%
+
+Confidence: 1"
+32,28%,10.0,0,1.0,0.8,1,"Reasoning: To find the percentage, we need to divide the total operating expenses by the net interest revenue and multiply by 100.
+
+Final Answer: 10%
+
+Confidence: 1"
+33,829,829.0,1,1.0,0.8,0,"Reasoning: The greatest provision for income taxes among the given years is $829 million, which corresponds to 2006.
+
+Final Answer: $829
+
+Confidence: 1"
+34,5.54%,54.4,0,1.0,0.8,1,"Reasoning: To find the percentage of CIB markets net interest income as part of the managed interest income, we need to divide the CIB markets net interest income by the managed interest income and then multiply by 100.
+
+Final Answer: 54.4%
+Confidence: 1"
+35,61545,48685.0,0,1.0,0.8,1,"Reasoning: To find the fair value of total securities available for sale without the fair value of securities classified as corporate stocks, we need to subtract the fair value of those securities from the total fair value of all securities available for sale.
+
+Total fair value of all securities available for sale = $51,052 million
+Fair value of securities classified as corporate stocks = $367 million
+
+Final Answer: $51,052 - $367 = $48,685 million
+
+Confidence: 1"
+36,112,168.0,0,1.0,0.8,1,"Reasoning: The table shows that the balance at March 31, 2008, was $168,000. This represents the ending balance of unrecognized tax benefits.
+
+Final Answer: $168
+
+Confidence: 1"
+37,64.9%,65.22,1,1.0,0.8,0,"Reasoning: We need to calculate the percentage of unleased square footage relative to the total square footage in Alpharetta, Georgia. The total square footage in Alpharetta, Georgia is given as 254,000 square feet. The unleased square footage is 165,000 square feet (since 165,000 out of 254,000). Therefore, the percentage is calculated as follows:
+\[ \text{Percentage} = \left( \frac{\text{Unleased Square Footage}}{\text{Total Square Footage}} \right) \times 100 \]
+\[ \text{Percentage} = \left( \frac{165,000}{254,000} \right) \times 100 \approx 65.22\% \]
+
+Final Answer: 65.22%
+
+Confidence: 1"
+38,75.8%,24.2,0,1.0,0.8,1,"Reasoning: To find the percentage of square footage in Alpharetta, Georgia not yet leased, we need to subtract the amount leased from the total square footage and then divide by the total square footage.
+
+Total square footage = 219,000 sq ft
+Leased square footage = 166,000 sq ft
+
+Not yet leased square footage = Total - Leased = 219,000 - 166,000 = 53,000 sq ft
+
+Percentage not yet leased = (Not yet leased / Total) * 100 = (53,000 / 219,000) * 100 ≈ 24.2%
+
+Final Answer: 24.2%
+Confidence: 1"
+39,12.1,12.1,1,1.0,0.8,0,"Reasoning: To find the total amount of stock options cancelled, we need to sum up the values for each year.
+
+Total cancelled stock options = 4.6 million + 5.5 million + 2.0 million
+= 12.1 million
+
+Final Answer: 12.1
+
+Confidence: 1"
+40,3876875,3876875.0,1,1.0,0.8,0,"Reasoning: To find the total shares of common stock issued to employees in both 2004 and 2003, we need to add up the shares from each year.
+
+In 2004:
+- Common stock issued to employees: 1939734 shares
+
+In 2003:
+- Common stock issued to employees: 1937141 shares
+
+Total shares of common stock issued to employees = 1939734 + 1937141 = 3876875
+
+Final Answer: 3876875
+
+Confidence: 1"
+41,-191,191.0,0,1.0,0.8,1,"Reasoning: 
+To find the net change in net revenue, we need to subtract the 2011 net revenue from the 2012 net revenue.
+
+Final Answer: -$191 million
+
+Confidence: 1"
+42,12.16%,5.0,0,1.0,0.8,1,"Reasoning: To calculate the difference in percentage cumulative total return, we need to find the difference between the two values and then divide by the value of the S&P 500 index at the end of 2013 ($236.20). The formula is:
+(248.36 - 236.20) / 236.20 * 100 = 5.00%
+
+Final Answer: 5.00%
+
+Confidence: 1"
+43,9294571.92,52.35,0,1.0,0.8,1,"Reasoning: The total number of non-vested performance share awards at December 31, 2017 is given as 428,328.
+
+Final Answer: $52.35
+
+Confidence: 1"
+44,45.10%,45.7,0,1.0,0.8,1,"Reasoning: To find the percentage, divide the long-term debt by the total contractual obligations and multiply by 100.
+
+Final Answer: 45.7%
+
+Confidence: 1"
+45,892.3,957.4,0,1.0,0.8,1,"Reasoning: To find the average cash flow from 2004 to 2006, we need to add up the cash flows for each year and divide by 3.
+
+Final Answer: ($950.4 + $769.1 + $1229) / 3 = $957.4 million
+
+Confidence: 1"
+46,31.3,357077994.0,0,1.0,0.8,1,"Reasoning: We need to calculate the total value of securities issued and approved by security holders, which is given directly in the table.
+
+Final Answer: 357,077,994.00
+
+Confidence: 1"
+47,42.9%,-10.0,0,1.0,0.8,1,"Reasoning: To calculate the percentage change, we need to find the difference between the two years and then divide it by the value of the first year.
+
+Final Answer: The percentage change in revenue generated from non-US currencies from 2015 to 2016 is -10%.
+
+Confidence: 1"
+48,8.0%,20.0,0,1.0,0.8,1,"Reasoning: To calculate the percentage decrease, we need to find the difference between the cash flows in 2009 and 2010, then divide by the cash flows in 2009 and multiply by 100.
+
+Final Answer: The percentage decrease in cash flows from operations from 2009 to 2010 was 20%.
+
+Confidence: 1"
+49,16.93%,19.1,0,0.99,0.8,1,"Reasoning: To find the percentage of the total carrying amount of investment securities that is the securities held to maturity, we need to divide the fair value of securities held to maturity by the total carrying amount of investment securities and then multiply by 100.
+
+Final Answer: 19.1%
+Confidence: 0.99"
+50,32.5%,32.74,1,1.0,0.8,0,"Reasoning: To find the percentage, we need to calculate the total shares bought after November 25, 2018, and then divide by the total shares bought over the period.
+
+Total shares bought after November 25, 2018 = 205,000
+Total shares bought over the period = 630,000
+
+Percentage = (205,000 / 630,000) × 100 ≈ 32.74%
+
+Final Answer: 32.74%
+Confidence: 1"

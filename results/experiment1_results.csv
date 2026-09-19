@@ -1,0 +1,181 @@
+id,question,gold_answer,gold_answer_display,answer_type,predicted_value,correct,parse_success,sign_mismatch,evidence_support,unsupported_number_count,unsupported_numbers,hallucination,self_reported_confidence,retrieved_chunk_count,verifier_parseable,verifier_verified,verifier_reason,retry_count,evidence_text,response
+ETR/2016/page_23.pdf-2,what is the net change in net revenue during 2015 for entergy corporation?,94.0,94,numeric,94.0,1.0,True,False,0.75,3,"[94.0, 94.0, 0.9]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] 2015 net revenue -- amount ( in millions ): $ 5829
+- [pre_text] entergy corporation and subsidiaries management 2019s financial discussion and analysis a result of the entergy louisiana and entergy gulf states louisiana business combination , results of operations for 2015 also include two items that occurred in october 2015 : 1 ) a deferred tax asset and resulting net increase in tax basis of approximately $ 334 million and 2 ) a regulatory liability of $ 107 million ( $ 66 million net-of-tax ) as a result of customer credits to be realized by electric customers of entergy louisiana , consistent with the terms of the stipulated settlement in the business combination proceeding .
+- [table_row] 2014 net revenue -- amount ( in millions ): $ 5735
+- [pre_text] net revenue utility following is an analysis of the change in net revenue comparing 2015 to 2014 .
+- [pre_text] results of operations for 2014 also include the $ 56.2 million ( $ 36.7 million net-of-tax ) write-off in 2014 of entergy mississippi 2019s regulatory asset associated with new nuclear generation development costs as a result of a joint stipulation entered into with the mississippi public utilities staff , subsequently approved by the mpsc , in which entergy mississippi agreed not to pursue recovery of the costs deferred by an mpsc order in the new nuclear generation docket .
+- [post_text] the retail electric price variance is primarily due to : 2022 formula rate plan increases at entergy louisiana , as approved by the lpsc , effective december 2014 and january 2015 ; 2022 an increase in energy efficiency rider revenue primarily due to increases in the energy efficiency rider at entergy arkansas , as approved by the apsc , effective july 2015 and july 2014 , and new energy efficiency riders at entergy louisiana and entergy mississippi that began in the fourth quarter 2014 ; and 2022 an annual net rate increase at entergy mississippi of $ 16 million , effective february 2015 , as a result of the mpsc order in the june 2014 rate case .
+- [pre_text] see note 2 to the financial statements for further discussion of the business combination and customer credits .
+- [pre_text] results of operations for 2014 include $ 154 million ( $ 100 million net-of-tax ) of charges related to vermont yankee primarily resulting from the effects of an updated decommissioning cost study completed in the third quarter 2014 along with reassessment of the assumptions regarding the timing of decommissioning cash flows and severance and employee retention costs .","Reasoning: To find the net change in net revenue during 2015, I need to subtract the 2014 net revenue from the 2015 net revenue. From the evidence, 2015 net revenue is $5829 million and 2014 net revenue is $5735 million. Calculation: 5829 - 5735 = 94
+
+Final Answer: 94
+
+Confidence: 0.9"
+INTC/2015/page_41.pdf-4,what percentage of total facilities as measured in square feet are leased?,14.463999999999999%,14%,numeric,14.46,1.0,True,False,0.5555555555555556,4,"[100.0, 14.46, 14.46, 0.9]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] ( square feet in millions ): leased facilities2 | unitedstates: 2.1 | othercountries: 6.0 | total: 8.1
+- [table_row] ( square feet in millions ): owned facilities1 | unitedstates: 30.7 | othercountries: 17.2 | total: 47.9
+- [table_row] ( square feet in millions ): total facilities | unitedstates: 32.8 | othercountries: 23.2 | total: 56.0
+- [pre_text] 30.7 17.2 47.9 leased facilities2 .
+- [pre_text] properties as of december 26 , 2015 , our major facilities consisted of : ( square feet in millions ) united states countries total owned facilities1 .
+- [post_text] we believe that the facilities described above are suitable and adequate for our present purposes and that the productive capacity in our facilities is substantially being utilized or we have plans to utilize it .
+- [post_text] for information on net property , plant and equipment by country , see 201cnote 26 : operating segments and geographic information 201d in part ii , item 8 of this form 10-k .
+- [post_text] 1 leases on portions of the land used for these facilities expire on varying dates through 2062 .","Reasoning: To find the percentage of total facilities that are leased, I use the 'total facilities' row where the 'leased facilities2' is 8.1 million square feet. The total facilities is 56.0 million square feet. Calculation: 8.1 / 56.0 * 100 = 14.46
+
+Final Answer: 14.46%
+
+Confidence: 0.9"
+ADI/2011/page_61.pdf-2,what is the percentage change in cash flow hedges in 2011 compare to the 2010?,9.864%,9.9%,numeric,9.8642,1.0,True,False,0.7647058823529411,4,"[100.0, 9.8642, 9.8642, 0.9]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,1,"- [post_text] changes in the fair value of cash flow hedges are recorded in oci and reclassified into earnings when the underlying contract matures .
+- [post_text] the total notional amounts of derivative instruments designated as hedging instruments as of october 29 , 2011 and october 30 , 2010 were $ 375 million of interest rate swap agreements accounted for as fair value hedges and $ 153.7 million and $ 139.9 million , respectively , of cash flow hedges denominated in euros , british pounds and analog devices , inc .
+- [pre_text] undesignated hedges was $ 41.2 million and $ 42.1 million , respectively .
+- [pre_text] the gain or loss on the hedged item ( that is , the fixed-rate borrowings ) attributable to the hedged benchmark interest rate risk and the offsetting gain or loss on the related interest rate swaps for fiscal year 2011 and fiscal year 2010 were as follows : statement of income .
+- [pre_text] interest rate exposure management 2014 on june 30 , 2009 , the company entered into interest rate swap transactions related to its outstanding 5.0% ( 5.0 % ) senior unsecured notes where the company swapped the notional amount of its $ 375 million of fixed rate debt at 5.0% ( 5.0 % ) into floating interest rate debt through july 1 , 2014 .
+- [pre_text] the company designated these swaps as fair value hedges .
+- [post_text] changes in the fair values of derivatives not qualifying for hedge accounting are reported in earnings as they occur .
+- [table_row] statement of income classification: other income | statement of income loss on swaps: $ -4614 ( 4614 ) | statement of income gain on note: $ 4614 | statement of income net income effect: $ 2014 | statement of income gain on swaps: $ 20692 | loss on note: $ -20692 ( 20692 ) | net income effect: $ 2014","Reasoning: To find the percentage change in cash flow hedges from 2010 to 2011, I use the values provided for the total notional amounts of cash flow hedges as of October 29, 2011 and October 30, 2010. From the evidence, the total notional amounts of cash flow hedges for 2011 is $153.7 million and for 2010 is $139.9 million. 
+
+Change = (153.7 - 139.9) / 139.9 * 100 = 9.8642
+
+Final Answer: 9.8642%
+
+Confidence: 0.9"
+FIS/2010/page_70.pdf-2,what portion of total purchase price is related to stock awards?,2.899%,2.9%,numeric,0.0288,0.0,True,False,0.75,2,"[0.0288, 0.9]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,1,"- [table_row] value of metavante common stock: value of metavante stock awards | $ 4066.4: 121.4
+- [pre_text] the total purchase price was as follows ( in millions ) : .
+- [table_row] value of metavante common stock: total purchase price | $ 4066.4: $ 4187.8
+- [post_text] we recorded a preliminary allocation of the purchase price to metavante tangible and identifiable intangible assets acquired and liabilities assumed based on their estimated fair values as of october 1 , 2009 .
+- [pre_text] these activities are included within net earnings from discontinued operations .
+- [pre_text] ( 5 ) acquisitions the results of operations and financial position of the entities acquired during the years ended december 31 , 2010 , 2009 and 2008 are included in the consolidated financial statements from and after the date of acquisition .
+- [pre_text] in addition , outstanding metavante stock options and other stock-based awards were converted into comparable fis stock options and other stock-based awards at the same conversion ratio .
+- [pre_text] each issued and outstanding share of metavante common stock , par value $ 0.01 per share , was converted into 1.35 shares of fis common stock .","Reasoning: To find the portion of the total purchase price related to stock awards, I use the value of metavante common stock awards ($121.4) and the total purchase price ($4187.8). The calculation is 121.4 / 4187.8.
+
+Final Answer: 121.4 / 4187.8 = 0.0288
+
+Confidence: 0.9"
+MAS/2017/page_27.pdf-2,what was the difference in percentage cumulative total shareholder return on masco common stock versus the s&p 500 index for the five year period ended 2017?,1.1197,,numeric,500.0,0.0,False,False,0.78125,14,"[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.3204, 1.14989, 1.15194, 1.16982, 1.20649]",0,,8,True,False,Expression recomputed but no 'Final Answer:' value found to compare it against.,1,"- [pre_text] performance graph the table below compares the cumulative total shareholder return on our common stock with the cumulative total return of ( i ) the standard & poor's 500 composite stock index ( ""s&p 500 index"" ) , ( ii ) the standard & poor's industrials index ( ""s&p industrials index"" ) and ( iii ) the standard & poor's consumer durables & apparel index ( ""s&p consumer durables & apparel index"" ) , from december 31 , 2012 through december 31 , 2017 , when the closing price of our common stock was $ 43.94 .
+- [pre_text] the table below sets forth the value , as of december 31 for each of the years indicated , of a $ 100 investment made on december 31 , 2012 in each of our common stock , the s&p 500 index , the s&p industrials index and the s&p consumer durables & apparel index and includes the reinvestment of dividends. .
+- [table_row] s&p 500 index -- 2013: $ 132.04 | 2014: $ 149.89 | 2015: $ 151.94 | 2016: $ 169.82 | 2017: $ 206.49
+- [post_text] $ 50.00 $ 100.00 $ 150.00 $ 200.00 $ 250.00 $ 300.00 $ 350.00 masco s&p 500 index s&p industrials index s&p consumer durables & apparel index .
+- [table_row] s&p industrials index -- 2013: $ 140.18 | 2014: $ 153.73 | 2015: $ 149.83 | 2016: $ 177.65 | 2017: $ 214.55
+- [table_row] masco -- 2013: $ 138.48 | 2014: $ 155.26 | 2015: $ 200.79 | 2016: $ 227.08 | 2017: $ 318.46
+- [table_row] s&p consumer durables & apparel index -- 2013: $ 135.84 | 2014: $ 148.31 | 2015: $ 147.23 | 2016: $ 138.82 | 2017: $ 164.39
+- [pre_text] the graph assumes investments of $ 100 on december 31 , 2012 in our common stock and in each of the three indices and the reinvestment of dividends .","Reasoning: To find the difference in percentage cumulative total shareholder return on Masco common stock versus the S&P 500 index for the five-year period ended 2017, I need to calculate the cumulative total shareholder returns for both Masco and S&P 500 index from 2012 to 2017, then find the difference and convert it to a percentage.
+
+Masco:
+2013: $138.48
+2014: $155.26
+2015: $200.79
+2016: $227.08
+2017: $318.46
+
+S&P 500 Index:
+2013: $132.04
+2014: $149.89
+2015: $151.94
+2016: $169.82
+2017: $206.49
+
+First, I will calculate the cumulative total for Masco:
+$138.48 * (1 + 132.04 / 100) * (1 + 149.89 / 100) * (1 + 151.94 / 100) * (1 + 169.82 / 100) * (1 + 206.49 / 100)
+
+Then, I will calculate the cumulative total for S&P 500 Index:
+$132.04 * (1 + 149.89 / 100) * (1 + 151.94 / 100) * (1 + 169.82 / 100) * (1 + 206.49 / 100)
+
+Let's calculate these step by step:
+
+For Masco:
+$138.48 * 1.3204 * 1.14989 * 1.15194 * 1.16982 * 1.20649 = $350.00
+
+For S&P 500"
+SYY/2006/page_71.pdf-1,"what was the percentage change in total rental expense under operating leases from july 2 , 2005 to july 1 , 2006?",6.757000000000001%,7%,numeric,11.04,0.0,True,False,0.6842105263157895,6,"[2.0, 2.0, 100.0, 11.04, 11.04, 0.9]",0,0.9,8,True,False,"Python recomputation of '(100690000 - 92710000) / 92710000 * 100' = 8.6075, which does not match the stated result (11.04).",1,"- [pre_text] total rental expense under operating leases was $ 100690000 , $ 92710000 , and $ 86842000 in fiscal 2006 , 2005 and 2004 , respectively .
+- [pre_text] aggregate minimum lease payments by fiscal year under existing non-capitalized long-term leases are as follows: .
+- [pre_text] contingent rentals , subleases and assets and obligations under capital leases are not significant .
+- [table_row] 2009 -- amount: 39904000
+- [table_row] 2007 -- amount: $ 56499000
+- [table_row] 2010 -- amount: 33329000
+- [table_row] 2008 -- amount: 46899000
+- [pre_text] total debt total debt at july 1 , 2006 was $ 1762692000 , of which approximately 75% ( 75 % ) was at fixed rates averaging 6.0% ( 6.0 % ) with an average life of 19 years , and the remainder was at floating rates averaging 5.2% ( 5.2 % ) .","Reasoning: To calculate the percentage change in total rental expense under operating leases from July 2, 2005 to July 1, 2006, I need the values for these two fiscal years. From the evidence, the total rental expense for fiscal 2005 (July 2, 2005) is $92,710,000 and for fiscal 2006 (July 1, 2006) is $100,690,000. 
+
+Change = (100690000 - 92710000) / 92710000 * 100 = 11.04
+
+Final Answer: 11.04%
+
+Confidence: 0.9"
+AES/2010/page_227.pdf-3,what percent of total recourse debt is current?,10.039%,10%,numeric,0.0,0.0,False,False,0.75,1,[0.0],0,0.0,8,False,False,No arithmetic expression (with an operator and >=2 numbers) found in the Reasoning section.,1,"- [table_row] december 31,: total recourse debt | annual maturities ( in millions ): $ 4612
+- [post_text] recourse debt transactions during 2010 , the company redeemed $ 690 million aggregate principal of its 8.75% ( 8.75 % ) second priority senior secured notes due 2013 ( 201cthe 2013 notes 201d ) .
+- [pre_text] the aes corporation notes to consolidated financial statements 2014 ( continued ) december 31 , 2010 , 2009 , and 2008 recourse debt as of december 31 , 2010 is scheduled to reach maturity as set forth in the table below : december 31 , annual maturities ( in millions ) .
+- [post_text] the fifth amended and restated credit agreement adjusted the terms and conditions of the existing credit agreement , including the following changes : 2022 the aggregate commitment for the revolving credit loan facility was increased to $ 800 million ; 2022 the final maturity date of the revolving credit loan facility was extended to january 29 , 2015 ; 2022 changes to the facility fee applicable to the revolving credit loan facility ; 2022 the interest rate margin applicable to the revolving credit loan facility is now based on the credit rating assigned to the loans under the credit agreement , with pricing currently at libor + 3.00% ( 3.00 % ) ; 2022 there is an undrawn fee of 0.625% ( 0.625 % ) per annum ; 2022 the company may incur a combination of additional term loan and revolver commitments so long as total term loan and revolver commitments ( including those currently outstanding ) do not exceed $ 1.4 billion ; and 2022 the negative pledge ( i.e. , a cap on first lien debt ) of $ 3.0 billion .
+- [post_text] 2 201d ) to the fourth amended and restated credit and reimbursement agreement , dated as of july 29 , 2008 , among the company , various subsidiary guarantors and various lending institutions ( the 201cexisting credit agreement 201d ) that amends and restates the existing credit agreement ( as so amended and restated by amendment no .
+- [post_text] 2 , the 201cfifth amended and restated credit agreement 201d ) .
+- [post_text] the company recognized a pre-tax loss on the redemption of the 2013 notes of $ 15 million for the year ended december 31 , 2010 , which is included in 201cother expense 201d in the accompanying consolidated statement of operations .
+- [post_text] recourse debt covenants and guarantees certain of the company 2019s obligations under the senior secured credit facility are guaranteed by its direct subsidiaries through which the company owns its interests in the aes shady point , aes hawaii , aes warrior run and aes eastern energy businesses .","Reasoning: To find the percentage of total recourse debt that is current, I need to know the amount of current recourse debt and the total recourse debt. From the evidence, I see that the total recourse debt as of December 31, 2010 is $4612 million. However, the evidence does not provide the amount of current recourse debt. Without the current recourse debt amount, I cannot calculate the percentage.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+GS/2015/page_188.pdf-2,what percentage of future minimum rental payments are due in 2018?,11.689%,12%,numeric,0.0,0.0,True,False,0.5,2,"[0.0, 0.0]",0,0.0,8,False,False,No arithmetic expression (with an operator and >=2 numbers) found in the Reasoning section.,1,"- [pre_text] the table below presents future minimum rental payments , net of minimum sublease rentals .
+- [post_text] rent charged to operating expense was $ 249 million for 2015 , $ 309 million for 2014 and $ 324 million for 2013 .
+- [post_text] rent expense relating to space held for growth is included in 201coccupancy . 201d the firm records a liability , based on the fair value of the remaining lease rentals reduced by any potential or existing sublease rentals , for leases where the firm has ceased using the space and management has concluded that the firm will not derive any future economic benefits .
+- [pre_text] the firm 2019s commercial lending commitments are extended to investment-grade and non- investment-grade corporate borrowers .
+- [pre_text] investment commitments the firm 2019s investment commitments of $ 6.05 billion and $ 5.16 billion as of december 2015 and december 2014 , respectively , include commitments to invest in private equity , real estate and other assets directly and through funds that the firm raises and manages .
+- [pre_text] in addition , subject to the satisfaction of certain conditions , upon the firm 2019s request , smfg will provide protection for 70% ( 70 % ) of additional losses on such commitments , up to a maximum of $ 1.13 billion , of which $ 768 million of protection had been provided as of both december 2015 and december 2014 .
+- [pre_text] the credit loss protection on loan commitments provided by smfg is generally limited to 95% ( 95 % ) of the first loss the firm realizes on such commitments , up to a maximum of approximately $ 950 million .
+- [table_row] $ in millions: 2021 - thereafter | as of december 2015: 1160","Reasoning: To find the percentage of future minimum rental payments due in 2018, I need to look at the 'future minimum rental payments' table row. However, the evidence provided does not contain any information about future minimum rental payments or their distribution by year. There is no relevant data in the given evidence to calculate the percentage of future minimum rental payments due in 2018.
+
+Final Answer: 0
+
+Confidence: 0.0"
+MO/2016/page_19.pdf-1,did altria outperform the s&p 500?,yes,yes,non_numeric,1.0,0.0,True,False,0.9772727272727273,1,[0.9],0,0.9,8,False,False,No arithmetic expression (with an operator and >=2 numbers) found in the Reasoning section.,1,"- [pre_text] 2011 2012 2013 2014 2015 2016 comparison of five-year cumulative total shareholder return altria group , inc .
+- [pre_text] ( 1 ) in 2016 , the altria group , inc .
+- [pre_text] performance graph the graph below compares the cumulative total shareholder return of altria group , inc . 2019s common stock for the last ive years with the cumulative total return for the same period of the s&p 500 index and the altria group , inc .
+- [table_row] date: december 2013 | altria group inc .: $ 143.69 | altria group inc . peer group: $ 135.61 | s&p 500: $ 153.55
+- [table_row] date: december 2015 | altria group inc .: $ 237.92 | altria group inc . peer group: $ 177.04 | s&p 500: $ 176.94
+- [table_row] date: december 2012 | altria group inc .: $ 111.77 | altria group inc . peer group: $ 108.78 | s&p 500: $ 115.99
+- [table_row] date: december 2014 | altria group inc .: $ 193.28 | altria group inc . peer group: $ 151.74 | s&p 500: $ 174.55
+- [table_row] date: december 2011 | altria group inc .: $ 100.00 | altria group inc . peer group: $ 100.00 | s&p 500: $ 100.00","Reasoning: To determine if Altria outperformed the S&P 500, I need to compare Altria's cumulative total shareholder return (CTSR) with the S&P 500's CTSR for each year. 
+
+For 2011:
+Altria: $100.00
+S&P 500: $100.00
+
+For 2012:
+Altria: $111.77
+S&P 500: $115.99
+
+For 2013:
+Altria: $193.28
+S&P 500: $174.55
+
+For 2014:
+Altria: $151.74
+S&P 500: $174.55
+
+For 2015:
+Altria: $237.92
+S&P 500: $176.94
+
+Altria's CTSR in 2011 was $100.00, while the S&P 500's CTSR was $100.00. In 2012, Altria's CTSR ($111.77) was higher than the S&P 500's CTSR ($115.99). In 2013, Altria's CTSR ($193.28) was higher than the S&P 500's CTSR ($174.55). In 2014, Altria's CTSR ($151.74) was lower than the S&P 500's CTSR ($174.55). In 2015, Altria's CTSR ($237.92) was higher than the S&P 500's CTSR ($176.94).
+
+Final Answer: 1
+
+Confidence: 0.9"
+CMCSA/2015/page_112.pdf-2,what was the change in unrecognized tax benefits from the end of 2014 to the end of 2015?,-35.0,-35,numeric,27.0,0.0,True,False,0.7586206896551724,7,"[81.0, 54.0, 81.0, 54.0, 27.0, 27.0, 0.9]",0,0.9,8,True,False,"Operand(s) not found in retrieved evidence (possible hallucinated input): [81.0, 54.0]",1,"- [post_text] during 2015 , the irs completed its examination of our income tax returns for the year 2013 .
+- [pre_text] reconciliation of unrecognized tax benefits .
+- [table_row] ( in millions ): additions based on tax positions related to the current year | 2015: 67 | 2014: 63 | 2013: 90
+- [table_row] ( in millions ): reductions for tax positions of prior years | 2015: -84 ( 84 ) | 2014: -220 ( 220 ) | 2013: -141 ( 141 )
+- [pre_text] uncertain tax positions our uncertain tax positions as of december 31 , 2015 totaled $ 1.1 billion , which exclude the federal benefits on state tax positions that were recorded as deferred income taxes .
+- [table_row] ( in millions ): additions based on tax positions related to prior years | 2015: 98 | 2014: 111 | 2013: 201
+- [table_row] ( in millions ): settlements with tax authorities | 2015: -75 ( 75 ) | 2014: -36 ( 36 ) | 2013: -287 ( 287 )
+- [pre_text] comcast corporation changes in our net deferred tax liability in 2015 that were not recorded as deferred income tax expense are primarily related to decreases of $ 28 million associated with items included in other comprehensive income ( loss ) and decreases of $ 132 million related to acquisitions made in 2015 .","Reasoning: To find the change in unrecognized tax benefits from the end of 2014 to the end of 2015, I need the values for both years. From the table, the relevant values are:
+- 2015: (in millions) additions based on tax positions related to the current year = 67
+- 2015: (in millions) reductions for tax positions of prior years = -84
+- 2015: (in millions) additions based on tax positions related to prior years = 98
+- 2014: (in millions) additions based on tax positions related to the current year = 63
+- 2014: (in millions) reductions for tax positions of prior years = -220
+- 2014: (in millions) additions based on tax positions related to prior years = 111
+
+The total unrecognized tax benefits at the end of 2015 = 67 + (-84) + 98 = 81 million
+The total unrecognized tax benefits at the end of 2014 = 63 + (-220) + 111 = 54 million
+
+Change = 81 - 54 = 27
+
+Final Answer: 27
+
+Confidence: 0.9"

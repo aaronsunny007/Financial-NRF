@@ -1,0 +1,727 @@
+id,question,gold_answer,gold_answer_display,answer_type,predicted_value,correct,parse_success,sign_mismatch,evidence_support,evidence_support_strict,evidence_support_derived,directly_supported_count,derived_supported_count,derived_numbers,unsupported_number_count,unsupported_numbers,hallucination,self_reported_confidence,retrieved_chunk_count,verifier_parseable,verifier_verified,verifier_reason,retry_count,evidence_text,response
+V/2008/page_17.pdf-1,what is the average payment volume per transaction for american express?,127.4,127.40,numeric,127.4,1.0,True,False,0.8333333333333334,0.6666666666666666,0.8333333333333334,4,1,[127.4],1,[0.9],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] company: american express | payments volume ( billions ): 637 | total volume ( billions ): 647 | total transactions ( billions ): 5.0 | cards ( millions ): 86
+- [table_row] company: mastercard | payments volume ( billions ): 1697 | total volume ( billions ): 2276 | total transactions ( billions ): 27.0 | cards ( millions ): 916
+- [table_row] company: visa inc. ( 1 ) | payments volume ( billions ): $ 2457 | total volume ( billions ): $ 3822 | total transactions ( billions ): 50.3 | cards ( millions ): 1592
+- [table_row] company: jcb | payments volume ( billions ): 55 | total volume ( billions ): 61 | total transactions ( billions ): 0.6 | cards ( millions ): 58
+- [table_row] company: diners club | payments volume ( billions ): 29 | total volume ( billions ): 30 | total transactions ( billions ): 0.2 | cards ( millions ): 7
+- [table_row] company: discover | payments volume ( billions ): 102 | total volume ( billions ): 119 | total transactions ( billions ): 1.6 | cards ( millions ): 57
+- [pre_text] based on payments volume , total volume , number of transactions and number of cards in circulation , visa is the largest retail electronic payments network in the world .
+- [post_text] jcb total transaction figures are estimates .","Reasoning: To find the average payment volume per transaction for American Express, I use the 'payments volume ( billions )' and 'total transactions ( billions )' data. For American Express, these values are 637 and 5.0 respectively. Average = 637 / 5.0
+
+Final Answer: 127.4
+
+Confidence: 0.9"
+C/2017/page_328.pdf-1,what was the percentage cumulative total return for the five year period ended 31-dec-2017 of citi common stock?,93.5%,93.5%,numeric,52.3,0.0,True,False,0.9642857142857143,0.8571428571428571,0.9642857142857143,24,3,"[52.3, 52.3, 52.3]",1,[0.9],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,1,"- [pre_text] comparison of five-year cumulative total return for the years ended date citi s&p 500 financials .
+- [pre_text] performance graph comparison of five-year cumulative total return the following graph and table compare the cumulative total return on citi 2019s common stock , which is listed on the nyse under the ticker symbol 201cc 201d and held by 65691 common stockholders of record as of january 31 , 2018 , with the cumulative total return of the s&p 500 index and the s&p financial index over the five-year period through december 31 , 2017 .
+- [pre_text] the graph and table assume that $ 100 was invested on december 31 , 2012 in citi 2019s common stock , the s&p 500 index and the s&p financial index , and that all dividends were reinvested .
+- [table_row] date: 31-dec-2014 | citi: 137.0 | s&p 500: 150.5 | s&p financials: 156.2
+- [table_row] date: 31-dec-2012 | citi: 100.0 | s&p 500: 100.0 | s&p financials: 100.0
+- [table_row] date: 31-dec-2013 | citi: 131.8 | s&p 500: 132.4 | s&p financials: 135.6
+- [table_row] date: 31-dec-2016 | citi: 152.3 | s&p 500: 170.8 | s&p financials: 188.9
+- [table_row] date: 31-dec-2015 | citi: 131.4 | s&p 500: 152.6 | s&p financials: 153.9","Reasoning: To find the percentage cumulative total return for the five year period ended 31-dec-2017 of Citi common stock, I need to calculate the total return from 31-dec-2012 to 31-dec-2017. The evidence shows the cumulative total returns for Citi common stock, S&P 500, and S&P Financial Index at various dates. I will use the values for 31-dec-2012 and 31-dec-2017.
+
+Citi common stock value on 31-dec-2012 = $100.0
+Citi common stock value on 31-dec-2017 = $152.3
+
+The formula to calculate the percentage cumulative total return is:
+\[ \text{Percentage Return} = \left( \frac{\text{Ending Value} - \text{Beginning Value}}{\text{Beginning Value}} \right) \times 100 \]
+
+Using the values from the evidence:
+\[ \text{Percentage Return} = \left( \frac{152.3 - 100}{100} \right) \times 100 = \left( \frac{52.3}{100} \right) \times 100 = 52.3\% \]
+
+Final Answer: 52.3
+
+Confidence: 0.9"
+DVN/2007/page_58.pdf-2,what percentage of the total oil and gas mmboe comes from canada?,24.69136%,24.69%,numeric,24.69,1.0,True,False,0.875,0.5,0.875,4,3,"[100.0, 24.69, 24.69]",1,[0.9],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,1,"- [table_row] canada -- oil ( mmbbls ): 23 | gas ( bcf ): 198 | ngls ( mmbbls ): 4 | total ( mmboe ): 60
+- [table_row] u.s . onshore -- oil ( mmbbls ): 12 | gas ( bcf ): 626 | ngls ( mmbbls ): 23 | total ( mmboe ): 140
+- [table_row] international -- oil ( mmbbls ): 23 | gas ( bcf ): 2 | ngls ( mmbbls ): 2014 | total ( mmboe ): 23
+- [table_row] u.s . offshore -- oil ( mmbbls ): 8 | gas ( bcf ): 68 | ngls ( mmbbls ): 1 | total ( mmboe ): 20
+- [pre_text] oil gas ngls total ( mmbbls ) ( bcf ) ( mmbbls ) ( mmboe ) .
+- [table_row] total -- oil ( mmbbls ): 66 | gas ( bcf ): 894 | ngls ( mmbbls ): 28 | total ( mmboe ): 243
+- [pre_text] we estimate that our combined 2008 oil , gas and ngl production will total approximately 240 to 247 mmboe .
+- [pre_text] amounts related to canadian operations have been converted to u.s .","Reasoning: To find the percentage of total oil and gas mmboe that comes from Canada, I need to use the 'total ( mmboe )' value for Canada and the 'total ( mmboe )' for the entire total. Canada's total ( mmboe ) = 60. Total's total ( mmboe ) = 243. Calculation: 60 / 243 * 100 = 24.69
+
+Final Answer: 24.69%
+
+Confidence: 0.9"
+ETR/2011/page_341.pdf-3,in 2010 what was the net change in net revenue in millions,19.2,18.6,numeric,18.6,0.0,True,False,1.0,0.7692307692307693,1.0,10,3,"[18.6, 18.6, 0.9]",0,[],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] 2010 net revenue -- amount ( in millions ): $ 555.3
+- [table_row] 2009 net revenue -- amount ( in millions ): $ 536.7
+- [pre_text] following is an analysis of the change in net revenue comparing 2010 to 2009 .
+- [pre_text] management 2019s financial discussion and analysis 2010 compared to 2009 net revenue consists of operating revenues net of : 1 ) fuel , fuel-related expenses , and gas purchased for resale , 2 ) purchased power expenses , and 3 ) other regulatory charges ( credits ) .
+- [post_text] other income statement variances 2011 compared to 2010 other operation and maintenance expenses decreased primarily due to : a $ 5.4 million decrease in compensation and benefits costs primarily resulting from an increase in the accrual for incentive-based compensation in 2010 and a decrease in stock option expense ; and the sale of $ 4.9 million of surplus oil inventory .
+- [post_text] gross operating revenues , fuel and purchased power expenses , and other regulatory charges ( credits ) gross operating revenues increased primarily due to an increase of $ 22 million in power management rider revenue as the result of higher rates , the volume/weather variance discussed above , and an increase in grand gulf rider revenue as a result of higher rates and increased usage , offset by a decrease of $ 23.5 million in fuel cost recovery revenues due to lower fuel rates .
+- [pre_text] amount ( in millions ) .
+- [post_text] the decrease was partially offset by an increase of $ 3.9 million in legal expenses due to the deferral in 2010 of certain litigation expenses in accordance with regulatory treatment .","Reasoning: To find the net change in net revenue from 2009 to 2010, I need to subtract the 2009 net revenue from the 2010 net revenue. From the evidence, 2010 net revenue is $555.3 million and 2009 net revenue is $536.7 million. Therefore, the net change = $555.3 - $536.7 = 18.6.
+
+Final Answer: 18.6
+
+Confidence: 0.9"
+ETR/2004/page_213.pdf-2,what are the deferred fuel cost revisions as a percentage of the increase in fuel cost recovery revenues?,60.306000000000004%,60.3%,numeric,60.31,0.0,True,False,0.7777777777777778,0.4444444444444444,0.7777777777777778,4,3,"[100.0, 100.0, 60.31]",2,"[60.30714285714286, 0.9]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] deferred fuel cost revisions -- ( in millions ): 59.1
+- [post_text] the deferred fuel cost revisions variance resulted from a revised unbilled sales pricing estimate made in december 2002 and a further revision made in the first quarter of 2003 to more closely align the fuel component of that pricing with expected recoverable fuel costs .
+- [pre_text] management's financial discussion and analysis gross operating revenues , fuel and purchased power expenses , and other regulatory credits gross operating revenues increased primarily due to : 2022 an increase of $ 98.0 million in fuel cost recovery revenues due to higher fuel rates ; and 2022 an increase due to volume/weather , as discussed above .
+- [pre_text] fuel and purchased power expenses increased primarily due to : 2022 an increase in the recovery from customers of deferred fuel costs ; and 2022 an increase in the market price of natural gas .
+- [pre_text] other regulatory credits increased primarily due to : 2022 the deferral in 2004 of $ 14.3 million of capacity charges related to generation resource planning as allowed by the lpsc ; 2022 the amortization in 2003 of $ 11.8 million of deferred capacity charges , as discussed above ; and 2022 the deferral in 2004 of $ 11.4 million related to entergy's voluntary severance program , in accordance with a proposed stipulation with the lpsc staff .
+- [pre_text] the increase was partially offset by the following : 2022 a decrease of $ 31.9 million in the price applied to unbilled sales , as discussed above ; 2022 a decrease of $ 12.2 million in rate refund provisions , as discussed above ; and 2022 a decrease of $ 5.2 million in gross wholesale revenue due to decreased sales to affiliated systems .
+- [pre_text] following is an analysis of the change in net revenue comparing 2003 to 2002. .
+- [pre_text] 2003 compared to 2002 net revenue , which is entergy louisiana's measure of gross margin , consists of operating revenues net of : 1 ) fuel , fuel-related , and purchased power expenses and 2 ) other regulatory charges ( credits ) .","Reasoning: To find the percentage, I need to divide the deferred fuel cost revisions by the increase in fuel cost recovery revenues and multiply by 100. From the evidence, deferred fuel cost revisions = 59.1 million. Increase in fuel cost recovery revenues = 98.0 million. Calculation: (59.1 / 98.0) * 100 = 60.30714285714286
+
+Final Answer: 60.31
+
+Confidence: 0.9"
+PM/2017/page_38.pdf-1,what was the change in millions of operating income from 2016 to 2017?,688.0,688,numeric,688.0,1.0,True,False,1.0,0.9230769230769231,1.0,12,1,[0.9],0,[],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] ( in millions ): operating income | for the years ended december 31 , 2017: 11503 | for the years ended december 31 , 2016: 10815 | for the years ended december 31 , $: 688 | % (  % ): 6.4% ( 6.4 % )
+- [post_text] operating income increased by $ 688 million , due primarily to : 2022 price increases ( $ 1.4 billion ) , partly offset by 2022 higher marketing , administration and research costs ( $ 570 million ) and 2022 unfavorable currency ( $ 157 million ) .
+- [pre_text] our cost of sales ; marketing , administration and research costs ; and operating income were as follows : for the years ended december 31 , variance .
+- [post_text] this decrease was due primarily to a higher effective tax rate as discussed above , partly offset by higher operating income .
+- [post_text] the 2017 effective tax rate was unfavorably impacted by $ 1.6 billion due to the tax cuts and jobs act .
+- [table_row] ( in millions ): cost of sales | for the years ended december 31 , 2017: $ 10432 | for the years ended december 31 , 2016: $ 9391 | for the years ended december 31 , $: $ 1041 | % (  % ): 11.1% ( 11.1 % )
+- [pre_text] excluding excise taxes , net revenues for rrps were $ 3.6 billion in 2017 and $ 733 million in 2016 .
+- [post_text] based upon our current interpretation of the tax cuts and jobs act , we estimate that our 2018 effective tax rate will be approximately 28% ( 28 % ) , subject to future regulatory developments and earnings mix by taxing jurisdiction .","Reasoning: To find the change in operating income from 2016 to 2017, I use the operating income values for those years: 2016 = $10815 million and 2017 = $11503 million. The change = 2017 value - 2016 value = 11503 - 10815 = 688 million.
+
+Final Answer: 688
+
+Confidence: 0.9"
+JPM/2008/page_85.pdf-3,what was jpmorgan chase & co's common equity tier 1 ( cet1 ) ratio in 2008?,10.935%,10.94%,numeric,73.44,0.0,True,False,0.9130434782608695,0.8695652173913043,0.9130434782608695,20,1,[184720.0],2,"[73.44, 0.9]",0,0.9,8,True,False,Operand(s) not found in retrieved evidence (possible hallucinated input): [184720.0],1,"- [pre_text] jpmorgan chase maintained a well-capitalized position , based upon tier 1 and total capital ratios at december 31 , 2008 and 2007 , as indicated in the tables below .
+- [pre_text] jpmorgan chase & co .
+- [pre_text] the occ granted jpmorgan chase bank , n.a .
+- [pre_text] the office of the comptroller of the currency ( 201cocc 201d ) establishes similar capital requirements and standards for the firm 2019s national banks , including jpmorgan chase bank , n.a. , and chase bank usa , n.a .
+- [table_row] december 31 ( in millions ): total tier 1capital ( a ) | 2008: $ 136104 | 2007: $ 88746
+- [table_row] december 31 ( in millions ): total tier 2 capital | 2008: 48616 | 2007: 43496
+- [pre_text] / 2008 annual report 83 credit risk capital credit risk capital is estimated separately for the wholesale business- es ( ib , cb , tss and am ) and consumer businesses ( rfs and cs ) .
+- [post_text] based on the provisions of the current proposal and the firm 2019s interpretation of the propos- al , the firm estimates that the impact of consolidation could be up to $ 70 billion of credit card receivables , $ 40 billion of assets related to firm-sponsored multi-seller conduits , and $ 50 billion of other loans ( including residential mortgages ) ; the decrease in the tier 1 capital ratio could be approximately 80 basis points .","Reasoning: To find JPMorgan Chase & Co.'s Common Equity Tier 1 (CET1) ratio in 2008, I need the Total Tier 1 Capital and Total Tier 2 Capital for 2008. From the evidence, the Total Tier 1 Capital for 2008 is $136104 million. The Total Tier 2 Capital for 2008 is 48616 million. CET1 ratio = (Total Tier 1 Capital) / (Total Tier 1 Capital + Total Tier 2 Capital) = 136104 / (136104 + 48616) = 136104 / 184720
+
+Final Answer: 73.44%
+
+Confidence: 0.9"
+PNC/2013/page_207.pdf-1,"at the end of 2014 , the notional value of derivatives designated as hedging instruments under gaap was what percent of the fair value?",3044.323%,3044%,numeric,305.02,0.0,True,False,0.7857142857142857,0.6428571428571429,0.7857142857142857,9,2,"[100.0, 100.0]",3,"[305.02, 305.02, 0.9]",0,0.9,8,False,False,No arithmetic expression (with an operator and >=2 numbers) found in the Reasoning section.,1,"- [table_row] in millions: derivatives not designated as hedging instruments under gaap | december 31 2013 notional/contractamount: 345059 | december 31 2013 assetfairvalue ( a ): 3604 | december 31 2013 liabilityfairvalue ( b ): 3570 | december 31 2013 notional/contractamount: 337086 | december 31 2013 assetfairvalue ( a ): 6696 | liabilityfairvalue ( b ): 6458
+- [table_row] in millions: derivatives designated as hedging instruments under gaap | december 31 2013 notional/contractamount: $ 36197 | december 31 2013 assetfairvalue ( a ): $ 1189 | december 31 2013 liabilityfairvalue ( b ): $ 364 | december 31 2013 notional/contractamount: $ 29270 | december 31 2013 assetfairvalue ( a ): $ 1872 | liabilityfairvalue ( b ): $ 152
+- [post_text] derivatives designated as hedging instruments under gaap certain derivatives used to manage interest rate risk as part of our asset and liability risk management activities are designated as accounting hedges under gaap .
+- [post_text] derivatives hedging the risks associated with changes in the fair value of assets or liabilities are considered fair value hedges , derivatives hedging the variability of expected future cash flows are considered cash flow hedges , and derivatives hedging a net investment in a foreign subsidiary are considered net investment hedges .
+- [pre_text] the following table presents the notional amounts and gross fair values of all derivative assets and liabilities held by pnc : table 127 : total gross derivatives .
+- [pre_text] note 17 financial derivatives we use derivative financial instruments ( derivatives ) primarily to help manage exposure to interest rate , market and credit risk and reduce the effects that changes in interest rates may have on net income , fair value of assets and liabilities , and cash flows .
+- [post_text] any nonperformance risk , including credit risk , is included in the determination of the estimated net fair value of the derivatives .
+- [table_row] in millions: total gross derivatives | december 31 2013 notional/contractamount: $ 381256 | december 31 2013 assetfairvalue ( a ): $ 4793 | december 31 2013 liabilityfairvalue ( b ): $ 3934 | december 31 2013 notional/contractamount: $ 366356 | december 31 2013 assetfairvalue ( a ): $ 8568 | liabilityfairvalue ( b ): $ 6610","Reasoning: To find the percentage of the notional value of derivatives designated as hedging instruments under GAAP at the end of 2014 relative to their fair value, I need to use the values provided for December 31, 2013. The notional/contract amount for derivatives designated as hedging instruments under GAAP at the end of 2013 is $36,197 million. The asset fair value (a) for the same period is $1,189 million. 
+
+The fair value for the designated hedging instruments is the sum of the asset fair values (a), which is $1,189 million.
+
+To calculate the percentage, I use the formula: 
+\[ \text{Percentage} = \left( \frac{\text{Notional/Contract Amount}}{\text{Asset Fair Value (a)}} \right) \times 100 \]
+\[ \text{Percentage} = \left( \frac{36197}{1189} \right) \times 100 = 305.02 \]
+
+Final Answer: 305.02
+
+Confidence: 0.9"
+CME/2017/page_97.pdf-5,"what was the increase in class a common stock issued and outstanding between years , in thousands?",995.0,995,numeric,9935.0,0.0,True,False,0.7692307692307693,0.7692307692307693,0.7692307692307693,10,0,[],3,"[9935.0, 9935.0, 0.9]",0,0.9,8,True,False,"Python recomputation of '339235 - 338240' = 995.0000, which does not match the stated result (9935.0).",1,"- [table_row] ( in thousands ): class a common stock issued and outstanding | december 31 , 2017: 339235 | december 31 , 2016: 338240
+- [table_row] ( in thousands ): class b-1 common stock authorized issued and outstanding | december 31 , 2017: 0.6 | december 31 , 2016: 0.6
+- [table_row] ( in thousands ): class b-3 common stock authorized issued and outstanding | december 31 , 2017: 1.3 | december 31 , 2016: 1.3
+- [table_row] ( in thousands ): class b-2 common stock authorized issued and outstanding | december 31 , 2017: 0.8 | december 31 , 2016: 0.8
+- [table_row] ( in thousands ): class b-4 common stock authorized issued and outstanding | december 31 , 2017: 0.4 | december 31 , 2016: 0.4
+- [table_row] ( in thousands ): class a common stock authorized | december 31 , 2017: 1000000 | december 31 , 2016: 1000000
+- [pre_text] capital stock shares outstanding .
+- [post_text] each class of class b common stock has the following number of votes on matters relating to core rights : class b-1 , six votes per share ; class b-2 , two votes per share ; class b-3 , one vote per share ; and class b-4 , 1/6th of one vote per share .","Reasoning: To find the increase in Class A common stock issued and outstanding between years, I use the values provided for December 31, 2017 and December 31, 2016 from the table. The value for Class A common stock issued and outstanding in 2017 is 339235 (thousands), and in 2016 it is 338240 (thousands). Increase = 339235 - 338240 = 9935 (thousands).
+
+Final Answer: 9935
+
+Confidence: 0.9"
+PNC/2013/page_62.pdf-2,in millions what was total residential mortgages balance for 2013 and 2012?,3576.0,3576,numeric,3576.0,1.0,True,False,1.0,0.8235294117647058,1.0,14,3,"[3576.0, 3576.0, 0.9]",0,[],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,1,"- [table_row] in millions: total commercial mortgages | december 312013: 867 | december 312012: 1392
+- [table_row] in millions: total residential mortgages | december 312013: 1356 | december 312012: 2220
+- [post_text] residential mortgage loan origination volume was $ 15.1 billion in 2013 compared to $ 15.2 billion in 2012 .
+- [post_text] for commercial mortgages held for sale carried at lower of cost or fair value , we sold $ 2.8 billion in 2013 compared to $ 2.2 billion in 2012 .
+- [table_row] in millions: residential mortgages at lower of cost or fair value | december 312013: 41 | december 312012: 124
+- [table_row] in millions: residential mortgages at fair value | december 312013: 1315 | december 312012: 2096
+- [table_row] in millions: commercial mortgages at fair value | december 312013: $ 586 | december 312012: $ 772
+- [post_text] at december 31 , 2013 , the balance relating to these loans was $ 586 million compared to $ 772 million at december 31 , 2012 .","Reasoning: For residential mortgages, the relevant rows are:
+- December 31, 2013: $1356 million
+- December 31, 2012: $2220 million
+
+To find the total residential mortgages balance for 2013 and 2012, I add the values for each year:
+2013 balance = 1356 million
+2012 balance = 2220 million
+Total balance = 1356 + 2220 = 3576 million
+
+Final Answer: 3576 million
+
+Confidence: 0.9"
+AAPL/2004/page_36.pdf-2,what was the gross margin decline in fiscal 2004 from 2003?,0.2,.2,numeric,0.7272727272727273,0.0,True,False,0.8421052631578947,0.631578947368421,0.8421052631578947,12,4,"[100.0, 0.2, 0.2, 100.0]",3,"[0.7272727272727273, 0.7272727272727273, 0.9]",0,0.9,8,False,False,"Extracted expression could not be safely evaluated: invalid syntax (<unknown>, line 1)",1,"- [post_text] gross margin declined in fiscal 2004 to 27.3% ( 27.3 % ) of net sales from 27.5% ( 27.5 % ) of net sales in 2003 .
+- [table_row] gross margin percentage -- 2004: 27.3% ( 27.3 % ) | 2003: 27.5% ( 27.5 % ) | 2002: 27.9% ( 27.9 % )
+- [pre_text] gross margin gross margin for the three fiscal years ended september 25 , 2004 are as follows ( in millions , except gross margin percentages ) : .
+- [table_row] gross margin -- 2004: $ 2259 | 2003: $ 1708 | 2002: $ 1603
+- [post_text] the company 2019s gross margin during fiscal 2004 declined due to an increase in mix towards lower margin ipod and ibook sales , pricing actions on certain power macintosh g5 models that were transitioned during the beginning of 2004 , higher warranty costs on certain portable macintosh products , and higher freight and duty costs during fiscal 2004 .
+- [table_row] net sales -- 2004: $ 8279 | 2003: $ 6207 | 2002: $ 5742
+- [pre_text] as measured by the company 2019s operating segment reporting , the retail segment reported profit of $ 39 million during fiscal 2004 as compared to losses of $ 5 million and $ 22 million during 2003 and 2002 , respectively .
+- [post_text] the foregoing statements regarding the company 2019s expected gross margin during 2005 , general demand for personal computers , anticipated air freight charges , and future economic conditions are forward- looking .","Reasoning: To find the gross margin decline from 2003 to 2004, I need the gross margin percentages for both years. From the table, 2004 gross margin percentage is 27.3% and 2003 gross margin percentage is 27.5%. The decline is calculated as (2003 value - 2004 value) / 2003 value * 100. So, 27.5 - 27.3 = 0.2. 0.2 / 27.5 * 100 = 0.7272727272727273
+
+Final Answer: 0.7272727272727273
+
+Confidence: 0.9"
+PKG/2009/page_65.pdf-4,what percentage of total purchase commitments are due after 2014?,56.196999999999996%,56%,numeric,11.61,0.0,True,False,0.8484848484848485,0.6666666666666666,0.8484848484848485,22,6,"[1.0, 2.0, 3.0, 51523.0, 51523.0, 100.0]",5,"[81.2, 445720.0, 11.61, 11.61, 0.9]",0,0.9,8,True,False,"Operand(s) not found in retrieved evidence (possible hallucinated input): [51523.0, 445720.0]",1,"- [pre_text] total purchase commitments are as follows: .
+- [post_text] the company purchased $ 37.3 million , $ 29.4 million , and $ 14.5 million during the years ended december 31 , 2009 , 2008 and 2007 , respectively , under these purchase agreements .
+- [pre_text] purchase commitments the company has entered into various purchase agreements for minimum amounts of pulpwood processing and energy over periods ranging from one to twenty years at fixed prices .
+- [post_text] as of the date of this filing , the company believes that it is not reasonably possible that future environmental expenditures and asset retirement obligations above the $ 9.1 million accrued as of december 31 , 2009 , will have a material impact on its financial condition , results of operations , or cash flows .
+- [table_row] 2010 -- ( in thousands ): $ 6951
+- [table_row] total -- ( in thousands ): $ 44572
+- [post_text] these purchase agreements are not marked to market .
+- [post_text] as of december 31 , 2009 , the company maintained an environmental reserve of $ 9.1 million relating to on-site landfills ( see note 13 ) and surface impoundments as well as ongoing and anticipated remedial projects .","Reasoning: To find the percentage of total purchase commitments due after 2014, I need to:
+1. Identify the purchase commitments for each year.
+2. Sum up the commitments made after 2014.
+3. Calculate the percentage of the total commitments.
+
+From the evidence:
+- 2009: $37.3 million
+- 2008: $29.4 million
+- 2007: $14.5 million
+
+Total commitments = $37.3 + $29.4 + $14.5 = $81.2 million
+
+Commitments after 2014:
+- 2010: $6951 (in thousands)
+- 2011: Not provided, but we can infer it's part of the total since it's not marked to market.
+- 2012: Not provided, but we can infer it's part of the total since it's not marked to market.
+- 2013: Not provided, but we can infer it's part of the total since it's not marked to market.
+- 2014: Not provided, but we can infer it's part of the total since it's not marked to market.
+
+Sum of commitments after 2014 = $6951 + $44572 = $51523 (in thousands)
+
+Percentage of total commitments due after 2014 = ($51523 / $445720) * 100 = 11.61
+
+Final Answer: 11.61
+
+Confidence: 0.9"
+LMT/2013/page_74.pdf-4,"what was the change in the weighted average common shares outstanding for diluted computations from 2012 to 2013 , in millions?",-1.9,-1.9,numeric,-1.9,1.0,True,False,1.0,0.7692307692307693,1.0,10,3,"[-1.9, -1.9, 0.9]",0,[],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] weighted average common shares outstanding for diluted computations -- 2013: 326.5 | 2012: 328.4 | 2011: 339.9
+- [table_row] weighted average common shares outstanding for basic computations -- 2013: 320.9 | 2012: 323.7 | 2011: 335.9
+- [pre_text] note 3 2013 earnings per share the weighted average number of shares outstanding used to compute earnings per common share were as follows ( in millions ) : .
+- [pre_text] these charges reduced our net earnings by $ 130 million ( $ .40 per share ) and primarily related to a plan we committed to in november 2013 to close and consolidate certain facilities and reduce our total workforce by approximately 4000 positions within our is&gs , mst , and space systems business segments .
+- [table_row] weighted average dilutive effect of equity awards -- 2013: 5.6 | 2012: 4.7 | 2011: 4.0
+- [pre_text] these charges reduced our net earnings by $ 88 million ( $ .26 per share ) and consisted of severance costs associated with the elimination of certain positions through either voluntary or involuntary actions .
+- [pre_text] these charges reduced our net earnings by $ 31 million ( $ .09 per share ) and consisted of severance costs associated with the elimination of certain positions through either voluntary or involuntary actions .
+- [pre_text] note 2 2013 restructuring charges 2013 actions during 2013 , we recorded charges related to certain severance actions totaling $ 201 million , net of state tax benefits , of which $ 83 million , $ 37 million , and $ 81 million related to our information systems & global solutions ( is&gs ) , mission systems and training ( mst ) , and space systems business segments .","Reasoning: To find the change in the weighted average common shares outstanding for diluted computations from 2012 to 2013, I will subtract the 2012 value from the 2013 value. From the table, 2013: 326.5 and 2012: 328.4. Calculation: 326.5 - 328.4 = -1.9
+
+Final Answer: -1.9
+
+Confidence: 0.9"
+STT/2011/page_83.pdf-1,"in 2011 what was the amount of tax related to the unrealized losses reclassifications totaled $ 303 million , or $ 189 million after-tax,",114.0,114,numeric,189.0,0.0,True,False,1.0,0.8571428571428571,1.0,6,1,[0.9],0,[],0,0.9,8,False,False,No arithmetic expression (with an operator and >=2 numbers) found in the Reasoning section.,1,"- [post_text] these unrealized losses related to reclassifications totaled $ 303 million , or $ 189 million after-tax , and $ 523 million , or $ 317 million after-tax , as of december 31 , 2011 and 2010 , respectively , and were recorded in accumulated other comprehensive income , or oci .
+- [post_text] the decline in these remaining after-tax unrealized losses related to reclassifications from december 31 , 2010 to december 31 , 2011 resulted primarily from amortization .
+- [table_row] ( in millions ): net unrealized loss after-tax | 2011: $ -113 ( 113 ) | 2010: $ -270 ( 270 )
+- [table_row] ( in millions ): net unrealized loss pre-tax | 2011: $ -181 ( 181 ) | 2010: $ -448 ( 448 )
+- [post_text] the net unrealized amounts presented above excluded the remaining net unrealized losses related to reclassifications of securities available for sale to securities held to maturity .
+- [pre_text] impairment the following table presents net unrealized losses on securities available for sale as of december 31: .
+- [table_row] ( in millions ): amortized cost | 2011: 100013 | 2010: 82329
+- [table_row] ( in millions ): fair value | 2011: $ 99832 | 2010: $ 81881","Reasoning: The evidence shows that the unrealized losses related to reclassifications totaled $303 million, or $189 million after-tax, as of December 31, 2011. This directly provides the after-tax figure for 2011.
+
+Final Answer: 189
+
+Confidence: 0.9"
+MRO/2007/page_149.pdf-2,"if current development costs increased in 2008 as much as in 2007 , what would the 2008 total be , in millions?",2057.0,2057,numeric,3381.0,0.0,True,False,1.0,0.7692307692307693,1.0,10,3,"[3381.0, 3381.0, 0.9]",0,[],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] ( in millions ): changes in estimated future development costs | 2007: -1727 ( 1727 ) | 2006: -527 ( 527 ) | 2005: -552 ( 552 )
+- [table_row] ( in millions ): development costs incurred during the period | 2007: 1654 | 2006: 1251 | 2005: 1030
+- [table_row] ( in millions ): net changes in prices and production transportation and administrative costs related to future production | 2007: 12845 | 2006: -1342 ( 1342 ) | 2005: 6648
+- [table_row] ( in millions ): sales and transfers of oil and gas produced net of production transportation and administrative costs | 2007: $ -4887 ( 4887 ) | 2006: $ -5312 ( 5312 ) | 2005: $ -3754 ( 3754 )
+- [table_row] ( in millions ): net change for the year | 2007: 4977 | 2006: -2083 ( 2083 ) | 2005: 4186
+- [table_row] ( in millions ): net change for the year from discontinued operations | 2007: $ 2013 | 2006: $ -216 ( 216 ) | 2005: $ 162
+- [table_row] ( in millions ): end of year | 2007: $ 13495 | 2006: $ 8518 | 2005: $ 10601
+- [table_row] ( in millions ): revisions of previous quantity estimates | 2007: 290 | 2006: 1319 | 2005: 820","Reasoning: To find the 2008 total development costs, I will add the 2007 development costs to the increase in 2007. From the evidence, 2007 development costs were $1654 million. The increase in 2007 was 1727 million. Therefore, 2008 total development costs = 1654 + 1727 = 3381.
+
+Final Answer: 3381
+
+Confidence: 0.9"
+AOS/2004/page_11.pdf-2,what percentage of total aggregate contractual obligations is due to purchase obligationst?,34.011%,34%,numeric,34.02,1.0,True,False,0.7777777777777778,0.4444444444444444,0.7777777777777778,4,3,"[100.0, 100.0, 0.9]",2,"[34.02, 34.02]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [pre_text] aggregate contractual obligations a summary of our contractual obligations as of december 31 , 2004 , is as follows: .
+- [table_row] ( dollars in millions ) contractual obligation: purchase obligations | ( dollars in millions ) total: 177.3 | ( dollars in millions ) less than 1 year: 176.6 | ( dollars in millions ) 1 - 3 years: 0.7 | ( dollars in millions ) 3 - 5 years: 2014 | more than 5 years: 2014
+- [table_row] ( dollars in millions ) contractual obligation: capital leases | ( dollars in millions ) total: 6.0 | ( dollars in millions ) less than 1 year: 2014 | ( dollars in millions ) 1 - 3 years: 2014 | ( dollars in millions ) 3 - 5 years: 6.0 | more than 5 years: 2014
+- [table_row] ( dollars in millions ) contractual obligation: operating leases | ( dollars in millions ) total: 62.9 | ( dollars in millions ) less than 1 year: 14.4 | ( dollars in millions ) 1 - 3 years: 20.7 | ( dollars in millions ) 3 - 5 years: 11.6 | more than 5 years: 16.2
+- [table_row] ( dollars in millions ) contractual obligation: total | ( dollars in millions ) total: $ 521.3 | ( dollars in millions ) less than 1 year: $ 199.6 | ( dollars in millions ) 1 - 3 years: $ 35.2 | ( dollars in millions ) 3 - 5 years: $ 155.8 | more than 5 years: $ 130.7
+- [pre_text] our leverage , as measured by the ratio of total debt to total capitalization , was 32 percent at the end of 2004 and the end of 2003 .
+- [table_row] ( dollars in millions ) contractual obligation: long-term debt | ( dollars in millions ) total: $ 275.1 | ( dollars in millions ) less than 1 year: $ 8.6 | ( dollars in millions ) 1 - 3 years: $ 13.8 | ( dollars in millions ) 3 - 5 years: $ 138.2 | more than 5 years: $ 114.5
+- [pre_text] offsetting the increase in receivable balances were $ 13.5 million lower inventory levels split about equally between water systems and electrical products and $ 14.3 million higher accounts payable balances .","Reasoning: To find the percentage of total aggregate contractual obligations due to purchase obligations, I need to divide the total purchase obligation by the total aggregate contractual obligations and multiply by 100. From the evidence, the total purchase obligation is $177.3 million and the total aggregate contractual obligations are $521.3 million. Calculation: ($177.3 / $521.3) * 100 = 34.02
+
+Final Answer: 34.02%
+
+Confidence: 0.9"
+C/2010/page_223.pdf-3,in 2010 what was the percentage change of the carrying amount of loan receivable net of the allowance,-52.48500000000001%,-52.5%,numeric,-48.72,0.0,True,False,0.8947368421052632,0.7368421052631579,0.8947368421052632,14,3,"[100.0, 100.0, 0.9]",2,"[-48.72, -48.72]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [pre_text] the changes in the accretable yield , related allowance and carrying amount net of accretable yield for 2010 are as follows : in millions of dollars accretable carrying amount of loan receivable allowance .
+- [table_row] in millions of dollars: balance at december 31 2010 ( 2 ) | accretable yield: $ 116 | carrying amount of loan receivable: $ 469 | allowance: $ 77
+- [table_row] in millions of dollars: beginning balance | accretable yield: $ 27 | carrying amount of loan receivable: $ 920 | allowance: $ 95
+- [table_row] in millions of dollars: purchases ( 1 ) | accretable yield: 1 | carrying amount of loan receivable: 130 | allowance: 2014
+- [table_row] in millions of dollars: builds ( reductions ) to the allowance | accretable yield: 128 | carrying amount of loan receivable: 2014 | allowance: -18 ( 18 )
+- [table_row] in millions of dollars: disposals/payments received | accretable yield: -11 ( 11 ) | carrying amount of loan receivable: -594 ( 594 ) | allowance: 2014
+- [post_text] ( 1 ) the balance reported in the column 201ccarrying amount of loan receivable 201d consists of $ 130 million of purchased loans accounted for under the level-yield method and $ 0 under the cost-recovery method .
+- [post_text] ( 2 ) the balance reported in the column 201ccarrying amount of loan receivable 201d consists of $ 315 million of loans accounted for under the level-yield method and $ 154 million accounted for under the cost-recovery method. .","Reasoning: To find the percentage change of the carrying amount of loan receivable net of the allowance, I need to calculate the difference between the balances at December 31, 2010 (2) and the beginning balance. The carrying amount of loan receivable at December 31, 2010 (2) is $469 million, and the beginning balance is $920 million. The formula is: ((469 - 920) / 920) * 100.
+
+Final Calculation: (469 - 920) / 920 * 100 = -48.72
+
+Final Answer: -48.72%
+
+Confidence: 0.9"
+MSI/2006/page_61.pdf-3,what was the percent of the total long-term debt obligations that was due after 2011,35.099000000000004%,35.1%,numeric,35.11,0.0,True,False,0.7692307692307693,0.6923076923076923,0.7692307692307693,9,1,[100.0],3,"[35.11, 35.11, 0.9]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] ( in millions ): long-term debt obligations | payments due by period ( 1 ) total: $ 4134 | payments due by period ( 1 ) 2007: $ 1340 | payments due by period ( 1 ) 2008: $ 198 | payments due by period ( 1 ) 2009: $ 4 | payments due by period ( 1 ) 2010: $ 534 | payments due by period ( 1 ) 2011: $ 607 | payments due by period ( 1 ) thereafter: $ 1451
+- [post_text] debt obligations : at december 31 , 2006 , the company's long-term debt obligations , including current maturities and unamortized discount and issue costs , totaled $ 4.1 billion , as compared to $ 4.0 billion at december 31 , 2005 .
+- [pre_text] payments due by period ( 1 ) ( in millions ) total 2007 2008 2009 2010 2011 thereafter .
+- [post_text] a table of all outstanding long-term debt securities can be found in note 4 , """"debt and credit facilities'' to the company's consolidated financial statements .
+- [table_row] ( in millions ): total contractual obligations | payments due by period ( 1 ) total: $ 7497 | payments due by period ( 1 ) 2007: $ 2017 | payments due by period ( 1 ) 2008: $ 599 | payments due by period ( 1 ) 2009: $ 239 | payments due by period ( 1 ) 2010: $ 724 | payments due by period ( 1 ) 2011: $ 777 | payments due by period ( 1 ) thereafter: $ 3141
+- [pre_text] the company was in compliance with the terms of the 5-year credit facility at december 31 , 2006 .
+- [table_row] ( in millions ): lease obligations | payments due by period ( 1 ) total: 2328 | payments due by period ( 1 ) 2007: 351 | payments due by period ( 1 ) 2008: 281 | payments due by period ( 1 ) 2009: 209 | payments due by period ( 1 ) 2010: 178 | payments due by period ( 1 ) 2011: 158 | payments due by period ( 1 ) thereafter: 1151
+- [table_row] ( in millions ): purchase obligations | payments due by period ( 1 ) total: 1035 | payments due by period ( 1 ) 2007: 326 | payments due by period ( 1 ) 2008: 120 | payments due by period ( 1 ) 2009: 26 | payments due by period ( 1 ) 2010: 12 | payments due by period ( 1 ) 2011: 12 | payments due by period ( 1 ) thereafter: 539","Reasoning: To find the percentage of total long-term debt obligations that was due after 2011, I need to calculate the sum of payments due after 2011 and divide it by the total long-term debt obligations. From the evidence, the total long-term debt obligations are $4134 million. Payments due after 2011 are $1451 million (payments due by period (1) thereafter: $1451). 
+
+Calculation: (1451 / 4134) * 100 = 35.11
+
+Final Answer: 35.11
+
+Confidence: 0.9"
+ABMD/2006/page_75.pdf-1,what is the decline from current future minimum lease payments and the following years expected obligation?\\n,19.495%,25%,numeric,3116.0,0.0,True,False,1.0,0.75,1.0,9,3,"[3116.0, 3116.0, 0.9]",0,[],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] fiscal year ending march 31,: total future minimum lease payments | operating leases: $ 4819
+- [pre_text] future minimum lease payments under all significant non-cancelable operating leases as of march 31 , 2006 are approximately as follows ( in thousands ) : fiscal year ending march 31 , operating leases .
+- [pre_text] total rent expense under these leases , included in the accompanying consolidated statements of operations approximated $ 821000 , $ 824000 and $ 1262000 for the fiscal years ended march 31 , 2004 , 2005 and 2006 , respectively .
+- [pre_text] as of march 31 , 2006 , the company had entered into leases for its facilities , including its primary operating facility in danvers , massachusetts , with terms through fiscal 2010 .
+- [table_row] fiscal year ending march 31,: 2010 | operating leases: 710
+- [table_row] fiscal year ending march 31,: 2007 | operating leases: 1703
+- [table_row] fiscal year ending march 31,: 2008 | operating leases: 1371
+- [pre_text] the danvers lease may be extended , at the company 2019s option , for two successive additional periods of five years each with monthly rent charges to be determined based on then current fair rental values .","Reasoning: To find the decline, I need to calculate the difference between the current year's future minimum lease payments and the next year's. From the evidence, the current year (2010) has 710 operating leases with total future minimum lease payments of $4819. For the following year (2011), the number of operating leases is 1703. 
+
+The decline = 2010's future minimum lease payments - 2011's future minimum lease payments
+         = 4819 - 1703
+         = 3116
+
+Final Answer: 3116
+
+Confidence: 0.9"
+AMAT/2013/page_18.pdf-2,"what is the applied 2019s net sales in 2018 , ( in billions ) ?",7.22222,7.22,numeric,14.0,0.0,True,False,1.0,0.7368421052631579,1.0,14,5,"[14.0, 14.0, 14.0, 14.0, 0.5]",0,[],0,0.5,8,False,False,No arithmetic expression (with an operator and >=2 numbers) found in the Reasoning section.,1,"- [post_text] applied 2019s investments in rd&e for product development and engineering programs to create or improve products and technologies over the last three years were as follows : $ 1.3 billion ( 18 percent of net sales ) in fiscal 2013 , $ 1.2 billion ( 14 percent of net sales ) in fiscal 2012 , and $ 1.1 billion ( 11 percent of net sales ) in fiscal 2011 .
+- [post_text] applied has spent an average of 14 percent of net sales in rd&e over the last five years .
+- [table_row] applied global services -- 2013: 591 | 2012: 25% ( 25 % ) | ( in millions except percentages ): 36% ( 36 % )
+- [post_text] research , development and engineering applied 2019s long-term growth strategy requires continued development of new products .
+- [table_row] total -- 2013: $ 2372 | 2012: 100% ( 100 % ) | ( in millions except percentages ): 100% ( 100 % )
+- [post_text] the company 2019s significant investment in research , development and engineering ( rd&e ) has generally enabled it to deliver new products and technologies before the emergence of strong demand , thus allowing customers to incorporate these products into their manufacturing plans at an early stage in the technology selection cycle .
+- [table_row] silicon systems group -- 2013: $ 1295 | 2012: 55% ( 55 % ) | ( in millions except percentages ): 44% ( 44 % )
+- [post_text] applied 2019s backlog on any particular date is not necessarily indicative of actual sales for any future periods , due to the potential for customer changes in delivery schedules or cancellation of orders .","Reasoning: The evidence shows the percentage of net sales spent on RD&E in 2013 as $2372 million (100% of net sales), and the average percentage over the last five years as 14%. However, the question asks for the 2019 net sales in 2018, which is not provided in the evidence. To find the 2019 net sales in 2018, we would need additional information that is not available in the given evidence.
+
+Since the direct computation cannot be made with the provided data, I will make a reasonable assumption based on the trend shown. If the average percentage of net sales spent on RD&E over the last five years is 14%, and assuming the net sales in 2019 were similar to the average, we can estimate the 2019 net sales in 2018.
+
+Let's assume the net sales in 2019 were $14 billion (which is 14% of the average net sales). Then, the net sales in 2018 would be higher by the same percentage increase, which is 14%.
+
+Final Answer: 14.0
+
+Confidence: 0.5"
+DVN/2014/page_85.pdf-1,"what is the average amortization amount , in millions , from 2015-2019?",44.8,44.8,numeric,44.8,1.0,True,False,0.875,0.7916666666666666,0.875,19,2,"[5.0, 5.0]",3,"[224.0, 224.0, 0.9]",0,0.9,8,True,False,"Operand(s) not found in retrieved evidence (possible hallucinated input): [224.0, 5.0]",1,"- [table_row] year: 2019 | amortization amount ( in millions ): $ 44
+- [pre_text] year amortization amount ( in millions ) .
+- [table_row] year: 2015 | amortization amount ( in millions ): $ 45
+- [table_row] year: 2018 | amortization amount ( in millions ): $ 45
+- [table_row] year: 2016 | amortization amount ( in millions ): $ 45
+- [table_row] year: 2017 | amortization amount ( in millions ): $ 45
+- [pre_text] amortization expense for intangibles was approximately $ 36 million for the year ended december 31 , 2014 .
+- [pre_text] the following table summarizes the estimated aggregate amortization expense for the next five years .","Reasoning: To find the average amortization amount from 2015 to 2019, I will use the amortization amounts provided for those years. From the evidence:
+- 2015: $45 million
+- 2016: $45 million
+- 2017: $45 million
+- 2018: $45 million
+- 2019: $44 million
+
+Sum of these amounts: 45 + 45 + 45 + 45 + 44 = 224 million
+
+There are 5 years, so the average is 224 / 5 = 44.8
+
+Final Answer: 44.8
+
+Confidence: 0.9"
+SPGI/2018/page_74.pdf-1,what was the ratio of the pension trust assets for 2017 to 2018,1.15663,1.16,numeric,1.1,0.0,True,False,1.0,0.8,1.0,8,2,"[1.1, 0.9]",0,[],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [post_text] pension trust had assets of $ 1572 million and $ 1739 million as of december 31 , 2018 and 2017 respectively , and the target allocations in 2018 include 75% ( 75 % ) fixed income , 16% ( 16 % ) domestic equities and 9% ( 9 % ) international equities .
+- [post_text] pension trust had assets of $ 415 million and $ 480 million as of december 31 , 2018 and 2017 , respectively , and the target allocations in 2018 include 40% ( 40 % ) fixed income , 30% ( 30 % ) diversified growth funds , 20% ( 20 % ) equities and 10% ( 10 % ) real estate .
+- [post_text] the pension assets are invested with the goal of producing a combination of capital growth , income and a liability hedge .
+- [post_text] the following table details further information on our plan assets where we have used significant unobservable inputs ( level 3 ) : pension trusts 2019 asset allocations there are two pension trusts , one in the u.s .
+- [post_text] common stock in 2017 .
+- [post_text] for commingled funds that are not actively traded , the trustee applies pricing information provided by investment management firms to the unit quantities of such funds .
+- [post_text] in general , the plan requires that 50% ( 50 % ) of eligible directors 2019 annual compensation plus dividend equivalents be credited to deferred stock accounts .
+- [post_text] common stock of $ 3 million during both the years ended december 31 , 2018 and december 31 , 2017 .","Reasoning: To find the ratio of the pension trust assets for 2017 to 2018, I use the assets provided for each year. Assets in 2017 = $1739 million, assets in 2018 = $1572 million. Ratio = 1739 / 1572
+
+Final Answer: 1.10
+
+Confidence: 0.9"
+ZBH/2003/page_58.pdf-3,what percent of inventory is ready for liquidation ( sale ) in 2003?,72.82499999999999%,72.83%,numeric,98.04,0.0,True,False,0.9333333333333333,0.7333333333333333,0.9333333333333333,11,3,"[100.0, 100.0, 0.9]",1,[98.04],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,1,"- [table_row] inventory step-up -- 2003: 52.6 | 2002: 2013
+- [table_row] finished goods -- 2003: $ 384.3 | 2002: $ 206.7
+- [post_text] the acquisition will be inventory step-up 52.6 2013 accounted for under the purchase method of accounting .
+- [post_text] inventories , net $ 527.7 $ 257.6 reserves for obsolete and slow-moving inventory at4 .
+- [table_row] inventories net -- 2003: $ 527.7 | 2002: $ 257.6
+- [pre_text] inventories payments that are contingent on the growth of implex inventories at december 31 , 2003 and 2002 , consist of product sales through 2006 .
+- [pre_text] for approximately $ 14.8 million cash , which has been the effect of the change during the year ended allocated primarily to goodwill and technology based december 31 , 2003 was to increase earnings before intangible assets .
+- [post_text] following the acquisition of centerpulse , the company depreciation is computed using the straight-line method established a common approach for estimating excess based on average estimated useful lives , determined inventory and instruments .","Reasoning: To find the percentage of inventory ready for liquidation in 2003, I need to use the 'inventories net' row for 2003, which is $527.7 million. The 'reserves for obsolete and slow-moving inventory' for 2003 is $4. This represents the amount that is not ready for liquidation. The formula to calculate the percentage of inventory ready for liquidation is: ($527.7 - 4) / 527.7 * 100.
+
+Final Answer: (527.7 - 4) / 527.7 * 100 = 98.04%
+
+Confidence: 0.9"
+AMT/2005/page_105.pdf-2,what is the total value of net operating loss carryforwards?,4575515.0,4575515,numeric,4.6,0.0,True,False,1.0,0.6666666666666666,1.0,6,3,"[4.6, 4.6, 0.9]",0,[],0,0.9,8,False,False,No arithmetic expression (with an operator and >=2 numbers) found in the Reasoning section.,1,"- [pre_text] if not utilized , the company 2019s net operating loss carryforwards expire as follows ( in thousands ) : .
+- [post_text] the company has not provided a valuation allowance for the remaining deferred tax assets , primarily its federal net operating loss carryforwards , as management believes the company will have sufficient time to realize these federal net operating loss carryforwards during the twenty-year tax carryforward period .
+- [post_text] in june 2003 and october 2003 , the company filed federal income tax refund claims with the irs relating to the carry back of $ 380.0 million of net operating losses generated prior to 2003 , of which the company initially anticipated receiving approximately $ 90.0 million .
+- [pre_text] american tower corporation and subsidiaries notes to consolidated financial statements 2014 ( continued ) at december 31 , 2005 , the company had net federal and state operating loss carryforwards available to reduce future taxable income of approximately $ 2.2 billion and $ 2.4 billion , respectively .
+- [post_text] the projections show a significant decrease in depreciation and interest expense in the later years of the carryforward period as a result of a significant portion of its assets being fully depreciated during the first fifteen years of the carryforward period and debt repayments reducing interest expense .
+- [post_text] based on its current outlook of future taxable income during the carryforward period , management believes that the net deferred tax asset will be realized .
+- [post_text] the balance of the valuation allowance primarily relates to net state deferred tax assets .
+- [post_text] the company intends to recover a portion of its deferred tax asset through its federal income tax refund claims related to the carry back of certain federal net operating losses .","Reasoning: The relevant information is in the statement ""at december 31 , 2005 , the company had net federal and state operating loss carryforwards available to reduce future taxable income of approximately $ 2.2 billion and $ 2.4 billion , respectively."" This gives us the total net operating loss carryforwards as $2.2 billion + $2.4 billion = $4.6 billion.
+
+Final Answer: 4.6 billion
+
+Confidence: 0.9"
+ETR/2015/page_131.pdf-1,what is the percent change in annual long-term debt maturities from 2016 to 2017?,275.56600000000003%,276%,numeric,308.86,0.0,True,False,0.7692307692307693,0.5384615384615384,0.7692307692307693,7,3,"[204079000.0, 766451000.0, 100.0]",3,"[308.86, 308.86, 0.9]",0,0.9,8,True,False,"Python recomputation of '(766451 - 204079) / 204079 * 100' = 275.5658, which does not match the stated result (308.86).",1,"- [pre_text] the annual long-term debt maturities ( excluding lease obligations and long-term doe obligations ) for debt outstanding as of december 31 , 2015 , for the next five years are as follows : amount ( in thousands ) .
+- [table_row] 2016 -- amount ( in thousands ): $ 204079
+- [table_row] 2017 -- amount ( in thousands ): $ 766451
+- [table_row] 2018 -- amount ( in thousands ): $ 822690
+- [post_text] these notes do not have a stated interest rate , but have an implicit interest rate of 4.8% ( 4.8 % ) .
+- [table_row] 2019 -- amount ( in thousands ): $ 768588
+- [pre_text] ( b ) these notes do not have a stated interest rate , but have an implicit interest rate of 4.8% ( 4.8 % ) .
+- [table_row] 2020 -- amount ( in thousands ): $ 1631181","Reasoning: To calculate the percent change from 2016 to 2017, I use the values provided for those years. For 2016, the amount is $204,079,000. For 2017, the amount is $766,451,000. 
+
+Change = (766451 - 204079) / 204079 * 100 = 308.86
+
+Final Answer: 308.86%
+
+Confidence: 0.9"
+PNC/2009/page_46.pdf-2,share of total securities rated bbb/baa or below changed by how many percentage point between 2008 and 2009?,-1.0,-1,numeric,-1.0,1.0,True,False,0.9166666666666666,0.5,0.9166666666666666,6,5,"[3.0, 2.0, -1.0, 1.0, -1.0]",1,[0.9],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] total -- december 31 2009: 100% ( 100 % ) | december 312008: 100% ( 100 % )
+- [table_row] aaa/aaa -- december 31 2009: 14% ( 14 % ) | december 312008: 19% ( 19 % )
+- [table_row] bbb/baa -- december 31 2009: 2 | december 312008: 3
+- [post_text] in exchange for a perfected security interest in the cash flows of the nonconforming mortgage loans , the spe issued to us asset-backed securities in the form of senior , mezzanine , and subordinated equity notes .
+- [post_text] based on this analysis and under accounting guidance effective during 2009 and 2008 , we are not the primary beneficiary and therefore the assets and liabilities of market street are not included on our consolidated balance sheet .
+- [pre_text] market street commitments by credit rating ( a ) december 31 , december 31 .
+- [table_row] aa/aa -- december 31 2009: 50 | december 312008: 6
+- [post_text] accordingly , this spe was consolidated and all of the entity 2019s assets , liabilities , and .","Reasoning: To find the change in the share of total securities rated BAA/Baa or below between 2008 and 2009, I need to compare the 'bbb/baa' ratings. In 2008, it's 3%, and in 2009, it's 2%. The change is 2 - 3 = -1. This means a decrease of 1 percentage point.
+
+Final Answer: -1
+
+Confidence: 0.9"
+PM/2017/page_38.pdf-3,what is the percentage increase in interest expense?,2.581%,2.6%,numeric,2.51,0.0,True,False,0.8,0.5,0.8,5,3,"[100.0, 100.0, 0.9]",2,"[2.51, 2.51]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [post_text] interest expense , net , of $ 914 million increased by $ 23 million , due primarily to unfavorably currency and higher average debt levels , partly offset by higher interest income .
+- [post_text] our effective tax rate increased by 12.8 percentage points to 40.7% ( 40.7 % ) .
+- [post_text] operating income increased by $ 688 million , due primarily to : 2022 price increases ( $ 1.4 billion ) , partly offset by 2022 higher marketing , administration and research costs ( $ 570 million ) and 2022 unfavorable currency ( $ 157 million ) .
+- [post_text] marketing , administration and research costs increased by $ 320 million , due to : 2022 higher expenses ( $ 570 million , largely reflecting increased investment behind reduced-risk products , predominately in the european union and asia ) , partly offset by 2022 favorable currency ( $ 250 million ) .
+- [post_text] based upon our current interpretation of the tax cuts and jobs act , we estimate that our 2018 effective tax rate will be approximately 28% ( 28 % ) , subject to future regulatory developments and earnings mix by taxing jurisdiction .
+- [post_text] this decrease was due primarily to a higher effective tax rate as discussed above , partly offset by higher operating income .
+- [post_text] diluted and basic eps of $ 3.88 decreased by 13.4% ( 13.4 % ) .
+- [pre_text] excise taxes on products increased by $ 1.1 billion , due to : 2022 higher excise taxes resulting from changes in retail prices and tax rates ( $ 4.6 billion ) , partially offset by 2022 favorable currency ( $ 1.9 billion ) and 2022 lower excise taxes resulting from volume/mix ( $ 1.6 billion ) .","Reasoning: The percentage increase in interest expense is calculated as follows: Increase in interest expense = $23 million. Percentage increase = (Increase in interest expense / Original interest expense) * 100. From the evidence, the original interest expense in 2010 is $914 million. Therefore, Percentage increase = (23 / 914) * 100 = 2.51%.
+
+Final Answer: 2.51%
+
+Confidence: 0.9"
+HOLX/2015/page_98.pdf-2,what is the expected growth rate in amortization expense from 2016 to 2017?,-3.024%,-3.0%,numeric,3.84,0.0,True,False,0.7857142857142857,0.7142857142857143,0.7857142857142857,10,1,[100.0],3,"[3.84, 3.84, 0.9]",0,0.9,8,True,False,"Python recomputation of '(377.0 - 365.6) / 365.6 * 100' = 3.1182, which does not match the stated result (3.84).",1,"- [pre_text] table of contents the estimated amortization expense at september 26 , 2015 for each of the five succeeding fiscal years was as follows: .
+- [table_row] fiscal 2016: fiscal 2017 | $ 377.0: $ 365.6
+- [post_text] the forecasted cash flows are based on the company 2019s most recent budget and strategic plan and for years beyond this period , the company 2019s estimates are based on assumed growth rates expected as of the measurement date .
+- [table_row] fiscal 2016: fiscal 2018 | $ 377.0: $ 355.1
+- [table_row] fiscal 2016: fiscal 2019 | $ 377.0: $ 343.5
+- [table_row] fiscal 2016: fiscal 2020 | $ 377.0: $ 332.3
+- [post_text] the company believes it used reasonable estimates and assumptions about future revenue , cost projections , cash flows , market multiples and discount rates as of the measurement date .
+- [post_text] the discount rates used are intended to reflect the risks inherent in future cash flow projections and are based on estimates of the weighted-average cost of capital ( 201cwacc 201d ) of market participants relative to each respective reporting unit .","Reasoning: The evidence shows the amortization expense for fiscal 2016 to fiscal 2017 is $377.0 and $365.6, respectively. To find the expected growth rate from 2016 to 2017, I will calculate the difference between these two values and divide by the 2016 value.
+
+Calculation:
+(377.0 - 365.6) / 365.6 * 100 = 3.84
+
+Final Answer: 3.84%
+
+Confidence: 0.9"
+ETR/2017/page_114.pdf-2,what are the payments for entergy arkansas as a percentage of payments for entergy louisiana?,33.333%,33.3%,numeric,33.33,1.0,True,False,0.8888888888888888,0.4444444444444444,0.8888888888888888,4,4,"[100.0, 100.0, 33.33, 33.33]",1,[0.9],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] entergy arkansas -- payments ( receipts ) ( in millions ): $ 2
+- [table_row] entergy louisiana -- payments ( receipts ) ( in millions ): $ 6
+- [post_text] as a result of the recalculations , entergy arkansas owed very minor payments to entergy louisiana , entergy mississippi , and entergy new orleans .
+- [table_row] entergy mississippi -- payments ( receipts ) ( in millions ): ( $ 4 )
+- [post_text] the ferc determined that the payments detailed in the november 2016 compliance filing did not include adequate interest for the payments from entergy arkansas to entergy louisiana because it did not include interest on the principal portion of the payment that was made in february 2016 .
+- [table_row] entergy new orleans -- payments ( receipts ) ( in millions ): ( $ 1 )
+- [table_row] entergy texas -- payments ( receipts ) ( in millions ): ( $ 3 )
+- [pre_text] payments ( receipts ) ( in millions ) .","Reasoning: To find the percentage, I need to divide the payments for Entergy Arkansas by the payments for Entergy Louisiana and multiply by 100. Payments for Entergy Arkansas = $2.00 million. Payments for Entergy Louisiana = $6.00 million. ($2.00 / $6.00) * 100 = 33.33%
+
+Final Answer: 33.33%
+
+Confidence: 0.9"
+UNP/2008/page_77.pdf-1,"as of december 31 , 2008 what was the percent of the total accounts payable and other liabilities that was accrued wages and vacation",14.335999999999999%,14.3%,numeric,3.625,0.0,True,False,0.9166666666666666,0.6666666666666666,0.9166666666666666,8,3,"[100.0, 100.0, 0.9]",1,[3.625],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] millions of dollars: accrued wages and vacation | dec . 31 2008: 367 | dec . 31 2007: 394
+- [pre_text] accounts payable and other current liabilities dec .
+- [table_row] millions of dollars: total accounts payable and other current liabilities | dec . 31 2008: $ 2560 | dec . 31 2007: $ 2902
+- [table_row] millions of dollars: accounts payable | dec . 31 2008: $ 629 | dec . 31 2007: $ 732
+- [table_row] millions of dollars: accrued casualty costs | dec . 31 2008: 390 | dec . 31 2007: 371
+- [table_row] millions of dollars: income and other taxes | dec . 31 2008: 207 | dec . 31 2007: 343
+- [table_row] millions of dollars: equipment rents payable | dec . 31 2008: 93 | dec . 31 2007: 103
+- [pre_text] general and administrative expenditures are expensed as incurred .","Reasoning: To find the percentage of accrued wages and vacation to total accounts payable and other current liabilities, I use the values provided for December 31, 2008. Accrued wages and vacation = 93 million dollars. Total accounts payable and other current liabilities = 2560 million dollars. Percentage = (93 / 2560) * 100
+
+Final Answer: (93 / 2560) * 100 = 3.625
+
+Confidence: 0.9"
+AES/2016/page_191.pdf-3,"for the period ending in 2016 , what was the average amount of settlements , in millions?",-11.33333,11.3,numeric,-11.33,1.0,True,False,0.8461538461538461,0.7307692307692307,0.8461538461538461,19,3,"[3.0, 3.0, 0.9]",4,"[-34.0, -34.0, -11.3333, -11.33]",0,0.9,8,True,False,"Operand(s) not found in retrieved evidence (possible hallucinated input): [-34.0, 3.0]",1,"- [table_row] december 31,: settlements | 2016: -13 ( 13 ) | 2015: -19 ( 19 ) | 2014: -2 ( 2 )
+- [table_row] december 31,: balance at january 1 | 2016: $ 373 | 2015: $ 394 | 2014: $ 392
+- [table_row] december 31,: balance at december 31 | 2016: $ 369 | 2015: $ 373 | 2014: $ 394
+- [post_text] sul 2019s pretax gain attributable to aes for the year ended december 31 , 2014 was $ 133 million .
+- [post_text] sul 2019s pretax loss attributable to aes for the years ended december 31 , 2016 and 2015 was $ 1.4 billion and $ 32 million , respectively .
+- [post_text] the cumulative impact to earnings of the impairment and loss on sale was $ 1.1 billion .
+- [table_row] december 31,: reductions for tax positions of prior years | 2016: -1 ( 1 ) | 2015: -7 ( 7 ) | 2014: -2 ( 2 )
+- [table_row] december 31,: additions for tax positions of prior years | 2016: 1 | 2015: 12 | 2014: 14","Reasoning: To find the average amount of settlements for the period ending in 2016, I need the 'settlements' values for 2016, 2015, and 2014. From the evidence, the relevant rows are:
+- 2016: -13 (13)
+- 2015: -19 (19)
+- 2014: -2 (2)
+
+The values for 2016 are -13 (13). Summing these values: -13 + (-19) + (-2) = -34. Then, to find the average, divide by the number of years (3): -34 / 3 = -11.3333
+
+Final Answer: -11.33
+
+Confidence: 0.9"
+ETFC/2007/page_126.pdf-3,what percentage of total future principal payments of corporate debt are due after 2012?,86.847%,87%,numeric,14.15,0.0,True,False,0.9047619047619048,0.47619047619047616,0.9047619047619048,10,9,"[1.0, 2.0, 3.0, 427454.0, 4.0, 100.0, 427454.0, 100.0, 0.9]",2,"[14.15, 14.15]",0,0.9,8,True,False,Operand(s) not found in retrieved evidence (possible hallucinated input): [427454.0],1,"- [table_row] 2008: total future principal payments of corporate debt | $ 2014: 3450152
+- [pre_text] future maturities of corporate debt scheduled principal payments of corporate debt as of december 31 , 2007 are as follows ( dollars in thousands ) : years ending december 31 .
+- [table_row] 2008: total corporate debt | $ 2014: $ 3022698
+- [pre_text] early extinguishment of debt in 2006 , the company called the entire remaining $ 185.2 million principal amount of its 6% ( 6 % ) notes for redemption .
+- [pre_text] other corporate debt the company also has multiple term loans from financial institutions .
+- [pre_text] corporate debt covenants certain of the company 2019s corporate debt described above have terms which include customary financial covenants .
+- [pre_text] 128 , earnings per share .
+- [pre_text] as a result of the citadel investment in november 2007 , the facility was terminated and all unamortized debt issuance costs were expensed .","Reasoning: To find the percentage of total future principal payments of corporate debt due after 2012, I need to:
+1. Identify the total future principal payments of corporate debt for 2014, which is $3,450,152.
+2. Identify the total corporate debt for 2008, which is $3,022,698.
+3. Calculate the difference between these two values to find the future principal payments of corporate debt due after 2012: $3,450,152 - $3,022,698 = $427,454.
+4. Calculate the percentage by dividing the difference by the total corporate debt for 2008 and multiplying by 100: ($427,454 / $3,022,698) * 100 = 14.15%.
+
+Final Answer: 14.15%
+
+Confidence: 0.9"
+MAS/2012/page_70.pdf-1,what was the percentage change in total net goodwill between 2010 and 2011?,-20.646%,-21%,numeric,-20.72,1.0,True,False,0.8823529411764706,0.7647058823529411,0.8823529411764706,13,2,"[100.0, 0.9]",2,"[-20.72, -20.72]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] total -- gross goodwill at december 31 2010: $ 4216 | accumulated impairment losses: $ -1833 ( 1833 ) | net goodwill at december 31 2010: $ 2383 | additions ( a ): $ 9 | discontinued operations ( b ): $ -13 ( 13 ) | pre-tax impairment charge: $ -486 ( 486 ) | other ( c ): $ -2 ( 2 ) | net goodwill at december 31 2011: $ 1891
+- [table_row] installation and other services -- gross goodwill at december 31 2010: 1819 | accumulated impairment losses: -762 ( 762 ) | net goodwill at december 31 2010: 1057 | additions ( a ): 2014 | discontinued operations ( b ): -13 ( 13 ) | pre-tax impairment charge: 2014 | other ( c ): 2014 | net goodwill at december 31 2011: 1044
+- [table_row] other specialty products -- gross goodwill at december 31 2010: 980 | accumulated impairment losses: -367 ( 367 ) | net goodwill at december 31 2010: 613 | additions ( a ): 2014 | discontinued operations ( b ): 2014 | pre-tax impairment charge: -367 ( 367 ) | other ( c ): 2014 | net goodwill at december 31 2011: 246
+- [post_text] ( b ) during 2011 , the company reclassified the goodwill related to the business units held for sale .
+- [table_row] decorative architectural products -- gross goodwill at december 31 2010: 294 | accumulated impairment losses: 2014 | net goodwill at december 31 2010: 294 | additions ( a ): 2014 | discontinued operations ( b ): 2014 | pre-tax impairment charge: -75 ( 75 ) | other ( c ): 2014 | net goodwill at december 31 2011: 219
+- [table_row] plumbing products -- gross goodwill at december 31 2010: 536 | accumulated impairment losses: -340 ( 340 ) | net goodwill at december 31 2010: 196 | additions ( a ): 9 | discontinued operations ( b ): 2014 | pre-tax impairment charge: 2014 | other ( c ): -4 ( 4 ) | net goodwill at december 31 2011: 201
+- [table_row] cabinets and related products -- gross goodwill at december 31 2010: $ 587 | accumulated impairment losses: $ -364 ( 364 ) | net goodwill at december 31 2010: $ 223 | additions ( a ): $ 2014 | discontinued operations ( b ): $ 2014 | pre-tax impairment charge: $ -44 ( 44 ) | other ( c ): $ 2 | net goodwill at december 31 2011: $ 181
+- [post_text] the company recognized the non-cash , pre-tax impairment charges , in continuing operations , for goodwill of $ 486 million ( $ 330 million , after tax ) for 2011 .","Reasoning: To find the percentage change in total net goodwill between 2010 and 2011, I use the 'net goodwill at december 31 2010' and 'net goodwill at december 31 2011' values from the 'total' row. In 2010, the net goodwill was $2383 million. In 2011, it was $1891 million. Calculation: ($1891 - $2383) / $2383 * 100 = -20.72
+
+Final Answer: -20.72%
+
+Confidence: 0.9"
+AON/2010/page_28.pdf-1,"from the data given , how many square feet have an expiry date in 2020?",778000.0,778000,numeric,414000.0,0.0,True,False,0.9166666666666666,0.9166666666666666,0.9166666666666666,11,0,[],1,[0.9],0,0.9,8,True,False,"Python recomputation of '2014 - 2019' = -5.0000, which does not match the stated result (414000.0).",1,"- [table_row] property:: 199 water street new york new york | occupied square footage: 337000 | lease expiration dates: 2018
+- [table_row] property:: 2300 discovery drive orlando florida | occupied square footage: 364000 | lease expiration dates: 2020
+- [table_row] property:: devonshire square and other locations london uk | occupied square footage: 339000 | lease expiration dates: 2018 - 2028
+- [pre_text] the following are additional significant leased properties , along with the occupied square footage and expiration. .
+- [table_row] property:: 2601 research forest drive the woodlands texas | occupied square footage: 414000 | lease expiration dates: 2020
+- [table_row] property:: 1000 n . milwaukee avenue glenview illinois | occupied square footage: 233000 | lease expiration dates: 2017
+- [table_row] property:: 4 overlook point and other locations lincolnshire illinois | occupied square footage: 1279000 | lease expiration dates: 2014 - 2019
+- [pre_text] we maintain our corporate headquarters at 200 e .","Reasoning: To find the square footage with an expiry date in 2020, I look for 'lease expiration dates' that include '2020'. This information is found in the third table row: 'property:: 4 overlook point and other locations lincolnshire illinois | occupied square footage: 1279000 | lease expiration dates: 2014 - 2019'. The only property with an expiry date in 2020 is '2601 research forest drive the woodlands texas | occupied square footage: 414000 | lease expiration dates: 2020'.
+
+Final Answer: 414000
+
+Confidence: 0.9"
+AES/2002/page_46.pdf-4,what was the difference in dollars of the high low sale price for the common stock in the fourth quarter of 2002?,2.62,2.62,numeric,14.27,0.0,True,False,1.0,0.7,1.0,7,3,"[14.27, 14.27, 0.9]",0,[],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [pre_text] price range of common stock .
+- [table_row] 2002 first quarter: fourth quarter | high $ 17.84: 3.57 | low $ 4.11: 0.95 | 2001 first quarter: fourth quarter | high $ 60.15: 17.80 | low $ 41.30: 11.60
+- [table_row] 2002 first quarter: third quarter | high $ 17.84: 4.61 | low $ 4.11: 1.56 | 2001 first quarter: third quarter | high $ 60.15: 44.50 | low $ 41.30: 12.00
+- [table_row] 2002 first quarter: second quarter | high $ 17.84: 9.17 | low $ 4.11: 3.55 | 2001 first quarter: second quarter | high $ 60.15: 52.25 | low $ 41.30: 39.95
+- [pre_text] the common stock of the company is currently traded on the new york stock exchange ( nyse ) under the symbol 2018 2018aes . 2019 2019 the following tables set forth the high and low sale prices for the common stock as reported by the nyse for the periods indicated .
+- [post_text] as of march 3 , 2003 , there were 9663 record holders of the company 2019s common stock , par value $ 0.01 per share .
+- [post_text] dividends .
+- [pre_text] part ii item 5 2014market for registrant 2019s common equity and related stockholder matters market information .","Reasoning: To find the difference in dollars of the high-low sale price for the common stock in the fourth quarter of 2002, I need to use the data provided for the fourth quarter of 2002. From the table, the high price for the fourth quarter of 2002 is $17.84 and the low price is $3.57. The difference is calculated as follows: (17.84 - 3.57) = 14.27
+
+Final Answer: 14.27
+
+Confidence: 0.9"
+CB/2010/page_200.pdf-4,in 2010 what was the ratio of the statutory capital and surplus to the statutory net income,4.85514,4.9\\n,numeric,2.58,0.0,True,False,0.8888888888888888,0.7777777777777778,0.8888888888888888,7,1,[2.58],1,[0.9],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [pre_text] the statutory capital and surplus of the u.s .
+- [pre_text] the following table presents the combined statutory capital and surplus and statutory net income of the bermuda and u.s .
+- [table_row] ( in millions of u.s . dollars ): statutory capital and surplus | bermuda subsidiaries 2010: $ 11798 | bermuda subsidiaries 2009: $ 9164 | bermuda subsidiaries 2008: $ 6205 | bermuda subsidiaries 2010: $ 6266 | bermuda subsidiaries 2009: $ 5885 | 2008: $ 5368
+- [table_row] ( in millions of u.s . dollars ): statutory net income | bermuda subsidiaries 2010: $ 2430 | bermuda subsidiaries 2009: $ 2369 | bermuda subsidiaries 2008: $ 2196 | bermuda subsidiaries 2010: $ 1047 | bermuda subsidiaries 2009: $ 904 | 2008: $ 818
+- [post_text] subsidiaries discount certain a&e liabilities , which increased statutory capital and surplus by approximately $ 206 million , $ 215 million , and $ 211 million at december 31 , 2010 , 2009 , and 2008 , respectively .
+- [pre_text] statutory accounting differs from gaap in the reporting of certain reinsurance contracts , investments , subsidiaries , acquis- ition expenses , fixed assets , deferred income taxes , and certain other items .
+- [pre_text] there are no statutory restrictions on the payment of dividends from retained earnings by any of the bermuda subsidiaries as the minimum statutory capital and surplus requirements are satisfied by the share capital and additional paid-in capital of each of the bermuda subsidiaries .
+- [pre_text] the receivable is included in other assets in the accompanying consolidated balance sheets .","Reasoning: To find the ratio of statutory capital and surplus to statutory net income for 2010, I use the values provided in the evidence. Statutory capital and surplus for 2010 is $6266 million and statutory net income for 2010 is $2430 million. Ratio = statutory capital and surplus / statutory net income = 6266 / 2430
+
+Final Answer: 2.58
+
+Confidence: 0.9"
+PM/2015/page_85.pdf-1,what is the percentage change in total debt from 2014 to 2015?,-0.0339%,3.4%,numeric,0.0,0.0,True,False,0.96875,0.8125,0.96875,26,5,"[100.0, 0.0, 100.0, 0.0, 0.0]",1,[0.9],0,0.9,8,True,False,Operand(s) not found in retrieved evidence (possible hallucinated input): [0.0],1,"- [post_text] debt 2013 our total debt was $ 28.5 billion at december 31 , 2015 , and $ 29.5 billion at december 31 , 2014 .
+- [pre_text] debt 2013 our total debt was $ 28.5 billion at december 31 , 2015 , and $ 29.5 billion at december 31 , 2014 .
+- [post_text] the weighted-average all-in financing cost of our total debt was 3.0% ( 3.0 % ) in 2015 , compared to 3.2% ( 3.2 % ) in 2014 .
+- [pre_text] the weighted-average all-in financing cost of our total debt was 3.0% ( 3.0 % ) in 2015 , compared to 3.2% ( 3.2 % ) in 2014 .
+- [post_text] borrowings under these arrangements amounted to $ 825 million at december 31 , 2015 , and $ 1.2 billion at december 31 , 2014 .
+- [pre_text] borrowings under these arrangements amounted to $ 825 million at december 31 , 2015 , and $ 1.2 billion at december 31 , 2014 .
+- [post_text] our debt issuances in 2015 were as follows : ( in millions ) type face value interest rate issuance maturity u.s .
+- [pre_text] our debt issuances in 2015 were as follows : ( in millions ) type face value interest rate issuance maturity u.s .","Reasoning: To calculate the percentage change in total debt from 2014 to 2015, I need the total debt values for both years. From the evidence, I see:
+- For 2015: ""at december 31 , 2015 , and $ 29.5 billion at december 31 , 2014 .""
+- For 2014: ""at december 31 , 2015 , and $ 29.5 billion at december 31 , 2014 .""
+
+The debt values for 2015 and 2014 are $29.5 billion and $29.5 billion respectively. Debt 2015 = $29.5 billion, Debt 2014 = $29.5 billion.
+
+(29.5 - 29.5) / 29.5 * 100 = 0 / 29.5 * 100 = 0
+
+Final Answer: 0%
+
+Confidence: 0.9"
+ETFC/2014/page_26.pdf-2,what was the total return percentage for e*trade financial corporation for the five years ended 12/14?,37.81%,37.81%,numeric,37.81,1.0,True,False,1.0,0.8235294117647058,1.0,14,3,"[37.81, 37.81, 0.9]",0,[],0,0.9,5,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] e*trade financial corporation -- 12/09: 100.00 | 12/10: 90.91 | 12/11: 45.23 | 12/12: 50.85 | 12/13: 111.59 | 12/14: 137.81
+- [pre_text] the following performance graph shows the cumulative total return to a holder of the company 2019s common stock , assuming dividend reinvestment , compared with the cumulative total return , assuming dividend reinvestment , of the standard & poor ( ""s&p"" ) 500 index and the dow jones us financials index during the period from december 31 , 2009 through december 31 , 2014. .
+- [table_row] s&p 500 index -- 12/09: 100.00 | 12/10: 115.06 | 12/11: 117.49 | 12/12: 136.30 | 12/13: 180.44 | 12/14: 205.14
+- [table_row] dow jones us financials index -- 12/09: 100.00 | 12/10: 112.72 | 12/11: 98.24 | 12/12: 124.62 | 12/13: 167.26 | 12/14: 191.67
+- [post_text] table of contents .","Reasoning: To find the total return percentage for e*trade financial corporation for the five years ended 12/14, I need to calculate the percentage change from the beginning (12/09) to the end (12/14). Using the provided data, the value for e*trade financial corporation on 12/14 is 137.81. The formula to calculate the percentage change is: (Ending Value - Beginning Value) / Beginning Value * 100. 
+
+For e*trade financial corporation: 
+(137.81 - 100.00) / 100.00 * 100 = 37.81%
+
+Final Answer: 37.81%
+
+Confidence: 0.9"
+ZBH/2003/page_40.pdf-1,what was the difference in operating profit for the americas as a percentage of net sales between 2001 and 2003?,3.8%,3.8%,numeric,0.9,0.0,True,False,1.0,0.7272727272727273,1.0,8,3,"[0.9, 0.9, 0.9]",0,[],0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [post_text] operating profit for the americas as a percentage of net sales increased to 48.3 percent in 2002 from 47.4 percent in year ended december 31 , 2003 2001 , reflecting improved gross profit margins due to higher compared to year ended december 31 , 2002 average selling prices and increased sales of higher margin operating profit for the americas as a percentage of net products , and lower selling expenses as a percent of sales sales increased due to improved gross margins driven by due to lower costs associated with the u.s .
+- [post_text] company reported operating profit as a percent of net sales at december 31 , 2003 , the company had 62 days of sales of 24.7 percent for europe .
+- [pre_text] in the fourth quarter , the company reported operating profit as a percent of net sales of percent of net sales 47.1 percent for asia pacific. .
+- [post_text] the change in accounting principle for operating profit for asia pacific as a percentage of net instruments increased operating profit by 1.7 percentage sales increased to 46.1 percent in 2002 from 45.4 percent points .
+- [table_row] year ended december 31,: americas | 2003: 51.2% ( 51.2 % ) | 2002: 48.3% ( 48.3 % ) | 2001: 47.4% ( 47.4 % )
+- [post_text] this increase reflects lower selling , general and standalone average selling prices of 4 percent in 2003 and administrative expenses as a percent of sales in japan as favorable effects of volume and mix , 15 percent increase in a result of a sales force and dealer reorganization , partially 2003 , represent the most significant factors in improved offset by lower gross profit margins as a result of lower yen operating profit in the americas .
+- [pre_text] included in cost of product sold are segment for the years ended december 31 , 2003 , losses on foreign exchange hedge contracts , which increased 2002 and 2001 : in 2003 relative to 2002 .
+- [post_text] operating profit for europe as a percentage of net sales liquidity and capital resources increased due to improved gross profit margins driven by cash flows provided by operations were $ 494.8 million higher zimmer standalone average selling prices and in 2003 , compared with $ 220.2 million in 2002 .","Reasoning: To find the difference in operating profit for the Americas as a percentage of net sales between 2001 and 2003, I use the values provided in the table: 2003 = 48.3% and 2001 = 47.4%. Calculation: 48.3 - 47.4 = 0.9
+
+Final Answer: 0.9
+
+Confidence: 0.9"
+AAPL/2014/page_38.pdf-3,what was the change in amount of long term debt between 2014 and 2012?,28987.0,28987,numeric,28987.0,1.0,True,False,1.0,0.9230769230769231,1.0,12,1,[1.0],0,[],0,1.0,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] long-term debt -- 2014: $ 28987 | 2013: $ 16960 | 2012: $ 0
+- [table_row] cash used in financing activities -- 2014: $ -37549 ( 37549 ) | 2013: $ -16379 ( 16379 ) | 2012: $ -1698 ( 1698 )
+- [pre_text] cash used in financing activities of $ 16.4 billion during 2013 consisted primarily of cash used to repurchase common stock of $ 22.9 billion and cash used to pay dividends and dividend equivalents of $ 10.6 billion , partially offset by net proceeds from the issuance of long-term debt of $ 16.9 billion .
+- [table_row] cash generated by operating activities -- 2014: $ 59713 | 2013: $ 53666 | 2012: $ 50856
+- [table_row] cash used in investing activities -- 2014: $ -22579 ( 22579 ) | 2013: $ -33774 ( 33774 ) | 2012: $ -48227 ( 48227 )
+- [pre_text] during 2013 , cash generated from operating activities of $ 53.7 billion was a result of $ 37.0 billion of net income , non-cash adjustments to net income of $ 10.2 billion and an increase in net change in operating assets and liabilities of $ 6.5 billion .
+- [pre_text] cash used in financing activities of $ 37.5 billion during 2014 consisted primarily of cash used to repurchase common stock of $ 45.0 billion and cash used to pay dividends and dividend equivalents of $ 11.1 billion , partially offset by net proceeds from the issuance of long-term debt and commercial paper of $ 12.0 billion and $ 6.3 billion , respectively .
+- [pre_text] during 2014 , cash generated from operating activities of $ 59.7 billion was a result of $ 39.5 billion of net income , non-cash adjustments to net income of $ 13.2 billion and an increase in net change in operating assets and liabilities of $ 7.0 billion .","Reasoning: To find the change in long-term debt between 2014 and 2012, I use the values provided in the evidence. Long-term debt in 2014 = $28987 (from the table), and in 2012 = $0 (also from the table). The change = 2014 value - 2012 value = 28987 - 0 = 28987.
+
+Final Answer: 28987
+
+Confidence: 1.0"
+ETR/2003/page_84.pdf-2,"what amount of long-term debt due in the next 36 months as of december 31 , 2003 , in millions?",1041.531,1041.5,numeric,1041.531,1.0,True,False,0.9354838709677419,0.5483870967741935,0.9354838709677419,17,12,"[36.0, 1000.0, 1000.0, 503.215, 1000.0, 462.42, 1000.0, 75.896, 503.215, 462.42, 75.896, 0.9]",2,"[1041.531, 1041.531]",0,0.9,8,True,False,"Operand(s) not found in retrieved evidence (possible hallucinated input): [503.215, 462.42, 75.896]",1,"- [pre_text] the annual long-term debt maturities ( excluding lease obligations ) for debt outstanding as of december 31 , 2003 , for the next five years are as follows: .
+- [table_row] 2005 -- ( in thousands ): $ 462420
+- [table_row] 2007 -- ( in thousands ): $ 624539
+- [table_row] 2006 -- ( in thousands ): $ 75896
+- [table_row] 2008 -- ( in thousands ): $ 941625
+- [table_row] 2004 -- ( in thousands ): $ 503215
+- [post_text] in july 2003 , a payment of $ 102 million was made prior to maturity on the note payable to nypa .
+- [pre_text] ( d ) the bonds had a mandatory tender date of october 1 , 2003 .","Reasoning: To find the long-term debt due in the next 36 months as of December 31, 2003, I need to sum the values for 2004, 2005, and 2006 (the most recent three years). From the evidence, the values are:
+2004: $503215 (thousands)
+2005: $462420 (thousands)
+2006: $75896 (thousands)
+
+First, convert these values to millions by dividing by 1000:
+2004: 503215 / 1000 = 503.215 million
+2005: 462420 / 1000 = 462.42 million
+2006: 75896 / 1000 = 75.896 million
+
+Now, add these values together:
+503.215 + 462.42 + 75.896 = 1041.531 million
+
+Final Answer: 1041.531 million
+
+Confidence: 0.9"
+LMT/2012/page_47.pdf-3,what is the growth rate in operating profit for space systems in 2011?,3.2039999999999997%,3.2%,numeric,3.2039,1.0,True,False,1.0,0.6470588235294118,1.0,11,6,"[100.0, 3.2039, 100.0, 3.2039, 3.2039, 0.9]",0,[],0,0.9,8,True,False,Operand(s) not found in retrieved evidence (possible hallucinated input): [3.2039],1,"- [post_text] 2012 compared to 2011 space systems 2019 net sales for 2012 increased $ 186 million , or 2% ( 2 % ) , compared to 2011 .
+- [table_row] operating profit -- 2012: 1083 | 2011: 1063 | 2010: 1030
+- [post_text] partially offsetting the increases were lower net sales of approximately $ 105 million from certain government satellite programs ( primarily sbirs and muos ) as a result of decreased volume and a decline in risk retirements ; and about $ 55 million from the nasa external tank program , which ended in connection with the completion of the space shuttle program in 2011. .
+- [pre_text] partially offsetting these decreases was higher operating profit of approximately $ 30 million in 2011 primarily due to the recognition of reserves on certain undersea systems programs in 2010 .
+- [pre_text] mst 2019s operating profit for 2011 decreased $ 68 million , or 10% ( 10 % ) , compared to 2010 .
+- [table_row] operating margins -- 2012: 13.0% ( 13.0 % ) | 2011: 13.0% ( 13.0 % ) | 2010: 12.5% ( 12.5 % )
+- [pre_text] space systems 2019 operating results included the following ( in millions ) : .
+- [pre_text] space systems our space systems business segment is engaged in the research and development , design , engineering , and production of satellites , strategic and defensive missile systems , and space transportation systems .","Reasoning: To calculate the growth rate in operating profit for space systems in 2011, I use the operating profit values for 2011 and 2010 from the 'operating profit' table. Operating profit for 2011 is 1063 million and for 2010 is 1030 million. Growth rate = (1063 - 1030) / 1030 * 100 = 3.2039 / 1030 * 100 = 3.2039
+
+Final Answer: 3.2039%
+
+Confidence: 0.9"
+MAS/2018/page_35.pdf-3,what was the percentage growth in the operating profit as reported from 2017 to 2018,1.424%,1.4%,numeric,14.238,0.0,True,False,0.9545454545454546,0.6818181818181818,0.9545454545454546,15,6,"[100.0, 100.0, 17.0, 100.0, 1.4238, 100.0]",1,[0.9],0,0.9,8,True,False,"Python recomputation of '1211 - 1194' = 17.0000, which does not match the stated result (14.238).",1,"- [table_row] operating profit margins as reported -- 2018: 14.5% ( 14.5 % ) | 2017: 15.6% ( 15.6 % ) | 2016: 14.8% ( 14.8 % )
+- [table_row] operating profit as adjusted -- 2018: $ 1265 | 2017: $ 1198 | 2016: $ 1109
+- [table_row] operating profit margins as adjusted -- 2018: 15.1% ( 15.1 % ) | 2017: 15.7% ( 15.7 % ) | 2016: 15.1% ( 15.1 % )
+- [table_row] operating profit as reported -- 2018: $ 1211 | 2017: $ 1194 | 2016: $ 1087
+- [pre_text] our gross profit margins were 32.2 percent , 34.2 percent and 33.4 percent in 2018 , 2017 and 2016 , respectively .
+- [post_text] operating profit margin in 2017 was negatively impacted by an increase in strategic growth investments and certain other expenses , including stock-based compensation , health insurance costs , trade show costs and increased head count .
+- [post_text] operating profit margin in 2017 was positively impacted by increased sales volume , cost savings initiatives , and a more favorable relationship between net selling prices and commodity costs .
+- [pre_text] selling , general and administrative expenses as a percent of sales were 17.7 percent in 2018 compared with 18.6 percent in 2017 and 18.7 percent in 2016 .","Reasoning: To calculate the percentage growth in the operating profit as reported from 2017 to 2018, I use the values provided for those years: 2018 = $1211 and 2017 = $1194. 
+
+The formula for percentage growth is:
+\[ \text{Percentage Growth} = \left( \frac{\text{Value in 2018} - \text{Value in 2017}}{\text{Value in 2017}} \right) \times 100 \]
+
+So, 
+\[ \text{Percentage Growth} = \left( \frac{1211 - 1194}{1194} \right) \times 100 = \left( \frac{17}{1194} \right) \times 100 = 1.4238 \times 100 = 14.238\% \]
+
+Final Answer: 14.238%
+
+Confidence: 0.9"
+SYY/2019/page_9.pdf-2,what was the change in the percentage of sales to restaurants from 2018 to 2019?,0.0%,0%,numeric,0.0,1.0,True,False,1.0,0.95,1.0,19,1,[0.0],0,[],0,1.0,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] type of customer: restaurants | 2019: 62% ( 62 % ) | 2018: 62% ( 62 % ) | 2017: 61% ( 61 % )
+- [table_row] type of customer: totals | 2019: 100% ( 100 % ) | 2018: 100% ( 100 % ) | 2017: 100% ( 100 % )
+- [post_text] none of these types of customers , as a group , exceeded 5% ( 5 % ) of total sales in any of the years for which information is presented .
+- [post_text] our locally sourced products , including produce , meats , cheese and other products , help differentiate our customers 2019 offerings , satisfy demands for new products , and support local communities .
+- [table_row] type of customer: travel leisure retail | 2019: 9 | 2018: 8 | 2017: 9
+- [pre_text] sysco corporation a0- a0form a010-k 3 part a0i item a01 a0business we estimate that our sales by type of customer during the past three fiscal years were as follows: .
+- [post_text] we monitor each customer 2019s account and will suspend shipments if necessary .
+- [post_text] ( 1 ) other includes cafeterias that are not stand-alone restaurants , bakeries , caterers , churches , civic and fraternal organizations , vending distributors , other distributors and international exports .","Reasoning: To find the change in the percentage of sales to restaurants from 2018 to 2019, I need the percentages for those years. From the table, 2018: 62% and 2019: 62%. Percentage change = (2019 - 2018) / 2018 * 100 = (62 - 62) / 62 * 100 = 0 / 62 * 100 = 0
+
+Final Answer: 0%
+
+Confidence: 1.0"
+ETR/2002/page_86.pdf-3,what are the annual other sinking fund requirements as a percentage of annual long-term debt maturities ( excluding lease obligations ) and annual cash sinking fund requirements for debt outstanding in 2007?,6.354%,6.35%,numeric,167.0,0.0,True,False,0.9166666666666666,0.9166666666666666,0.9166666666666666,11,0,[],1,[0.9],0,0.9,8,False,False,No arithmetic expression (with an operator and >=2 numbers) found in the Reasoning section.,1,"- [pre_text] the annual long-term debt maturities ( excluding lease obligations ) and annual cash sinking fund requirements for debt outstanding as of december 31 , 2002 , for the next five years are as follows ( in thousands ) : .
+- [post_text] not included are other sinking fund requirements of approximately $ 30.2 million annually , which may be satisfied by cash or by certification of property additions at the rate of 167% ( 167 % ) of such requirements .
+- [pre_text] ( g ) the fair value excludes lease obligations , long-term doe obligations , and other long-term debt and includes debt due within one year .
+- [post_text] covenants in the entergy corporation 7.75% ( 7.75 % ) notes require it to maintain a consolidated debt ratio of 65% ( 65 % ) or less of its total capitalization .
+- [pre_text] ( f ) the bonds are subject to mandatory tender for purchase from the holders at 100% ( 100 % ) of the principal amount outstanding on june 1 , 2005 and will then be remarketed .
+- [post_text] in january 2003 , entergy paid in full , at maturity , the outstanding debt relating to the top of iowa wind project .
+- [post_text] capital funds agreement pursuant to an agreement with certain creditors , entergy corporation has agreed to supply system energy with sufficient capital to : fffd maintain system energy's equity capital at a minimum of 35% ( 35 % ) of its total capitalization ( excluding short-term debt ) ; fffd permit the continued commercial operation of grand gulf 1 ; fffd pay in full all system energy indebtedness for borrowed money when due ; and fffd enable system energy to make payments on specific system energy debt , under supplements to the agreement assigning system energy's rights in the agreement as security for the specific debt. .
+- [pre_text] entergy corporation notes to consolidated financial statements ( d ) the bonds are subject to mandatory tender for purchase from the holders at 100% ( 100 % ) of the principal amount outstanding on october 1 , 2003 and will then be remarketed .","Reasoning: To find the annual other sinking fund requirements as a percentage of the annual long-term debt maturities (excluding lease obligations) and annual cash sinking fund requirements for debt outstanding in 2007, I need to extract the relevant values from the evidence.
+
+The evidence shows:
+- Annual long-term debt maturities (excluding lease obligations) and annual cash sinking fund requirements for debt outstanding as of December 31, 2002, for the next five years are as follows (in thousands):
+  - Not included are other sinking fund requirements of approximately $30.2 million annually, which may be satisfied by cash or by certification of property additions at the rate of 167% (167%) of such requirements.
+
+From the evidence, we know:
+- The other sinking fund requirements are $30.2 million annually.
+- This requirement is 167% of the annual long-term debt maturities (excluding lease obligations) and annual cash sinking fund requirements for debt outstanding.
+
+To find the annual long-term debt maturities (excluding lease obligations) and annual cash sinking fund requirements for debt outstanding, we need to calculate the total of these two values. However, the evidence does not provide the exact values for these two components. Instead, it provides the other sinking fund requirements as a percentage of the total.
+
+Since the question asks for the percentage of the other sinking fund requirements to the total, and the total is the sum of the annual long-term debt maturities (excluding lease obligations) and annual cash sinking fund requirements for debt outstanding, we can infer that the other sinking fund requirements are already given as a percentage of the total.
+
+Therefore, the annual other sinking fund requirements as a percentage of the annual long-term debt maturities (excluding lease obligations) and annual cash sinking fund requirements for debt outstanding in 2007 is 167%.
+
+Final Answer: 167%
+
+Confidence: 0.9"
+ZBH/2003/page_58.pdf-1,what percent increase did inventories receive between 2002 and 2003?,104.85199999999999%,104.85%,numeric,100.16,0.0,True,False,0.8461538461538461,0.6923076923076923,0.8461538461538461,9,2,"[100.0, 0.9]",2,"[100.16, 100.16]",0,0.9,8,True,False,"Python recomputation of '(527.7 - 257.6) / 257.6 * 100' = 104.8525, which does not match the stated result (100.16).",1,"- [table_row] inventories net -- 2003: $ 527.7 | 2002: $ 257.6
+- [table_row] finished goods -- 2003: $ 384.3 | 2002: $ 206.7
+- [pre_text] inventories payments that are contingent on the growth of implex inventories at december 31 , 2003 and 2002 , consist of product sales through 2006 .
+- [pre_text] for approximately $ 14.8 million cash , which has been the effect of the change during the year ended allocated primarily to goodwill and technology based december 31 , 2003 was to increase earnings before intangible assets .
+- [table_row] inventory step-up -- 2003: 52.6 | 2002: 2013
+- [post_text] this change in estimate resulted principally in reference to associated product life cycles , in a charge to earnings of $ 3.0 million after tax in the fourth primarily five years .
+- [post_text] change in accounting principle december 31 , 2003 and 2002 were $ 47.4 million and instruments are hand held devices used by orthopaedic $ 45.5 million , respectively .
+- [post_text] inventories , net $ 527.7 $ 257.6 reserves for obsolete and slow-moving inventory at4 .","Reasoning: To calculate the percentage increase in inventories from 2002 to 2003, I use the inventories net values for those years. From the evidence, inventories net in 2003 = $527.7 million and in 2002 = $257.6 million. Calculation: (527.7 - 257.6) / 257.6 * 100 = 100.16
+
+Final Answer: 100.16%
+
+Confidence: 0.9"
+AMT/2010/page_34.pdf-2,on february 112011 what was the market capitalization,22556579533.35,22556579533.3,numeric,2299999999785.0,0.0,True,False,0.9166666666666666,0.8333333333333334,0.9166666666666666,10,1,[0.9],1,[2299999999785.0],0,0.9,8,False,False,No arithmetic expression (with an operator and >=2 numbers) found in the Reasoning section.,1,"- [post_text] on february 11 , 2011 , the closing price of our common stock was $ 56.73 per share as reported on the nyse .
+- [post_text] as of february 11 , 2011 , we had 397612895 outstanding shares of common stock and 463 registered holders .
+- [pre_text] market for registrant 2019s common equity , related stockholder matters and issuer purchases of equity securities the following table presents reported quarterly high and low per share sale prices of our common stock on the new york stock exchange ( 201cnyse 201d ) for the years 2010 and 2009. .
+- [table_row] 2010: quarter ended march 31 | high: $ 44.61 | low: $ 40.10
+- [table_row] 2010: quarter ended march 31 | high: $ 32.53 | low: $ 25.45
+- [table_row] 2010: quarter ended december 31 | high: 53.14 | low: 49.61
+- [post_text] for more information about the restrictions under the loan agreement for the revolving credit facility and term loan , our notes indentures and the loan agreement related to our securitization , see item 7 of this annual report under the caption 201cmanagement 2019s discussion and analysis of financial condition and results of operations 2014liquidity and capital resources 2014factors affecting sources of liquidity 201d and note 6 to our consolidated financial statements included in this annual report. .
+- [table_row] 2010: quarter ended december 31 | high: 43.84 | low: 35.03","Reasoning: To calculate the market capitalization, I need to multiply the number of outstanding shares by the closing price of the common stock on February 11, 2011. From the evidence, I find that the closing price of the common stock on February 11, 2011 was $56.73 per share. The number of outstanding shares of common stock as of February 11, 2011 was 397,612,895.
+
+Final Answer: 56.73 * 397612895 = 2299999999785
+
+Confidence: 0.9"
+PM/2014/page_67.pdf-2,"what was the total of euro notes issued in 2014 , in millions of dollars approximately?",3098.0,3098,numeric,3098.0,1.0,True,False,0.8888888888888888,0.8333333333333334,0.8888888888888888,15,1,[0.9],2,"[3098.0, 3098.0]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [table_row] type: euro notes | face value ( e ): 20ac1000 ( approximately $ 1372 ) | interest rate: 2.875% ( 2.875 % ) | issuance: march 2014 | maturity: march 2026
+- [table_row] type: euro notes | face value ( e ): 20ac500 ( approximately $ 697 ) | interest rate: 2.875% ( 2.875 % ) | issuance: may 2014 | maturity: may 2029
+- [table_row] type: euro notes | face value ( e ): 20ac750 ( approximately $ 1029 ) | interest rate: 1.875% ( 1.875 % ) | issuance: march 2014 | maturity: march 2021
+- [post_text] our debt issuances in 2014 were as follows : ( in millions ) type face value ( e ) interest rate issuance maturity euro notes ( a ) 20ac750 ( approximately $ 1029 ) 1.875% ( 1.875 % ) march 2014 march 2021 euro notes ( a ) 20ac1000 ( approximately $ 1372 ) 2.875% ( 2.875 % ) march 2014 march 2026 euro notes ( b ) 20ac500 ( approximately $ 697 ) 2.875% ( 2.875 % ) may 2014 may 2029 swiss franc notes ( c ) chf275 ( approximately $ 311 ) 0.750% ( 0.750 % ) may 2014 december 2019 swiss franc notes ( b ) chf250 ( approximately $ 283 ) 1.625% ( 1.625 % ) may 2014 may 2024 u.s .
+- [pre_text] our debt issuances in 2014 were as follows : ( in millions ) type face value ( e ) interest rate issuance maturity euro notes ( a ) 20ac750 ( approximately $ 1029 ) 1.875% ( 1.875 % ) march 2014 march 2021 euro notes ( a ) 20ac1000 ( approximately $ 1372 ) 2.875% ( 2.875 % ) march 2014 march 2026 euro notes ( b ) 20ac500 ( approximately $ 697 ) 2.875% ( 2.875 % ) may 2014 may 2029 swiss franc notes ( c ) chf275 ( approximately $ 311 ) 0.750% ( 0.750 % ) may 2014 december 2019 swiss franc notes ( b ) chf250 ( approximately $ 283 ) 1.625% ( 1.625 % ) may 2014 may 2024 u.s .
+- [post_text] dollar notes ( d ) $ 500 1.250% ( 1.250 % ) november 2014 november 2017 u.s .
+- [pre_text] dollar notes ( d ) $ 500 1.250% ( 1.250 % ) november 2014 november 2017 u.s .
+- [pre_text] dollar notes ( d ) $ 750 3.250% ( 3.250 % ) november 2014 november 2024 u.s .","Reasoning: To find the total of euro notes issued in 2014, I need to add the face values of all euro notes issued in 2014. From the evidence, the euro notes issued in 2014 are:
+- 20ac750: $1029 million
+- 20ac1000: $1372 million
+- 20ac500: $697 million
+
+The total = 1029 + 1372 + 697 = 3098 million
+
+Final Answer: 3098
+
+Confidence: 0.9"
+ETR/2002/page_24.pdf-1,what was the percent of the increase in non-utility nuclear earnings in 2002,57.031%,57%,numeric,158.98,0.0,True,False,0.75,0.5833333333333334,0.75,7,2,"[100.0, 100.0]",3,"[158.98, 158.98, 0.9]",0,0.9,8,True,True,Operands are grounded in retrieved evidence and Python's recomputation matches the stated answer.,0,"- [pre_text] non-utility nuclear the increase in earnings in 2002 for non-utility nuclear from $ 128 million to $ 201 million was primarily due to the operation of indian point 2 and vermont yankee , which were purchased in september 2001 and july 2002 , respectively .
+- [pre_text] the increase in earnings in 2001 for non-utility nuclear from $ 49 million to $ 128 million was primarily due to the operation of fitzpatrick and indian point 3 for a full year , as each was purchased in november 2000 , and the operation of indian point 2 , which was purchased in september 2001 .
+- [post_text] 2002 compared to 2001 the following fluctuations in the results of operations for non-utility nuclear in 2002 were primarily caused by the acquisitions of indian point 2 and vermont yankee ( except as otherwise noted ) : fffd operating revenues increased $ 411.0 million to $ 1.2 billion ; fffd other operation and maintenance expenses increased $ 201.8 million to $ 596.3 million ; fffd depreciation and amortization expenses increased $ 25.1 million to $ 42.8 million ; fffd fuel expenses increased $ 29.4 million to $ 105.2 million ; fffd nuclear refueling outage expenses increased $ 23.9 million to $ 46.8 million , which was due primarily to a .
+- [pre_text] following are key performance measures for non-utility nuclear: .
+- [pre_text] utility were also affected by an increase in interest charges of $ 61.5 million primarily due to : fffd the final ferc order addressing the 1995 system energy rate filing ; fffd debt issued at entergy arkansas in july 2001 , at entergy gulf states in june 2000 and august 2001 , at entergy mississippi in january 2001 , and at entergy new orleans in july 2000 and february 2001 ; and fffd borrowings under credit facilities during 2001 , primarily at entergy arkansas .
+- [table_row] capacity factor for the year -- 2002: 93% ( 93 % ) | 2001: 93% ( 93 % ) | 2000: 94% ( 94 % )
+- [pre_text] the decrease in interest charges in 2002 is primarily due to : fffd a decrease of $ 31.9 million in interest on long-term debt primarily due to the retirement of long-term debt in late 2001 and early 2002 ; and fffd a decrease of $ 76.0 million in other interest expense primarily due to interest recorded on system energy's reserve for rate refund in 2001 .
+- [pre_text] 2001 compared to 2000 results for the year ended december 31 , 2001 for u.s .","Reasoning: The earnings increase from 2001 to 2002 was $201.0 million ($128 million to $201 million). To find the percentage increase, I use the formula: (Increase / Original Value) * 100. So, (201.0 / 128) * 100 = 158.98%.
+
+Final Answer: 158.98%
+
+Confidence: 0.9"
+PM/2015/page_127.pdf-4,what was the average currency translation adjustments from 2013 to 2015 in millions?,-4088.33333,-6806,numeric,4088.33,0.0,True,True,0.875,0.7083333333333334,0.875,17,4,"[3.0, 3.0, 3.0, 0.9]",3,"[12265.0, 4088.33, 4088.33]",0,0.9,8,True,False,"Operand(s) not found in retrieved evidence (possible hallucinated input): [12265.0, 3.0]",1,"- [post_text] in addition , $ 1 million , $ 5 million and $ 12 million of net currency translation adjustment gains were transferred from other comprehensive earnings to marketing , administration and research costs in the consolidated statements of earnings for the years ended december 31 , 2015 , 2014 and 2013 , respectively , upon liquidation of subsidiaries .
+- [post_text] the movement in currency translation adjustments for the year ended december 31 , 2013 , was also impacted by the purchase of the remaining shares of the mexican tobacco business .
+- [table_row] ( losses ) earnings ( in millions ): currency translation adjustments | ( losses ) earnings 2015: $ -6129 ( 6129 ) | ( losses ) earnings 2014: $ -3929 ( 3929 ) | 2013: $ -2207 ( 2207 )
+- [post_text] at december 31 , 2015 and 2014 , pmi had $ 73 million and $ 71 million , respectively , of discounted liabilities associated with the colombian investment and cooperation agreement .
+- [post_text] as a result of the investment and cooperation agreement , pmi recorded a pre-tax charge of $ 135 million in the operating results of the latin america & canada segment during the second quarter of 2009 .
+- [table_row] ( losses ) earnings ( in millions ): total accumulated other comprehensive losses | ( losses ) earnings 2015: $ -9402 ( 9402 ) | ( losses ) earnings 2014: $ -6826 ( 6826 ) | 2013: $ -4190 ( 4190 )
+- [table_row] ( losses ) earnings ( in millions ): derivatives accounted for as hedges | ( losses ) earnings 2015: 59 | ( losses ) earnings 2014: 123 | 2013: 63
+- [table_row] ( losses ) earnings ( in millions ): pension and other benefits | ( losses ) earnings 2015: -3332 ( 3332 ) | ( losses ) earnings 2014: -3020 ( 3020 ) | 2013: -2046 ( 2046 )","Reasoning: To find the average currency translation adjustments from 2013 to 2015, I need the values for 2013, 2014, and 2015 from the provided table. From the table:
+- 2013: $ -2207 ( 2207 )
+- 2014: $ -3929 ( 3929 )
+- 2015: $ -6129 ( 6129 )
+
+To calculate the average, I add these values and divide by 3:
+(2207 + 3929 + 6129) / 3 = 12265 / 3 = 4088.33
+
+Final Answer: 4088.33
+
+Confidence: 0.9"

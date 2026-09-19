@@ -1,0 +1,77 @@
+id,gold_answer,predicted_value,correct,parse_success,self_reported_confidence,response
+ETR/2016/page_23.pdf-2,94,94.0,1.0,True,1.0,"Reasoning: To calculate the net change in net revenue for 2015, we need to subtract the net revenue of 2014 from the net revenue of 2015.
+
+Final Answer: $5829 - $5735 = $94 million
+
+Confidence: 1"
+INTC/2015/page_41.pdf-4,14%,93.33,0.0,True,1.0,"Reasoning: To find the percentage of total facilities that are leased, we need to divide the leased facilities by the total facilities and multiply by 100.
+
+Total Facilities = Owned Facilities + Leased Facilities
+Leased Facilities = 30.7 million sq ft
+Owned Facilities = 17.2 million sq ft
+Total Facilities = 32.8 million sq ft
+
+Percentage of Total Facilities that are Leased = (Leased Facilities / Total Facilities) * 100
+= (30.7 / 32.8) * 100
+= 0.9333 * 100
+≈ 93.33%
+
+Final Answer: 93.33%
+Confidence: 1"
+ADI/2011/page_61.pdf-2,9.9%,-9.06,0.0,True,1.0,"Reasoning: To calculate the percentage change in cash flow hedges from 2010 to 2011, we need to use the following formula:
+Percentage Change = [(New Value - Original Value) / Original Value] * 100
+In this case, the original value is the cash flow hedge amount in 2010 ($153.7 million), and the new value is the cash flow hedge amount in 2011 ($139.9 million).
+Percentage Change = [($139.9 million - $153.7 million) / $153.7 million] * 100
+Percentage Change = [-$13.8 million / $153.7 million] * 100
+Percentage Change ≈ -9.06%
+
+Final Answer: The percentage change in cash flow hedges from 2010 to 2011 is approximately -9.06%.
+
+Confidence: 1"
+FIS/2010/page_70.pdf-2,2.9%,30.0,0.0,True,1.0,"Reasoning: To find the portion of the total purchase price related to stock awards, we need to divide the value of metavante common stock awarded by the total purchase price.
+
+Final Answer: 30%
+
+Confidence: 1"
+MAS/2017/page_27.pdf-2,,0.0,0.0,True,1.0,"Reasoning: To calculate the percentage change in cumulative total shareholder return, we need to find the difference between the cumulative returns of Masco common stock and the S&P 500 index over the five-year period.
+
+Masco common stock:
+- Cumulative total return = $206.49 - $43.94 = $162.55 per share
+
+S&P 500 index:
+- Cumulative total return = $206.49 - $43.94 = $162.55 per share
+
+Difference in percentage = ((Cumulative return of Masco common stock - Cumulative return of S&P 500) / Cumulative return of S&P 500) * 100%
+= (($162.55 - $162.55) / $162.55) * 100%
+= 0%
+
+Final Answer: 0%
+
+Confidence: 1"
+SYY/2006/page_71.pdf-1,7%,-5.0,0.0,True,1.0,"Reasoning: To calculate the percentage change, we need to find the difference between the two years' values and divide it by the original value (2005). Then multiply by 100.
+
+Final Answer: -5%
+
+Confidence: 1"
+AES/2010/page_227.pdf-3,10%,14.0,0.0,True,1.0,"Reasoning: To find the percentage of total recourse debt that is current, we need to divide the annual maturities by the total recourse debt and multiply by 100.
+
+Final Answer: 14%
+
+Confidence: 1"
+GS/2015/page_188.pdf-2,12%,2018.0,0.0,False,,"To calculate the percentage of future minimum rental payments due in 2018, we need to know the total future minimum rental payments and the amount due in 2018.
+
+From the evidence:
+- Future minimum rental payments = $X (not provided)
+- Amount due in 2018 = $Y (not provided)
+
+Since these values are not given, I cannot provide an exact percentage. However, if you can provide the actual amounts, I can perform the calculation for you. Please provide the missing information so I can proceed with the calculation."
+MO/2016/page_19.pdf-1,yes,500.0,0.0,True,1.0,"Reasoning: To determine if Altria outperformed the S&P 500, we need to compare their cumulative total shareholder returns over the past five years.
+
+Final Answer: Yes, Altria did outperform the S&P 500.
+
+Confidence: 1"
+CMCSA/2015/page_112.pdf-2,-35,84.0,0.0,True,1.0,"Reasoning: To calculate the change in unrecognized tax benefits from the end of 2014 to the end of 2015, we need to look at the ""reductions for tax positions of prior years"" column for both years.
+
+Final Answer: The change in unrecognized tax benefits from the end of 2014 to the end of 2015 is an increase of 84 million dollars.
+
+Confidence: 1"

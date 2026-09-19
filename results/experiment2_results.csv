@@ -1,0 +1,97 @@
+id,gold_answer,predicted_value,correct,parse_success,evidence_support,unsupported_number_count,unsupported_numbers,hallucination,used_decoy_number,self_reported_confidence,response
+ETR/2016/page_23.pdf-2,94,94.0,1.0,True,0.7,3,"[94.0, 94.0, 1.0]",0,0,1.0,"Reasoning: To calculate the net change in net revenue during 2015, we need to subtract the net revenue of 2014 from the net revenue of 2015.
+
+Net change = Net revenue 2015 - Net revenue 2014
+           = $5829 million - $5735 million
+           = $94 million
+
+Final Answer: $94 million
+
+Confidence: 1"
+INTC/2015/page_41.pdf-4,14%,14.54,0.0,True,0.5,5,"[100.0, 100.0, 100.0, 14.54, 14.54]",0,0,,"Reasoning: To find the percentage of total facilities that are leased, we need to divide the leased facilities by the total facilities and multiply by 100.
+
+Total facilities = Leased facilities + Owned facilities
+Total facilities = 8.1 million sq ft + 47.9 million sq ft
+Total facilities = 56.0 million sq ft
+
+Percentage of leased facilities = (Leased facilities / Total facilities) * 100
+Percentage of leased facilities = (8.1 / 56.0) * 100
+Percentage of leased facilities ≈ 14.54%
+
+Final Answer: 14.54%"
+ADI/2011/page_61.pdf-2,9.9%,2010.0,0.0,True,0.7333333333333333,4,"[100.0, 100.0, 25306.0, 10.0]",0,0,,"Reasoning: To calculate the percentage change in cash flow hedges for 2011 compared to 2010, we need to look at the values for ""statement of income gain on swaps"" for both years.
+
+Final Answer: The percentage change in cash flow hedges in 2011 compared to 2010 is calculated as follows:
+\[ \text{Percentage Change} = \left( \frac{\text{Cash Flow Hedges in 2011} - \text{Cash Flow Hedges in 2010}}{\text{Cash Flow Hedges in 2010}} \right) \times 100 \]
+\[ \text{Percentage Change} = \left( \frac{20692 - (-4614)}{-4614} \right) \times 100 \]
+\[ \text{Percentage Change} = \left( \frac{25306}{-4614} \right) \times 10"
+FIS/2010/page_70.pdf-2,2.9%,30.0,0.0,True,0.0,2,"[30.0, 1.0]",1,0,1.0,"Reasoning: To find the portion of the total purchase price related to stock awards, we divide the value of metavante common stock awarded by the total purchase price.
+
+Final Answer: 30%
+
+Confidence: 1"
+MAS/2017/page_27.pdf-2,,144.5,0.0,True,0.6923076923076923,4,"[100.0, 100.0, 144.5, 1.0]",0,0,1.0,"Reasoning: To calculate the percentage cumulative total shareholder return (TSR) of Masco common stock versus the S&P 500 index over the five-year period ending 2017, we need to find the difference in their respective closing prices at the end of each year and then sum these differences.
+
+MASCO's TSR = ($318.46 - $138.48) / $138.48 * 100%
+S&P 500 Index's TSR = ($206.49 - $132.04) / $132.04 * 100%
+
+Final Answer: 144.5%
+
+Confidence: 1"
+SYY/2006/page_71.pdf-1,7%,-16595.0,0.0,False,0.5625,7,"[2.0, 1.0, 100.0, 2.0, 1.0, 100.0, -16595.0]",0,0,,"To calculate the percentage change in total rental expense under operating leases from July 2, 2005 to July 1, 2006, we need to use the following formula for percentage change:
+
+\[ \text{Percentage Change} = \left( \frac{\text{New Value} - \text{Old Value}}{\text{Old Value}} \right) \times 100 \]
+
+From the provided data:
+- Old value (July 2, 2005): $56499000
+- New value (July 1, 2006): $39904000
+
+Plugging these values into the formula:
+
+\[ \text{Percentage Change} = \left( \frac{39904000 - 56499000}{56499000} \right) \times 100 \]
+\[ \text{Percentage Change} = \left( \frac{-16595"
+AES/2010/page_227.pdf-3,10%,4.0,0.0,True,0.5555555555555556,8,"[10824.0, 10224.0, 10224.0, 10824.0, 100.0, 94.0, 4.0, 1.0]",0,0,1.0,"Reasoning: To find the percentage of total recourse debt that is current, we need to calculate the sum of all annual maturities for each year listed and then divide by the total recourse debt.
+
+Total Recourse Debt = $4612 + $3152 + $500 + $463 + $497 = $10824 million
+
+Sum of Annual Maturities = $4612 + $3152 + $500 + $463 + $497 = $10224 million
+
+Percentage of Total Recourse Debt Current = ($10224 / $10824) * 100%
+
+Final Answer: 94. 4%
+
+Confidence: 1"
+GS/2015/page_188.pdf-2,12%,-17.45,0.0,True,0.7,6,"[100.0, 100.0, -55.0, 100.0, -17.45, -17.45]",0,0,,"Reasoning: To calculate the percentage of future minimum rental payments due in 2018, we need to find the difference between the total rental payments for 2018 and 2017, divide by the total rental payments for 2017, and multiply by 100.
+
+Total rental payments for 2018 = $258 million (as of December 2015)
+Total rental payments for 2017 = $313 million (as of December 2015)
+
+Percentage = ((258 - 313) / 313) * 100
+Percentage = (-55 / 313) * 100
+Percentage ≈ -17.45%
+
+Final Answer: -17.45%"
+MO/2016/page_19.pdf-1,yes,500.0,0.0,True,0.75,1,[1.0],0,0,1.0,"Reasoning: To determine if Altria outperformed the S&P 500, we can compare its stock price to the S&P 500's closing value on each respective date.
+
+Final Answer: Yes, Altria outperformed the S&P 500.
+
+Confidence: 1"
+CMCSA/2015/page_112.pdf-2,-35,-90.0,0.0,True,0.7619047619047619,5,"[130.0, 130.0, -90.0, -90.0, 1.0]",0,0,1.0,"Reasoning: To calculate the change in unrecognized tax benefits from the end of 2014 to the end of 2015, we need to consider both additions and reductions.
+
+Additions:
+- For 2015: 67 million
+- For 2014: 63 million
+Total additions = 67 + 63 = 130 million
+
+Reductions:
+- For 2015: 84 million
+- For 2014: 220 million
+Total reductions = 84 + 220 = 220 million
+
+Change in unrecognized tax benefits = Total additions - Total reductions
+= 130 million - 220 million
+= -90 million
+
+Final Answer: -90 million
+
+Confidence: 1"

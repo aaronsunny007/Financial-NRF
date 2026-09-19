@@ -1,0 +1,18 @@
+{
+  "n": 10,
+  "n_scored_numeric": 9,
+  "excluded_non_numeric_count": 1,
+  "accuracy": 0.3333333333333333,
+  "evidence_support": 0.7271615381152186,
+  "hallucination_rate": 0.0,
+  "invalid_format_rate": 0.2,
+  "sign_mismatch_count": 0,
+  "verifier_verified_rate": 0.4,
+  "retried_count": 8,
+  "mean_self_reported_confidence": 0.675,
+  "confidence_missing_count": 1,
+  "ece_of_self_reported_confidence": 0.30000000000000004,
+  "onrs": 0.6581484614345655,
+  "onrs_weights": "0.30 accuracy / 0.30 evidence_support / 0.20 hallucination / 0.20 calibration (framework/nrf.py default)",
+  "gold_answer_source": "qa.exe_ans (precise executed value), scaled x100 when the FinQA display answer indicated a percentage; falls back to the display string only when exe_ans is unavailable."
+}

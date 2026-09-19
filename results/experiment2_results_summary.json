@@ -1,0 +1,8 @@
+{
+  "n": 10,
+  "accuracy": 0.1,
+  "evidence_support": 0.5955601343101342,
+  "hallucination_rate": 0.1,
+  "decoy_usage_rate": 0.0,
+  "invalid_format_rate": 0.1
+}

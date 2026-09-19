@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Numerical Reliability Framework — Financial RAG</title>
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a1a; --muted:#5c6470; --line:#e2e6ec;
+    --accent:#1f3864; --accent2:#2e5496; --panel:#f7f9fc; --code:#f2f4f7;
+    --good:#0f7b4f; --bad:#a3232b; --warn:#8a6100;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12151a; --fg:#e8ebf0; --muted:#9aa4b2; --line:#2a3038;
+      --accent:#8fb3f0; --accent2:#a9c4f5; --panel:#1a1f27; --code:#1e242d;
+      --good:#4ec98a; --bad:#f0868d; --warn:#e0b45e;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 80px}
+  header h1{font-size:1.75rem;line-height:1.25;margin:0 0 8px;color:var(--accent)}
+  .sub{color:var(--muted);margin:0 0 6px}
+  .note{background:var(--panel);border-left:3px solid var(--accent2);
+        padding:14px 16px;border-radius:0 6px 6px 0;margin:20px 0;font-size:.94rem}
+  nav{display:flex;flex-wrap:wrap;gap:6px;margin:24px 0 20px;border-bottom:1px solid var(--line)}
+  nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);
+    padding:9px 13px;font:inherit;font-size:.93rem;cursor:pointer}
+  nav button:hover{color:var(--fg)}
+  nav button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+  section[hidden]{display:none}
+  h2{font-size:1.2rem;color:var(--accent);margin:26px 0 10px}
+  h3{font-size:1rem;margin:20px 0 8px}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+  table{border-collapse:collapse;width:100%;min-width:440px;font-size:.9rem}
+  th{background:var(--accent);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+  td{padding:7px 10px;border-bottom:1px solid var(--line)}
+  tbody tr:nth-child(even){background:var(--panel)}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-weight:600;font-size:.9rem;margin:14px 0 5px}
+  textarea{width:100%;min-height:150px;padding:10px;border:1px solid var(--line);border-radius:6px;
+    background:var(--bg);color:var(--fg);font:13px/1.5 ui-monospace,Consolas,monospace;resize:vertical}
+  .row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:12px 0}
+  button.go{background:var(--accent);color:#fff;border:0;border-radius:6px;
+    padding:10px 20px;font:inherit;font-weight:600;cursor:pointer}
+  button.go:hover{background:var(--accent2)}
+  button.ex{background:var(--panel);color:var(--fg);border:1px solid var(--line);
+    border-radius:6px;padding:7px 11px;font:inherit;font-size:.85rem;cursor:pointer;text-align:left}
+  button.ex:hover{border-color:var(--accent2)}
+  .out{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;margin-top:16px}
+  .pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.8rem;font-weight:600}
+  .pill.ok{background:rgba(15,123,79,.14);color:var(--good)}
+  .pill.no{background:rgba(163,35,43,.14);color:var(--bad)}
+  code,pre{background:var(--code);border-radius:4px;font-family:ui-monospace,Consolas,monospace;font-size:.86rem}
+  code{padding:1px 5px}
+  pre{padding:12px;overflow-x:auto;margin:10px 0}
+  ul{padding-left:20px}
+  li{margin:5px 0}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:.85rem}
+  .kv{display:flex;justify-content:space-between;gap:14px;padding:5px 0;border-bottom:1px solid var(--line)}
+  .kv span:last-child{font-variant-numeric:tabular-nums;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>A Numerical Reliability Framework for Retrieval-Augmented Financial Question Answering</h1>
+  <p class="sub">Aaron Prakash Gandi &middot; B01043066 &middot; School of Computing, Ulster University</p>
+  <p class="sub">Supervisor: Dr. Tazar Hussain</p>
+</header>
+
+<div class="note">
+  <strong>What runs here.</strong> The evidence-support score, hallucination detector and gold-free
+  arithmetic verifier execute live in your browser on whatever you paste into the Analyser tab.
+  <strong>What does not.</strong> The language model. All reported results were produced with
+  Qwen2.5-3B-Instruct under 4-bit quantisation on a local NVIDIA RTX 3050; the results tabs show
+  recorded outputs rather than re-running generation.
+</div>
+
+<nav id="tabs">
+  <button aria-selected="true" data-t="analyser">Live analyser</button>
+  <button data-t="e1">Exp 1 · Baseline</button>
+  <button data-t="e2">Exp 2 · Hallucination</button>
+  <button data-t="e3">Exp 3 · Calibration</button>
+  <button data-t="e4">Exp 4 · Noise</button>
+  <button data-t="e5">Exp 5 · Comparison</button>
+  <button data-t="method">Method &amp; audit</button>
+</nav>
+
+<!-- ANALYSER -->
+<section id="analyser">
+  <p>Paste retrieved evidence and a model response. The framework computes evidence support,
+  flags unsupported numbers, and independently re-executes the response's own arithmetic —
+  without ever seeing a correct answer.</p>
+
+  <div class="grid">
+    <div>
+      <label for="ev">Retrieved evidence</label>
+      <textarea id="ev" spellcheck="false"></textarea>
+      <label for="rs">Model response</label>
+      <textarea id="rs" spellcheck="false"></textarea>
+      <div class="row">
+        <label style="margin:0"><input type="radio" name="m" value="strict"> Strict NESS</label>
+        <label style="margin:0"><input type="radio" name="m" value="derived" checked> Revised NESS</label>
+        <button class="go" id="run">Analyse</button>
+      </div>
+      <h3>Examples</h3>
+      <div style="display:grid;gap:7px">
+        <button class="ex" data-i="0">Correct percentage, derivation credited</button>
+        <button class="ex" data-i="1">Correct subtraction, strict mode</button>
+        <button class="ex" data-i="2">Real arithmetic slip — verifier catches it</button>
+        <button class="ex" data-i="3">Invented figure — flagged unsupported</button>
+      </div>
+    </div>
+    <div><div id="out" class="out"><em style="color:var(--muted)">Results appear here.</em></div></div>
+  </div>
+</section>
+
+<!-- EXP 1 -->
+<section id="e1" hidden>
+  <h2>Experiment 1 — Baseline reliability profile (n = 50)</h2>
+  <div class="tw"><table><thead><tr><th>Metric</th><th class="n">Value</th></tr></thead><tbody>
+  <tr><td>Execution accuracy</td><td class="n">0.3400</td></tr>
+  <tr><td>NESS — strict</td><td class="n">0.7145</td></tr>
+  <tr><td>NESS — revised</td><td class="n">0.9085</td></tr>
+  <tr><td>Hallucination rate</td><td class="n">0.0800</td></tr>
+  <tr><td>Invalid-format rate</td><td class="n">0.0000</td></tr>
+  <tr><td>Verifier pass rate (gold-free)</td><td class="n">0.5600</td></tr>
+  <tr><td>Mean self-reported confidence</td><td class="n">0.8960</td></tr>
+  <tr><td>ECE of self-reported confidence</td><td class="n">0.5560</td></tr>
+  <tr><td>ONRS — strict / revised</td><td class="n">0.5891 / 0.6634</td></tr>
+  </tbody></table></div>
+  <p>Wilson 95% interval on accuracy: [0.224, 0.478].</p>
+
+  <h3>Verifier outcome decomposition</h3>
+  <p>The aggregate pass rate conceals three distinct failure conditions. Reporting it alone
+  overstates the arithmetic error rate roughly fourfold.</p>
+  <div class="tw"><table><thead><tr><th>Outcome</th><th class="n">Count</th><th class="n">Share</th></tr></thead><tbody>
+  <tr><td>Verified self-consistent</td><td class="n">28</td><td class="n">56%</td></tr>
+  <tr><td>Operand not grounded in evidence</td><td class="n">10</td><td class="n">20%</td></tr>
+  <tr><td>No checkable expression stated</td><td class="n">6</td><td class="n">12%</td></tr>
+  <tr><td>Genuine arithmetic mismatch</td><td class="n">6</td><td class="n">12%</td></tr>
+  </tbody></table></div>
+
+  <h3>Error taxonomy — confirmed items</h3>
+  <div class="tw"><table><thead><tr><th>Category</th><th>Item</th><th>Detail</th></tr></thead><tbody>
+  <tr><td>Arithmetic slip</td><td>CME/2017/page_97.pdf-5</td><td>339235 − 338240 computed as 9935 rather than 995</td></tr>
+  <tr><td>Omitted unit</td><td>ETR/2004/page_213.pdf-2</td><td>60.31 computed correctly, percentage sign absent</td></tr>
+  <tr><td>Wrong column</td><td>ZBH/2003/page_40.pdf-1</td><td>Used 2002 (48.3%) where 2003 (51.2%) was required</td></tr>
+  <tr><td>Wrong formula</td><td>JPM/2008/page_85.pdf-3</td><td>Incorrect denominator for a capital ratio</td></tr>
+  <tr><td>Retrieval miss</td><td>AMT/2005/page_105.pdf-2</td><td>Precise row never entered top-k; rounded prose used</td></tr>
+  <tr><td>Near-duplicate</td><td>SPGI/2018/page_74.pdf-1</td><td>Value pair from the wrong pension trust</td></tr>
+  <tr><td>Partial aggregation</td><td>AON/2010/page_28.pdf-1</td><td>Two qualifying rows retrieved, only first used</td></tr>
+  <tr><td>Sign error</td><td>PM/2015/page_127.pdf-4</td><td>Accounting negatives averaged as positives</td></tr>
+  <tr><td>Reference issue</td><td>ETR/2011/page_341.pdf-3</td><td>Benchmark target conflicts with its own cited evidence</td></tr>
+  </tbody></table></div>
+</section>
+
+<!-- EXP 2 -->
+<section id="e2" hidden>
+  <h2>Experiment 2 — Hallucination detector sensitivity (n = 10)</h2>
+  <p>An initial two-condition design produced eight of ten byte-identical responses between clean
+  and adversarial conditions. A manipulation check revealed why: retrieval had removed every
+  injected sentence before generation. A third condition and an explicit check were added, because
+  without the check a null result cannot be distinguished from a failed manipulation — readings
+  with opposite implications.</p>
+  <div class="tw"><table><thead><tr><th>Condition</th><th class="n">Decoy reached model</th><th class="n">Accuracy</th><th class="n">NESS</th><th class="n">Hallucination</th><th class="n">Decoy used</th></tr></thead><tbody>
+  <tr><td>Clean control</td><td class="n">0.0000</td><td class="n">0.4000</td><td class="n">0.7266</td><td class="n">0.1000</td><td class="n">0.0000</td></tr>
+  <tr><td>Document injection</td><td class="n">0.2000</td><td class="n">0.4000</td><td class="n">0.7224</td><td class="n">0.1000</td><td class="n">0.0000</td></tr>
+  <tr><td>Evidence injection</td><td class="n">1.0000</td><td class="n">0.5000</td><td class="n">0.6889</td><td class="n">0.2000</td><td class="n">0.0000</td></tr>
+  </tbody></table></div>
+  <ul>
+    <li>Retrieval filtered 80% of document-level distractors — only 2 of 10 reached the evidence block.</li>
+    <li>Once contamination reached the model the flag rate doubled and evidence support declined.</li>
+    <li>The generator never adopted an injected value, so movement reflects contaminated context rather than contaminated answers.</li>
+  </ul>
+  <p>These deltas correspond to single examples at this sample size and the intervals overlap
+  heavily. The mechanism is demonstrated; the magnitude is not established. The accuracy rise under
+  evidence injection reflects one example flipping and must not be read as noise improving performance.</p>
+</section>
+
+<!-- EXP 3 -->
+<section id="e3" hidden>
+  <h2>Experiment 3 — Confidence calibration and overconfidence (n = 50)</h2>
+  <div class="tw"><table><thead><tr><th>Quantity</th><th class="n">Value</th><th>Note</th></tr></thead><tbody>
+  <tr><td>Accuracy</td><td class="n">0.3400</td><td>17 correct, 33 incorrect</td></tr>
+  <tr><td>Mean self-reported confidence</td><td class="n">0.8960</td><td>0 missing</td></tr>
+  <tr><td>Mean confidence, correct answers</td><td class="n">0.9118</td><td>n = 17</td></tr>
+  <tr><td>Mean confidence, incorrect answers</td><td class="n">0.8879</td><td>n = 33</td></tr>
+  <tr><td>Confidence gap</td><td class="n">0.0239</td><td>correct − incorrect</td></tr>
+  <tr><td>Overconfidence gap</td><td class="n">0.5560</td><td>confidence − accuracy</td></tr>
+  <tr><td>High-confidence errors</td><td class="n">0.6400</td><td>32/50 wrong at confidence ≥ 0.8</td></tr>
+  <tr><td>ECE of self-reported confidence</td><td class="n">0.5560</td><td>—</td></tr>
+  </tbody></table></div>
+  <p>Confidence on correct and incorrect answers differs by 0.024 on a unit scale, so the stated
+  signal carries almost no information about correctness, while 64% of responses were confidently
+  wrong. In a financial decision-support setting this is the concrete high-risk failure mode the
+  framework was designed to expose, and it is the most robust single finding in the project.</p>
+  <p><em>This is self-reported confidence elicited in the prompt, not a probability derived from
+  token log-probabilities.</em></p>
+</section>
+
+<!-- EXP 4 -->
+<section id="e4" hidden>
+  <h2>Experiment 4 — Composite response to graded context noise (n = 50 per level)</h2>
+  <div class="tw"><table><thead><tr><th>Noise</th><th class="n">Reached</th><th class="n">Accuracy</th><th class="n">NESS</th><th class="n">Hallucination</th><th class="n">ECE</th><th class="n">ONRS</th></tr></thead><tbody>
+  <tr><td>0%</td><td class="n">0.0000</td><td class="n">0.3400</td><td class="n">0.7145</td><td class="n">0.0800</td><td class="n">0.5560</td><td class="n">0.5891</td></tr>
+  <tr><td>10%</td><td class="n">1.0000</td><td class="n">0.3000</td><td class="n">0.7109</td><td class="n">0.1000</td><td class="n">0.5800</td><td class="n">0.5673</td></tr>
+  <tr><td>20%</td><td class="n">1.0000</td><td class="n">0.3800</td><td class="n">0.7114</td><td class="n">0.1200</td><td class="n">0.4920</td><td class="n">0.6050</td></tr>
+  <tr><td>30%</td><td class="n">1.0000</td><td class="n">0.3600</td><td class="n">0.6922</td><td class="n">0.1000</td><td class="n">0.5240</td><td class="n">0.5909</td></tr>
+  <tr><td>40%</td><td class="n">1.0000</td><td class="n">0.3200</td><td class="n">0.7132</td><td class="n">0.1200</td><td class="n">0.5680</td><td class="n">0.5724</td></tr>
+  </tbody></table></div>
+  <p>Total change 0% → 40%: −0.0168. Monotonically non-increasing: <strong>false</strong>.</p>
+  <h3>Correlations across noise levels</h3>
+  <div class="tw"><table><thead><tr><th>Pair</th><th class="n">r</th><th>Reading</th></tr></thead><tbody>
+  <tr><td>Noise level vs ONRS</td><td class="n">−0.10</td><td>Effectively no relationship</td></tr>
+  <tr><td>Noise level vs hallucination rate</td><td class="n">+0.76</td><td>The detector does track noise</td></tr>
+  <tr><td>Accuracy vs ONRS</td><td class="n">+0.98</td><td>The composite is empirically accuracy in disguise</td></tr>
+  <tr><td>Accuracy vs ECE</td><td class="n">−0.97</td><td>Calibration carries no independent information</td></tr>
+  </tbody></table></div>
+  <h3>Why the composite fails to track noise</h3>
+  <p>Because self-reported confidence is near-constant at ≈0.90, calibration error becomes an
+  almost deterministic function of accuracy:</p>
+  <div class="tw"><table><thead><tr><th>Noise</th><th class="n">Accuracy</th><th class="n">ECE observed</th><th class="n">0.90 − accuracy</th></tr></thead><tbody>
+  <tr><td>0%</td><td class="n">0.3400</td><td class="n">0.5560</td><td class="n">0.5600</td></tr>
+  <tr><td>10%</td><td class="n">0.3000</td><td class="n">0.5800</td><td class="n">0.6000</td></tr>
+  <tr><td>20%</td><td class="n">0.3800</td><td class="n">0.4920</td><td class="n">0.5200</td></tr>
+  <tr><td>30%</td><td class="n">0.3600</td><td class="n">0.5240</td><td class="n">0.5400</td></tr>
+  <tr><td>40%</td><td class="n">0.3200</td><td class="n">0.5680</td><td class="n">0.5800</td></tr>
+  </tbody></table></div>
+  <p>The nominal 0.30 weight on accuracy is therefore in practice ≈0.50, with a further 0.20
+  entering through the degenerate calibration term. The composite inherits accuracy's full
+  instability, which at this sample size exceeds the effect being measured.</p>
+</section>
+
+<!-- EXP 5 -->
+<section id="e5" hidden>
+  <h2>Experiment 5 — Controlled comparison across evidence conditions (n = 50)</h2>
+  <p>Added following supervisory feedback that quoting published FinQA figures alongside these
+  results was not a controlled comparison. Every condition shares the same items, generator,
+  prompt, scoring code, answer resolution and verifier. Only the evidence supplied varies.</p>
+  <div class="tw"><table><thead><tr><th>Condition</th><th class="n">Accuracy</th><th class="n">95% CI</th><th class="n">NESS</th><th class="n">Hallucination</th><th class="n">ONRS</th></tr></thead><tbody>
+  <tr><td>Closed-book (no evidence)</td><td class="n">0.0000</td><td class="n">[0.00, 0.07]</td><td class="n">0.0000</td><td class="n">1.0000</td><td class="n">0.0960</td></tr>
+  <tr><td>Retrieval (system under test)</td><td class="n">0.3400</td><td class="n">[0.22, 0.48]</td><td class="n">0.7145</td><td class="n">0.0800</td><td class="n">0.5891</td></tr>
+  <tr><td>Oracle (FinQA gold evidence)</td><td class="n">0.4200</td><td class="n">[0.29, 0.56]</td><td class="n">0.6278</td><td class="n">0.2000</td><td class="n">0.5811</td></tr>
+  </tbody></table></div>
+  <h3>Error decomposition</h3>
+  <div class="tw"><table><thead><tr><th>Quantity</th><th class="n">Value</th><th>Interpretation</th></tr></thead><tbody>
+  <tr><td>Retrieval contribution over closed-book</td><td class="n">+0.3400</td><td>Retrieval supplies the entire accuracy of the system</td></tr>
+  <tr><td>Retrieval-attributable error</td><td class="n">+0.0800</td><td>Recoverable by perfect retrieval — 12.1% of remaining error</td></tr>
+  <tr><td>Reasoning-attributable error</td><td class="n">0.5800</td><td>Persists with perfect evidence — 87.9% of remaining error</td></tr>
+  </tbody></table></div>
+  <p><strong>Closed-book scores zero.</strong> No sampled item is answerable from parametric
+  knowledge alone: the benchmark does not leak, and retrieval accounts for the entire accuracy of
+  the system. The detector flags every closed-book response, a positive control that complements
+  Experiment 2 by moving the flag rate from 0.08 to 1.00 rather than 0.10 to 0.20.</p>
+  <p><strong>The bottleneck is reasoning, not retrieval.</strong> Perfect evidence raises accuracy
+  only to 0.420. Approximately 12% of remaining error is retrieval-attributable; 88% is bounded by
+  the generator. This retrospectively explains why two retrieval modifications, attempted earlier
+  and reverted, could not have succeeded — their entire available headroom was eight accuracy points.</p>
+  <p><strong>A second, independent failure of the composite.</strong> The oracle condition is more
+  accurate than the retrieval condition, yet the composite ranks it lower (0.5811 against 0.5891).
+  Unlike the correlation argument in Experiment 4 this does not depend on sample size or trend
+  analysis: one configuration is unambiguously more accurate on identical items under an identical
+  scorer, and the aggregate orders them the wrong way.</p>
+  <p><em>The lower oracle evidence-support figure is an artefact of evidence size, not degraded
+  grounding: gold evidence is a smaller block containing only strictly necessary lines, so fewer
+  response numbers find a literal match.</em></p>
+</section>
+
+<!-- METHOD -->
+<section id="method" hidden>
+  <h2>Published FinQA execution accuracy</h2>
+  <div class="tw"><table><thead><tr><th>System</th><th class="n">Accuracy</th><th>Setting</th></tr></thead><tbody>
+  <tr><td>Human expert</td><td class="n">91.16%</td><td>FinQA original paper</td></tr>
+  <tr><td>FinQANet (RoBERTa-large), gold retrieval</td><td class="n">70.0%</td><td>Fine-tuned, test split</td></tr>
+  <tr><td>FinQANet (RoBERTa-large)</td><td class="n">61.24%</td><td>Fine-tuned, test split</td></tr>
+  <tr><td>General crowd worker</td><td class="n">50.68%</td><td>FinQA original paper</td></tr>
+  <tr><td>This system, oracle evidence</td><td class="n">42.0%</td><td>Few-shot, dev split, own scorer</td></tr>
+  <tr><td>This system, retrieval</td><td class="n">34.0%</td><td>Few-shot, dev split, own scorer</td></tr>
+  </tbody></table></div>
+  <p>These are context, not a scoreboard. The comparison systems are fine-tuned on the training
+  split with a task-specific program-generation architecture and evaluated on the test split by
+  their own scorer; four factors differ simultaneously. Experiment 5 supplies the controlled
+  comparison. Notably the oracle condition at 42.0% remains well below the 70.0% gold-retrieval
+  figure of a fine-tuned system, which localises the deficit to the generator rather than to
+  evidence quality.</p>
+
+  <h2>Methodology audit</h2>
+  <p>Several defects were identified and corrected before any figure was accepted.</p>
+  <ul>
+    <li><strong>Fabricated evidence-support constant.</strong> A missing dictionary key meant the
+    metric silently returned exactly 0.8 for every example in every condition, pinning 30% of the
+    composite weight to a constant.</li>
+    <li><strong>Two gold-answer scaling defects.</strong> Percentage values were mis-scaled by a
+    factor of 100 in two distinct ways, marking correct answers wrong.</li>
+    <li><strong>Chunking defect.</strong> A string assigned where a list was expected caused every
+    document to be fragmented into single-character retrieval chunks — verified directly, a
+    57-character string producing 57 chunks — invalidating two experiments including their baselines.</li>
+    <li><strong>Verifier extraction defect.</strong> Expressions following a sentence boundary were
+    mis-parsed because a full stop is both decimal point and terminator. Re-scoring confirmed the
+    pass rate was unchanged, so no reported figure moved.</li>
+    <li><strong>Evidence-support revision.</strong> The strict metric penalised correct arithmetic,
+    since a computed answer never appears verbatim in source text. The revision was validated
+    against gaming: an initial implementation showed an <strong>86.5%</strong> false-positive rate on
+    invented values and was rejected; the adopted version measures <strong>0.2%</strong> over 400
+    adversarial trials.</li>
+    <li><strong>Two retrieval modifications</strong> were implemented, measured and reverted when
+    verification showed they did not fix their target cases — during which ~28% of answers were
+    found to change under prompt perturbations unrelated to the question, establishing the noise
+    floor for all later comparisons.</li>
+  </ul>
+</section>
+
+<footer>
+  MSc Research Project, School of Computing, Ulster University.
+  Generation results produced locally on an NVIDIA RTX 3050; framework logic runs in your browser.
+</footer>
+</div>
+
+<script>
+"use strict";
+/* ------------------------------------------------------------------
+   Browser port of framework/nrf.py and framework/verifier.py.
+   Constants and tolerances mirror the Python implementation exactly.
+   ------------------------------------------------------------------ */
+const NUM_RE = /[-+]?\$?\d+(?:,\d{3})*(?:\.\d+)?%?/g;
+const CONVERSION = [100, 1000, 1000000, 12, 4, 360, 365];
+const SCALES = [100, 1000, 1000000];
+const HALLUC_THRESHOLD = 0.5;
+
+function parseNum(tok){
+  const raw = tok.trim();
+  if(!raw) return null;
+  const isPct = raw.endsWith('%');
+  const cleaned = raw.replace(/\$/g,'').replace(/,/g,'').replace(/%/g,'').trim();
+  if(cleaned===''||cleaned==='-'||cleaned==='+'||cleaned==='.') return null;
+  const v = Number(cleaned);
+  return Number.isFinite(v) ? {raw, value:v, isPct} : null;
+}
+function extractNumbers(text){
+  if(!text) return [];
+  const out=[]; let m;
+  const re = new RegExp(NUM_RE.source,'g');
+  while((m = re.exec(String(text)))!==null){
+    const p = parseNum(m[0]);
+    if(p) out.push(p);
+  }
+  return out;
+}
+/* tolerance from the precision the value was WRITTEN at */
+function statedTol(p){
+  const c = p.raw.trim().replace(/\$/g,'').replace(/,/g,'').replace(/%/g,'');
+  const dot = c.indexOf('.');
+  const tol = dot >= 0 ? 0.5*Math.pow(10,-(c.length-dot-1)) : 0.5;
+  return tol + Math.abs(p.value)*1e-9;
+}
+function derivableSet(seeds){
+  const s = new Set();
+  const add = v => { if(Number.isFinite(v)) s.add(v); };
+  for(let i=0;i<seeds.length;i++){
+    const a = seeds[i];
+    add(-a);
+    for(const k of SCALES){ add(a*k); add(a/k); }
+    for(let j=0;j<seeds.length;j++){
+      if(i===j) continue;
+      const b = seeds[j];
+      add(a+b); add(a-b); add(a*b); add((a+b)/2);
+      if(b!==0){
+        const q=a/b; add(q); add(q*100);
+        const ch=(a-b)/b; add(ch); add(ch*100);
+      }
+    }
+  }
+  return Array.from(s).sort((x,y)=>x-y);
+}
+function matchesSorted(target, sorted, tol){
+  if(!sorted.length) return false;
+  let lo=0, hi=sorted.length;
+  while(lo<hi){ const mid=(lo+hi)>>1; if(sorted[mid]<target) lo=mid+1; else hi=mid; }
+  for(const k of [lo-1,lo]){
+    if(k>=0 && k<sorted.length && Math.abs(sorted[k]-target)<=tol) return true;
+  }
+  return false;
+}
+function ness(response, evidence, creditDerived){
+  const R = extractNumbers(response), E = extractNumbers(evidence);
+  const total = R.length;
+  if(!total) return {total:0,direct:0,derived:0,unsupported:0,strict:0,derivedScore:0,
+                     score:0,unsupportedVals:[],derivedVals:[]};
+  if(!E.length) return {total,direct:0,derived:0,unsupported:total,strict:0,derivedScore:0,
+                        score:0,unsupportedVals:R.map(x=>x.value),derivedVals:[]};
+  let direct=0; const notDirect=[]; const cited=[];
+  for(const rn of R){
+    let found=false;
+    for(const en of E){
+      if(rn.isPct!==en.isPct) continue;
+      const tol = Math.max(0.01, Math.abs(en.value)*0.02);
+      if(Math.abs(rn.value-en.value)<=tol){ found=true; break; }
+    }
+    if(found){ direct++; cited.push(rn.value); } else notDirect.push(rn);
+  }
+  const derivedVals=[], unsupportedVals=[];
+  if(notDirect.length){
+    const seeds = Array.from(new Set(cited.concat(CONVERSION))).sort((a,b)=>a-b);
+    const derivable = derivableSet(seeds);
+    const convSorted = CONVERSION.slice().sort((a,b)=>a-b);
+    for(const rn of notDirect){
+      const tol = statedTol(rn);
+      if(matchesSorted(rn.value, convSorted, tol) || matchesSorted(rn.value, derivable, tol))
+        derivedVals.push(rn.value);
+      else unsupportedVals.push(rn.value);
+    }
+  }
+  const derived = derivedVals.length;
+  const strict = direct/total, derivedScore = (direct+derived)/total;
+  return {total, direct, derived, unsupported: total-direct-derived,
+          strict, derivedScore, score: creditDerived?derivedScore:strict,
+          unsupportedVals, derivedVals};
+}
+function extractFinalAnswer(resp){
+  const m = /final\s*answer\s*[:\-]\s*([\s\S]*?)(?:\n|$|confidence\s*[:\-]|reasoning\s*[:\-])/i.exec(resp||'');
+  if(!m) return null;
+  const nums = extractNumbers(m[1]);
+  return nums.length ? nums[nums.length-1] : null;
+}
+function extractConfidence(resp){
+  if(!resp) return null;
+  const s = resp.toLowerCase();
+  let m = /confidence\s*[:\-]\s*(\d+(?:\.\d+)?)\s*%/.exec(s);
+  if(m) return Math.min(1,Math.max(0,Number(m[1])/100));
+  m = /confidence\s*[:\-]\s*(0?\.\d+)\b/.exec(s);
+  if(m) return Math.min(1,Math.max(0,Number(m[1])));
+  m = /confidence\s*[:\-]\s*(\d+(?:\.\d+)?)\b/.exec(s);
+  if(m){ let v=Number(m[1]); if(v>1) v/=100; return Math.min(1,Math.max(0,v)); }
+  return null;
+}
+/* safe arithmetic evaluator: recursive descent, no eval() */
+function safeEval(expr){
+  let i=0; const s=expr.replace(/\s+/g,'');
+  function peek(){ return s[i]; }
+  function parseExpr(){
+    let v=parseTerm();
+    while(i<s.length && (peek()==='+'||peek()==='-')){
+      const op=s[i++]; const r=parseTerm(); v = op==='+' ? v+r : v-r;
+    } return v;
+  }
+  function parseTerm(){
+    let v=parseFactor();
+    while(i<s.length && (peek()==='*'||peek()==='/')){
+      const op=s[i++]; const r=parseFactor();
+      if(op==='/'&&r===0) throw new Error('division by zero');
+      v = op==='*' ? v*r : v/r;
+    } return v;
+  }
+  function parseFactor(){
+    if(peek()==='+'){ i++; return parseFactor(); }
+    if(peek()==='-'){ i++; return -parseFactor(); }
+    if(peek()==='('){ i++; const v=parseExpr();
+      if(peek()!==')') throw new Error('unbalanced parenthesis'); i++; return v; }
+    const start=i;
+    while(i<s.length && /[\d.]/.test(s[i])) i++;
+    if(start===i) throw new Error('unexpected character');
+    const v=Number(s.slice(start,i));
+    if(!Number.isFinite(v)) throw new Error('bad number');
+    return v;
+  }
+  const val=parseExpr();
+  if(i!==s.length) throw new Error('trailing characters');
+  return val;
+}
+function findLastExpression(text){
+  const spanRe = /[\d.,$%()+\-*/\s]{3,}/g;
+  let best=null, m;
+  while((m=spanRe.exec(text))!==null){
+    let span=m[0];
+    const frags = span.split(/\.\s+/);
+    const qualified = frags.filter(f =>
+      /[+\-*/]/.test(f) && (f.match(/\d+(?:\.\d+)?/g)||[]).length >= 2);
+    span = qualified.length ? qualified[qualified.length-1] : span;
+    if(!/[+\-*/]/.test(span)) continue;
+    if((span.match(/\d+(?:\.\d+)?/g)||[]).length < 2) continue;
+    best = span;
+  }
+  if(!best) return null;
+  const cleaned = best.replace(/[$%,]/g,'').trim().replace(/[^0-9.()+\-*/\s]/g,'').trim();
+  return (cleaned && /[+\-*/]/.test(cleaned)) ? cleaned : null;
+}
+function verify(response, evidence){
+  const expr = findLastExpression(response||'');
+  if(!expr) return {parseable:false, verified:false,
+    reason:'No checkable arithmetic expression was found in the response.'};
+  let val;
+  try{ val = safeEval(expr); }
+  catch(e){ return {parseable:false, verified:false,
+    reason:'Extracted expression could not be safely evaluated: '+e.message}; }
+  const evNums = extractNumbers(evidence).map(x=>x.value);
+  const operands = (expr.match(/\d+(?:\.\d+)?/g)||[]).map(Number);
+  const ungrounded = operands.filter(o =>
+    !CONVERSION.some(c=>Math.abs(c-o)<1e-9) &&
+    !evNums.some(e=>Math.abs(e-o) <= Math.max(0.01, Math.abs(e)*0.02)));
+  const stated = extractFinalAnswer(response);
+  if(ungrounded.length) return {parseable:true, verified:false, expr, recomputed:val,
+    reason:'Operand(s) not found in retrieved evidence (possible hallucination): '+
+           ungrounded.map(x=>x.toString()).join(', ')};
+  if(!stated) return {parseable:true, verified:false, expr, recomputed:val,
+    reason:'Expression recomputed to '+val.toFixed(4)+' but no Final Answer value was found.'};
+  const tol = Math.max(0.01, Math.abs(stated.value)*0.02);
+  if(Math.abs(val-stated.value) > tol) return {parseable:true, verified:false, expr, recomputed:val,
+    reason:"Python-equivalent recomputation of '"+expr+"' = "+val.toFixed(4)+
+           ', which does not match the stated result ('+stated.value+').'};
+  return {parseable:true, verified:true, expr, recomputed:val,
+    reason:'Operands are grounded in retrieved evidence and recomputation matches the stated answer.'};
+}
+
+/* ---------------- UI ---------------- */
+const EXAMPLES = [
+ ["- [table_row] leased facilities -- united states: 2.1 | other countries: 6.0 | total: 8.1\n- [table_row] owned facilities -- united states: 30.7 | other countries: 17.2 | total: 47.9\n- [table_row] total facilities -- united states: 32.8 | other countries: 23.2 | total: 56.0",
+  "Reasoning: The question asks for leased facilities as a percentage of total facilities. Leased total = 8.1. Total facilities = 56.0. 8.1 / 56.0 * 100 = 14.46\n\nFinal Answer: 14.46%\n\nConfidence: 0.9","derived"],
+ ["- [table_row] net revenue -- 2015: $5829 | 2014: $5735",
+  "Reasoning: The change is 5829 - 5735 = 94.\n\nFinal Answer: 94\n\nConfidence: 0.9","strict"],
+ ["- [table_row] total operating revenue -- 2017: 339235 | 2016: 338240",
+  "Reasoning: The increase is 339235 - 338240 = 9935.\n\nFinal Answer: 9935\n\nConfidence: 0.9","strict"],
+ ["- [pre_text] the company reported total assets of 4821 million in the period .",
+  "Reasoning: Based on the filing, the figure is approximately 7350 million.\n\nFinal Answer: 7350\n\nConfidence: 0.95","derived"]
+];
+const $ = id => document.getElementById(id);
+document.querySelectorAll('#tabs button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#tabs button').forEach(x=>x.setAttribute('aria-selected','false'));
+    b.setAttribute('aria-selected','true');
+    document.querySelectorAll('section').forEach(s=>s.hidden=true);
+    $(b.dataset.t).hidden=false;
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+document.querySelectorAll('button.ex').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const e=EXAMPLES[Number(b.dataset.i)];
+    $('ev').value=e[0]; $('rs').value=e[1];
+    document.querySelector('input[name=m][value="'+e[2]+'"]').checked=true;
+    run();
+  });
+});
+function esc(s){ return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+function run(){
+  const ev=$('ev').value, rs=$('rs').value;
+  if(!rs.trim()){ $('out').innerHTML='<em style="color:var(--muted)">Enter a model response to analyse.</em>'; return; }
+  const mode=document.querySelector('input[name=m]:checked').value;
+  const s=ness(rs,ev,mode==='derived');
+  const conf=extractConfidence(rs);
+  const fa=extractFinalAnswer(rs);
+  const flagged = s.score < HALLUC_THRESHOLD;
+  const v=verify(rs,ev);
+  const kv=(k,val)=>'<div class="kv"><span>'+k+'</span><span>'+val+'</span></div>';
+  let h='<h3>Reliability measures</h3>';
+  h+=kv('Final answer parsed', fa? esc(fa.value + (fa.isPct?'%':'')) : '<em>none found</em>');
+  h+=kv('NESS (active: '+mode+')', s.score.toFixed(4));
+  h+=kv('NESS — strict', s.strict.toFixed(4));
+  h+=kv('NESS — revised', s.derivedScore.toFixed(4));
+  h+=kv('Numbers in response', s.total);
+  h+=kv('Directly supported', s.direct);
+  h+=kv('Derived from cited evidence', s.derived);
+  h+=kv('Unsupported', s.unsupported);
+  h+=kv('Hallucination flag', flagged?'<span class="pill no">FLAGGED</span>':'<span class="pill ok">not flagged</span>');
+  h+=kv('Self-reported confidence', conf===null?'<em>not stated</em>':conf.toFixed(2));
+  h+='<h3>Detail</h3><p style="font-size:.9rem"><strong>Unsupported numbers:</strong> '+
+     (s.unsupportedVals.length?esc(s.unsupportedVals.join(', ')):'none')+'<br>'+
+     '<strong>Credited as derived:</strong> '+
+     (s.derivedVals.length?esc(s.derivedVals.join(', ')):'none')+'</p>';
+  h+='<h3>Gold-free arithmetic verifier</h3>';
+  h+=kv('Expression parsed', v.parseable?'<span class="pill ok">yes</span>':'<span class="pill no">no</span>');
+  h+=kv('Verified', v.verified?'<span class="pill ok">PASS</span>':'<span class="pill no">FAIL</span>');
+  if(v.expr) h+=kv('Expression', '<code>'+esc(v.expr)+'</code>');
+  if(v.recomputed!==undefined) h+=kv('Recomputes to', v.recomputed.toFixed(4));
+  h+='<p style="font-size:.9rem;margin-top:10px">'+esc(v.reason)+'</p>';
+  h+='<p style="font-size:.85rem;color:var(--muted)"><em>The verifier never sees a gold answer. '+
+     'It re-executes the response’s own arithmetic and compares it against the response’s own '+
+     'stated final answer.</em></p>';
+  $('out').innerHTML=h;
+}
+$('run').addEventListener('click',run);
+$('ev').value=EXAMPLES[0][0]; $('rs').value=EXAMPLES[0][1];
+run();
+</script>
+</body>
+</html>

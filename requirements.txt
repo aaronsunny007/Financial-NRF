@@ -1,0 +1,17 @@
+# Core pipeline ------------------------------------------------------------
+torch>=2.2.0
+transformers>=4.44.0
+accelerate>=0.33.0
+bitsandbytes>=0.43.0          # 4-bit NF4 quantisation (CUDA required)
+sentence-transformers>=3.0.0
+faiss-cpu>=1.8.0
+
+# Data and analysis --------------------------------------------------------
+numpy>=1.26.0
+pandas>=2.0.0
+
+# Optional: hosted-model backend for comparison runs ------------------------
+# anthropic>=0.34.0
+
+# Optional: the browser demo in deploy/ ------------------------------------
+# gradio>=4.44.0
