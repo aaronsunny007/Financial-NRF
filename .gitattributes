@@ -1,0 +1,23 @@
+# Normalise line endings so the repository is not polluted by CRLF/LF churn
+# when files move between Windows and Linux.
+* text=auto eol=lf
+
+# Windows batch files must keep CRLF or they will not run.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files - never diff or normalise these.
+*.docx binary
+*.pdf   binary
+*.pptx  binary
+*.xlsx  binary
+*.png   binary
+*.jpg   binary
+*.zip   binary
+*.faiss binary
+*.bin   binary
+
+# Result data: keep as text, but do not count it in language statistics or
+# show it in pull request diffs by default.
+results/*.csv  text linguist-generated=true
+results/*.json text linguist-generated=true

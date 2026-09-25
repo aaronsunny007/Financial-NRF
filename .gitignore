@@ -13,6 +13,7 @@ ENV/
 models/
 embeddings/
 vector_db/
+notebooks/.ipynb_checkpoints/
 *.bin
 *.safetensors
 *.pt
@@ -35,8 +36,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.egg-info/
+.eggs/
+build/
+dist/
 .pytest_cache/
 .ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
 
 # ---------------------------------------------------------------------------
 # Archives and build output
@@ -49,11 +55,22 @@ __pycache__/
 # ---------------------------------------------------------------------------
 .vscode/
 .idea/
+*.swp
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# ---------------------------------------------------------------------------
+# Office lock files (created when a .docx is open in Word)
+# ---------------------------------------------------------------------------
+~$*.docx
+~$*.xlsx
+~$*.pptx
 
 # ---------------------------------------------------------------------------
 # Secrets - never commit API keys
 # ---------------------------------------------------------------------------
 .env
+.env.local
 *.key
+*.pem
