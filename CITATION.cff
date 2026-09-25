@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: >-
+  Financial-NRF: A Numerical Reliability Framework for
+  Retrieval-Augmented AI Systems
+message: >-
+  If you use this software or refer to its findings, please
+  cite it using the metadata below.
+type: software
+authors:
+  - given-names: Aaron Prakash
+    family-names: Gandi
+    affiliation: Ulster University
+repository-code: 'https://github.com/aaronsunny007/Financial-NRF'
+abstract: >-
+  A measurement framework for retrieval-augmented question
+  answering over financial documents. Four independent
+  checks - execution accuracy, numerical evidence support,
+  gold-free post-hoc arithmetic verification, and confidence
+  calibration - are applied to generated answers and
+  combined into a composite reliability score. Two
+  falsification experiments show that the composite fails to
+  track reliability under graded evidence degradation
+  (r = -0.10) and inverts the ranking of two systems whose
+  true ordering is known, while the individual diagnostic
+  components remain informative.
+keywords:
+  - retrieval-augmented generation
+  - financial question answering
+  - reliability metrics
+  - hallucination detection
+  - confidence calibration
+  - FinQA
+license: MIT
