@@ -5,6 +5,8 @@
 MSc dissertation project — Ulster University
 Aaron Prakash Gandi · Supervisor: Dr Tazar Hussain
 
+**[Live demo](https://aaronsunny007.github.io/Financial-NRF/)**: score your own evidence and responses in the browser, browse the recorded results, and re-weight the composite yourself.
+
 ---
 
 ## What this is
