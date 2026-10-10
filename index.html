@@ -35,7 +35,7 @@
   h3{font-size:1rem;margin:20px 0 8px}
   .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
   table{border-collapse:collapse;width:100%;min-width:440px;font-size:.9rem}
-  th{background:var(--accent);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+  th{background:var(--accent);color:var(--bg);text-align:left;padding:8px 10px;font-weight:600}
   td{padding:7px 10px;border-bottom:1px solid var(--line)}
   tbody tr:nth-child(even){background:var(--panel)}
   td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
@@ -56,7 +56,7 @@
   .pill.ok{background:rgba(15,123,79,.14);color:var(--good)}
   .pill.no{background:rgba(163,35,43,.14);color:var(--bad)}
   code,pre{background:var(--code);border-radius:4px;font-family:ui-monospace,Consolas,monospace;font-size:.86rem}
-  code{padding:1px 5px}
+  code{padding:1px 5px;overflow-wrap:anywhere}
   pre{padding:12px;overflow-x:auto;margin:10px 0}
   ul{padding-left:20px}
   li{margin:5px 0}
@@ -64,6 +64,11 @@
     color:var(--muted);font-size:.85rem}
   .kv{display:flex;justify-content:space-between;gap:14px;padding:5px 0;border-bottom:1px solid var(--line)}
   .kv span:last-child{font-variant-numeric:tabular-nums;font-weight:600}
+  .sl{display:grid;grid-template-columns:8.5em 1fr 3.4em;gap:10px;align-items:center;margin:8px 0}
+  .sl label{margin:0}
+  .sl input{width:100%;accent-color:var(--accent2)}
+  .sl output{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  .verdict{margin:14px 0 4px;font-weight:600}
 </style>
 </head>
 <body>
@@ -90,6 +95,7 @@
   <button data-t="e3">Exp 3 · Calibration</button>
   <button data-t="e4">Exp 4 · Noise</button>
   <button data-t="e5">Exp 5 · Comparison</button>
+  <button data-t="weights">Weight sweep</button>
   <button data-t="method">Method &amp; audit</button>
 </nav>
 
@@ -272,6 +278,55 @@
   <p><em>The lower oracle evidence-support figure is an artefact of evidence size, not degraded
   grounding: gold evidence is a smaller block containing only strictly necessary lines, so fewer
   response numbers find a literal match.</em></p>
+</section>
+
+<!-- WEIGHT SWEEP -->
+<section id="weights" hidden>
+  <h2>Could different weights fix the composite?</h2>
+  <p>The composite was run with one frozen weighting: 0.30 accuracy, 0.30 NESS, 0.20 hallucination
+  and 0.20 calibration. Both of its failures could be blamed on that choice. To test this, the
+  recorded component values from Experiments 4 and 5 were re-scored after the fact under all 1,771
+  weightings on a 0.05 grid, with no new model runs.</p>
+  <div class="tw"><table><thead><tr><th>Weightings that…</th><th class="n">Share of 1,771</th></tr></thead><tbody>
+  <tr><td>Track noise (r ≤ −0.5 across the five noise levels)</td><td class="n">19.2%</td></tr>
+  <tr><td>Rank oracle &gt; retrieval &gt; closed-book</td><td class="n">43.5%</td></tr>
+  <tr><td><strong>Do both</strong></td><td class="n"><strong>0.0%</strong></td></tr>
+  </tbody></table></div>
+  <p>Among the weightings that rank correctly, the strongest noise correlation is −0.16. The same
+  holds on a finer 0.01 grid (176,851 weightings) and with the threshold relaxed to r ≤ −0.3.</p>
+
+  <h3>Try it</h3>
+  <p>Set any weights below. They are rescaled to sum to 1, and the recorded results are re-scored
+  live in your browser.</p>
+  <div class="grid">
+    <div>
+      <div class="sl"><label for="w-acc">Accuracy</label><input type="range" id="w-acc" min="0" max="100" step="5" value="30"><output id="o-acc"></output></div>
+      <div class="sl"><label for="w-ness">NESS</label><input type="range" id="w-ness" min="0" max="100" step="5" value="30"><output id="o-ness"></output></div>
+      <div class="sl"><label for="w-hal">Hallucination</label><input type="range" id="w-hal" min="0" max="100" step="5" value="20"><output id="o-hal"></output></div>
+      <div class="sl"><label for="w-cal">Calibration</label><input type="range" id="w-cal" min="0" max="100" step="5" value="20"><output id="o-cal"></output></div>
+      <div style="display:grid;gap:7px;margin-top:12px">
+        <button class="ex" data-w="30,30,20,20">Original weights (0.30 / 0.30 / 0.20 / 0.20)</button>
+        <button class="ex" data-w="0,45,45,10">Best for noise (0 / 0.45 / 0.45 / 0.10)</button>
+        <button class="ex" data-w="100,0,0,0">Accuracy only</button>
+      </div>
+    </div>
+    <div id="wout" class="out"></div>
+  </div>
+
+  <h3>Why no weighting passes both</h3>
+  <p>The two tests need weightings that don't overlap. Every weighting that tracks noise puts at most
+  0.35 of its weight on accuracy and calibration combined. Every weighting that ranks correctly puts
+  at least 0.50 there. Only hallucination rate (r = +0.76) and NESS respond to noise, but the oracle
+  condition scores <em>lower</em> than retrieval on exactly those two (NESS 0.628 vs 0.715,
+  hallucination 0.20 vs 0.08), so its advantage shows only in accuracy and calibration. Accuracy
+  barely moves with noise at n = 50.</p>
+  <p><strong>The failure belongs to the components, not the weights.</strong> Re-weighting is
+  necessary but not sufficient. Five noise levels and three conditions of n = 50 are a thin basis,
+  and the sweep selects and evaluates on the same data, so this should be repeated on a larger
+  held-out run.</p>
+  <p style="font-size:.9rem;color:var(--muted)">Reproduce with <code>python -m experiments.weight_sensitivity</code>
+  (needs only numpy). Output: <code>results/weight_sensitivity_dev.csv</code> and
+  <code>results/weight_sensitivity_dev_summary.json</code>.</p>
 </section>
 
 <!-- METHOD -->
@@ -540,7 +595,7 @@ document.querySelectorAll('#tabs button').forEach(b=>{
     window.scrollTo({top:0,behavior:'smooth'});
   });
 });
-document.querySelectorAll('button.ex').forEach(b=>{
+document.querySelectorAll('button.ex[data-i]').forEach(b=>{
   b.addEventListener('click',()=>{
     const e=EXAMPLES[Number(b.dataset.i)];
     $('ev').value=e[0]; $('rs').value=e[1];
@@ -588,6 +643,70 @@ function run(){
 $('run').addEventListener('click',run);
 $('ev').value=EXAMPLES[0][0]; $('rs').value=EXAMPLES[0][1];
 run();
+
+/* WEIGHTS-START: recorded component values (results/experiment4_results_dev.csv,
+   results/experiment5_results_dev_summary.json) and the ONRS formula from
+   framework/nrf.py calculate_onrs(). */
+const EXP4 = [ // noise level, accuracy, NESS (strict), hallucination rate, ECE
+  [0, 0.34, 0.7144523295909899, 0.08, 0.556],
+  [10, 0.30, 0.7109238513912766, 0.10, 0.58],
+  [20, 0.38, 0.7113563736677615, 0.12, 0.49199999999999994],
+  [30, 0.36, 0.6922000136945958, 0.10, 0.5240000000000001],
+  [40, 0.32, 0.7131918479490815, 0.12, 0.5680000000000001],
+];
+const EXP5 = [ // condition, accuracy, NESS (strict), hallucination rate, ECE
+  ['Oracle', 0.42, 0.6277860138834724, 0.20, 0.4660000000000001],
+  ['Retrieval', 0.34, 0.7144523295909899, 0.08, 0.556],
+  ['Closed-book', 0.0, 0.0, 1.0, 0.52],
+];
+function onrs(w, acc, ness, hal, ece){
+  const v = w[0]*acc + w[1]*ness + w[2]*(1-hal) + w[3]*(1-ece);
+  return Math.max(0, Math.min(1, v));
+}
+function pearson(xs, ys){
+  const n = xs.length, mx = xs.reduce((a,b)=>a+b)/n, my = ys.reduce((a,b)=>a+b)/n;
+  let sxy=0, sxx=0, syy=0;
+  for(let i=0;i<n;i++){ const dx=xs[i]-mx, dy=ys[i]-my; sxy+=dx*dy; sxx+=dx*dx; syy+=dy*dy; }
+  return (sxx===0||syy===0) ? NaN : sxy/Math.sqrt(sxx*syy);
+}
+function scoreWeights(w){
+  const noise = EXP4.map(r=>onrs(w, r[1], r[2], r[3], r[4]));
+  const r = pearson(EXP4.map(x=>x[0]), noise);
+  const cond = EXP5.map(c=>onrs(w, c[1], c[2], c[3], c[4]));
+  return {noise, r, cond, tracks: r <= -0.5, ranks: cond[0] > cond[1] && cond[1] > cond[2]};
+}
+/* WEIGHTS-END */
+
+const WIDS = ['acc','ness','hal','cal'];
+const wkv=(k,val)=>'<div class="kv"><span>'+k+'</span><span>'+val+'</span></div>';
+function updateWeights(){
+  const raw = WIDS.map(k=>Number($('w-'+k).value));
+  const tot = raw.reduce((a,b)=>a+b);
+  if(tot===0){
+    WIDS.forEach(k=>$('o-'+k).value='–');
+    $('wout').innerHTML='<em style="color:var(--muted)">Set at least one weight above zero.</em>';
+    return;
+  }
+  const w = raw.map(x=>x/tot);
+  WIDS.forEach((k,i)=>$('o-'+k).value=w[i].toFixed(2));
+  const s = scoreWeights(w);
+  const pill = ok => ok ? '<span class="pill ok">yes</span>' : '<span class="pill no">no</span>';
+  let h = '<h3 style="margin-top:0">Experiment 4: ONRS by noise level</h3>';
+  EXP4.forEach((row,i)=>{ h += wkv(row[0]+'% noise', s.noise[i].toFixed(4)); });
+  h += wkv('Correlation with noise', Number.isNaN(s.r) ? 'undefined' : (s.r<0?'−':'+')+Math.abs(s.r).toFixed(2));
+  h += wkv('Tracks noise (r ≤ −0.5)', pill(s.tracks));
+  h += '<h3>Experiment 5: ONRS by condition</h3>';
+  EXP5.forEach((c,i)=>{ h += wkv(c[0]+' (accuracy '+c[1].toFixed(2)+')', s.cond[i].toFixed(4)); });
+  h += wkv('Ranks oracle > retrieval > closed-book', pill(s.ranks));
+  h += '<p class="verdict">Passes both tests: '+pill(s.tracks && s.ranks)+'</p>';
+  $('wout').innerHTML = h;
+}
+WIDS.forEach(k=>$('w-'+k).addEventListener('input', updateWeights));
+document.querySelectorAll('button[data-w]').forEach(b=>b.addEventListener('click',()=>{
+  b.dataset.w.split(',').forEach((v,i)=>{ $('w-'+WIDS[i]).value=v; });
+  updateWeights();
+}));
+updateWeights();
 </script>
 </body>
 </html>
