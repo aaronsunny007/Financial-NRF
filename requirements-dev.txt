@@ -1,0 +1,3 @@
+# Lightweight dependencies for the tests and the weight-sensitivity sweep.
+# No GPU needed. The full pipeline uses requirements.txt instead.
+numpy>=1.26.0

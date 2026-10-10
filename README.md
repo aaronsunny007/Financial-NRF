@@ -86,6 +86,28 @@ Supplying oracle evidence raised accuracy from 0.340 to 0.420, yet the composite
 that condition *lower*. A score whose purpose is to let you choose between systems chose
 the worse one.
 
+### Could different weights fix it? No.
+
+The obvious objection is that the composite failed only because its hand-picked weights
+were wrong. `experiments/weight_sensitivity.py` tests that directly. It re-scores the
+saved Experiment 4 and 5 results under all 1,771 weightings on a 0.05 grid, with no
+model re-run, and checks each weighting against both tests.
+
+| Weightings that… | Share |
+|---|---|
+| track noise (r ≤ −0.5) | 19.2% |
+| rank oracle > retrieval > closed-book | 43.5% |
+| **do both** | **0.0%** |
+
+Among the weightings that rank correctly, the strongest noise correlation is −0.16. The
+two tests pull in opposite directions. Only hallucination rate (r = −0.76) and evidence
+support (r = −0.37) respond to noise, but the oracle condition scores *worse* on both
+(evidence support 0.628 vs 0.714, hallucination 0.20 vs 0.08), so its advantage shows
+only in accuracy and calibration. Accuracy itself barely moves with noise (r = +0.10)
+at n = 50. The failure belongs to the components, not the weights. A finer 0.01 grid
+and looser thresholds give the same picture: with the threshold relaxed to r ≤ −0.3,
+still no weighting passes.
+
 ### What the oracle comparison establishes
 
 Perfect evidence lifts accuracy only to 0.420, placing the majority of the residual
@@ -109,6 +131,7 @@ experiments/
   experiment4.py  Noise sensitivity across five graded levels
   experiment5.py  Oracle evidence vs ordinary retrieval — the ranking inversion
   finqa_gold.py   Shared gold-answer resolution, with its own test suite
+  weight_sensitivity.py  Re-scores saved results under every ONRS weighting (no GPU)
 results/          Per-item CSV output and summary JSON for every run
 deploy/           Static browser demo of the scoring logic
 ```
@@ -144,6 +167,18 @@ python -m experiments.experiment5 --n 50
 
 Each writes a per-item CSV and a summary JSON into `results/`.
 
+The weight-sensitivity sweep and the test suites need only `numpy`, not a GPU:
+
+```bash
+pip install -r requirements-dev.txt
+python -m framework.nrf                    # parsing and evidence-support tests
+python -m framework.verifier               # arithmetic verifier tests
+python -m experiments.finqa_gold           # gold-answer resolution tests
+python -m experiments.weight_sensitivity   # re-score saved results under every weighting
+```
+
+CI runs all four on every push and checks that the sweep reproduces the committed results.
+
 ---
 
 ## Stack, and why
@@ -169,9 +204,11 @@ Each writes a per-item CSV and a summary JSON into `results/`.
   not, and are not claimed.
 - **Evidence support is numerical overlap, not entailment.** Correct numbers used inside
   a wrong argument pass it.
-- **The composite weighting is assigned, not learned.** A sensitivity sweep across the
-  weight space, followed by learning the weights against a held-out objective, is the
-  most direct future work.
+- **The composite weighting is assigned, not learned.** The sweep above shows that
+  no reweighting rescues it on this data, so the next step is better components, not
+  better weights: a noise-sensitive evidence measure, and entailment rather than overlap.
+  Five noise levels and n = 50 per condition are thin, so the sweep should be repeated
+  on a larger held-out run before treating it as settled.
 
 ---
 

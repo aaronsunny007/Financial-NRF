@@ -2,8 +2,8 @@ name: checks
 
 # Deliberately lightweight. The heavy dependencies (torch, faiss, bitsandbytes)
 # need a GPU and several gigabytes, so CI does not install them. What it does
-# verify is that every Python file parses and that the gold-resolution test
-# suite - which has no external dependencies - still passes.
+# verify is that every Python file parses, that the test suites (which need at
+# most numpy) still pass, and that the weight sweep reproduces its saved results.
 
 on:
   push:
@@ -50,3 +50,27 @@ jobs:
               sys.exit(0)
           sys.exit(r.returncode)
           PY
+
+  framework-tests:
+    name: Framework tests and weight sweep
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install lightweight dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: NRF parsing and evidence-support tests
+        run: python -m framework.nrf
+
+      - name: Arithmetic verifier tests
+        run: python -m framework.verifier
+
+      - name: Weight-sensitivity sweep reproduces committed results
+        run: |
+          python -m experiments.weight_sensitivity
+          git diff --exit-code -- results/weight_sensitivity_dev.csv results/weight_sensitivity_dev_summary.json
