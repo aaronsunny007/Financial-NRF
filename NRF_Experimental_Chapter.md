@@ -501,7 +501,50 @@ component is sound; the *aggregation scheme* is what fails.
 This is a substantive, evidence-based critique of a metric proposed by this
 project, and is presented as such.
 
-### 6.4 Alternative condition available
+### 6.4 Post-hoc check: can re-weighting rescue ONRS?
+
+Recommendation 2 above, and the frozen weights generally, invite an obvious
+objection: perhaps ONRS failed only because 0.30 / 0.30 / 0.20 / 0.20 was the
+wrong weighting. This was tested directly after the main runs, without any new
+generations. `experiments/weight_sensitivity.py` re-scores the recorded component
+values under every weighting on a 0.05 grid over the four weights (1,771 weight
+vectors, each summing to 1). It uses the same `nrf.calculate_onrs()` function, and
+it first confirms that the default weights reproduce the stored ONRS values
+exactly. Each weighting is held to two tests at once. The first is the noise test
+above: ONRS must fall as noise rises (r ≤ −0.5 across the five levels). The second
+is the oracle comparison (Experiment 5, n = 50 per condition, reported in the main
+report; results in `experiment5_results_dev_summary.json`). There, supplying gold
+evidence raised accuracy from 0.3400 to 0.4200, yet default-weight ONRS ranked the
+oracle condition below ordinary retrieval (0.5811 vs 0.5891). A usable composite
+must rank oracle > retrieval > closed-book.
+
+| Weightings that… | Share of 1,771 |
+|---|---|
+| track noise (r ≤ −0.5) | 19.2% |
+| rank oracle > retrieval > closed-book | 43.5% |
+| **satisfy both** | **0.0%** |
+
+Re-weighting *can* fix the noise test on its own. Dropping accuracy and leaning on
+the hallucination and NESS terms reaches r = −0.90, consistent with §6.2's finding
+that the hallucination sub-metric carries the noise signal. But the two tests demand
+disjoint regions of the weight space. Every weighting that tracks noise puts at most
+0.35 of its total weight on accuracy and calibration. Every weighting that ranks the
+oracle condition correctly puts at least 0.50 there. The reason lies in the
+components: the oracle condition is *worse* on exactly the two terms that respond to
+noise (NESS 0.6278 vs 0.7145, hallucination 0.2000 vs 0.0800), so its advantage is
+visible only through accuracy and calibration, which do not respond to noise at this
+sample size. Among weightings that rank correctly, the strongest noise correlation
+achievable is −0.16. The result holds on a finer 0.01 grid (176,851 weightings) and
+with the threshold relaxed to r ≤ −0.3.
+
+**Implication.** On this data, no linear weighting of these four components is a
+valid composite, so recommendation 2 is necessary but not sufficient. The components
+themselves must change, as recommendation 1 already proposes for calibration. Five
+noise levels and three conditions of n = 50 are a thin basis, and the sweep selects
+and evaluates on the same data, so this should be repeated on a larger held-out run
+before being treated as settled.
+
+### 6.5 Alternative condition available
 
 `--injection-mode document` reproduces the end-to-end condition in which retrieval
 may filter the noise. This measures pipeline robustness rather than metric
@@ -619,7 +662,9 @@ revision in §2.7.
 2. **Token-probability confidence** to replace self-reported confidence, making the
    calibration term informative (§6.3).
 3. **ONRS re-weighting or orthogonalisation** to eliminate the accuracy
-   double-count (§6.3).
+   double-count (§6.3). The post-hoc sweep in §6.4 shows that re-weighting alone
+   cannot satisfy both falsification tests on the current data, so this item
+   depends on improving the components first.
 4. **Table-aware retrieval.** The `AMT/2005` case shows per-row dense retrieval can
    miss the specific row a question needs (e.g. a "total" row) when many
    near-duplicate prose sentences out-rank it. Two general fixes were tried and
@@ -643,6 +688,8 @@ python -m experiments.experiment1 --split dev --n 50
 python -m experiments.experiment2 --split dev --n 50 --conditions clean evidence_injection
 python -m experiments.experiment3 --split dev --n 50
 python -m experiments.experiment4 --split dev --n 50
+
+python -m experiments.weight_sensitivity    # §6.4 sweep; re-scores saved results, no GPU
 ```
 
 Optional flags: `--ness-mode {strict,derived}`, `--engine {local,anthropic}`,
@@ -676,3 +723,5 @@ model outputs.
 | 4 ONRS under noise | 50 × 5 | corr(noise, ONRS) | −0.10 |
 | 4 ONRS under noise | 50 × 5 | corr(noise, hallucination) | +0.76 |
 | 4 ONRS under noise | 50 × 5 | corr(accuracy, ECE) | −0.97 |
+| 4 + 5 Weight sweep (post-hoc) | 1,771 weightings | Pass noise test and oracle ranking | 0.0% |
+| 4 + 5 Weight sweep (post-hoc) | 1,771 weightings | Best corr(noise, ONRS) among correct rankings | −0.16 |
