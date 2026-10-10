@@ -1,0 +1,41 @@
+{
+  "split": "dev",
+  "source_files": [
+    "experiment4_results_dev.csv",
+    "experiment5_results_dev_summary.json"
+  ],
+  "grid_step": 0.05,
+  "n_weight_vectors": 1771,
+  "r_threshold": -0.5,
+  "component_noise_correlation": {
+    "accuracy": 0.09999999999999981,
+    "faithfulness": -0.3658880401099336,
+    "hallucination": -0.7559289460184544,
+    "calibration": 0.1414213562373087
+  },
+  "default_weights": {
+    "weights": {
+      "accuracy": 0.3,
+      "faithfulness": 0.3,
+      "hallucination": 0.2,
+      "calibration": 0.2
+    },
+    "noise_r": -0.10366390497700285,
+    "ranking_correct": false
+  },
+  "fraction_tracking_noise": 0.1919819311123659,
+  "fraction_ranking_correct": 0.43478260869565216,
+  "fraction_passing_both": 0.0,
+  "most_negative_noise_r": {
+    "noise_r": -0.9024099956575902,
+    "weights": {
+      "accuracy": 0.0,
+      "faithfulness": 0.45,
+      "hallucination": 0.45,
+      "calibration": 0.1
+    }
+  },
+  "most_negative_noise_r_among_correct_rankings": -0.1618916725746733,
+  "passing_both_examples": [],
+  "note": "Five noise levels and three conditions of n=50 each. A weighting that passes both tests here has been selected on the same data it is evaluated on, so it is a hypothesis for a held-out run, not a validated metric."
+}
