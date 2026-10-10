@@ -155,6 +155,44 @@ def comparison_table():
     return df, "\n".join(lines)
 
 
+def weight_sweep():
+    s = _load_json("weight_sensitivity_dev_summary.json")
+    if not s:
+        return None, ("Weight-sensitivity results not found. Run:\n"
+                      "    python -m experiments.weight_sensitivity")
+    n = s.get("n_weight_vectors", "-")
+    thr = s.get("r_threshold", -0.5)
+    df = pd.DataFrame([
+        [f"Track noise (r <= {thr})", f"{100 * s['fraction_tracking_noise']:.1f}%"],
+        ["Rank oracle > retrieval > closed-book", f"{100 * s['fraction_ranking_correct']:.1f}%"],
+        ["Pass both tests", f"{100 * s['fraction_passing_both']:.1f}%"],
+    ], columns=[f"Weightings (of {n}) that...", "Share"])
+
+    d = s.get("default_weights", {})
+    best = s.get("most_negative_noise_r", {})
+    best_ranked = s.get("most_negative_noise_r_among_correct_rankings")
+    comp = s.get("component_noise_correlation", {})
+    lines = [f"Saved Experiment 4 and 5 component values re-scored under every weighting on a "
+             f"{s.get('grid_step')} grid. No model re-run.\n",
+             f"- Original weights: r = **{d.get('noise_r', float('nan')):+.2f}**, "
+             f"ranking correct = **{d.get('ranking_correct')}**."]
+    if best:
+        w = ", ".join(f"{k} {v:.2f}" for k, v in best.get("weights", {}).items())
+        clause = (", but no weighting that tracks noise also ranks correctly"
+                  if s.get("fraction_passing_both") == 0 else "")
+        lines.append(f"- Strongest noise tracking possible: r = **{best['noise_r']:+.2f}** ({w}){clause}.")
+    if best_ranked is not None:
+        lines.append(f"- Strongest noise tracking among weightings that rank correctly: "
+                     f"r = **{best_ranked:+.2f}**.")
+    if comp:
+        lines.append("- Noise correlation of each component alone, scored so higher is better "
+                     "(negative means it falls as noise rises): " +
+                     ", ".join(f"{k} {v:+.2f}" for k, v in comp.items()) + ".")
+    lines.append("\nThe two tests need weightings that don't overlap, so the failure belongs to the "
+                 "components, not the weights. " + s.get("note", ""))
+    return df, "\n".join(lines)
+
+
 def per_example(exp_choice, only_wrong):
     mapping = {
         "Experiment 1 — baseline": "experiment1_results_dev.csv",
@@ -279,6 +317,12 @@ with gr.Blocks(title="NRF — Financial RAG Reliability", theme=gr.themes.Soft()
         noise_md = gr.Markdown()
         demo.load(noise_curve, outputs=[noise_df, noise_md])
 
+    with gr.Tab("Weight sweep"):
+        gr.Markdown("### Could different ONRS weights fix the composite?")
+        ws_df = gr.DataFrame(interactive=False, wrap=True)
+        ws_md = gr.Markdown()
+        demo.load(weight_sweep, outputs=[ws_df, ws_md])
+
     with gr.Tab("Per-example inspection"):
         gr.Markdown("Every scored example, with the option to filter to failures only. "
                     "Use the row inspector to read the retrieved evidence and the model's "
@@ -347,7 +391,9 @@ imputed.
 0.20 (1 − ECE). Proposed by this project, not established in the literature. The
 experiments demonstrate a structural weakness in this aggregation: where self-reported
 confidence is near-constant, ECE becomes an approximately deterministic function of
-accuracy, double-counting it and masking signal present in the components.
+accuracy, double-counting it and masking signal present in the components. A post-hoc
+sweep over every weighting (see the Weight sweep tab) finds none that both tracks noise
+and ranks the oracle condition above retrieval.
 
 **Gold-free verifier** — re-executes the model's own stated arithmetic in a restricted
 AST evaluator and checks operand grounding, without ever consulting the gold answer.

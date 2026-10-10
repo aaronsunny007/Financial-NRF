@@ -133,7 +133,8 @@ experiments/
   finqa_gold.py   Shared gold-answer resolution, with its own test suite
   weight_sensitivity.py  Re-scores saved results under every ONRS weighting (no GPU)
 results/          Per-item CSV output and summary JSON for every run
-deploy/           Static browser demo of the scoring logic
+deploy/           Gradio results explorer (Hugging Face Space), optional live pipeline
+index.html        Static browser demo: live scoring, recorded results, weight sweep
 ```
 
 Per-item CSVs are committed deliberately: every figure quoted above can be traced back
