@@ -8,6 +8,9 @@
 > final, audited codebase. Sample sizes are stated per experiment and differ
 > between experiments — this is flagged wherever it matters. Do not merge figures
 > from different sample sizes into a single table without noting `n`.
+> **Read §2.8 with the hallucination rates and noise correlations:** a scoring
+> defect found after the runs (the model's own confidence value was counted as an
+> unsupported number) changes several of them, and the runs have not been repeated.
 
 ---
 
@@ -249,6 +252,81 @@ default so previously reported baselines stay reproducible. **The revised figure
 must always be reported alongside the strict one and described as a defined metric
 revision — never as a corrected version of the same metric.**
 
+### 2.8 Confidence value counted as unsupported evidence (found after the runs)
+
+**Defect.** `numerical_evidence_support()` extracted every number from the model's
+whole response, including the `Confidence: 0.9` line the prompt asks it to write. That
+value is a report about the answer, not a claim about the document, so the evidence
+could never support it. Every response was therefore scored as carrying one extra
+unsupported number: the denominator was inflated, the NESS of every response was
+lowered, and a response close to the 0.5 hallucination threshold could be pushed under
+it by that number alone. The same line is visible in the saved rows: Experiment 1's
+first row lists `unsupported_numbers = [0.9]`.
+
+**Fix.** The statement is now removed before numbers are counted
+(`NumericalReliabilityFramework(exclude_confidence_from_support=True)`, the default),
+with regression tests in `python -m framework.nrf`. Passing `False` reproduces the
+recorded runs. The result files were **not** regenerated: they remain what was run,
+scored with the earlier behaviour, and `experiments/confidence_line_audit.py`
+(`results/confidence_line_audit_dev.json`) measures the difference from the saved files.
+
+**Measured effect.** Where the saved rows keep the response and evidence
+(Experiments 1 and 2) every row was re-scored; the earlier behaviour first had to
+reproduce each stored score exactly. In the one place the confidence value coincided
+with a number in the evidence (1 of 80 rows) it was counted as supported.
+
+| Quantity | As recorded | Corrected |
+|---|---|---|
+| Exp 1, strict NESS / hallucination rate | 0.7145 / 0.0800 (4/50) | 0.7710 / **0.0000** |
+| Exp 1, revised NESS / hallucination rate | 0.9085 / 0.0000 | 0.9363 / 0.0000 |
+| Exp 2, hallucination, clean → evidence injection | 0.1000 → 0.2000 | **0.0000 → 0.0000** |
+| Exp 2, strict NESS, clean → evidence injection | 0.727 → 0.689 | 0.790 → 0.753 |
+| Exp 5, retrieval: NESS / hallucination / ONRS | 0.7145 / 0.08 / 0.5891 | 0.7721 / 0.00 / 0.6224 |
+| Exp 5, oracle: NESS / hallucination / ONRS | 0.6278 / 0.20 / 0.5811 | 0.6943 / 0.10 / 0.6211 |
+
+Every strict-mode hallucination flag in Experiments 1 and 2 (4 of 50 and 4 of 30) was
+produced by this defect. Experiment 5's responses are saved but its evidence is not, so
+the corrected scores there are recovered from each row's stored score and the number of
+numbers in its response (exact unless the confidence value happened to match the
+evidence, which the worst-case column in the JSON covers). Experiment 4 keeps neither,
+so its correction is bounded rather than exact: its 0% level is Experiment 5's
+retrieval condition, so those 50 rows are exact, and the other rows are resolved
+against the same item's baseline response where the score is unchanged and bracketed
+otherwise. That bracketing was first checked against all 150 Experiment 5 rows, where
+the exact answer is known.
+
+**What survives and what does not.**
+
+1. *The ranking inversion survives, as a near tie.* At the default weights oracle
+   evidence still scores below retrieval, 0.6211 against 0.6224. The gap shrank from
+   0.0080 to 0.0013, far smaller than anything n = 50 can resolve, so it should be
+   read as "the composite cannot separate the two" rather than "it ranks them
+   wrongly."
+2. *No weighting passes both tests, in every scenario computed.* Across three
+   scenarios bracketing the Experiment 4 correction (most flags and lowest NESS, a
+   middle case, fewest flags and highest NESS), the share of weightings that track
+   noise (r ≤ −0.5) ranges from 0.0% to 37.5% (19.2% as recorded), the share that rank
+   correctly is 48.7% (43.5% as recorded), and the share that do both is 0.0% in
+   every scenario and as recorded.
+3. *The Experiment 2 "doubling" of the hallucination rate was this defect.* After
+   correction the hallucination rate is 0.0000 in all three conditions. What remains
+   is the fall in NESS under evidence injection (§4.3, Finding 2).
+4. *The noise correlations are not robust.* The recorded r = +0.76 between noise and
+   hallucination rests on 4 to 6 flagged responses per level, and every one of the 4
+   flagged responses at the 0% level is removed by the correction. Corrected, the
+   correlation lies between +0.00 and +0.89 (+0.88 in the middle scenario) depending
+   on how the unresolved rows fall, on 0 to 4 flagged responses per level. The
+   correlation between noise and the default-weights ONRS, recorded as −0.10, lies
+   between +0.18 and −0.36 (−0.26 in the middle scenario). These cannot be pinned
+   down without regenerating Experiment 4.
+5. *Nothing here touches accuracy, ECE, the verifier outcomes, or Experiment 3.* None
+   of them use evidence support.
+
+**Required follow-up.** Re-run Experiments 1, 2, 4 and 5 on the GPU with the corrected
+scorer and replace the figures above with measured ones. The recorded figures in the
+rest of this chapter are left as run, and every place that quotes a hallucination rate
+or a noise correlation should be read with this section.
+
 ---
 
 ## 3. Experiment 1 — Baseline Reliability Profiling
@@ -345,6 +423,9 @@ anything. This is a genuine, quantified property of the RAG architecture.
 evidence injection (100% delivery), the hallucination flag rate **doubled**
 (0.10 → 0.20) and strict NESS fell (0.727 → 0.689). The module is sensitive; the
 original design simply never delivered anything for it to detect.
+*(See §2.8: the doubling of the hallucination flag rate was caused by the confidence
+value being counted as an unsupported number. Corrected, it is 0.0000 in all three
+conditions; the fall in NESS remains.)*
 
 **Finding 3 — the generator did not take the bait.** Decoy-as-answer and
 decoy-in-reasoning were **0.0000 in all three conditions**. The model never
@@ -489,6 +570,9 @@ disguise.
 **The hallucination sub-metric, by contrast, does track noise** (r = **+0.76**;
 all four noise levels above the clean baseline of 0.0800). The *detection*
 component is sound; the *aggregation scheme* is what fails.
+*(See §2.8: this correlation rests on 4 to 6 flagged responses per level, and the
+corrected value cannot be fixed without re-running Experiment 4. It lies between
++0.00 and +0.89 on the data bracketed there.)*
 
 ### 6.3 Recommended revisions to ONRS (arising directly from this finding)
 
@@ -650,6 +734,11 @@ revision in §2.7.
 10. **Noise magnitude.** Experiment 4's maximum condition injects 4 distractor
     sentences alongside 8 retrieved chunks. Larger perturbations were not tested and
     may be required to move ONRS beyond the instability band.
+11. **Recorded runs used the earlier evidence-support scorer.** The confidence value
+    was counted as an unsupported number (§2.8). The scorer is fixed, but Experiments
+    1, 2, 4 and 5 have not been re-run, so their hallucination rates and the Experiment
+    4 noise correlations are as recorded, with the measured and bounded effect given
+    in §2.8.
 
 ---
 
@@ -690,6 +779,7 @@ python -m experiments.experiment3 --split dev --n 50
 python -m experiments.experiment4 --split dev --n 50
 
 python -m experiments.weight_sensitivity    # §6.4 sweep; re-scores saved results, no GPU
+python -m experiments.confidence_line_audit # §2.8 audit; re-scores saved results, no GPU
 ```
 
 Optional flags: `--ness-mode {strict,derived}`, `--engine {local,anthropic}`,
@@ -725,3 +815,6 @@ model outputs.
 | 4 ONRS under noise | 50 × 5 | corr(accuracy, ECE) | −0.97 |
 | 4 + 5 Weight sweep (post-hoc) | 1,771 weightings | Pass noise test and oracle ranking | 0.0% |
 | 4 + 5 Weight sweep (post-hoc) | 1,771 weightings | Best corr(noise, ONRS) among correct rankings | −0.16 |
+| 1 + 2 + 5 Confidence-line audit (post-hoc) | 50 / 30 / 150 | Strict hallucination flags caused by the defect, Exp 1 and Exp 2 | 4 of 4 and 4 of 4 |
+| 5 Confidence-line audit (post-hoc) | 50 × 3 | ONRS, retrieval vs oracle, corrected | 0.6224 vs 0.6211 |
+| 4 Confidence-line audit (post-hoc) | 50 × 5 | corr(noise, hallucination), corrected range | +0.00 to +0.89 |

@@ -137,6 +137,7 @@ class NumericalReliabilityFramework:
         re.compile(r"confidence\s*[:\-]\s*(0?\.\d+)\b"),           # "Confidence: 0.9"
         re.compile(r"confidence\s*[:\-]\s*(\d+(?:\.\d+)?)\b"),     # "Confidence: 1" or "Confidence: 1.0"
     ]
+    _CONFIDENCE_STATEMENT_RE = re.compile(r"confidence\s*[:\-]\s*(?:\d+(?:\.\d+)?|\.\d+)\s*%?", re.IGNORECASE)
 
     # Single-operand rescalings treated as legitimate derivations (unit
     # conversions that appear constantly in financial text: dollars <->
@@ -154,6 +155,7 @@ class NumericalReliabilityFramework:
         hallucination_threshold: float = 0.5,
         ece_bins: int = 10,
         credit_derived_numbers: bool = False,
+        exclude_confidence_from_support: bool = True,
         derivation_relative_tolerance: float = 0.001,
         derivation_absolute_tolerance: float = 0.005,
     ):
@@ -174,6 +176,18 @@ class NumericalReliabilityFramework:
         modes never requires re-running generation, and any reported
         figure can be cross-checked against the other definition.
 
+        exclude_confidence_from_support (default True) removes the model's
+        own "Confidence: 0.9" statement before numbers are counted for
+        evidence support. The confidence value is a report about the
+        answer, not a claim about the document, so it has no business in
+        the numerator or the denominator of a grounding score. Before this
+        flag existed it was counted as one more number the evidence could
+        not support, which lowered every response's NESS slightly and
+        could push a borderline response under the hallucination
+        threshold. The runs recorded in results/ were scored with the old
+        behaviour (False); experiments/confidence_line_audit.py measures
+        the difference. Pass False to reproduce those recorded numbers.
+
         derivation_*_tolerance are DELIBERATELY tighter than the 2%
         relative tolerance used for literal evidence matching. Literal
         matching compares a number against a specific evidence number, so
@@ -188,6 +202,7 @@ class NumericalReliabilityFramework:
         self.hallucination_threshold = hallucination_threshold
         self.ece_bins = ece_bins
         self.credit_derived_numbers = credit_derived_numbers
+        self.exclude_confidence_from_support = exclude_confidence_from_support
         self.derivation_relative_tolerance = derivation_relative_tolerance
         self.derivation_absolute_tolerance = derivation_absolute_tolerance
 
@@ -227,6 +242,15 @@ class NumericalReliabilityFramework:
             if parsed is not None:
                 results.append(parsed)
         return results
+
+    def strip_confidence_statement(self, text: str) -> str:
+        """Remove every "Confidence: <number>" statement from `text`, using
+        the same patterns extract_self_reported_confidence() reads, so a
+        number is excluded exactly when it would be parsed as the
+        confidence value."""
+        if not text:
+            return text
+        return self._CONFIDENCE_STATEMENT_RE.sub(" ", str(text))
 
     # ------------------------------------------------------------------
     # Final answer extraction (THE key fix)
@@ -516,7 +540,11 @@ class NumericalReliabilityFramework:
         if credit_derived is None:
             credit_derived = self.credit_derived_numbers
 
-        response_numbers = self.extract_numbers(response)
+        scored_response = (
+            self.strip_confidence_statement(response)
+            if self.exclude_confidence_from_support else response
+        )
+        response_numbers = self.extract_numbers(scored_response)
         evidence_numbers = self.extract_numbers(evidence)
 
         if not response_numbers:
@@ -957,6 +985,22 @@ def _run_tests():
     check("confidence_bare_one", nrf.extract_self_reported_confidence("Confidence: 1") == 1.0)
     check("confidence_percent", nrf.extract_self_reported_confidence("Confidence: 85%") == 0.85)
     check("confidence_missing_returns_none", nrf.extract_self_reported_confidence("no confidence here") is None)
+
+    # --- confidence statement is not an evidence claim ---
+    ev_c = "total: 8.1 | total: 56.0"
+    resp_c = "Reasoning: 8.1 / 56.0 = 0.1446\n\nFinal Answer: 0.1446\n\nConfidence: 0.9"
+    old = NumericalReliabilityFramework(exclude_confidence_from_support=False)
+    new = NumericalReliabilityFramework()
+    r_old = old.numerical_evidence_support(resp_c, ev_c)
+    r_new = new.numerical_evidence_support(resp_c, ev_c)
+    check("confidence_counted_when_flag_off", 0.9 in r_old.unsupported_numbers and r_old.total_count == r_new.total_count + 1)
+    check("confidence_excluded_by_default", 0.9 not in r_new.unsupported_numbers)
+    check("confidence_percent_form_excluded",
+          new.numerical_evidence_support("Final Answer: 8.1\nConfidence: 85%", ev_c).total_count == 1)
+    check("number_equal_to_confidence_elsewhere_still_counted",
+          new.numerical_evidence_support("Reasoning: the rate is 0.9 here.\nFinal Answer: 0.9\nConfidence: 0.9", ev_c).total_count == 2)
+    check("confidence_only_response_scores_zero",
+          new.numerical_evidence_support("Confidence: 0.9", ev_c).total_count == 0)
 
     # --- calculate_ece ---
     ece_perfect = nrf.calculate_ece([1.0, 1.0], [1.0, 1.0])

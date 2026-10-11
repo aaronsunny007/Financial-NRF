@@ -63,7 +63,7 @@ reported throughout the accompanying documents.
 | Execution accuracy — oracle evidence | 0.420 | gold evidence supplied |
 | Composite score — ordinary retrieval | 0.5891 | ranked **first** by the composite |
 | Composite score — oracle evidence | 0.5811 | ranked **second**, despite higher accuracy |
-| Correlation, noise level vs composite | −0.10 | five graded levels, manipulation-checked |
+| Correlation, noise level vs composite | −0.10 | five graded levels, manipulation-checked; see the scoring defect below |
 | Confidence gap, correct vs incorrect | 0.0239 | — |
 | Overconfidence gap | 0.5560 | — |
 | Errors made at high confidence | 0.6400 | — |
@@ -102,13 +102,39 @@ model re-run, and checks each weighting against both tests.
 | **do both** | **0.0%** |
 
 Among the weightings that rank correctly, the strongest noise correlation is −0.16. The
-two tests pull in opposite directions. Only hallucination rate (r = −0.76) and evidence
+two tests pull in opposite directions. Only hallucination rate (r = −0.76, as recorded; see the scoring defect below) and evidence
 support (r = −0.37) respond to noise, but the oracle condition scores *worse* on both
 (evidence support 0.628 vs 0.714, hallucination 0.20 vs 0.08), so its advantage shows
 only in accuracy and calibration. Accuracy itself barely moves with noise (r = +0.10)
 at n = 50. The failure belongs to the components, not the weights. A finer 0.01 grid
 and looser thresholds give the same picture: with the threshold relaxed to r ≤ −0.3,
 still no weighting passes.
+
+### A scoring defect found after the runs
+
+The evidence-support score counted the model's own `Confidence: 0.9` line as one more
+number the evidence had to support. It never could, so every response was marked down
+slightly and some were pushed under the hallucination threshold by that number alone.
+The scorer is fixed (`exclude_confidence_from_support`, on by default, with tests), but
+the recorded runs were scored the old way and have **not** been re-run.
+`experiments/confidence_line_audit.py` measures the effect from the saved files.
+
+| What | As recorded | Corrected |
+|---|---|---|
+| Exp 1 hallucination rate (strict NESS) | 0.08 | **0.00** |
+| Exp 2 hallucination, clean → evidence injection | 0.10 → 0.20 | **0.00 → 0.00** |
+| Oracle vs retrieval ONRS (default weights) | 0.5811 vs 0.5891 | 0.6211 vs 0.6224 |
+| Weightings passing both tests | 0.0% | 0.0% in every scenario |
+| Noise vs hallucination correlation | +0.76 | between +0.00 and +0.89 |
+| Noise vs ONRS correlation (default weights) | −0.10 | between +0.18 and −0.36 |
+
+What holds: the oracle-vs-retrieval ranking is still inverted, now as a near tie, and
+no weighting passes both tests. What does not: the doubling of the hallucination rate in
+Experiment 2 was this defect, and the two noise correlations cannot be pinned down
+without re-running Experiment 4. Accuracy, calibration, the verifier and Experiment 3
+do not use evidence support and are unaffected. The Experiment 4 figures are bracketed
+rather than exact because that run did not save its responses; the bracketing method is
+checked against the 150 Experiment 5 rows where the exact answer is known.
 
 ### What the oracle comparison establishes
 
@@ -134,6 +160,7 @@ experiments/
   experiment5.py  Oracle evidence vs ordinary retrieval — the ranking inversion
   finqa_gold.py   Shared gold-answer resolution, with its own test suite
   weight_sensitivity.py  Re-scores saved results under every ONRS weighting (no GPU)
+  confidence_line_audit.py  Measures the confidence-line scoring defect from saved results (no GPU)
 results/          Per-item CSV output and summary JSON for every run
 deploy/           Gradio results explorer (Hugging Face Space), optional live pipeline
 index.html        Static browser demo: live scoring, recorded results, weight sweep
@@ -178,9 +205,11 @@ python -m framework.nrf                    # parsing and evidence-support tests
 python -m framework.verifier               # arithmetic verifier tests
 python -m experiments.finqa_gold           # gold-answer resolution tests
 python -m experiments.weight_sensitivity   # re-score saved results under every weighting
+python -m experiments.confidence_line_audit  # measure the confidence-line defect
 ```
 
-CI runs all four on every push and checks that the sweep reproduces the committed results.
+CI runs all five on every push and checks that the sweep and the audit reproduce the
+committed results.
 
 ---
 
@@ -205,6 +234,9 @@ CI runs all four on every push and checks that the sweep reproduces the committe
   findings about the metric would not change.
 - **Fifty items per condition.** Directions are claimable; margins of a few points are
   not, and are not claimed.
+- **The recorded runs predate a scoring fix.** The confidence value was counted as an
+  unsupported number (see above). Experiments 1, 2, 4 and 5 need a GPU re-run before
+  their hallucination rates and noise correlations can be treated as final.
 - **Evidence support is numerical overlap, not entailment.** Correct numbers used inside
   a wrong argument pass it.
 - **The composite weighting is assigned, not learned.** The sweep above shows that

@@ -16,6 +16,16 @@ can be traced back to the individual answers that produced it.
 
 Where a `_prototype` file and a final file both exist, the final file is authoritative.
 
+## Scoring note: the recorded runs predate a fix
+
+The `dev` files for Experiments 1, 2, 4 and 5 were scored while the evidence-support
+metric still counted the model's own `Confidence: 0.9` value as an unsupported number.
+`framework/nrf.py` now excludes it (`exclude_confidence_from_support=True`). The files
+here are what was run and have not been regenerated. `confidence_line_audit_dev.json`
+holds the re-scored comparison: exact for Experiments 1 and 2, near-exact for 5, and
+bracketed for 4 (which did not save its responses). To reproduce a recorded number
+from code, construct `NumericalReliabilityFramework(exclude_confidence_from_support=False)`.
+
 ## Which file backs which claim
 
 | Claim | File |
@@ -24,6 +34,7 @@ Where a `_prototype` file and a final file both exist, the final file is authori
 | Calibration figures (n = 50) | `experiment3_results_dev_summary.json` |
 | Noise correlation −0.10 | `experiment4_results_dev.csv` (ONRS per noise level); the computed r is in `weight_sensitivity_dev_summary.json` |
 | Oracle vs retrieval, ranking inversion | `experiment5_results_dev_summary.json` |
+| Effect of the confidence-line scoring defect | `confidence_line_audit_dev.json` (`python -m experiments.confidence_line_audit`) |
 | No weighting passes both falsification tests | `weight_sensitivity_dev_summary.json` (one row per weighting in `weight_sensitivity_dev.csv`) |
 
 ## What the rows contain
