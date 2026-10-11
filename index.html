@@ -171,6 +171,7 @@
 <!-- EXP 2 -->
 <section id="e2" hidden>
   <h2>Experiment 2 — Hallucination detector sensitivity (n = 10)</h2>
+  <div class="note"><strong>Scoring note.</strong> These recorded hallucination rates were scored while the model’s own “Confidence: 0.9” was counted as an unsupported number. Corrected, the rate is 0.00 in all three conditions, so the 0.10 → 0.20 rise below was that artefact. See <em>Method &amp; audit</em>.</div>
   <p>An initial two-condition design produced eight of ten byte-identical responses between clean
   and adversarial conditions. A manipulation check revealed why: retrieval had removed every
   injected sentence before generation. A third condition and an explicit check were added, because
@@ -215,6 +216,7 @@
 <!-- EXP 4 -->
 <section id="e4" hidden>
   <h2>Experiment 4 — Composite response to graded context noise (n = 50 per level)</h2>
+  <div class="note"><strong>Scoring note.</strong> The hallucination column and the noise correlations below were scored the old way and were not re-run. Corrected, the noise–hallucination correlation lies between +0.00 and +0.89 rather than the recorded +0.76. See <em>Method &amp; audit</em>.</div>
   <div class="tw"><table><thead><tr><th>Noise</th><th class="n">Reached</th><th class="n">Accuracy</th><th class="n">NESS</th><th class="n">Hallucination</th><th class="n">ECE</th><th class="n">ONRS</th></tr></thead><tbody>
   <tr><td>0%</td><td class="n">0.0000</td><td class="n">0.3400</td><td class="n">0.7145</td><td class="n">0.0800</td><td class="n">0.5560</td><td class="n">0.5891</td></tr>
   <tr><td>10%</td><td class="n">1.0000</td><td class="n">0.3000</td><td class="n">0.7109</td><td class="n">0.1000</td><td class="n">0.5800</td><td class="n">0.5673</td></tr>
@@ -248,6 +250,7 @@
 <!-- EXP 5 -->
 <section id="e5" hidden>
   <h2>Experiment 5 — Controlled comparison across evidence conditions (n = 50)</h2>
+  <div class="note"><strong>Scoring note.</strong> Re-scored without the confidence value, retrieval is 0.6224 and oracle 0.6211, so the inversion survives as a near tie (gap 0.0013, was 0.0080). See <em>Method &amp; audit</em>.</div>
   <p>Added following supervisory feedback that quoting published FinQA figures alongside these
   results was not a controlled comparison. Every condition shares the same items, generator,
   prompt, scoring code, answer resolution and verifier. Only the evidence supplied varies.</p>
@@ -283,6 +286,7 @@
 <!-- WEIGHT SWEEP -->
 <section id="weights" hidden>
   <h2>Could different weights fix the composite?</h2>
+  <div class="note"><strong>Scoring note.</strong> The sweep uses the recorded component values. Re-run on three corrected scenarios, the share of weightings that pass both tests is still 0.0% in each (tracking noise 0.0%–37.5%, ranking correctly 48.7%). See <em>Method &amp; audit</em>.</div>
   <p>The composite was run with one frozen weighting: 0.30 accuracy, 0.30 NESS, 0.20 hallucination
   and 0.20 calibration. Both of its failures could be blamed on that choice. To test this, the
   recorded component values from Experiments 4 and 5 were re-scored after the fact under all 1,771
@@ -348,8 +352,20 @@
   evidence quality.</p>
 
   <h2>Methodology audit</h2>
-  <p>Several defects were identified and corrected before any figure was accepted.</p>
+  <p>Several defects were identified and corrected before any figure was accepted. One more
+  was found afterwards and is listed first, because it changes some recorded numbers.</p>
   <ul>
+    <li><strong>Confidence value counted as unsupported evidence (found after the runs).</strong>
+    Evidence support counted the number in the model’s own “Confidence: 0.9” line as one the
+    retrieved text had to support. It never could, so every response was marked down and some
+    were pushed under the hallucination threshold by it alone. The scorer, and this page’s
+    analyser, now ignore the confidence line; the recorded runs were scored the old way and
+    have not been re-run. Measured from the saved files: Exp 1 strict hallucination
+    0.08 → 0.00; Exp 2 hallucination 0.10 → 0.20 becomes 0.00 → 0.00; Exp 5 ONRS retrieval
+    0.5891 → 0.6224 and oracle 0.5811 → 0.6211 (ranking still inverted, now a near tie);
+    Exp 4’s noise–hallucination correlation (+0.76) falls somewhere in +0.00 to +0.89 and
+    needs a GPU re-run. No weighting passes both tests under any of the corrected scenarios.
+    Accuracy, calibration and the verifier are unaffected.</li>
     <li><strong>Fabricated evidence-support constant.</strong> A missing dictionary key meant the
     metric silently returned exactly 0.8 for every example in every condition, pinning 30% of the
     composite weight to a constant.</li>
@@ -444,8 +460,11 @@ function matchesSorted(target, sorted, tol){
   }
   return false;
 }
+// The model's own "Confidence: 0.9" is a report about the answer, not a claim about the
+// document, so it is removed before numbers are counted (matches framework/nrf.py).
+const CONF_STATEMENT=/confidence\s*[:\-]\s*(?:\d+(?:\.\d+)?|\.\d+)\s*%?/gi;
 function ness(response, evidence, creditDerived){
-  const R = extractNumbers(response), E = extractNumbers(evidence);
+  const R = extractNumbers((response||'').replace(CONF_STATEMENT,' ')), E = extractNumbers(evidence);
   const total = R.length;
   if(!total) return {total:0,direct:0,derived:0,unsupported:0,strict:0,derivedScore:0,
                      score:0,unsupportedVals:[],derivedVals:[]};

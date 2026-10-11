@@ -3,7 +3,7 @@ name: checks
 # Deliberately lightweight. The heavy dependencies (torch, faiss, bitsandbytes)
 # need a GPU and several gigabytes, so CI does not install them. What it does
 # verify is that every Python file parses, that the test suites (which need at
-# most numpy) still pass, and that the weight sweep reproduces its saved results.
+# most numpy) still pass, and that the weight sweep and the confidence-line audit reproduce their saved results.
 
 on:
   push:
@@ -74,3 +74,8 @@ jobs:
         run: |
           python -m experiments.weight_sensitivity
           git diff --exit-code -- results/weight_sensitivity_dev.csv results/weight_sensitivity_dev_summary.json
+
+      - name: Confidence-line audit reproduces committed results
+        run: |
+          python -m experiments.confidence_line_audit
+          git diff --exit-code -- results/confidence_line_audit_dev.json
