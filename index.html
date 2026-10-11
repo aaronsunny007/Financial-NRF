@@ -6,79 +6,174 @@
 <title>Numerical Reliability Framework — Financial RAG</title>
 <style>
   :root{
-    --bg:#ffffff; --fg:#1a1a1a; --muted:#5c6470; --line:#e2e6ec;
-    --accent:#1f3864; --accent2:#2e5496; --panel:#f7f9fc; --code:#f2f4f7;
-    --good:#0f7b4f; --bad:#a3232b; --warn:#8a6100;
+    --bg:#f4f6fa; --surface:#ffffff; --fg:#0f1720; --muted:#5b6675; --line:#e3e8ef;
+    --accent:#1f3864; --accent2:#2e5496; --panel:#f6f8fc; --code:#eef1f6;
+    --good:#0f7b4f; --bad:#a3232b; --warn:#8a6100; --series:#2a78d6;
+    --shadow:0 1px 2px rgba(15,23,32,.05),0 6px 18px rgba(15,23,32,.05);
+    --hero1:#1f3864; --hero2:#2e5496;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#12151a; --fg:#e8ebf0; --muted:#9aa4b2; --line:#2a3038;
-      --accent:#8fb3f0; --accent2:#a9c4f5; --panel:#1a1f27; --code:#1e242d;
-      --good:#4ec98a; --bad:#f0868d; --warn:#e0b45e;
+      --bg:#0d1117; --surface:#151b23; --fg:#e8ebf0; --muted:#9aa4b2; --line:#272f3a;
+      --accent:#8fb3f0; --accent2:#a9c4f5; --panel:#1a212b; --code:#1e2530;
+      --good:#4ec98a; --bad:#f0868d; --warn:#e0b45e; --series:#3987e5;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.25);
+      --hero1:#14233f; --hero2:#1d3a6b;
     }
   }
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{margin:0;background:var(--bg);color:var(--fg);
-       font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 80px}
-  header h1{font-size:1.75rem;line-height:1.25;margin:0 0 8px;color:var(--accent)}
-  .sub{color:var(--muted);margin:0 0 6px}
-  .note{background:var(--panel);border-left:3px solid var(--accent2);
-        padding:14px 16px;border-radius:0 6px 6px 0;margin:20px 0;font-size:.94rem}
-  nav{display:flex;flex-wrap:wrap;gap:6px;margin:24px 0 20px;border-bottom:1px solid var(--line)}
-  nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);
-    padding:9px 13px;font:inherit;font-size:.93rem;cursor:pointer}
-  nav button:hover{color:var(--fg)}
-  nav button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+       font:16px/1.65 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+  a{color:var(--accent2)}
+  a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+    outline:2px solid var(--accent2);outline-offset:2px}
+
+  /* hero */
+  .hero{background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff;
+        padding:44px 0 74px}
+  .hero .wrap{padding-bottom:0}
+  .eyebrow{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;
+           font-weight:600;color:rgba(255,255,255,.78);margin-bottom:12px}
+  .hero h1{font-size:clamp(1.55rem,3.4vw,2.35rem);line-height:1.2;margin:0 0 14px;
+           font-weight:700;letter-spacing:-.015em;max-width:24em}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+  .chip{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);
+        border-radius:99px;padding:4px 12px;font-size:.85rem}
+  .links{display:flex;flex-wrap:wrap;gap:10px}
+  .links a{background:#fff;color:#1f3864;text-decoration:none;font-weight:600;font-size:.9rem;
+           padding:8px 16px;border-radius:8px}
+  .links a.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+  .links a:hover{filter:brightness(.95)}
+
+  /* headline numbers */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:-46px 0 26px;position:relative}
+  @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.stats{gap:10px;margin-top:-40px}.stat{padding:12px 13px}.stat b{font-size:1.35rem}.stat span{font-size:.76rem}}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+        padding:16px 18px;box-shadow:var(--shadow)}
+  .stat b{display:block;font-size:1.9rem;line-height:1.15;font-weight:700;letter-spacing:-.02em;
+          color:var(--accent);font-variant-numeric:tabular-nums}
+  .stat span{display:block;font-size:.84rem;color:var(--muted);margin-top:4px;line-height:1.4}
+
+  .note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent2);
+        padding:13px 16px;border-radius:8px;margin:14px 0 18px;font-size:.92rem}
+
+  /* tabs */
+  nav{position:sticky;top:0;z-index:5;display:flex;gap:6px;margin:0 -20px 22px;padding:10px 20px;
+      overflow-x:auto;scrollbar-width:none;background:var(--bg);
+      border-bottom:1px solid var(--line)}
+  nav::-webkit-scrollbar{display:none}
+  nav button{flex:none;background:transparent;border:1px solid transparent;border-radius:99px;
+    color:var(--muted);padding:7px 15px;font:inherit;font-size:.9rem;cursor:pointer;white-space:nowrap}
+  nav button:hover{color:var(--fg);background:var(--panel)}
+  nav button[aria-selected="true"]{background:var(--accent);color:var(--bg);font-weight:600}
+
+  /* sections as cards */
+  section{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+          padding:8px 26px 26px;box-shadow:var(--shadow)}
+  @media(max-width:560px){section{padding:6px 16px 20px}}
   section[hidden]{display:none}
-  h2{font-size:1.2rem;color:var(--accent);margin:26px 0 10px}
-  h3{font-size:1rem;margin:20px 0 8px}
-  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+  h2{font-size:1.3rem;line-height:1.3;color:var(--fg);margin:22px 0 10px;letter-spacing:-.01em}
+  h3{font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);
+     margin:26px 0 8px;font-weight:700}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0;border:1px solid var(--line);
+      border-radius:10px}
   table{border-collapse:collapse;width:100%;min-width:440px;font-size:.9rem}
-  th{background:var(--accent);color:var(--bg);text-align:left;padding:8px 10px;font-weight:600}
-  td{padding:7px 10px;border-bottom:1px solid var(--line)}
-  tbody tr:nth-child(even){background:var(--panel)}
+  th{background:var(--panel);color:var(--muted);text-align:left;padding:9px 12px;font-weight:600;
+     font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+  td{padding:9px 12px;border-bottom:1px solid var(--line)}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:var(--panel)}
   td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
   @media(max-width:760px){.grid{grid-template-columns:1fr}}
-  label{display:block;font-weight:600;font-size:.9rem;margin:14px 0 5px}
-  textarea{width:100%;min-height:150px;padding:10px;border:1px solid var(--line);border-radius:6px;
-    background:var(--bg);color:var(--fg);font:13px/1.5 ui-monospace,Consolas,monospace;resize:vertical}
-  .row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:12px 0}
-  button.go{background:var(--accent);color:#fff;border:0;border-radius:6px;
-    padding:10px 20px;font:inherit;font-weight:600;cursor:pointer}
-  button.go:hover{background:var(--accent2)}
+  label{display:block;font-weight:600;font-size:.88rem;margin:14px 0 5px}
+  textarea{width:100%;min-height:150px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;
+    background:var(--bg);color:var(--fg);font:13px/1.55 ui-monospace,Consolas,monospace;resize:vertical}
+  textarea:focus{border-color:var(--accent2)}
+  .row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:12px 0}
+  .row label{font-weight:500;display:inline-flex;align-items:center;gap:6px}
+  button.go{background:var(--accent);color:var(--bg);border:0;border-radius:10px;
+    padding:10px 22px;font:inherit;font-weight:600;cursor:pointer}
+  button.go:hover{filter:brightness(1.1)}
   button.ex{background:var(--panel);color:var(--fg);border:1px solid var(--line);
-    border-radius:6px;padding:7px 11px;font:inherit;font-size:.85rem;cursor:pointer;text-align:left}
+    border-radius:10px;padding:9px 13px;font:inherit;font-size:.86rem;cursor:pointer;text-align:left}
   button.ex:hover{border-color:var(--accent2)}
-  .out{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;margin-top:16px}
-  .pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.8rem;font-weight:600}
+  .out{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+  .pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.78rem;font-weight:700}
   .pill.ok{background:rgba(15,123,79,.14);color:var(--good)}
   .pill.no{background:rgba(163,35,43,.14);color:var(--bad)}
-  code,pre{background:var(--code);border-radius:4px;font-family:ui-monospace,Consolas,monospace;font-size:.86rem}
+  code,pre{background:var(--code);border-radius:5px;font-family:ui-monospace,Consolas,monospace;font-size:.86rem}
   code{padding:1px 5px;overflow-wrap:anywhere}
   pre{padding:12px;overflow-x:auto;margin:10px 0}
   ul{padding-left:20px}
-  li{margin:5px 0}
-  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
-    color:var(--muted);font-size:.85rem}
-  .kv{display:flex;justify-content:space-between;gap:14px;padding:5px 0;border-bottom:1px solid var(--line)}
-  .kv span:last-child{font-variant-numeric:tabular-nums;font-weight:600}
+  li{margin:6px 0}
+  .kv{display:flex;justify-content:space-between;gap:14px;padding:6px 0;border-bottom:1px solid var(--line);font-size:.93rem}
+  .kv:last-of-type{border-bottom:0}
+  .kv span:last-child{font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
   .sl{display:grid;grid-template-columns:8.5em 1fr 3.4em;gap:10px;align-items:center;margin:8px 0}
   .sl label{margin:0}
   .sl input{width:100%;accent-color:var(--accent2)}
   .sl output{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
   .verdict{margin:14px 0 4px;font-weight:600}
+
+  /* score meters (analyser) */
+  .meters{display:grid;gap:10px;margin:0 0 14px}
+  .meter-h{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-bottom:4px}
+  .meter-h b{color:var(--fg);font-variant-numeric:tabular-nums}
+  .meter{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+  .meter i{display:block;height:100%;border-radius:99px;background:var(--series)}
+
+  /* bar charts: one measure, one axis, value at the tip */
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0}
+  @media(max-width:760px){.charts{grid-template-columns:1fr}}
+  .chart{border:1px solid var(--line);border-radius:12px;padding:14px 16px 12px;background:var(--surface)}
+  .chart h4{margin:0 0 2px;font-size:.95rem}
+  .chart p{margin:0 0 10px;font-size:.8rem;color:var(--muted);line-height:1.4}
+  .bars{display:grid;gap:9px}
+  .b{display:grid;grid-template-columns:7.2em 1fr 3.6em;gap:10px;align-items:center;font-size:.84rem}
+  .b .l{color:var(--muted)}
+  .b .t{position:relative;height:18px;border-left:1px solid var(--line)}
+  .b .t i{display:block;height:100%;max-width:100%;background:var(--series);
+          border-radius:0 4px 4px 0;min-width:2px}
+  .b .v{font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
+  .axis{display:grid;grid-template-columns:7.2em 1fr 3.6em;gap:10px;margin-top:6px;
+        font-size:.72rem;color:var(--muted)}
+  .axis span:nth-child(2){display:flex;justify-content:space-between;padding-left:1px}
+
+  footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:.85rem}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">MSc dissertation &middot; Ulster University</span>
+    <h1>A Numerical Reliability Framework for Retrieval-Augmented Financial Question Answering</h1>
+    <div class="chips">
+      <span class="chip">Aaron Prakash Gandi &middot; B01043066</span>
+      <span class="chip">School of Computing</span>
+      <span class="chip">Supervisor: Dr. Tazar Hussain</span>
+    </div>
+    <div class="links">
+      <a href="#tabs" id="try">Try the analyser</a>
+      <a class="ghost" href="https://github.com/aaronsunny007/Financial-NRF">Source on GitHub</a>
+    </div>
+  </div>
+</div>
+
 <div class="wrap">
 
-<header>
-  <h1>A Numerical Reliability Framework for Retrieval-Augmented Financial Question Answering</h1>
-  <p class="sub">Aaron Prakash Gandi &middot; B01043066 &middot; School of Computing, Ulster University</p>
-  <p class="sub">Supervisor: Dr. Tazar Hussain</p>
-</header>
+<div class="stats" aria-label="Headline results">
+  <div class="stat"><b>0.340</b><span>execution accuracy with ordinary retrieval, 50 FinQA items</span></div>
+  <div class="stat"><b>0.420</b><span>accuracy with oracle evidence, yet the composite scores that condition lower</span></div>
+  <div class="stat"><b>&minus;0.10</b><span>correlation between noise level and the composite, as recorded</span></div>
+  <div class="stat"><b>0 / 1,771</b><span>weightings that pass both falsification tests</span></div>
+</div>
 
 <div class="note">
   <strong>What runs here.</strong> The evidence-support score, hallucination detector and gold-free
@@ -217,6 +312,32 @@
 <section id="e4" hidden>
   <h2>Experiment 4 — Composite response to graded context noise (n = 50 per level)</h2>
   <div class="note"><strong>Scoring note.</strong> The hallucination column and the noise correlations below were scored the old way and were not re-run. Corrected, the noise–hallucination correlation lies between +0.00 and +0.89 rather than the recorded +0.76. See <em>Method &amp; audit</em>.</div>
+  <div class="charts">
+    <div class="chart">
+      <h4>Composite score by noise level</h4>
+      <p>Flat across 0% to 40% injected distractors.</p>
+      <div class="bars" role="img" aria-label="Composite score by noise level: 0.589, 0.567, 0.605, 0.591, 0.572">
+        <div class="b"><span class="l">0% noise</span><span class="t"><i style="width:58.9%" title="0% noise: 0.589"></i></span><span class="v">0.589</span></div>
+        <div class="b"><span class="l">10%</span><span class="t"><i style="width:56.7%" title="10%: 0.567"></i></span><span class="v">0.567</span></div>
+        <div class="b"><span class="l">20%</span><span class="t"><i style="width:60.5%" title="20%: 0.605"></i></span><span class="v">0.605</span></div>
+        <div class="b"><span class="l">30%</span><span class="t"><i style="width:59.1%" title="30%: 0.591"></i></span><span class="v">0.591</span></div>
+        <div class="b"><span class="l">40%</span><span class="t"><i style="width:57.2%" title="40%: 0.572"></i></span><span class="v">0.572</span></div>
+      </div>
+      <div class="axis"><span></span><span><span>0</span><span>0.5</span><span>1</span></span><span></span></div>
+    </div>
+    <div class="chart">
+      <h4>Execution accuracy by noise level</h4>
+      <p>Moves by a few items, not in one direction.</p>
+      <div class="bars" role="img" aria-label="Execution accuracy by noise level: 0.34, 0.30, 0.38, 0.36, 0.32">
+        <div class="b"><span class="l">0% noise</span><span class="t"><i style="width:34.0%" title="0% noise: 0.340"></i></span><span class="v">0.340</span></div>
+        <div class="b"><span class="l">10%</span><span class="t"><i style="width:30.0%" title="10%: 0.300"></i></span><span class="v">0.300</span></div>
+        <div class="b"><span class="l">20%</span><span class="t"><i style="width:38.0%" title="20%: 0.380"></i></span><span class="v">0.380</span></div>
+        <div class="b"><span class="l">30%</span><span class="t"><i style="width:36.0%" title="30%: 0.360"></i></span><span class="v">0.360</span></div>
+        <div class="b"><span class="l">40%</span><span class="t"><i style="width:32.0%" title="40%: 0.320"></i></span><span class="v">0.320</span></div>
+      </div>
+      <div class="axis"><span></span><span><span>0</span><span>0.5</span><span>1</span></span><span></span></div>
+    </div>
+  </div>
   <div class="tw"><table><thead><tr><th>Noise</th><th class="n">Reached</th><th class="n">Accuracy</th><th class="n">NESS</th><th class="n">Hallucination</th><th class="n">ECE</th><th class="n">ONRS</th></tr></thead><tbody>
   <tr><td>0%</td><td class="n">0.0000</td><td class="n">0.3400</td><td class="n">0.7145</td><td class="n">0.0800</td><td class="n">0.5560</td><td class="n">0.5891</td></tr>
   <tr><td>10%</td><td class="n">1.0000</td><td class="n">0.3000</td><td class="n">0.7109</td><td class="n">0.1000</td><td class="n">0.5800</td><td class="n">0.5673</td></tr>
@@ -254,6 +375,28 @@
   <p>Added following supervisory feedback that quoting published FinQA figures alongside these
   results was not a controlled comparison. Every condition shares the same items, generator,
   prompt, scoring code, answer resolution and verifier. Only the evidence supplied varies.</p>
+  <div class="charts">
+    <div class="chart">
+      <h4>Execution accuracy</h4>
+      <p>Higher is better. Oracle evidence helps.</p>
+      <div class="bars" role="img" aria-label="Execution accuracy: closed-book 0.000, retrieval 0.340, oracle 0.420">
+        <div class="b"><span class="l">Closed-book</span><span class="t"><i style="width:0.0%" title="Closed-book: 0.000"></i></span><span class="v">0.000</span></div>
+        <div class="b"><span class="l">Retrieval</span><span class="t"><i style="width:34.0%" title="Retrieval: 0.340"></i></span><span class="v">0.340</span></div>
+        <div class="b"><span class="l">Oracle</span><span class="t"><i style="width:42.0%" title="Oracle: 0.420"></i></span><span class="v">0.420</span></div>
+      </div>
+      <div class="axis"><span></span><span><span>0</span><span>0.5</span><span>1</span></span><span></span></div>
+    </div>
+    <div class="chart">
+      <h4>Composite score (ONRS)</h4>
+      <p>As recorded. Oracle ranks below retrieval.</p>
+      <div class="bars" role="img" aria-label="Composite score: closed-book 0.096, retrieval 0.589, oracle 0.581">
+        <div class="b"><span class="l">Closed-book</span><span class="t"><i style="width:9.6%" title="Closed-book: 0.096"></i></span><span class="v">0.096</span></div>
+        <div class="b"><span class="l">Retrieval</span><span class="t"><i style="width:58.9%" title="Retrieval: 0.589"></i></span><span class="v">0.589</span></div>
+        <div class="b"><span class="l">Oracle</span><span class="t"><i style="width:58.1%" title="Oracle: 0.581"></i></span><span class="v">0.581</span></div>
+      </div>
+      <div class="axis"><span></span><span><span>0</span><span>0.5</span><span>1</span></span><span></span></div>
+    </div>
+  </div>
   <div class="tw"><table><thead><tr><th>Condition</th><th class="n">Accuracy</th><th class="n">95% CI</th><th class="n">NESS</th><th class="n">Hallucination</th><th class="n">ONRS</th></tr></thead><tbody>
   <tr><td>Closed-book (no evidence)</td><td class="n">0.0000</td><td class="n">[0.00, 0.07]</td><td class="n">0.0000</td><td class="n">1.0000</td><td class="n">0.0960</td></tr>
   <tr><td>Retrieval (system under test)</td><td class="n">0.3400</td><td class="n">[0.22, 0.48]</td><td class="n">0.7145</td><td class="n">0.0800</td><td class="n">0.5891</td></tr>
@@ -633,7 +776,9 @@ function run(){
   const flagged = s.score < HALLUC_THRESHOLD;
   const v=verify(rs,ev);
   const kv=(k,val)=>'<div class="kv"><span>'+k+'</span><span>'+val+'</span></div>';
-  let h='<h3>Reliability measures</h3>';
+  const meter=(k,v)=>'<div><div class="meter-h"><span>'+k+'</span><b>'+v.toFixed(2)+'</b></div><div class="meter"><i style="width:'+(Math.max(0,Math.min(1,v))*100).toFixed(1)+'%"></i></div></div>';
+  let h='<div class="meters">'+meter('Evidence support, strict',s.strict)+meter('Evidence support, revised',s.derivedScore)+'</div>';
+  h+='<h3>Reliability measures</h3>';
   h+=kv('Final answer parsed', fa? esc(fa.value + (fa.isPct?'%':'')) : '<em>none found</em>');
   h+=kv('NESS (active: '+mode+')', s.score.toFixed(4));
   h+=kv('NESS — strict', s.strict.toFixed(4));
