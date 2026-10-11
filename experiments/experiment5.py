@@ -71,7 +71,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from framework.nrf import NumericalReliabilityFramework
-from rag_pipeline.rag import FinancialRAG, SEED, set_seed
+from rag_pipeline.rag import FinancialRAG, SEED, set_seed, shard_items
 from data_loader.load_finqa import load_finqa
 from experiments.finqa_gold import resolve_gold_answer
 
@@ -211,7 +211,7 @@ def main():
     parser.add_argument("--seed", type=int, default=SEED)
     parser.add_argument("--top-k", type=int, default=None)
     parser.add_argument("--ness-mode", choices=["strict", "derived"], default="strict")
-    parser.add_argument("--engine", choices=["local", "anthropic"], default="local")
+    parser.add_argument("--engine", choices=["local", "anthropic", "replay"], default="local")
     parser.add_argument("--conditions", nargs="+",
                         choices=["closed_book", "retrieval", "oracle"],
                         default=["closed_book", "retrieval", "oracle"],
@@ -242,7 +242,7 @@ def main():
     print("=" * 62)
 
     set_seed(args.seed)
-    data = load_finqa(args.split)[:n_examples]
+    data = shard_items(load_finqa(args.split)[:n_examples])
 
     rag_kwargs = {"seed": args.seed, "llm_backend": args.engine}
     if args.top_k is not None:

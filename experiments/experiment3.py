@@ -77,7 +77,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from framework.nrf import NumericalReliabilityFramework
-from rag_pipeline.rag import FinancialRAG, SEED, set_seed
+from rag_pipeline.rag import FinancialRAG, SEED, set_seed, shard_items
 from data_loader.load_finqa import load_finqa
 from experiments.finqa_gold import resolve_gold_answer
 
@@ -116,7 +116,7 @@ def main():
     parser.add_argument("--n", type=int, default=None, help="Override sample count directly")
     parser.add_argument("--seed", type=int, default=SEED)
     parser.add_argument("--top-k", type=int, default=None, help="Override retrieval top-k")
-    parser.add_argument("--engine", choices=["local", "anthropic"], default="local",
+    parser.add_argument("--engine", choices=["local", "anthropic", "replay"], default="local",
                         help="Generation backend (see rag_pipeline/rag.py).")
     parser.add_argument("--output", type=str, default=None)
     args = parser.parse_args()
@@ -140,7 +140,7 @@ def main():
     print("'ECE of self-reported confidence' -- see framework/nrf.py.")
 
     set_seed(args.seed)
-    data = load_finqa(args.split)[:n_examples]
+    data = shard_items(load_finqa(args.split)[:n_examples])
     print(f"Evaluating {len(data)} examples.")
 
     rag_kwargs = {"seed": args.seed, "llm_backend": args.engine}
