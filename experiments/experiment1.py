@@ -39,7 +39,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from framework.nrf import NumericalReliabilityFramework
-from rag_pipeline.rag import FinancialRAG, SEED, set_seed
+from rag_pipeline.rag import FinancialRAG, SEED, set_seed, shard_items
 from data_loader.load_finqa import load_finqa
 # resolve_gold_answer now lives in experiments/finqa_gold.py so that
 # experiments 1-4 all score against the SAME gold value. Previously this
@@ -293,7 +293,7 @@ def main():
                               "the source). BOTH scores are recorded in the CSV and summary either way. If you "
                               "report the 'derived' figure, say so explicitly and report the strict one "
                               "alongside it -- they are different metrics, not a corrected version of one.")
-    parser.add_argument("--engine", choices=["local", "anthropic"], default="local",
+    parser.add_argument("--engine", choices=["local", "anthropic", "replay"], default="local",
                          help="Generation backend: 'local' (default -- Qwen2.5-3B 4-bit on your GPU) or "
                               "'anthropic' (calls the Anthropic API with Claude Opus instead; requires "
                               "'pip install anthropic' and an ANTHROPIC_API_KEY environment variable). "
@@ -329,7 +329,7 @@ def main():
 
     set_seed(args.seed)
 
-    data = load_finqa(args.split)[:n_examples]
+    data = shard_items(load_finqa(args.split)[:n_examples])
     print(f"Evaluating {len(data)} FinQA examples.")
 
     rag_kwargs = {"seed": args.seed, "llm_backend": args.engine}

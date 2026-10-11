@@ -68,7 +68,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from framework.nrf import NumericalReliabilityFramework
-from rag_pipeline.rag import FinancialRAG, SEED, set_seed
+from rag_pipeline.rag import FinancialRAG, SEED, set_seed, shard_items
 from data_loader.load_finqa import load_finqa
 from experiments.finqa_gold import resolve_gold_answer
 
@@ -143,7 +143,7 @@ def main():
     parser.add_argument("--ness-mode", choices=["strict", "derived"], default="strict",
                         help="Which NESS definition drives evidence support, hallucination detection "
                              "and hence ONRS. Both are always recorded. See framework/nrf.py.")
-    parser.add_argument("--engine", choices=["local", "anthropic"], default="local",
+    parser.add_argument("--engine", choices=["local", "anthropic", "replay"], default="local",
                         help="Generation backend (see rag_pipeline/rag.py).")
     parser.add_argument("--output", type=str, default=None)
     args = parser.parse_args()
@@ -168,7 +168,7 @@ def main():
     print("=" * 60)
 
     set_seed(args.seed)
-    data = load_finqa(args.split)[:n_examples]
+    data = shard_items(load_finqa(args.split)[:n_examples])
 
     rag_kwargs = {"seed": args.seed, "llm_backend": args.engine}
     if args.top_k is not None:

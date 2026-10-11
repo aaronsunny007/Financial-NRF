@@ -149,6 +149,8 @@ a much larger amount of unrelated churn underneath it.
 """
 
 import os
+import json
+import time
 import hashlib
 import random
 from dataclasses import dataclass
@@ -287,6 +289,86 @@ def set_seed(seed: int = SEED) -> None:
     torch.manual_seed(seed)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
+
+
+# ---------------------------------------------------------------------------
+# Generation cache, replay backend, and item sharding
+#
+# These exist so the experiments can be reproduced WITHOUT a GPU, for free,
+# by splitting the slow generation step across many CPU machines and then
+# re-running the unchanged experiment scripts against the collected answers:
+#
+#   NRF_SHARD="k/N"      each experiment script processes only items whose
+#                        index i satisfies i % N == k (see shard_items)
+#   NRF_GEN_CACHE=path   every generation is appended to this JSONL file,
+#                        keyed by a hash of the exact chat messages, and a
+#                        key already in the file is returned without
+#                        running the model
+#   llm_backend="replay" no model is loaded at all; every generation must
+#                        be found in the cache, and a miss raises rather
+#                        than guessing. Retrieval, scoring and the verifier
+#                        run exactly as in a normal run.
+#
+# Generation is greedy, so a cached answer is exactly what the model would
+# produce again for the same messages.
+# ---------------------------------------------------------------------------
+
+def shard_items(data):
+    """Return the slice of `data` this process should handle, per NRF_SHARD."""
+    spec = os.environ.get("NRF_SHARD")
+    if not spec:
+        return data
+    k, n = (int(x) for x in spec.split("/"))
+    if not (0 <= k < n):
+        raise ValueError(f"NRF_SHARD must look like 'k/N' with 0 <= k < N, got {spec!r}")
+    print(f"[shard] NRF_SHARD={spec}: handling items {k}, {k + n}, {k + 2 * n}, ...")
+    return data[k::n]
+
+
+def _messages_key(messages, max_new_tokens) -> str:
+    payload = json.dumps([messages, max_new_tokens], sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+class _GenerationCache:
+    """Append-only JSONL cache of generations. Several files can be merged
+    by concatenation; the first line of each may be a {"_meta": ...} record
+    naming the model that produced the entries."""
+
+    def __init__(self, paths, write_path=None):
+        self.entries = {}
+        self.meta = {}
+        for path in paths:
+            if not os.path.exists(path):
+                continue
+            with open(path, encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    rec = json.loads(line)
+                    if "_meta" in rec:
+                        self.meta.update(rec["_meta"])
+                    else:
+                        self.entries[rec["key"]] = rec["response"]
+        self.write_path = write_path
+        if write_path:
+            os.makedirs(os.path.dirname(os.path.abspath(write_path)), exist_ok=True)
+
+    def get(self, key):
+        return self.entries.get(key)
+
+    def put(self, key, response, seconds, meta=None):
+        self.entries[key] = response
+        if not self.write_path:
+            return
+        new_file = not os.path.exists(self.write_path)
+        with open(self.write_path, "a", encoding="utf-8") as f:
+            if new_file and meta:
+                f.write(json.dumps({"_meta": meta}) + "\n")
+            f.write(json.dumps({"key": key, "response": response, "seconds": round(seconds, 2)},
+                               ensure_ascii=False) + "\n")
+
 
 
 # ---------------------------------------------------------------------------
@@ -517,8 +599,8 @@ class FinancialRAG:
         embedding model is still local either way, since it's tiny and
         retrieval needs to stay identical for a fair comparison). See the
         ANTHROPIC_MODEL_NAME comment above for why this option exists."""
-        if llm_backend not in ("local", "anthropic"):
-            raise ValueError(f"llm_backend must be 'local' or 'anthropic', got {llm_backend!r}")
+        if llm_backend not in ("local", "anthropic", "replay"):
+            raise ValueError(f"llm_backend must be 'local', 'anthropic' or 'replay', got {llm_backend!r}")
         set_seed(seed)
         self.top_k = top_k
         self.verify_and_retry = verify_and_retry
@@ -528,10 +610,26 @@ class FinancialRAG:
         print("Loading embedding model:", EMBEDDING_MODEL_NAME)
         self.embedder = SentenceTransformer(EMBEDDING_MODEL_NAME, device=EMBEDDING_DEVICE)
 
+        # Optional generation cache (see the shard/replay notes above).
+        read_paths = [p for p in os.environ.get("NRF_GEN_CACHE_READ", "").split(os.pathsep) if p]
+        write_path = os.environ.get("NRF_GEN_CACHE")
+        if write_path and write_path not in read_paths:
+            read_paths.append(write_path)
+        self._gen_cache = _GenerationCache(read_paths, write_path if self.llm_backend == "local" else None) \
+            if (read_paths or self.llm_backend == "replay") else None
+
         if self.llm_backend == "local":
             self.llm_model_name = self._load_llm()
             self.model.eval()
             print("LLM running on:", next(self.model.parameters()).device)
+        elif self.llm_backend == "replay":
+            if self._gen_cache is None or not self._gen_cache.entries:
+                raise RuntimeError("llm_backend='replay' needs NRF_GEN_CACHE_READ to point at "
+                                   "generation cache files containing entries.")
+            self.llm_model_name = self._gen_cache.meta.get("model", LLM_MODEL_NAME) + \
+                f" ({self._gen_cache.meta.get('precision', 'unknown precision')}, replayed from cache)"
+            print(f"LLM backend: replay of {len(self._gen_cache.entries)} cached generations, "
+                  f"{self.llm_model_name}")
         else:
             self.llm_model_name = self._init_anthropic_client()
             print("LLM backend: Anthropic API,", self.llm_model_name)
@@ -604,6 +702,7 @@ class FinancialRAG:
                     device_map=LLM_DEVICE,
                 )
                 print(f"Loaded {LLM_MODEL_NAME} (4-bit).")
+                self._precision = "4-bit NF4"
                 return LLM_MODEL_NAME
             except Exception as e:
                 print(
@@ -619,13 +718,22 @@ class FinancialRAG:
         model_name = FALLBACK_LLM_MODEL_NAME if (LLM_USE_4BIT and LLM_DEVICE == "cuda") else LLM_MODEL_NAME
         if LLM_DEVICE != "cuda":
             print(f"WARNING: No CUDA device detected; loading {model_name} on CPU. This will be slow.")
-        print(f"Loading {model_name} (fp16)...")
+        # fp16 is the GPU fallback. On CPU, half precision is slow or
+        # unsupported for many ops, so NRF_CPU_DTYPE selects float32 (default)
+        # or bfloat16 instead.
+        if LLM_DEVICE == "cuda":
+            load_dtype, precision = torch.float16, "fp16"
+        else:
+            precision = os.environ.get("NRF_CPU_DTYPE", "float32")
+            load_dtype = {"float32": torch.float32, "bfloat16": torch.bfloat16}[precision]
+        print(f"Loading {model_name} ({precision})...")
         self.model = AutoModelForCausalLM.from_pretrained(
             model_name,
-            dtype=torch.float16,
+            dtype=load_dtype,
             device_map=LLM_DEVICE,
         )
-        print(f"Loaded {model_name} (fp16).")
+        self._precision = precision
+        print(f"Loaded {model_name} ({precision}).")
         return model_name
 
     # ------------------------------------------------------------------
@@ -787,9 +895,27 @@ and recompute carefully before answering again.
     def generate(self, question: str, evidence_text: str, correction_note: Optional[str] = None) -> str:
         messages = self._build_messages(question, evidence_text, correction_note=correction_note)
 
+        key = _messages_key(messages, MAX_NEW_TOKENS)
+        if self._gen_cache is not None:
+            hit = self._gen_cache.get(key)
+            if hit is not None:
+                return hit
+        if self.llm_backend == "replay":
+            raise RuntimeError(
+                "replay backend: no cached generation for this prompt "
+                f"(key {key[:12]}..., question {question[:60]!r}). The shard runs did not cover it."
+            )
+
+        started = time.time()
         if self.llm_backend == "anthropic":
-            return self._generate_anthropic(messages)
-        return self._generate_local(messages)
+            response = self._generate_anthropic(messages)
+        else:
+            response = self._generate_local(messages)
+        if self._gen_cache is not None:
+            self._gen_cache.put(key, response, time.time() - started,
+                                meta={"model": self.llm_model_name,
+                                      "precision": getattr(self, "_precision", "unknown")})
+        return response
 
     def _generate_local(self, messages: List[Dict[str, str]]) -> str:
         prompt = self.tokenizer.apply_chat_template(
