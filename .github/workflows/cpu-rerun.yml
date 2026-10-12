@@ -33,14 +33,30 @@ on:
       replay_only:
         description: Skip generation and replay the committed results/cpu_fp32/generations.jsonl
         default: 'false'
+      cleanup:
+        description: Delete the temporary cpu-gen-* and cpu-rerun-results-* branches and do nothing else
+        default: 'false'
 
 permissions:
   contents: write
   actions: read
 
 jobs:
+  cleanup:
+    if: ${{ inputs.cleanup == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Delete temporary branches
+        run: |
+          for b in $(git ls-remote --heads origin 'cpu-gen-*' 'cpu-rerun-results-*' | awk '{print $2}'); do
+            echo "deleting ${b#refs/heads/}"
+            git push origin --delete "${b#refs/heads/}" || true
+          done
+          echo "remaining: $(git ls-remote --heads origin 'cpu-gen-*' 'cpu-rerun-results-*' | wc -l)"
+
   plan:
-    if: ${{ inputs.replay_only != 'true' }}
+    if: ${{ inputs.replay_only != 'true' && inputs.cleanup != 'true' }}
     runs-on: ubuntu-latest
     outputs:
       shards: ${{ steps.p.outputs.shards }}
@@ -144,7 +160,7 @@ jobs:
 
   replay:
     needs: generate
-    if: ${{ !cancelled() }}
+    if: ${{ !cancelled() && inputs.cleanup != 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
