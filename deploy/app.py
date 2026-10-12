@@ -394,9 +394,11 @@ alone. `framework/nrf.py` now excludes the confidence statement; the recorded re
 were not regenerated. Re-scored from the saved files: Experiment 1 strict hallucination
 rate 0.08 → 0.00; Experiment 2 hallucination 0.10 → 0.20 becomes 0.00 → 0.00;
 Experiment 5 ONRS retrieval 0.5891 → 0.6224 and oracle 0.5811 → 0.6211 (ranking still
-inverted, now a near tie); Experiment 4's noise–hallucination correlation (+0.76) lies
-between +0.00 and +0.89 and needs a GPU re-run. No weighting passes both tests under
-any corrected scenario. Accuracy, calibration and the verifier are unaffected.
+inverted, now a near tie). A full float32 CPU re-run of all five experiments
+(`results/cpu_fp32/`) then measured Experiment 4's noise–hallucination correlation at
+−0.12 instead of +0.76 and its noise–composite correlation at +0.62 instead of −0.10;
+accuracy fell from 0.34 to 0.20 from numeric precision alone. No weighting passes both
+tests in any scenario. Calibration and the verifier are unaffected.
 
 **Calibration** — binned expected calibration error over *self-reported* confidence,
 elicited in the prompt. This is not a probability derived from token log-probabilities
