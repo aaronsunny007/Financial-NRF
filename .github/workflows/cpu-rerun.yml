@@ -104,7 +104,10 @@ jobs:
           # That doubles as a checkpoint if the job is ever cut off.
           push_state() {
             tail -n 300 gen/log.txt > gen/log_tail.txt 2>/dev/null || true
-            git add -f gen/shard_${SHARD}.jsonl gen/log_tail.txt 2>/dev/null || true
+            # one path at a time: git add aborts the whole command if any path is missing
+            for f in gen/shard_${SHARD}.jsonl gen/log_tail.txt; do
+              [ -e "$f" ] && git add -f "$f"
+            done
             git commit -qm "shard ${SHARD} progress" 2>/dev/null || true
             git push -qf origin HEAD:refs/heads/cpu-gen-${RUN_ID}-${SHARD} 2>/dev/null || true
           }
