@@ -5,7 +5,7 @@ Split: dev | Sample-size mode: dev | N: 50 | Seed: 42 | Engine: replay | NESS mo
 ============================================================
 Evaluating 50 FinQA examples.
 Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
-LLM backend: replay of 577 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
+LLM backend: replay of 579 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
 Embedding model running on: cpu
 FAISS available: True (using faiss.IndexFlatIP)
 
@@ -179,6 +179,7 @@ ECE (of self-reported confidence): 0.6560
 ONRS:                              0.6107
   weights used:                   0.30 accuracy / 0.30 evidence_support / 0.20 hallucination / 0.20 calibration (framework/nrf.py default)
 ============================================================
+Preserved previous results as: results/cpu_fp32/experiment1_results_dev_prototype.csv
 
 Per-example results saved to: results/cpu_fp32/experiment1_results_dev.csv
 Summary saved to:             results/cpu_fp32/experiment1_results_dev_summary.json

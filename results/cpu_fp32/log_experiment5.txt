@@ -8,7 +8,7 @@ All conditions share the same items, generator, prompt, scoring and
 verifier. Only the evidence supplied to the model differs.
 ==============================================================
 Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
-LLM backend: replay of 577 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
+LLM backend: replay of 579 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
 Embedding model running on: cpu
 FAISS available: True (using faiss.IndexFlatIP)
 
@@ -220,6 +220,7 @@ ERROR DECOMPOSITION  <- this is what answers the comparison question
   different splits and differently-trained systems: use them
   as context, not as a like-for-like scoreboard.
 ==============================================================
+Preserved previous results as: results/cpu_fp32/experiment5_results_dev_prototype.csv
 
 Per-example results saved to: results/cpu_fp32/experiment5_results_dev.csv
 Summary saved to:             results/cpu_fp32/experiment5_results_dev_summary.json

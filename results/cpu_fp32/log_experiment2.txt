@@ -1,21 +1,4 @@
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/home/runner/work/Financial-NRF/Financial-NRF/experiments/experiment2.py", line 384, in <module>
-    main()
-  File "/home/runner/work/Financial-NRF/Financial-NRF/experiments/experiment2.py", line 289, in main
-    row = evaluate_condition(rag, nrf, model_item, item, condition, extra_evidence=extra)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Financial-NRF/Financial-NRF/experiments/experiment2.py", line 139, in evaluate_condition
-    result = rag.answer(item, extra_evidence=extra_evidence)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Financial-NRF/Financial-NRF/rag_pipeline/rag.py", line 1041, in answer
-    response = self.generate(question, evidence_text)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/Financial-NRF/Financial-NRF/rag_pipeline/rag.py", line 904, in generate
-    raise RuntimeError(
-RuntimeError: replay backend: no cached generation for this prompt (key 8370e3658f10..., question 'at the end of 2014 , the notional value of derivatives desig'). The shard runs did not cover it.
 ============================================================
 EXPERIMENT 2: HALLUCINATION DETECTION SENSITIVITY
 Split: dev | N: 10 | Seed: 42 | Engine: replay | NESS mode: strict
@@ -23,7 +6,7 @@ Conditions: ['clean', 'doc_injection', 'evidence_injection']  (total generations
 ============================================================
 Evaluating 10 FinQA examples per condition.
 Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
-LLM backend: replay of 577 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
+LLM backend: replay of 579 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
 Embedding model running on: cpu
 FAISS available: True (using faiss.IndexFlatIP)
 
@@ -92,4 +75,79 @@ CONDITION: EVIDENCE_INJECTION
   Gold: 688.0 | Pred: 688.0 | Correct: 1.0 | NESS: 1.00 | Halluc: 0 | DecoyReachedModel: 1 | UsedDecoy: 0 | DecoyInReasoning: 0 | Conf: 0.90
 [7/10] JPM/2008/page_85.pdf-3
   Gold: 10.935% | Pred: 10.61 | Correct: 0.0 | NESS: 0.86 | Halluc: 0 | DecoyReachedModel: 1 | UsedDecoy: 0 | DecoyInReasoning: 1 | Conf: 0.90
-FAILED
+[8/10] PNC/2013/page_207.pdf-1
+  Gold: 3044.323% | Pred: 304.07 | Correct: 0.0 | NESS: 0.70 | Halluc: 0 | DecoyReachedModel: 1 | UsedDecoy: 0 | DecoyInReasoning: 0 | Conf: 0.90
+[9/10] CME/2017/page_97.pdf-5
+  Gold: 995.0 | Pred: 995.0 | Correct: 1.0 | NESS: 0.83 | Halluc: 0 | DecoyReachedModel: 1 | UsedDecoy: 0 | DecoyInReasoning: 0 | Conf: 0.90
+[10/10] PNC/2013/page_62.pdf-2
+  Gold: 3576.0 | Pred: 3576.0 | Correct: 1.0 | NESS: 0.80 | Halluc: 0 | DecoyReachedModel: 1 | UsedDecoy: 0 | DecoyInReasoning: 0 | Conf: 0.90
+
+============================================================
+EXPERIMENT 2 RESULTS
+============================================================
+
+[CLEAN]  n=10 (scored numeric: 10)
+  Decoy REACHED the model:  0.0000   <- manipulation check
+  Accuracy:                 0.3000
+  Evidence Support (NESS):  0.8314 (strict 0.8314 / derived 0.9600)
+  Hallucination Rate:       0.0000
+  Decoy used as answer:     0.0000
+  Decoy cited in reasoning: 0.0000
+  Invalid-format rate:      0.0000
+
+[DOC_INJECTION]  n=10 (scored numeric: 10)
+  Decoy REACHED the model:  0.2000   <- manipulation check
+  Accuracy:                 0.3000
+  Evidence Support (NESS):  0.8290 (strict 0.8290 / derived 0.9600)
+  Hallucination Rate:       0.0000
+  Decoy used as answer:     0.0000
+  Decoy cited in reasoning: 0.0000
+  Invalid-format rate:      0.0000
+
+[EVIDENCE_INJECTION]  n=10 (scored numeric: 10)
+  Decoy REACHED the model:  1.0000   <- manipulation check
+  Accuracy:                 0.4000
+  Evidence Support (NESS):  0.8092 (strict 0.8092 / derived 0.9514)
+  Hallucination Rate:       0.0000
+  Decoy used as answer:     0.0000
+  Decoy cited in reasoning: 0.1000
+  Invalid-format rate:      0.0000
+
+------------------------------------------------------------
+SENSITIVITY: doc_injection_vs_clean
+------------------------------------------------------------
+  Decoy-reached-model change:   +0.2000  <- READ THIS FIRST
+  Accuracy change:              +0.0000
+  Evidence Support change:      -0.0024
+  Hallucination Rate change:    +0.0000
+  Decoy-as-answer change:       +0.0000
+  Decoy-in-reasoning change:    +0.0000
+
+------------------------------------------------------------
+SENSITIVITY: evidence_injection_vs_clean
+------------------------------------------------------------
+  Decoy-reached-model change:   +1.0000  <- READ THIS FIRST
+  Accuracy change:              +0.1000
+  Evidence Support change:      -0.0223
+  Hallucination Rate change:    +0.0000
+  Decoy-as-answer change:       +0.0000
+  Decoy-in-reasoning change:    +0.1000
+
+------------------------------------------------------------
+HOW TO READ THIS
+------------------------------------------------------------
+  Check 'Decoy REACHED the model' FIRST. If it is 0 for a condition, the
+  attack never got past retrieval, and that condition says NOTHING about
+  the detector -- a hallucination rate of 0 there means 'nothing to detect',
+  not 'detector working' and not 'detector blind'. Retrieval filtering the
+  noise is itself a real finding about the pipeline's first line of defence,
+  but it is a DIFFERENT finding from detector sensitivity.
+
+  The detector is only genuinely tested where the decoys reached the model
+  (normally the evidence_injection condition). There, a POSITIVE
+  hallucination-rate change means the module fired on contaminated
+  reasoning as intended.
+============================================================
+
+Per-example results saved to: results/cpu_fp32/experiment2_results_dev.csv
+Summary saved to:             results/cpu_fp32/experiment2_results_dev_summary.json

@@ -6,7 +6,7 @@ Noise levels: [0, 10, 20, 30, 40] | Total generations: 250
 Noise definition: level% of a 10-sentence distractor pool -> [0, 1, 2, 3, 4] sentences injected
 ============================================================
 Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
-LLM backend: replay of 577 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
+LLM backend: replay of 579 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
 Embedding model running on: cpu
 FAISS available: True (using faiss.IndexFlatIP)
 

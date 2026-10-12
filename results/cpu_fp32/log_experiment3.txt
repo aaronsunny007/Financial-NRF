@@ -8,7 +8,7 @@ the prompt. It is NOT derived from token log-probabilities. Report it as
 'ECE of self-reported confidence' -- see framework/nrf.py.
 Evaluating 50 examples.
 Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
-LLM backend: replay of 577 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
+LLM backend: replay of 579 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
 Embedding model running on: cpu
 FAISS available: True (using faiss.IndexFlatIP)
 
@@ -184,6 +184,7 @@ High-confidence errors (conf>=0.8):    37 (0.7400 of scored)
 
 ECE (of self-reported confidence):   0.6560
 ============================================================
+Preserved previous results as: results/cpu_fp32/experiment3_results_dev_prototype.csv
 
 Per-example results saved to: results/cpu_fp32/experiment3_results_dev.csv
 Summary saved to:             results/cpu_fp32/experiment3_results_dev_summary.json
