@@ -322,10 +322,61 @@ the exact answer is known.
 5. *Nothing here touches accuracy, ECE, the verifier outcomes, or Experiment 3.* None
    of them use evidence support.
 
-**Required follow-up.** Re-run Experiments 1, 2, 4 and 5 on the GPU with the corrected
-scorer and replace the figures above with measured ones. The recorded figures in the
-rest of this chapter are left as run, and every place that quotes a hallucination rate
-or a noise correlation should be read with this section.
+**Measured re-run.** The estimates above were then checked by re-running all five
+experiments with the corrected scorer. No GPU or paid API was available, so this was done
+on free GitHub-hosted CPU runners (`.github/workflows/cpu-rerun.yml`): the generation step
+was split over 20 shard jobs (579 distinct generations, mean 118 s each), and the
+unchanged experiment scripts were then run with `--engine replay`, which loads no model
+and fails on any prompt not in the recorded answers. The generator is the same
+Qwen2.5-3B-Instruct, but in float32 rather than 4-bit NF4, so individual answers differ
+(15 of the 50 baseline answers are identical, 37 agree on correct or incorrect) and
+accuracy is lower. It is a replication on different numerics, not a regeneration of the
+recorded answers. Outputs are in `results/cpu_fp32/`.
+
+| Quantity | Recorded (4-bit GPU, old scorer) | Re-run (float32 CPU, corrected scorer) |
+|---|---|---|
+| Exp 1 accuracy / strict NESS / revised NESS | 0.340 / 0.7145 / 0.9085 | 0.200 / 0.7525 / 0.9396 |
+| Exp 1 ONRS (revised NESS) | 0.6634 | 0.6107 |
+| Exp 2 hallucination, clean / document / evidence injection | 0.10 / 0.10 / 0.20 | 0.00 / 0.00 / 0.00 |
+| Exp 3 ECE of self-reported confidence | 0.556 | 0.656 |
+| Exp 4 accuracy at 0% … 40% noise | 0.34, 0.30, 0.38, 0.36, 0.32 | 0.20, 0.20, 0.26, 0.22, 0.28 |
+| Exp 4 hallucination rate at 0% … 40% noise | 0.08, 0.10, 0.12, 0.10, 0.12 | 0.06, 0.00, 0.00, 0.02, 0.04 |
+| Exp 4 corr(noise, composite) | −0.10 | **+0.62** |
+| Exp 4 corr(noise, hallucination rate) | +0.76 | **−0.12** |
+| Exp 4 corr(noise, strict NESS) | −0.37 | −0.52 |
+| Exp 5 accuracy, retrieval / oracle | 0.340 / 0.420 | 0.200 / 0.200 |
+| Exp 5 composite, closed-book / retrieval / oracle | 0.0960 / 0.5891 / 0.5811 | 0.1280 / 0.5425 / 0.5316 |
+| Weightings that track noise (r ≤ −0.5) | 19.2% | 0.1% |
+| Weightings that rank oracle > retrieval > closed-book | 43.5% | 0.0% |
+| Weightings that pass both | 0.0% | 0.0% |
+
+What replicated, and what did not:
+
+1. *The composite does not track noise.* It moved the opposite way (+0.62), because
+   accuracy drifted up with noise by chance, 0.20 to 0.28, and calibration error is a
+   function of accuracy (§6.2). The failure is, if anything, clearer than recorded.
+2. *No weighting passes both tests*, as before. Only 0.1% of weightings (those putting
+   almost all weight on NESS) track noise at all.
+3. *The hallucination flag does not follow noise.* Corrected, it fires on 0 to 3 of 50
+   responses per level with no trend, so the recorded r = +0.76 was the scoring defect
+   plus a handful of borderline responses. The claim in §6.2 that the hallucination
+   sub-metric tracks noise is **not supported**. Only NESS declines with noise, weakly
+   (0.7525 to 0.7449, r = −0.52).
+4. *The ranking inversion cannot be tested in this run.* Oracle evidence did not raise
+   accuracy (0.200 for both conditions), so there is no better system for the composite
+   to rank wrongly. The composite did score oracle lower (0.5316 against 0.5425), because
+   its NESS is lower (0.729 against 0.753, the evidence-size effect of §6.2), which is
+   the same mechanism as before.
+5. *Accuracy moved 14 points from numeric precision alone* (0.34 to 0.20, same model,
+   items, prompts and seed). With n = 50 and a single seed this is the most direct
+   measure in the project of the answer instability described in §2.3 and §8, and it
+   limits how much weight any accuracy-dependent comparison here can bear.
+
+**Remaining follow-up.** The re-run is full precision on CPU, so it is not a like-for-like
+repeat of the 4-bit GPU runs. Running Experiments 1, 2, 4 and 5 once more on the original
+GPU configuration with the corrected scorer would complete the comparison. The recorded
+figures in the rest of this chapter are left as run, and every place that quotes a
+hallucination rate or a noise correlation should be read with this section.
 
 ---
 
@@ -567,12 +618,13 @@ effect at this sample size and noise magnitude. This is confirmed by
 correlation(accuracy, ONRS) = **+0.98** — ONRS is, empirically, accuracy in
 disguise.
 
-**The hallucination sub-metric, by contrast, does track noise** (r = **+0.76**;
+**The hallucination sub-metric, by contrast, does track noise** *(as recorded; not
+replicated, see §2.8)* (r = **+0.76**;
 all four noise levels above the clean baseline of 0.0800). The *detection*
 component is sound; the *aggregation scheme* is what fails.
-*(See §2.8: this correlation rests on 4 to 6 flagged responses per level, and the
-corrected value cannot be fixed without re-running Experiment 4. It lies between
-+0.00 and +0.89 on the data bracketed there.)*
+*(See §2.8: this correlation rests on 4 to 6 flagged responses per level. A re-run
+with the corrected scorer measured −0.12, with 0 to 3 flagged responses per level and
+no trend, so it is not supported.)*
 
 ### 6.3 Recommended revisions to ONRS (arising directly from this finding)
 
@@ -737,8 +789,9 @@ revision in §2.7.
 11. **Recorded runs used the earlier evidence-support scorer.** The confidence value
     was counted as an unsupported number (§2.8). The scorer is fixed, but Experiments
     1, 2, 4 and 5 have not been re-run, so their hallucination rates and the Experiment
-    4 noise correlations are as recorded, with the measured and bounded effect given
-    in §2.8.
+    4 noise correlations are as recorded. Their effect was estimated from the saved
+    files and then measured on a float32 CPU re-run (§2.8); a 4-bit GPU re-run has not
+    been done.
 
 ---
 
@@ -780,6 +833,8 @@ python -m experiments.experiment4 --split dev --n 50
 
 python -m experiments.weight_sensitivity    # §6.4 sweep; re-scores saved results, no GPU
 python -m experiments.confidence_line_audit # §2.8 audit; re-scores saved results, no GPU
+python -m experiments.weight_sensitivity --results-dir results/cpu_fp32   # §2.8 re-run sweep
+# No GPU: Actions -> cpu-rerun -> Run workflow (shards the generation step over free CPU runners)
 ```
 
 Optional flags: `--ness-mode {strict,derived}`, `--engine {local,anthropic}`,
@@ -818,3 +873,8 @@ model outputs.
 | 1 + 2 + 5 Confidence-line audit (post-hoc) | 50 / 30 / 150 | Strict hallucination flags caused by the defect, Exp 1 and Exp 2 | 4 of 4 and 4 of 4 |
 | 5 Confidence-line audit (post-hoc) | 50 × 3 | ONRS, retrieval vs oracle, corrected | 0.6224 vs 0.6211 |
 | 4 Confidence-line audit (post-hoc) | 50 × 5 | corr(noise, hallucination), corrected range | +0.00 to +0.89 |
+| 4 CPU re-run (corrected scorer, float32) | 50 × 5 | corr(noise, composite) | +0.62 |
+| 4 CPU re-run (corrected scorer, float32) | 50 × 5 | corr(noise, hallucination) | −0.12 |
+| 1 CPU re-run (corrected scorer, float32) | 50 | Accuracy | 0.200 |
+| 5 CPU re-run (corrected scorer, float32) | 50 × 3 | Accuracy, retrieval / oracle | 0.200 / 0.200 |
+| 4 + 5 CPU re-run weight sweep | 1,771 weightings | Pass noise test and oracle ranking | 0.0% |

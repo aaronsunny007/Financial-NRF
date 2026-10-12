@@ -26,6 +26,10 @@ holds the re-scored comparison: exact for Experiments 1 and 2, near-exact for 5,
 bracketed for 4 (which did not save its responses). To reproduce a recorded number
 from code, construct `NumericalReliabilityFramework(exclude_confidence_from_support=False)`.
 
+`cpu_fp32/` holds a re-run of all five experiments with the corrected scorer in float32 on CPU
+(see `cpu_fp32/README.md`). Its numbers are a replication on different numerics and should be
+quoted next to, not in place of, the recorded runs.
+
 ## Which file backs which claim
 
 | Claim | File |
@@ -34,6 +38,7 @@ from code, construct `NumericalReliabilityFramework(exclude_confidence_from_supp
 | Calibration figures (n = 50) | `experiment3_results_dev_summary.json` |
 | Noise correlation −0.10 | `experiment4_results_dev.csv` (ONRS per noise level); the computed r is in `weight_sensitivity_dev_summary.json` |
 | Oracle vs retrieval, ranking inversion | `experiment5_results_dev_summary.json` |
+| Measured re-run with the corrected scorer | `cpu_fp32/` (`weight_sensitivity_dev_summary.json` there for the sweep) |
 | Effect of the confidence-line scoring defect | `confidence_line_audit_dev.json` (`python -m experiments.confidence_line_audit`) |
 | No weighting passes both falsification tests | `weight_sensitivity_dev_summary.json` (one row per weighting in `weight_sensitivity_dev.csv`) |
 

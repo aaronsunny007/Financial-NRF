@@ -25,7 +25,9 @@ its own headline metric.
 **The central finding is negative, and that is the point of the work.** The composite
 reliability score proposed here fails two falsification tests: it does not track
 reliability when the evidence is degraded, and it ranks a demonstrably better system
-below a worse one. The individual diagnostic components survive. The aggregate does not.
+below a worse one. The aggregate fails; of the components, the verifier, accuracy and
+calibration measurements stand, and the claim that the hallucination flag tracks noise did
+not survive a re-run (see below).
 
 ---
 
@@ -136,10 +138,39 @@ do not use evidence support and are unaffected. The Experiment 4 figures are bra
 rather than exact because that run did not save its responses; the bracketing method is
 checked against the 150 Experiment 5 rows where the exact answer is known.
 
+### Measured re-run with the corrected scorer
+
+The estimates above were then checked by actually re-running all five experiments with the
+corrected scorer, for free, on GitHub-hosted CPU runners (`.github/workflows/cpu-rerun.yml`,
+outputs in `results/cpu_fp32/`). It is the same model and pipeline in float32 rather than
+4-bit, so individual answers differ (15 of 50 baseline answers are identical), and accuracy
+came out lower. Read it as a replication on different numerics, not a regeneration.
+
+| Measure | Recorded (4-bit GPU, old scorer) | Re-run (float32 CPU, corrected scorer) |
+|---|---|---|
+| Execution accuracy, retrieval | 0.340 | 0.200 |
+| Execution accuracy, oracle evidence | 0.420 | 0.200 |
+| Hallucination rate, retrieval | 0.08 | 0.06 |
+| Composite, retrieval vs oracle | 0.5891 vs 0.5811 | 0.5425 vs 0.5316 |
+| Noise vs composite, r | −0.10 | **+0.62** |
+| Noise vs hallucination rate, r | +0.76 | **−0.12** |
+| Weightings that track noise (r ≤ −0.5) | 19.2% | 0.1% |
+| Weightings that pass both tests | 0.0% | 0.0% |
+
+What replicated: the composite does not track noise (it moved the other way, because
+accuracy drifted up with noise by chance, 0.20 to 0.28), and no weighting passes both
+tests. What did not: the hallucination flag does not follow noise (0 to 3 flagged
+responses per level, no trend), so the earlier +0.76 should not be relied on. Oracle
+evidence did not beat retrieval in this run (both 0.200), so the ranking inversion
+cannot be tested here; the composite still scored oracle lower. The 14-point drop in
+accuracy from changing only numeric precision is itself a measure of how unstable a 3B
+model's answers are at n = 50. A 4-bit GPU re-run is the one remaining like-for-like check.
+
 ### What the oracle comparison establishes
 
-Perfect evidence lifts accuracy only to 0.420, placing the majority of the residual
-error in numerical reasoning rather than retrieval. That decomposition is the useful
+In the recorded run, perfect evidence lifts accuracy only to 0.420 (it did not help at all
+in the float32 re-run), placing the majority of the residual error in numerical reasoning
+rather than retrieval. That decomposition is the useful
 result: it says where future work should go.
 
 ---
@@ -197,6 +228,12 @@ python -m experiments.experiment5 --n 50
 
 Each writes a per-item CSV and a summary JSON into `results/`.
 
+No GPU? The **cpu-rerun** workflow (Actions tab, Run workflow) re-runs all five on free
+GitHub-hosted CPUs in full precision, in about two hours, and commits the results to a new
+branch. It shards the generation step, then replays the answers through the unchanged
+experiment scripts (`--engine replay`). Set `replay_only` to re-score the committed
+`results/cpu_fp32/generations.jsonl` without regenerating.
+
 The weight-sensitivity sweep and the test suites need only `numpy`, not a GPU:
 
 ```bash
@@ -235,8 +272,8 @@ committed results.
 - **Fifty items per condition.** Directions are claimable; margins of a few points are
   not, and are not claimed.
 - **The recorded runs predate a scoring fix.** The confidence value was counted as an
-  unsupported number (see above). Experiments 1, 2, 4 and 5 need a GPU re-run before
-  their hallucination rates and noise correlations can be treated as final.
+  unsupported number (see above). The corrected scorer has been run only in float32 on
+  CPU (`results/cpu_fp32/`); a 4-bit GPU re-run would make the comparison like for like.
 - **Evidence support is numerical overlap, not entailment.** Correct numbers used inside
   a wrong argument pass it.
 - **The composite weighting is assigned, not learned.** The sweep above shows that

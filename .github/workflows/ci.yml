@@ -75,6 +75,11 @@ jobs:
           python -m experiments.weight_sensitivity
           git diff --exit-code -- results/weight_sensitivity_dev.csv results/weight_sensitivity_dev_summary.json
 
+      - name: Weight sweep on the CPU re-run reproduces committed results
+        run: |
+          python -m experiments.weight_sensitivity --results-dir results/cpu_fp32
+          git diff --exit-code -- results/cpu_fp32/weight_sensitivity_dev.csv results/cpu_fp32/weight_sensitivity_dev_summary.json
+
       - name: Confidence-line audit reproduces committed results
         run: |
           python -m experiments.confidence_line_audit

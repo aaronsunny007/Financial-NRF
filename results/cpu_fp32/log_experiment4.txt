@@ -1,0 +1,345 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+============================================================
+EXPERIMENT 4: OVERALL RELIABILITY UNDER VARYING NOISE
+Split: dev | N per noise level: 50 | Seed: 42 | Engine: replay | NESS mode: strict
+Noise levels: [0, 10, 20, 30, 40] | Total generations: 250
+Noise definition: level% of a 10-sentence distractor pool -> [0, 1, 2, 3, 4] sentences injected
+============================================================
+Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+LLM backend: replay of 579 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
+Embedding model running on: cpu
+FAISS available: True (using faiss.IndexFlatIP)
+
+------------------------------------------------------------
+NOISE LEVEL: 0%  (0 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/50] Correct: 1.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [2/50] Correct: 0.0 | NESS: 0.93 | Hallucination: 0 | Confidence: 0.90
+  [3/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 0.90
+  [4/50] Correct: 0.0 | NESS: 0.86 | Hallucination: 0 | Confidence: 0.90
+  [5/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [6/50] Correct: 1.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [7/50] Correct: 0.0 | NESS: 0.79 | Hallucination: 0 | Confidence: 0.90
+  [8/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [9/50] Correct: 1.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [10/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [11/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [12/50] Correct: 0.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.90
+  [13/50] Correct: 1.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [14/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [15/50] Correct: 0.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [16/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [17/50] Correct: 0.0 | NESS: 0.45 | Hallucination: 1 | Confidence: 0.90
+  [18/50] Correct: 0.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [19/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [20/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 1.00
+  [21/50] Correct: 1.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [22/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [23/50] Correct: 0.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.90
+  [24/50] Correct: 0.0 | NESS: 0.00 | Hallucination: 1 | Confidence: 0.10
+  [25/50] Correct: 0.0 | NESS: 0.69 | Hallucination: 0 | Confidence: 0.90
+  [26/50] Correct: 1.0 | NESS: 0.60 | Hallucination: 0 | Confidence: 0.90
+  [27/50] Correct: 0.0 | NESS: 0.54 | Hallucination: 0 | Confidence: 0.90
+  [28/50] Correct: 1.0 | NESS: 0.71 | Hallucination: 0 | Confidence: 0.90
+  [29/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 0.90
+  [30/50] Correct: 0.0 | NESS: 0.71 | Hallucination: 0 | Confidence: 0.90
+  [31/50] Correct: 0.0 | NESS: 0.86 | Hallucination: 0 | Confidence: 0.90
+  [32/50] Correct: 0.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.10
+  [33/50] Correct: 0.0 | NESS: 0.85 | Hallucination: 0 | Confidence: 0.90
+  [34/50] Correct: 0.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [35/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [36/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [37/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [38/50] Correct: 0.0 | NESS: 0.81 | Hallucination: 0 | Confidence: 0.90
+  [39/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [40/50] Correct: 1.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 1.00
+  [41/50] Correct: 1.0 | NESS: 0.68 | Hallucination: 0 | Confidence: 0.90
+  [42/50] Correct: 0.0 | NESS: 0.85 | Hallucination: 0 | Confidence: 0.90
+  [43/50] Correct: 0.0 | NESS: 0.62 | Hallucination: 0 | Confidence: 0.90
+  [44/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 1.00
+  [45/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.00
+  [46/50] Correct: 0.0 | NESS: 0.64 | Hallucination: 0 | Confidence: 0.90
+  [47/50] Correct: 1.0 | NESS: 0.89 | Hallucination: 0 | Confidence: 0.90
+  [48/50] Correct: 0.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+  [49/50] Correct: 0.0 | NESS: 0.47 | Hallucination: 1 | Confidence: 0.90
+  [50/50] Correct: 0.0 | NESS: 0.77 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 0.0000   <- manipulation check
+Accuracy:           0.2000
+Evidence Support:   0.7525 (strict 0.7525 / derived 0.9396)
+Hallucination Rate: 0.0600
+ECE:                0.6560 (0 missing confidence)
+ONRS:               0.5425
+
+------------------------------------------------------------
+NOISE LEVEL: 10%  (1 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/50] Correct: 1.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [2/50] Correct: 0.0 | NESS: 0.96 | Hallucination: 0 | Confidence: 0.90
+  [3/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [4/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [5/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 0.90
+  [6/50] Correct: 1.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [7/50] Correct: 0.0 | NESS: 0.84 | Hallucination: 0 | Confidence: 0.90
+  [8/50] Correct: 0.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.90
+  [9/50] Correct: 1.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [10/50] Correct: 0.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [11/50] Correct: 1.0 | NESS: 0.71 | Hallucination: 0 | Confidence: 0.90
+  [12/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 1.00
+  [13/50] Correct: 1.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [14/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [15/50] Correct: 0.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [16/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [17/50] Correct: 0.0 | NESS: 0.74 | Hallucination: 0 | Confidence: 0.90
+  [18/50] Correct: 0.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [19/50] Correct: 0.0 | NESS: 0.92 | Hallucination: 0 | Confidence: 0.90
+  [20/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.10
+  [21/50] Correct: 1.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [22/50] Correct: 0.0 | NESS: 0.86 | Hallucination: 0 | Confidence: 0.90
+  [23/50] Correct: 0.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.90
+  [24/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.10
+  [25/50] Correct: 0.0 | NESS: 0.69 | Hallucination: 0 | Confidence: 0.90
+  [26/50] Correct: 1.0 | NESS: 0.60 | Hallucination: 0 | Confidence: 0.90
+  [27/50] Correct: 0.0 | NESS: 0.62 | Hallucination: 0 | Confidence: 0.90
+  [28/50] Correct: 0.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [29/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [30/50] Correct: 0.0 | NESS: 0.71 | Hallucination: 0 | Confidence: 0.90
+  [31/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [32/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 0.00
+  [33/50] Correct: 0.0 | NESS: 0.76 | Hallucination: 0 | Confidence: 0.90
+  [34/50] Correct: 0.0 | NESS: 0.69 | Hallucination: 0 | Confidence: 0.90
+  [35/50] Correct: 0.0 | NESS: 0.85 | Hallucination: 0 | Confidence: 0.90
+  [36/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [37/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [38/50] Correct: 0.0 | NESS: 0.89 | Hallucination: 0 | Confidence: 0.90
+  [39/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [40/50] Correct: 1.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [41/50] Correct: 0.0 | NESS: 0.64 | Hallucination: 0 | Confidence: 0.90
+  [42/50] Correct: 0.0 | NESS: 0.85 | Hallucination: 0 | Confidence: 0.90
+  [43/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [44/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 1.00
+  [45/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 1.00
+  [46/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [47/50] Correct: 1.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [48/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [49/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [50/50] Correct: 1.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.2000
+Evidence Support:   0.7697 (strict 0.7697 / derived 0.9306)
+Hallucination Rate: 0.0000
+ECE:                0.6560 (0 missing confidence)
+ONRS:               0.5597
+
+------------------------------------------------------------
+NOISE LEVEL: 20%  (2 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/50] Correct: 1.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.90
+  [2/50] Correct: 0.0 | NESS: 0.88 | Hallucination: 0 | Confidence: 0.90
+  [3/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 0.90
+  [4/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [5/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [6/50] Correct: 1.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [7/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.10
+  [8/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [9/50] Correct: 1.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [10/50] Correct: 1.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [11/50] Correct: 1.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [12/50] Correct: 0.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+  [13/50] Correct: 1.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [14/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [15/50] Correct: 0.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [16/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [17/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [18/50] Correct: 0.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [19/50] Correct: 0.0 | NESS: 0.86 | Hallucination: 0 | Confidence: 0.90
+  [20/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.00
+  [21/50] Correct: 0.0 | NESS: 0.73 | Hallucination: 0 | Confidence: 0.90
+  [22/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [23/50] Correct: 0.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.90
+  [24/50] Correct: 0.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.80
+  [25/50] Correct: 0.0 | NESS: 0.69 | Hallucination: 0 | Confidence: 0.90
+  [26/50] Correct: 1.0 | NESS: 0.60 | Hallucination: 0 | Confidence: 0.90
+  [27/50] Correct: 0.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.90
+  [28/50] Correct: 1.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [29/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 0.90
+  [30/50] Correct: 0.0 | NESS: 0.71 | Hallucination: 0 | Confidence: 0.90
+  [31/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [32/50] Correct: 0.0 | NESS: 0.59 | Hallucination: 0 | Confidence: 0.50
+  [33/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [34/50] Correct: 0.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [35/50] Correct: 0.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [36/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [37/50] Correct: 0.0 | NESS: 0.79 | Hallucination: 0 | Confidence: 0.90
+  [38/50] Correct: 0.0 | NESS: 0.89 | Hallucination: 0 | Confidence: 0.90
+  [39/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [40/50] Correct: 1.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [41/50] Correct: 1.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 0.90
+  [42/50] Correct: 0.0 | NESS: 0.79 | Hallucination: 0 | Confidence: 0.90
+  [43/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [44/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 1.00
+  [45/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 1.00
+  [46/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [47/50] Correct: 1.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [48/50] Correct: 1.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [49/50] Correct: 0.0 | NESS: 0.54 | Hallucination: 0 | Confidence: 0.90
+  [50/50] Correct: 1.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.2600
+Evidence Support:   0.7627 (strict 0.7627 / derived 0.9416)
+Hallucination Rate: 0.0000
+ECE:                0.6000 (0 missing confidence)
+ONRS:               0.5868
+
+------------------------------------------------------------
+NOISE LEVEL: 30%  (3 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/50] Correct: 1.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.90
+  [2/50] Correct: 0.0 | NESS: 0.84 | Hallucination: 0 | Confidence: 0.90
+  [3/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 1.00
+  [4/50] Correct: 0.0 | NESS: 0.86 | Hallucination: 0 | Confidence: 0.90
+  [5/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 0.90
+  [6/50] Correct: 1.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [7/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.00
+  [8/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [9/50] Correct: 1.0 | NESS: 0.77 | Hallucination: 0 | Confidence: 0.90
+  [10/50] Correct: 1.0 | NESS: 0.89 | Hallucination: 0 | Confidence: 0.90
+  [11/50] Correct: 1.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [12/50] Correct: 0.0 | NESS: 0.72 | Hallucination: 0 | Confidence: 0.90
+  [13/50] Correct: 1.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [14/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [15/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [16/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [17/50] Correct: 0.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.90
+  [18/50] Correct: 0.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [19/50] Correct: 0.0 | NESS: 0.86 | Hallucination: 0 | Confidence: 0.90
+  [20/50] Correct: 0.0 | NESS: 0.88 | Hallucination: 0 | Confidence: 0.00
+  [21/50] Correct: 1.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [22/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [23/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [24/50] Correct: 0.0 | NESS: 0.00 | Hallucination: 1 | Confidence: 0.50
+  [25/50] Correct: 0.0 | NESS: 0.69 | Hallucination: 0 | Confidence: 0.90
+  [26/50] Correct: 0.0 | NESS: 0.71 | Hallucination: 0 | Confidence: 0.90
+  [27/50] Correct: 0.0 | NESS: 0.69 | Hallucination: 0 | Confidence: 0.90
+  [28/50] Correct: 1.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+  [29/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 0.90
+  [30/50] Correct: 0.0 | NESS: 0.71 | Hallucination: 0 | Confidence: 0.90
+  [31/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [32/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 0.50
+  [33/50] Correct: 0.0 | NESS: 0.71 | Hallucination: 0 | Confidence: 0.90
+  [34/50] Correct: 0.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 1.00
+  [35/50] Correct: 0.0 | NESS: 0.87 | Hallucination: 0 | Confidence: 0.90
+  [36/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [37/50] Correct: 0.0 | NESS: 0.79 | Hallucination: 0 | Confidence: 0.90
+  [38/50] Correct: 0.0 | NESS: 0.74 | Hallucination: 0 | Confidence: 0.90
+  [39/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [40/50] Correct: 1.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [41/50] Correct: 1.0 | NESS: 0.63 | Hallucination: 0 | Confidence: 0.90
+  [42/50] Correct: 0.0 | NESS: 0.69 | Hallucination: 0 | Confidence: 0.90
+  [43/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [44/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 1.00
+  [45/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 1.00
+  [46/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [47/50] Correct: 1.0 | NESS: 0.86 | Hallucination: 0 | Confidence: 0.90
+  [48/50] Correct: 0.0 | NESS: 0.73 | Hallucination: 0 | Confidence: 0.90
+  [49/50] Correct: 0.0 | NESS: 0.60 | Hallucination: 0 | Confidence: 0.90
+  [50/50] Correct: 0.0 | NESS: 0.94 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.2200
+Evidence Support:   0.7532 (strict 0.7532 / derived 0.9291)
+Hallucination Rate: 0.0200
+ECE:                0.6360 (0 missing confidence)
+ONRS:               0.5608
+
+------------------------------------------------------------
+NOISE LEVEL: 40%  (4 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/50] Correct: 1.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.90
+  [2/50] Correct: 0.0 | NESS: 0.94 | Hallucination: 0 | Confidence: 0.90
+  [3/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 1.00
+  [4/50] Correct: 0.0 | NESS: 0.86 | Hallucination: 0 | Confidence: 0.90
+  [5/50] Correct: 0.0 | NESS: 0.88 | Hallucination: 0 | Confidence: 0.90
+  [6/50] Correct: 1.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [7/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.00
+  [8/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [9/50] Correct: 1.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [10/50] Correct: 1.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [11/50] Correct: 1.0 | NESS: 0.86 | Hallucination: 0 | Confidence: 0.90
+  [12/50] Correct: 0.0 | NESS: 0.60 | Hallucination: 0 | Confidence: 0.90
+  [13/50] Correct: 1.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [14/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [15/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [16/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [17/50] Correct: 0.0 | NESS: 0.54 | Hallucination: 0 | Confidence: 0.90
+  [18/50] Correct: 0.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [19/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [20/50] Correct: 1.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.30
+  [21/50] Correct: 1.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [22/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [23/50] Correct: 1.0 | NESS: 0.73 | Hallucination: 0 | Confidence: 0.90
+  [24/50] Correct: 0.0 | NESS: 0.00 | Hallucination: 1 | Confidence: 0.80
+  [25/50] Correct: 0.0 | NESS: 0.69 | Hallucination: 0 | Confidence: 0.90
+  [26/50] Correct: 1.0 | NESS: 0.67 | Hallucination: 0 | Confidence: 0.90
+  [27/50] Correct: 0.0 | NESS: 0.76 | Hallucination: 0 | Confidence: 0.90
+  [28/50] Correct: 0.0 | NESS: 0.78 | Hallucination: 0 | Confidence: 0.90
+  [29/50] Correct: 0.0 | NESS: 0.57 | Hallucination: 0 | Confidence: 0.90
+  [30/50] Correct: 0.0 | NESS: 0.71 | Hallucination: 0 | Confidence: 0.90
+  [31/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [32/50] Correct: 0.0 | NESS: 0.43 | Hallucination: 1 | Confidence: 0.90
+  [33/50] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [34/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [35/50] Correct: 0.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [36/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [37/50] Correct: 0.0 | NESS: 0.79 | Hallucination: 0 | Confidence: 0.90
+  [38/50] Correct: 0.0 | NESS: 0.79 | Hallucination: 0 | Confidence: 0.90
+  [39/50] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [40/50] Correct: 1.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.90
+  [41/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [42/50] Correct: 0.0 | NESS: 0.73 | Hallucination: 0 | Confidence: 0.90
+  [43/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [44/50] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 1.00
+  [45/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 1.00
+  [46/50] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [47/50] Correct: 1.0 | NESS: 0.77 | Hallucination: 0 | Confidence: 0.90
+  [48/50] Correct: 1.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [49/50] Correct: 0.0 | NESS: 0.50 | Hallucination: 0 | Confidence: 0.90
+  [50/50] Correct: 1.0 | NESS: 0.58 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.2800
+Evidence Support:   0.7449 (strict 0.7449 / derived 0.9399)
+Hallucination Rate: 0.0400
+ECE:                0.6220 (0 missing confidence)
+ONRS:               0.5751
+
+============================================================
+EXPERIMENT 4 RESULTS
+============================================================
+Injection mode: evidence
+Noise  0% | Reached = 0.0000 | Accuracy = 0.2000 | NESS = 0.7525 | Hallucination = 0.0600 | ONRS = 0.5425
+Noise 10% | Reached = 1.0000 | Accuracy = 0.2000 | NESS = 0.7697 | Hallucination = 0.0000 | ONRS = 0.5597
+Noise 20% | Reached = 1.0000 | Accuracy = 0.2600 | NESS = 0.7627 | Hallucination = 0.0000 | ONRS = 0.5868
+Noise 30% | Reached = 1.0000 | Accuracy = 0.2200 | NESS = 0.7532 | Hallucination = 0.0200 | ONRS = 0.5608
+Noise 40% | Reached = 1.0000 | Accuracy = 0.2800 | NESS = 0.7449 | Hallucination = 0.0400 | ONRS = 0.5751
+------------------------------------------------------------
+ONRS at 0% noise: 0.5425
+ONRS at 40% noise: 0.5751
+Total change: +0.0325
+Monotonically non-increasing across levels: False
+
+  Interpretation: a NEGATIVE total change means ONRS tracked the
+  injected degradation, i.e. the metric behaved as a health signal.
+  A flat or positive trend would be a negative result FOR THE METRIC,
+  indicating it does not respond to the degradation it should signal.
+
+  BUT check the 'Reached' column first. If the noise did not reach the
+  model, a flat ONRS says nothing about the metric -- there was no
+  degradation to signal. Only levels where Reached > 0 test ONRS.
+============================================================
+
+Per-noise-level summary saved to: results/cpu_fp32/experiment4_results_dev.csv
+Per-example results saved to:     results/cpu_fp32/experiment4_results_dev_per_example.csv
+Summary JSON saved to:            results/cpu_fp32/experiment4_results_dev_summary.json
