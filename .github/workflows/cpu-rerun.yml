@@ -33,6 +33,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   plan:
@@ -91,17 +92,39 @@ jobs:
         env:
           N_MAIN: ${{ inputs.n_main }}
           N_EXP2: ${{ inputs.n_exp2 }}
+          SHARD: ${{ matrix.shard }}
+          RUN_ID: ${{ github.run_id }}
         run: |
           mkdir -p gen scratch
-          # A shard with no items for an experiment (Experiment 2 has only a few)
-          # fails its own summary step; the generations are cached before that.
-          run() { echo "::group::$*"; /usr/bin/time -v "$@" || true; echo "::endgroup::"; }
-          run python -m experiments.experiment1 --split dev --n "$N_MAIN" --ness-mode derived --output scratch/e1.csv
-          run python -m experiments.experiment5 --split dev --n "$N_MAIN" --output scratch/e5.csv
-          run python -m experiments.experiment4 --split dev --n "$N_MAIN" --injection-mode evidence --output scratch/e4.csv
-          run python -m experiments.experiment2 --split dev --n "$N_EXP2" --output scratch/e2.csv
-          run python -m experiments.experiment3 --split dev --n "$N_MAIN" --output scratch/e3.csv
-          ls -la gen; wc -l gen/*.jsonl || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Logs and artifacts cannot be read while a job runs, so the shard pushes
+          # its cache and the tail of its log to its own branch every few minutes.
+          # That doubles as a checkpoint if the job is ever cut off.
+          push_state() {
+            tail -n 300 gen/log.txt > gen/log_tail.txt 2>/dev/null || true
+            git add -f gen/shard_${SHARD}.jsonl gen/log_tail.txt 2>/dev/null || true
+            git commit -qm "shard ${SHARD} progress" 2>/dev/null || true
+            git push -qf origin HEAD:refs/heads/cpu-gen-${RUN_ID}-${SHARD} 2>/dev/null || true
+          }
+
+          { echo "shard ${SHARD}"; nproc; free -g | head -2; lscpu | grep -E "Model name|Flags" | cut -c1-400; } > gen/log.txt 2>&1
+          (
+            # A shard with no items for an experiment (Experiment 2 has only a few)
+            # fails its own summary step; its generations are cached before that.
+            run() { echo "::group::$*"; echo "=== $(date -u +%T) START $*"; /usr/bin/time -v "$@" || true; echo "=== $(date -u +%T) END"; echo "::endgroup::"; }
+            run python -m experiments.experiment1 --split dev --n "$N_MAIN" --ness-mode derived --output scratch/e1.csv
+            run python -m experiments.experiment5 --split dev --n "$N_MAIN" --output scratch/e5.csv
+            run python -m experiments.experiment4 --split dev --n "$N_MAIN" --injection-mode evidence --output scratch/e4.csv
+            run python -m experiments.experiment2 --split dev --n "$N_EXP2" --output scratch/e2.csv
+            run python -m experiments.experiment3 --split dev --n "$N_MAIN" --output scratch/e3.csv
+          ) >> gen/log.txt 2>&1 &
+          pid=$!
+          while kill -0 $pid 2>/dev/null; do sleep 150; push_state; done
+          push_state
+          wc -l gen/*.jsonl || true
+          tail -n 40 gen/log.txt
 
       - name: Upload generation cache
         if: always()
@@ -133,11 +156,17 @@ jobs:
       - name: Fetch FinQA dev split
         run: curl -sSf -o data_loader/dev.json https://raw.githubusercontent.com/czyssrs/FinQA/main/dataset/dev.json
 
-      - uses: actions/download-artifact@v4
-        with:
-          pattern: gencache-*
-          path: caches
-          merge-multiple: true
+      - name: Collect shard caches from their branches
+        env:
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          git fetch -q origin "+refs/heads/cpu-gen-${RUN_ID}-*:refs/remotes/gen/*"
+          mkdir -p caches
+          for ref in $(git for-each-ref --format='%(refname)' refs/remotes/gen); do
+            k=${ref##*-}
+            git show "$ref:gen/shard_${k}.jsonl" > "caches/shard_${k}.jsonl" || echo "no cache on $ref"
+          done
+          ls -la caches
 
       - name: Merge caches
         run: |
