@@ -1,0 +1,225 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+==============================================================
+EXPERIMENT 5: COMPARATIVE BASELINES ON IDENTICAL DATA
+Split: dev | N: 50 | Seed: 42 | Engine: replay | NESS mode: strict
+Conditions: ['closed_book', 'retrieval', 'oracle']  (total generations: 150)
+==============================================================
+All conditions share the same items, generator, prompt, scoring and
+verifier. Only the evidence supplied to the model differs.
+==============================================================
+Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+LLM backend: replay of 577 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
+Embedding model running on: cpu
+FAISS available: True (using faiss.IndexFlatIP)
+
+--------------------------------------------------------------
+CONDITION: CLOSED_BOOK
+--------------------------------------------------------------
+  [1/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [2/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [3/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [4/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [5/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [6/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [7/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [8/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [9/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [10/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [11/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [12/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [13/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [14/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [15/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [16/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [17/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [18/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [19/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [20/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [21/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [22/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [23/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [24/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [25/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [26/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [27/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [28/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [29/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [30/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [31/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [32/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [33/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [34/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [35/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [36/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [37/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [38/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [39/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [40/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [41/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [42/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [43/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [44/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [45/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [46/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [47/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [48/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [49/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [50/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+
+  Accuracy:        0.0000  95% CI [0.0000, 0.0714]
+  NESS:            0.0000
+  Hallucination:   1.0000
+  ECE:             0.3600
+  ONRS:            0.1280
+
+--------------------------------------------------------------
+CONDITION: RETRIEVAL
+--------------------------------------------------------------
+  [1/50] Correct: 1.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [2/50] Correct: 0.0 | NESS: 0.93 | Halluc: 0 | Conf: 0.90
+  [3/50] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [4/50] Correct: 0.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.90
+  [5/50] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [6/50] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [7/50] Correct: 0.0 | NESS: 0.79 | Halluc: 0 | Conf: 0.90
+  [8/50] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [9/50] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [10/50] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [11/50] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [12/50] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [13/50] Correct: 1.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [14/50] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [15/50] Correct: 0.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [16/50] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [17/50] Correct: 0.0 | NESS: 0.45 | Halluc: 1 | Conf: 0.90
+  [18/50] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.90
+  [19/50] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [20/50] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 1.00
+  [21/50] Correct: 1.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.90
+  [22/50] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [23/50] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [24/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.10
+  [25/50] Correct: 0.0 | NESS: 0.69 | Halluc: 0 | Conf: 0.90
+  [26/50] Correct: 1.0 | NESS: 0.60 | Halluc: 0 | Conf: 0.90
+  [27/50] Correct: 0.0 | NESS: 0.54 | Halluc: 0 | Conf: 0.90
+  [28/50] Correct: 1.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+  [29/50] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [30/50] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+  [31/50] Correct: 0.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.90
+  [32/50] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.10
+  [33/50] Correct: 0.0 | NESS: 0.85 | Halluc: 0 | Conf: 0.90
+  [34/50] Correct: 0.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [35/50] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [36/50] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [37/50] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [38/50] Correct: 0.0 | NESS: 0.81 | Halluc: 0 | Conf: 0.90
+  [39/50] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [40/50] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 1.00
+  [41/50] Correct: 1.0 | NESS: 0.68 | Halluc: 0 | Conf: 0.90
+  [42/50] Correct: 0.0 | NESS: 0.85 | Halluc: 0 | Conf: 0.90
+  [43/50] Correct: 0.0 | NESS: 0.62 | Halluc: 0 | Conf: 0.90
+  [44/50] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 1.00
+  [45/50] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.00
+  [46/50] Correct: 0.0 | NESS: 0.64 | Halluc: 0 | Conf: 0.90
+  [47/50] Correct: 1.0 | NESS: 0.89 | Halluc: 0 | Conf: 0.90
+  [48/50] Correct: 0.0 | NESS: 0.70 | Halluc: 0 | Conf: 0.90
+  [49/50] Correct: 0.0 | NESS: 0.47 | Halluc: 1 | Conf: 0.90
+  [50/50] Correct: 0.0 | NESS: 0.77 | Halluc: 0 | Conf: 0.90
+
+  Accuracy:        0.2000  95% CI [0.1124, 0.3304]
+  NESS:            0.7525
+  Hallucination:   0.0600
+  ECE:             0.6560
+  ONRS:            0.5425
+
+--------------------------------------------------------------
+CONDITION: ORACLE
+--------------------------------------------------------------
+  [1/50] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [2/50] Correct: 0.0 | NESS: 0.68 | Halluc: 0 | Conf: 0.90
+  [3/50] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [4/50] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [5/50] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [6/50] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [7/50] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [8/50] Correct: 0.0 | NESS: 0.53 | Halluc: 0 | Conf: 0.90
+  [9/50] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [10/50] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [11/50] Correct: 1.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [12/50] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [13/50] Correct: 0.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [14/50] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [15/50] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [16/50] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [17/50] Correct: 0.0 | NESS: 0.29 | Halluc: 1 | Conf: 0.90
+  [18/50] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [19/50] Correct: 0.0 | NESS: 0.89 | Halluc: 0 | Conf: 0.90
+  [20/50] Correct: 1.0 | NESS: 0.61 | Halluc: 0 | Conf: 0.80
+  [21/50] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [22/50] Correct: 1.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [23/50] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [24/50] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [25/50] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [26/50] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [27/50] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [28/50] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [29/50] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [30/50] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [31/50] Correct: 0.0 | NESS: 0.88 | Halluc: 0 | Conf: 0.90
+  [32/50] Correct: 0.0 | NESS: 0.64 | Halluc: 0 | Conf: 0.90
+  [33/50] Correct: 0.0 | NESS: 0.76 | Halluc: 0 | Conf: 0.90
+  [34/50] Correct: 1.0 | NESS: 0.82 | Halluc: 0 | Conf: 1.00
+  [35/50] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [36/50] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [37/50] Correct: 0.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [38/50] Correct: 0.0 | NESS: 0.63 | Halluc: 0 | Conf: 0.90
+  [39/50] Correct: 0.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [40/50] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [41/50] Correct: 0.0 | NESS: 0.44 | Halluc: 1 | Conf: 0.90
+  [42/50] Correct: 0.0 | NESS: 0.79 | Halluc: 0 | Conf: 0.90
+  [43/50] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [44/50] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 1.00
+  [45/50] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.10
+  [46/50] Correct: 0.0 | NESS: 0.64 | Halluc: 0 | Conf: 0.90
+  [47/50] Correct: 1.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [48/50] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.90
+  [49/50] Correct: 0.0 | NESS: 0.55 | Halluc: 0 | Conf: 0.90
+  [50/50] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+
+  Accuracy:        0.2000  95% CI [0.1124, 0.3304]
+  NESS:            0.7292
+  Hallucination:   0.0600
+  ECE:             0.6760
+  ONRS:            0.5316
+
+==============================================================
+EXPERIMENT 5 RESULTS -- CONTROLLED COMPARISON
+==============================================================
+Condition          Acc            95% CI    NESS   Halluc     ONRS
+closed_book     0.0000      [0.00, 0.07]  0.0000   1.0000   0.1280
+retrieval       0.2000      [0.11, 0.33]  0.7525   0.0600   0.5425
+oracle          0.2000      [0.11, 0.33]  0.7292   0.0600   0.5316
+
+--------------------------------------------------------------
+ERROR DECOMPOSITION  <- this is what answers the comparison question
+--------------------------------------------------------------
+  Closed-book accuracy:                 0.0000
+  Gain from retrieval over closed-book: +0.2000
+     -> how much the retrieval stage actually contributes.
+  Retrieval-attributable error:         +0.0000
+     -> accuracy recovered by supplying gold evidence instead
+        of retrieved evidence. This is the ceiling on what any
+        retrieval improvement could deliver for this generator.
+  Reasoning-attributable error:         0.8000
+     -> error remaining even with perfect evidence. Not
+        addressable by improving retrieval at all.
+
+  Compare the oracle row against the gold-retrieval condition
+  reported in the FinQA literature, and the retrieval row
+  against their retriever condition. Note these remain
+  different splits and differently-trained systems: use them
+  as context, not as a like-for-like scoreboard.
+==============================================================
+
+Per-example results saved to: results/cpu_fp32/experiment5_results_dev.csv
+Summary saved to:             results/cpu_fp32/experiment5_results_dev_summary.json

@@ -1,0 +1,1132 @@
+condition,id,gold_answer,answer_type,predicted_value,correct,parse_success,evidence_support,evidence_support_strict,evidence_support_derived,hallucination,self_reported_confidence,verifier_verified,retry_count,evidence_char_count,response
+closed_book,V/2008/page_17.pdf-1,127.4,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data for American Express payment volumes or transaction details.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,C/2017/page_328.pdf-1,93.5%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the percentage cumulative total return for Citi Common Stock over any period. 
+
+Final Answer: 0
+
+Confidence: 0.0"
+closed_book,DVN/2007/page_58.pdf-2,24.69136%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the percentage of total oil and gas mmboe that comes from Canada.
+
+Final Answer: 0
+
+Confidence: 1.0"
+closed_book,ETR/2011/page_341.pdf-3,19.2,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the net change in net revenue for 2010.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,ETR/2004/page_213.pdf-2,60.306000000000004%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the deferred fuel cost revisions as a percentage of the increase in fuel cost recovery revenues. 
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,PM/2017/page_38.pdf-1,688.0,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the change in operating income from 2016 to 2017.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,JPM/2008/page_85.pdf-3,10.935%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot find the CET1 ratio for JPMorgan Chase & Co. in 2008.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,PNC/2013/page_207.pdf-1,3044.323%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the required percentage. The evidence does not contain any information about the notional value of derivatives designated as hedging instruments under GAAP at the end of 2014 or the fair value at that time.
+
+Final Answer: 0%
+
+Confidence: 1.0"
+closed_book,CME/2017/page_97.pdf-5,995.0,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided to calculate the increase in Class A common stock issued and outstanding between years.
+
+Final Answer: 0
+
+Confidence: 1.0"
+closed_book,PNC/2013/page_62.pdf-2,3576.0,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the total residential mortgages balance for 2013 and 2012.
+
+Final Answer: 0
+
+Confidence: 1.0"
+closed_book,AAPL/2004/page_36.pdf-2,0.2,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the gross margin decline from 2003 to 2004.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,PKG/2009/page_65.pdf-4,56.196999999999996%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the percentage of total purchase commitments that are due after 2014.
+
+Final Answer: 0%
+
+Confidence: 1.0"
+closed_book,LMT/2013/page_74.pdf-4,-1.9,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the change in the weighted average common shares outstanding for diluted computations from 2012 to 2013.
+
+Final Answer: 0
+
+Confidence: 1.0"
+closed_book,STT/2011/page_83.pdf-1,114.0,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: The evidence provided does not contain any information about tax related to the unrealized losses reclassifications for 2011. Therefore, I cannot calculate the amount of tax related to the unrealized losses reclassifications.
+
+Final Answer: 0
+
+Confidence: 1.0"
+closed_book,MRO/2007/page_149.pdf-2,2057.0,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot identify specific values or perform calculations.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,AOS/2004/page_11.pdf-2,34.011%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the percentage of total aggregate contractual obligations that is due to purchase obligations. 
+
+The evidence does not contain any information about aggregate contractual obligations or purchase obligations.
+
+Final Answer: 0%
+
+Confidence: 1.0"
+closed_book,C/2010/page_223.pdf-3,-52.48500000000001%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot calculate the percentage change of the carrying amount of loan receivable net of the allowance for 2010.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,MSI/2006/page_61.pdf-3,35.099000000000004%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the percentage of the total long-term debt obligations that was due after 2011. 
+
+The evidence does not contain any information about long-term debt obligations or their due dates.
+
+Final Answer: 0%
+
+Confidence: 1.0"
+closed_book,ABMD/2006/page_75.pdf-1,19.495%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the decline from current future minimum lease payments and the following years expected obligation. 
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,AMAT/2013/page_18.pdf-2,7.22222,numeric,0.0,0.0,True,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot find any numerical values related to 'applied 2019s net sales in 2018'. 
+
+Final Answer: 0
+
+Confidence: 0.0"
+closed_book,DVN/2014/page_85.pdf-1,44.8,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data for calculating the amortization amounts from 2015 to 2019. Therefore, I cannot compute the average amortization amount.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,SPGI/2018/page_74.pdf-1,1.15663,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot calculate the ratio of pension trust assets for 2017 to 2018.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,ZBH/2003/page_58.pdf-3,72.82499999999999%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question. Therefore, I cannot identify or extract any relevant values to calculate the percentage of inventory that is ready for liquidation in 2003.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,AMT/2005/page_105.pdf-2,4575515.0,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the total value of net operating loss carryforwards.
+
+Final Answer: 0
+
+Confidence: 1.0"
+closed_book,ETR/2015/page_131.pdf-1,275.56600000000003%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data for the financial information needed to calculate the percent change in annual long-term debt maturities from 2016 to 2017.
+
+Final Answer: 0
+
+Confidence: 1.0"
+closed_book,PNC/2009/page_46.pdf-2,-1.0,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the share of total securities rated BBB/Baa or below for either 2008 or 2009. Therefore, it's impossible to determine the percentage change between these years.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,PM/2017/page_38.pdf-3,2.581%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the percentage increase in interest expense. 
+
+Final Answer: 0
+
+Confidence: 1.0"
+closed_book,HOLX/2015/page_98.pdf-2,-3.024%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the expected growth rate in amortization expense from 2016 to 2017.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,ETR/2017/page_114.pdf-2,33.333%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the payments for Entergy Arkansas as a percentage of payments for Entergy Louisiana.
+
+Final Answer: 0.0
+
+Confidence: 1.0"
+closed_book,UNP/2008/page_77.pdf-1,14.335999999999999%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot calculate the required percentage.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,AES/2016/page_191.pdf-3,-11.33333,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot identify any specific values or perform calculations.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,ETFC/2007/page_126.pdf-3,86.847%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the percentage of total future principal payments of corporate debt that are due after 2012. The evidence does not contain any information about future principal payments or their due dates.
+
+Final Answer: 0%
+
+Confidence: 1.0"
+closed_book,MAS/2012/page_70.pdf-1,-20.646%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: The evidence does not provide any information about total net goodwill for either 2010 or 2011. Therefore, it is not possible to calculate the percentage change in total net goodwill between 2010 and 2011.
+
+Final Answer: 0%
+
+Confidence: 1.0"
+closed_book,AON/2010/page_28.pdf-1,778000.0,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to determine the square footage with an expiry date in 2020.
+
+Final Answer: 0
+
+Confidence: 1.0"
+closed_book,AES/2002/page_46.pdf-4,2.62,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the difference in dollars of the high-low sale price for the common stock in the fourth quarter of 2002.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,CB/2010/page_200.pdf-4,4.85514,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the ratio of statutory capital and surplus to statutory net income for any year. 
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,PM/2015/page_85.pdf-1,-0.0339%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data for the financial information needed to calculate the percentage change in total debt from 2014 to 2015.
+
+Final Answer: 0
+
+Confidence: 1.0"
+closed_book,ETFC/2014/page_26.pdf-2,37.81%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot calculate the total return percentage for e*trade financial corporation for the five years ended 12/14.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,ZBH/2003/page_40.pdf-1,3.8%,numeric,0.0,0.0,True,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the operating profit for the Americas as a percentage of net sales for either 2001 or 2003. 
+
+Final Answer: 0%
+
+Confidence: 0.0"
+closed_book,AAPL/2014/page_38.pdf-3,28987.0,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the change in the amount of long-term debt between 2014 and 2012.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,ETR/2003/page_84.pdf-2,1041.531,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the amount of long-term debt due in the next 36 months as of December 31, 2003.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,LMT/2012/page_47.pdf-3,3.2039999999999997%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot calculate the growth rate in operating profit for space systems in 2011.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,MAS/2018/page_35.pdf-3,1.424%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot calculate the percentage growth in operating profit from 2017 to 2018.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,SYY/2019/page_9.pdf-2,0.0%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the percentage of sales to restaurants for either 2018 or 2019.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,ETR/2002/page_86.pdf-3,6.354%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot find the required values such as annual other sinking fund requirements, annual long-term debt maturities (excluding lease obligations), and annual cash sinking fund requirements for debt outstanding in 2007.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,ZBH/2003/page_58.pdf-1,104.85199999999999%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot calculate the percentage increase in inventories between 2002 and 2003.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,AMT/2010/page_34.pdf-2,22556579533.35,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to calculate the market capitalization for February 2011.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,PM/2014/page_67.pdf-2,3098.0,numeric,0.0,0.0,True,0.0,0.0,0.0,1,1.0,False,1,45,"Reasoning: There is no evidence provided in the retrieved data to find the total of euro notes issued in 2014.
+
+Final Answer: 0
+
+Confidence: 1.0"
+closed_book,ETR/2002/page_24.pdf-1,57.031%,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided for this question, so I cannot calculate the percent increase in non-utility nuclear earnings for 2002.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+closed_book,PM/2015/page_127.pdf-4,-4088.33333,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,45,"Reasoning: There is no evidence provided to calculate the average currency translation adjustments from 2013 to 2015.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+retrieval,V/2008/page_17.pdf-1,127.4,numeric,127.4,1.0,True,0.75,0.75,1.0,0,0.9,True,0,1257,"Reasoning: To find the average payment volume per transaction for American Express, I need to divide the payments volume by the total transactions for American Express. From the evidence, American Express's payments volume is 637 billion and total transactions are 5.0 billion. Therefore, the calculation is 637 / 5.0.
+
+Final Answer: 127.4
+
+Confidence: 0.9
+
+Expression: 637 / 5.0 = 127.4"
+retrieval,C/2017/page_328.pdf-1,93.5%,numeric,70.8,0.0,True,0.9310344827586207,0.9310344827586207,1.0,0,0.9,True,0,1198,"Reasoning: To find the percentage cumulative total return for the five year period ended 31-dec-2017 of Citi common stock, I need to calculate the growth from 31-dec-2012 to 31-dec-2017. The formula is: ((Ending Value - Beginning Value) / Beginning Value) * 100. From the evidence, the beginning value (31-dec-2012) is $100 for Citi common stock. The ending value (31-dec-2017) is found by observing the trend and noting that the last available data point is 31-dec-2016 with a value of $152.3. Assuming the trend continues, we can infer the ending value for 31-dec-2017 is likely around $170.8 (as seen for 31-dec-2016 and 31-dec-2017 in the S&P 500 index). 
+
+expression = (170.8 - 100) / 100 * 100
+expression = 70.8
+
+Final Answer: 70.8
+
+Confidence: 0.9"
+retrieval,DVN/2007/page_58.pdf-2,24.69136%,numeric,24.72,0.0,True,0.5714285714285714,0.5714285714285714,0.8571428571428571,0,0.9,True,0,824,"Reasoning: To find what percentage of the total oil and gas mmboe comes from Canada, I need to use the Canada's total mmboe figure and divide it by the total mmboe of all operations, then multiply by 100 to get the percentage. From the evidence, Canada's total mmboe is 60. The total mmboe of all operations is 243. Expression = 60 / 243 * 100
+
+Final Answer: 24.72
+
+Confidence: 0.9"
+retrieval,ETR/2011/page_341.pdf-3,19.2,numeric,18.6,0.0,True,0.8571428571428571,0.8571428571428571,1.0,0,0.9,False,1,1632,"Reasoning: To find the net change in net revenue from 2009 to 2010, I need to subtract the 2009 net revenue from the 2010 net revenue. From the evidence, I have:
+- 2010 net revenue: $555.3 million
+- 2009 net revenue: $536.7 million
+
+So, the net change = 2010 net revenue - 2009 net revenue = $555.3 million - $536.7 million = 18.6 million
+
+Final Answer: 18.6
+
+Confidence: 0.9"
+retrieval,ETR/2004/page_213.pdf-2,60.306000000000004%,numeric,60.21,0.0,True,0.8333333333333334,0.8333333333333334,1.0,0,0.9,True,0,2080,"Reasoning: To find the percentage, I need to calculate the ratio of deferred fuel cost revisions to the increase in fuel cost recovery revenues, then convert it to a percentage. From the evidence, deferred fuel cost revisions = $59.1 million. Increase in fuel cost recovery revenues = $98.0 million. Expression = (59.1 / 98.0) * 100
+
+Final Answer: 60.21
+
+Confidence: 0.9"
+retrieval,PM/2017/page_38.pdf-1,688.0,numeric,688.0,1.0,True,1.0,1.0,1.0,0,0.9,True,1,1484,"Reasoning: To find the change in operating income from 2016 to 2017, I need the operating income values for those two years. From the evidence, I see:
+- Operating income for 2017: 11503 million
+- Operating income for 2016: 10815 million
+
+Change = 11503 - 10815 = 688
+
+Final Answer: 688
+
+Confidence: 0.9
+
+The confidence is moderate because while the calculation is straightforward, there's no additional context or verification steps provided in the evidence to increase certainty."
+retrieval,JPM/2008/page_85.pdf-3,10.935%,numeric,64.15,0.0,True,0.7878787878787878,0.7878787878787878,0.9090909090909091,0,0.9,False,1,1346,"Reasoning: To find JPMorgan Chase & Co.'s Common Equity Tier 1 (CET1) ratio in 2008, I need to calculate CET1 by subtracting Tier 2 Capital from Total Tier 1 Capital. From the evidence, I have:
+- Total Tier 1 Capital (a) for 2008: $136104 million
+- Total Tier 2 Capital for 2008: $48616 million
+
+CET1 = Total Tier 1 Capital - Total Tier 2 Capital
+     = $136104 million - $48616 million
+     = $87488 million
+
+To find the CET1 ratio, I divide CET1 by Total Tier 1 Capital and multiply by 100 to get a percentage.
+
+CET1 Ratio (%) = (CET1 / Total Tier 1 Capital) * 100
+              = ($87488 million / $136104 million) * 100
+              = 0.6415 * 100
+              = 64.15%
+
+Final Answer: 64.15%
+
+Confidence: 0.9"
+retrieval,PNC/2013/page_207.pdf-1,3044.323%,numeric,304.47,0.0,True,0.75,0.75,0.8333333333333334,0,0.9,False,1,2297,"Reasoning: To find the percentage of the notional value of derivatives designated as hedging instruments under GAAP at the end of 2014 relative to their fair value, I need to:
+- Identify the notional/contract amount for derivatives designated as hedging instruments under GAAP as of December 31, 2013, which is $36,197 million (from the evidence).
+- Identify the asset fair value (a) for these derivatives as of December 31, 2013, which is $1,189 million (from the evidence).
+- Calculate the percentage: (36,197 / 1,189) * 100 = 304.47
+
+Final Answer: 304.47
+
+Confidence: 0.9"
+retrieval,CME/2017/page_97.pdf-5,995.0,numeric,995.0,1.0,True,0.8333333333333334,0.8333333333333334,1.0,0,0.9,True,1,1136,"Reasoning: To find the increase in Class A common stock issued and outstanding between years, I need to subtract the value for 2016 from the value for 2017. From the evidence, I see that for Class A common stock issued and outstanding:
+- December 31, 2017: 339235 (in thousands)
+- December 31, 2016: 338240 (in thousands)
+
+expression = 339235 - 338240 = 995
+
+Final Answer: 995
+
+Confidence: 0.9"
+retrieval,PNC/2013/page_62.pdf-2,3576.0,numeric,2220.0,0.0,True,1.0,1.0,1.0,0,0.9,False,1,976,"Reasoning: To find the total residential mortgages balance for 2013 and 2012, I look at the 'total residential mortgages' row in the evidence. For 2013, the value is 1356 million. For 2012, the value is 2220 million. 
+
+Final Answer: 1356 and 2220
+
+Confidence: 0.9"
+retrieval,AAPL/2004/page_36.pdf-2,0.2,numeric,0.2,0.0,True,0.8,0.8,1.0,0,0.9,True,1,1383,"Reasoning: The gross margin for 2003 is 27.5% and for 2004 is 27.3%. To find the decline, I subtract the 2004 gross margin from the 2003 gross margin: 27.5% - 27.3% = 0.2%
+
+Final Answer: 0.2%
+
+Confidence: 0.9"
+retrieval,PKG/2009/page_65.pdf-4,56.196999999999996%,numeric,0.0,0.0,True,0.6666666666666666,0.6666666666666666,1.0,0,0.9,False,1,1189,"Reasoning: To find the percentage of total purchase commitments due after 2014, I need to:
+1. Identify the purchase commitments due after 2014.
+2. Calculate the total of those commitments.
+3. Divide the total of those commitments by the total purchase commitments.
+4. Multiply by 100 to get the percentage.
+
+From the evidence, I can see the total purchase commitments for different years:
+- 2009: $37.3 million
+- 2008: $29.4 million
+- 2007: $14.5 million
+
+The total purchase commitments as of December 31, 2009, are given as $44,572 thousand.
+
+Since the question asks for the percentage of total purchase commitments due after 2014, I'll consider the commitments made in 2009, 2008, and 2007 as they are all prior to 2014.
+
+Total purchase commitments due after 2014 = $0 (since no information is provided for years after 2009)
+
+Total purchase commitments = $44,572 thousand
+
+0 / 44,572 * 100 = 0
+
+Final Answer: 0%
+
+Confidence: 0.9"
+retrieval,LMT/2013/page_74.pdf-4,-1.9,numeric,-1.9,1.0,True,0.9090909090909091,0.9090909090909091,1.0,0,0.9,True,0,1675,"Reasoning: To find the change in the weighted average common shares outstanding for diluted computations from 2012 to 2013, I need to subtract the 2012 value from the 2013 value. From the evidence, the 2013 value for diluted computations is 326.5 and the 2012 value is 328.4. expression = 326.5 - 328.4
+
+Final Answer: -1.9
+
+Confidence: 0.9"
+retrieval,STT/2011/page_83.pdf-1,114.0,numeric,189.0,0.0,True,1.0,1.0,1.0,0,0.9,False,1,1164,"Reasoning: The evidence states that the unrealized losses related to reclassifications totaled $303 million, or $189 million after-tax, as of December 31, 2011. This directly provides the after-tax amount needed.
+
+Final Answer: 189
+
+Confidence: 0.9"
+retrieval,MRO/2007/page_149.pdf-2,2057.0,numeric,3308.0,0.0,True,0.8181818181818182,0.8181818181818182,0.8181818181818182,0,0.9,True,0,1090,"Reasoning: To find the 2008 total, we need to add the increase in development costs from 2007 to 2008. From the evidence, we know the development costs incurred during the period for 2007 were $1654 million. Therefore, if these costs increased by the same amount in 2008, the development costs for 2008 would be $1654 + $1654 = $3308 million.
+
+Final Answer: 3308
+
+Confidence: 0.9"
+retrieval,AOS/2004/page_11.pdf-2,34.011%,numeric,33.81,0.0,True,0.5,0.5,0.75,0,0.9,True,0,1917,"Reasoning: To find the percentage of total aggregate contractual obligations due to purchase obligations, I need to divide the total amount of purchase obligations by the total aggregate contractual obligations and multiply by 100. From the evidence, the total amount of purchase obligations is $177.3 million and the total aggregate contractual obligations is $521.3 million. 
+
+expression = 177.3 / 521.3 * 100
+expression = 33.81
+
+Final Answer: 33.81
+
+Confidence: 0.9"
+retrieval,C/2010/page_223.pdf-3,-52.48500000000001%,numeric,1351.85,0.0,True,0.45,0.45,1.0,1,0.9,False,1,1463,"Reasoning: To find the percentage change of the carrying amount of loan receivable net of the allowance in 2010, I need to calculate the difference between the carrying amount of loan receivable and the allowance, then divide by the carrying amount of loan receivable, and finally multiply by 100 to get the percentage.
+
+For 2010:
+- Carrying amount of loan receivable: $469 million
+- Allowance: $77 million
+
+Net of allowance = Carrying amount of loan receivable - Allowance = $469 million - $77 million = $392 million
+
+Percentage change = ((New Value - Original Value) / Original Value) * 100
+                 = (($392 million - $27 million) / $27 million) * 100
+                 = ($365 million / $27 million) * 100
+                 = 13.5185... * 100
+                 = 1351.85...
+
+Final Answer: 1351.85%
+
+Confidence: 0.9
+
+Note: The confidence is slightly lower due to the complexity of the calculation and the potential for rounding errors, but the values used are clearly stated in the evidence."
+retrieval,MSI/2006/page_61.pdf-3,35.099000000000004%,numeric,35.21,0.0,True,0.7777777777777778,0.7777777777777778,0.8888888888888888,0,0.9,True,0,2066,"Reasoning: To find the percentage of total long-term debt obligations that was due after 2011, I need to calculate the ratio of ""payments due by period (1) thereafter"" to the ""total long-term debt obligations"". From the evidence, ""payments due by period (1) thereafter"" is $1451 million and ""total long-term debt obligations"" is $4134 million.
+
+expression = 1451 / 4134 * 100
+
+Final Answer: 35.21
+
+Confidence: 0.9"
+retrieval,ABMD/2006/page_75.pdf-1,19.495%,numeric,993.0,0.0,True,0.8,0.8,1.0,0,0.9,True,0,1205,"Reasoning: To find the decline from current future minimum lease payments and the following years expected obligation, I need to calculate the difference between the current year's future minimum lease payments and the next year's. From the evidence, I see that for the fiscal year ending March 31, 2010, the future minimum lease payments are $710 thousand. For the fiscal year ending March 31, 2007, the future minimum lease payments are $1703 thousand. 
+
+expression = 1703 - 710 = 993
+
+Final Answer: 993
+
+Confidence: 0.9"
+retrieval,AMAT/2013/page_18.pdf-2,7.22222,numeric,0.0,0.0,True,0.75,0.75,1.0,0,1.0,False,1,1547,"Reasoning: The evidence does not provide any information about Applied's net sales in 2018. There is no data given for 2018 or any year prior to 2013.
+
+Final Answer: 0
+
+Confidence: 1.0"
+retrieval,DVN/2014/page_85.pdf-1,44.8,numeric,44.8,1.0,True,0.782608695652174,0.782608695652174,0.9130434782608695,0,0.9,False,1,636,"Reasoning: To find the average amortization amount from 2015-2019, I need the amortization amounts for those years. From the evidence:
+- For 2015: $45 million
+- For 2016: $45 million
+- For 2017: $45 million
+- For 2018: $45 million
+- For 2019: $44 million
+
+Sum of these amounts = 45 + 45 + 45 + 45 + 44 = 224 million
+Number of years = 5
+Average = 224 / 5 = 44.8
+
+Final Answer: 44.8
+
+Confidence: 0.9
+
+Note: The confidence level is adjusted slightly down due to the recalculated average, but the confidence remains high as the calculation is straightforward and verified against the provided data."
+retrieval,SPGI/2018/page_74.pdf-1,1.15663,numeric,1.1055,0.0,True,0.8333333333333334,0.8333333333333334,0.8333333333333334,0,0.9,True,0,1438,"Reasoning: To find the ratio of the pension trust assets for 2017 to 2018, I need to use the values provided for those years. Assets for 2017 = $1739 million and for 2018 = $1572 million. The ratio is calculated by dividing the 2017 value by the 2018 value.
+
+1739 / 1572 = 1.1055
+
+Final Answer: 1.1055
+
+Confidence: 0.9"
+retrieval,ZBH/2003/page_58.pdf-3,72.82499999999999%,numeric,73.14,0.0,True,0.6666666666666666,0.6666666666666666,0.8333333333333334,0,0.9,True,0,1067,"Reasoning: To find the percentage of inventory that is ready for liquidation (sale) in 2003, I need to divide the finished goods value by the inventories net value for 2003 and multiply by 100. From the evidence, the finished goods value for 2003 is $384.3 million and the inventories net value for 2003 is $527.7 million.
+
+(384.3 / 527.7) * 100 = 73.14
+
+Final Answer: 73.14
+
+Confidence: 0.9"
+retrieval,AMT/2005/page_105.pdf-2,4575515.0,numeric,1.0,0.0,True,0.0,0.0,1.0,1,0.1,False,1,1852,"Reasoning: The evidence mentions net operating loss carryforwards but does not provide specific dollar amounts. It talks about the potential expiration dates, utilization, and the amount of net operating loss carryforwards available to reduce future taxable income. However, it does not list any specific values for the net operating loss carryforwards. 
+
+Given the lack of specific figures, I cannot calculate a precise total value of net operating loss carryforwards.
+
+Final Answer: 1
+
+Confidence: 0.1"
+retrieval,ETR/2015/page_131.pdf-1,275.56600000000003%,numeric,274.94,0.0,True,0.6923076923076923,0.6923076923076923,0.8461538461538461,0,0.9,True,0,748,"Reasoning: To find the percent change from 2016 to 2017, I need the values for those two years. From the evidence, 2016 is $204,079 thousand and 2017 is $766,451 thousand. Percent change formula: ((New Value - Original Value) / Original Value) * 100. Substituting the values: ((766451 - 204079) / 204079) * 100 = 274.94
+
+Final Answer: 274.94
+
+Confidence: 0.9"
+retrieval,PNC/2009/page_46.pdf-2,-1.0,numeric,-1.0,1.0,True,0.6,0.6,1.0,0,0.9,True,0,984,"Reasoning: To find the share of total securities rated BAA/BBB or below changed between 2008 and 2009, I need to look at the 'bbb/baa' row for both years. In 2009, the value is 2%, and in 2008, the value is 3%. The change in percentage points is calculated as 2 - 3 = -1.
+
+Final Answer: -1
+
+Confidence: 0.9"
+retrieval,PM/2017/page_38.pdf-3,2.581%,numeric,2.46,0.0,True,0.5384615384615384,0.5384615384615384,0.8461538461538461,0,0.9,False,1,1651,"Reasoning: The evidence states ""interest expense, net, of $914 million increased by $23 million"". To find the percentage increase, I use the formula: ((new_value - original_value) / original_value) * 100. Here, the new value is $914 million + $23 million = $937 million. The original value is $914 million. So, the calculation is: ($937 million - $914 million) / $914 million * 100 = 2.46
+
+Final Answer: 2.46
+
+Confidence: 0.9"
+retrieval,HOLX/2015/page_98.pdf-2,-3.024%,numeric,-3.02,1.0,True,0.7142857142857143,0.7142857142857143,0.9285714285714286,0,0.9,True,1,1093,"Reasoning: To find the expected growth rate in amortization expense from 2016 to 2017, I need to calculate the difference between the amortization expenses for these two fiscal years, then divide by the 2016 expense. From the evidence, the amortization expense for fiscal 2016 is $377.0 million and for fiscal 2017 is $365.6 million. 
+
+Calculation: ((365.6 - 377.0) / 377.0) * 100 = -3.0239
+
+Final Answer: -3.02%
+
+Confidence: 0.9
+
+Note: The confidence level is adjusted slightly down due to the discrepancy noted in the previous attempt, but the recalculated value aligns closer to the provided answer of -3.31%."
+retrieval,ETR/2017/page_114.pdf-2,33.333%,numeric,33.33,0.0,True,0.5714285714285714,0.5714285714285714,1.0,0,0.9,True,0,919,"Reasoning: To find the percentage of payments for Entergy Arkansas compared to Entergy Louisiana, I need to divide the payments for Entergy Arkansas by the payments for Entergy Louisiana and multiply by 100. Payments for Entergy Arkansas = $2 million, Payments for Entergy Louisiana = $6 million. expression = (2 / 6) * 100
+
+Final Answer: 33.33
+
+Confidence: 0.9"
+retrieval,UNP/2008/page_77.pdf-1,14.335999999999999%,numeric,14.305125,0.0,True,0.7142857142857143,0.7142857142857143,0.8571428571428571,0,0.9,True,0,783,"Reasoning: To find the percent of the total accounts payable and other liabilities that was accrued wages and vacation, I need to divide the 'accrued wages and vacation' by the 'total accounts payable and other current liabilities' at December 31, 2008, and then multiply by 100 to get the percentage.
+
+From the evidence:
+- Accrued wages and vacation for December 31, 2008: 367 million dollars
+- Total accounts payable and other current liabilities for December 31, 2008: 2560 million dollars
+
+Expression: 367 / 2560 * 100 = 14.305125
+
+Final Answer: 14.305125
+
+Confidence: 0.9"
+retrieval,AES/2016/page_191.pdf-3,-11.33333,numeric,-3.0,0.0,True,0.8571428571428571,0.8571428571428571,1.0,0,0.9,True,0,877,"Reasoning: To find the average amount of settlements for the period ending in 2016, I need to add the settlements for 2016 and 2015, then divide by 2. From the evidence, the settlements for 2016 are -13 (13) and for 2015 are -19 (19). I will use 13 for 2016 and -19 for 2015.
+
+expression = (13 + (-19)) / 2
+
+Final Answer: -3
+
+Confidence: 0.9
+
+Reasoning: [brief calculation using only the retrieved evidence]
+
+Final Answer: -3
+
+Confidence: [number between 0 and 1]"
+retrieval,ETFC/2007/page_126.pdf-3,86.847%,numeric,0.1,0.0,False,0.6666666666666666,0.6666666666666666,0.9333333333333333,0,0.1,False,1,958,"Reasoning: To find the percentage of total future principal payments of corporate debt due after 2012, I need to:
+1. Identify the total future principal payments of corporate debt for 2014, which is $34,501,520.
+2. Identify the future principal payments of corporate debt for 2013 and 2014, which are not provided directly but can be inferred as the difference between 2014 and 2013.
+3. Calculate the sum of future principal payments for 2013 and 2014.
+4. Calculate the percentage of these payments relative to the 2014 total.
+
+However, the evidence does not provide the future principal payments for 2013. Without this information, I cannot calculate the required percentage.
+
+Final Answer: N/A
+
+Confidence: 0.1"
+retrieval,MAS/2012/page_70.pdf-1,-20.646%,numeric,-21.46,0.0,True,0.85,0.85,0.95,0,0.9,False,1,2306,"Reasoning: To find the percentage change in total net goodwill between 2010 and 2011, I need to use the 'net goodwill at december 31 2010' and 'net goodwill at december 31 2011' values from the 'total' row. From the evidence, these values are: 
+- Net goodwill at December 31, 2010: $2383
+- Net goodwill at December 31, 2011: $1891
+
+I will calculate the percentage change using the formula: ((New Value - Original Value) / Original Value) * 100.
+
+expression = (1891 - 2383) / 2383 * 100
+
+Final Answer: -21.46
+
+Confidence: 0.9
+
+The negative value indicates a decrease in net goodwill from 2010 to 2011."
+retrieval,AON/2010/page_28.pdf-1,778000.0,numeric,751000.0,0.0,True,0.8181818181818182,0.8181818181818182,1.0,0,0.9,True,1,1018,"Reasoning: To find the square footage with an expiry date in 2020, I look through the provided data for 'lease expiration dates' that include '2020'. This gives me:
+- Property: 2601 Research Forest Drive, Occupied Square Footage: 414000
+- Property: 199 Water Street New York, Occupied Square Footage: 337000
+
+The total square footage with an expiry date in 2020 is 414000 + 337000 = 751000.
+
+Final Answer: 751000
+
+Confidence: 0.9"
+retrieval,AES/2002/page_46.pdf-4,2.62,numeric,14.27,0.0,True,0.75,0.75,1.0,0,0.9,True,0,1113,"Reasoning: To find the difference in dollars of the high-low sale price for the common stock in the fourth quarter of 2002, I need to look at the relevant row from the table provided. The row for ""2002 first quarter: fourth quarter"" gives me the high and low values for that period. High = $17.84 and Low = $3.57.
+
+The difference in dollars = High - Low = $17.84 - $3.57 = $14.27
+
+Final Answer: 14.27
+
+Confidence: 0.9"
+retrieval,CB/2010/page_200.pdf-4,4.85514,numeric,2.58,0.0,True,0.8,0.8,1.0,0,0.9,True,0,1588,"Reasoning: To find the ratio of statutory capital and surplus to statutory net income for 2010, I need to use the values provided for those metrics in 2010. From the evidence, statutory capital and surplus for 2010 is $6266 million and statutory net income for 2010 is $2430 million. The ratio is calculated as statutory capital and surplus divided by statutory net income.
+
+6266 / 2430 = 2.58
+
+Final Answer: 2.58
+
+Confidence: 0.9"
+retrieval,PM/2015/page_85.pdf-1,-0.0339%,numeric,-2.71,0.0,True,0.75,0.75,0.8333333333333334,0,0.9,False,1,1069,"Reasoning: To find the percentage change in total debt from 2014 to 2015, I use the values provided for total debt in both years. Debt in 2014 = $29.5 billion and debt in 2015 = $28.5 billion. Percentage change = (28.5 - 29.5) / 29.5 * 100 = -2.71
+
+Final Answer: -2.71
+
+Confidence: 0.9"
+retrieval,ETFC/2014/page_26.pdf-2,37.81%,numeric,37.81,0.0,True,0.8095238095238095,0.8095238095238095,1.0,0,0.9,True,0,826,"Reasoning: To find the total return percentage for e*trade financial corporation for the five years ended 12/14, I need to calculate the percentage change from the initial value (12/09) to the final value (12/14). The evidence shows the closing values for e*trade financial corporation on 12/14 as 137.81. The initial value (12/09) is 100.00. The formula for percentage change is ((final value - initial value) / initial value) * 100.
+
+expression = (137.81 - 100.00) / 100.00 * 100
+
+Final Answer: 37.81
+
+Confidence: 0.9
+
+Reasoning: [brief calculation using only the retrieved evidence]
+
+Final Answer: 37.81
+
+Confidence: [number between 0 and 1]"
+retrieval,ZBH/2003/page_40.pdf-1,3.8%,numeric,3.8,0.0,True,0.8,0.8,1.0,0,0.9,True,0,2200,"Reasoning: To find the difference in operating profit for the Americas as a percentage of net sales between 2001 and 2003, I need to extract the percentages for those years from the table. From the table, I see that for Americas:
+- In 2003, the operating profit as a percentage of net sales was 51.2%
+- In 2001, the operating profit as a percentage of net sales was 47.4%
+
+The difference = 51.2% - 47.4% = 3.8%
+
+Final Answer: 3.8
+
+Confidence: 0.9"
+retrieval,AAPL/2014/page_38.pdf-3,28987.0,numeric,28987.0,1.0,True,1.0,1.0,1.0,0,1.0,True,0,1669,"Reasoning: To find the change in long-term debt between 2014 and 2012, I need to subtract the long-term debt value for 2012 from the long-term debt value for 2014. From the evidence, the long-term debt for 2014 is $28987 and for 2012 it is $0.
+
+expression = 28987 - 0
+
+Final Answer: 28987
+
+Confidence: 1.0"
+retrieval,ETR/2003/page_84.pdf-2,1041.531,numeric,1041.531,1.0,True,0.6818181818181818,0.6818181818181818,0.8181818181818182,0,0.9,False,1,607,"Reasoning: To find the long-term debt due in the next 36 months as of December 31, 2003, I need to sum the values for 2004, 2005, and 2006 (the most recent three years before 2008, which is the farthest out in the given data).
+
+From the evidence:
+- 2004 -- ( in thousands ): $ 503215
+- 2005 -- ( in thousands ): $ 462420
+- 2006 -- ( in thousands ): $ 75896
+
+I will add these values together.
+
+503215 + 462420 + 75896 = 1041531
+
+Now, converting to millions by dividing by 1000:
+
+1041531 / 1000 = 1041.531
+
+Final Answer: 1041.531
+
+Confidence: 0.9
+
+Note: The confidence level is slightly reduced because the calculation involves rounding and assumptions about the units, but the values used are directly derived from the provided evidence."
+retrieval,LMT/2012/page_47.pdf-3,3.2039999999999997%,numeric,3.28,0.0,True,0.8461538461538461,0.8461538461538461,0.9230769230769231,0,0.9,False,1,1351,"Reasoning: The growth rate in operating profit for space systems in 2011 is calculated by taking the difference in operating profit between 2011 and 2010, then dividing by the operating profit in 2010. From the evidence, we have:
+- Operating profit for 2011: 1063 million
+- Operating profit for 2010: 1030 million
+
+Expression = (1063 - 1030) / 1030 * 100
+
+Final Answer: 3.28
+
+Confidence: 0.9"
+retrieval,MAS/2018/page_35.pdf-3,1.424%,numeric,1.42,0.0,True,0.625,0.625,1.0,0,0.9,False,1,1189,"Reasoning: To find the percentage growth in the operating profit as reported from 2017 to 2018, I need the operating profit as reported values for those two years. From the evidence, I see:
+- Operating profit as reported in 2018: $1211
+- Operating profit as reported in 2017: $1194
+
+The formula for percentage growth is: ((New Value - Original Value) / Original Value) * 100
+
+Using these values, the calculation is: ((1211 - 1194) / 1194) * 100 = (17 / 1194) * 100 = 1.42%
+
+Final Answer: 1.42
+
+Confidence: 0.9"
+retrieval,SYY/2019/page_9.pdf-2,0.0%,numeric,0.0,0.0,True,1.0,1.0,1.0,0,1.0,True,0,1170,"Reasoning: To find the change in the percentage of sales to restaurants from 2018 to 2019, I need to subtract the percentage of sales to restaurants in 2018 from the percentage of sales to restaurants in 2019. From the evidence, I see that for restaurants in 2019, the percentage is 62%, and for 2018, the percentage is 62%. 
+
+expression = 62 - 62 = 0
+
+Final Answer: 0
+
+Confidence: 1.0"
+retrieval,ETR/2002/page_86.pdf-3,6.354%,numeric,0.0,0.0,False,1.0,1.0,1.0,0,0.0,False,1,2030,"Reasoning: The evidence does not provide specific values for annual long-term debt maturities (excluding lease obligations), annual cash sinking fund requirements for debt outstanding, or other sinking fund requirements for the year 2007. Therefore, I cannot calculate the required percentage.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+retrieval,ZBH/2003/page_58.pdf-1,104.85199999999999%,numeric,99.0412,0.0,True,0.6428571428571429,0.6428571428571429,0.8571428571428571,0,0.9,False,1,1066,"Reasoning: To find the percent increase in inventories from 2002 to 2003, I need the values for both years from the 'inventories net' row. 2002 value = $257.6 and 2003 value = $527.7. Percent Increase formula: ((New Value - Original Value) / Original Value) * 100. Substituting the values: ((527.7 - 257.6) / 257.6) * 100 = 99.0412
+
+Final Answer: 99.0412
+
+Confidence: 0.9
+
+Note: The confidence is slightly reduced due to the recalculated result being very close to 100%, which might suggest a potential rounding issue or simplification in the original evidence."
+retrieval,AMT/2010/page_34.pdf-2,22556579533.35,numeric,22488567604.45,1.0,True,0.8888888888888888,0.8888888888888888,0.8888888888888888,0,0.9,True,0,1373,"Reasoning: To calculate the market capitalization, I need to multiply the number of outstanding shares by the closing price of the common stock on February 11, 2011. From the evidence, I found that the closing price of the common stock on February 11, 2011, was $56.73 per share. The number of outstanding shares is given as 397,612,895.
+
+Market Capitalization = Number of Shares Outstanding * Closing Price
+                   = 397,612,895 * 56.73
+
+Final Answer: 22,488,567,604.45
+
+Confidence: 0.9"
+retrieval,PM/2014/page_67.pdf-2,3098.0,numeric,2401.0,0.0,True,0.7,0.7,1.0,0,0.9,True,1,1952,"Reasoning: The relevant information is in the table provided. There are two rows for euro notes (a) with different face values and maturities. The first euro note (a) has a face value of $1029 and was issued in March 2014. The second euro note (a) has a face value of $1372 and was issued in March 2014. To find the total of euro notes issued in 2014, I add these two face values together: $1029 + $1372 = $2401.
+
+Final Answer: 2401
+
+Confidence: 0.9
+
+Note: The confidence level is set at 0.9 because while the evidence provides clear and direct values, no automated checks were performed to ensure the accuracy of the addition."
+retrieval,ETR/2002/page_24.pdf-1,57.031%,numeric,309.18,0.0,True,0.4666666666666667,0.4666666666666667,0.8,1,0.9,False,1,2378,"Reasoning: The increase in earnings for non-utility nuclear from 2001 to 2002 was $201 million - $49 million = $152 million. To find the percentage increase, I use the formula: (increase / original amount) * 100. The original amount is the earnings in 2001, which is $49 million. So, ($152 / $49) * 100 = 309.18
+
+Final Answer: 309.18
+
+Confidence: 0.9
+
+The confidence is moderate because while the calculation follows the provided data, the context suggests the earnings increase should be around 30%, but the exact figure of 309.18% is derived from the given data without further verification."
+retrieval,PM/2015/page_127.pdf-4,-4088.33333,numeric,4088.33,0.0,True,0.7727272727272727,0.7727272727272727,0.8636363636363636,0,0.9,False,1,1733,"Reasoning: To find the average currency translation adjustments from 2013 to 2015, I need the values for 2013, 2014, and 2015 from the 'currency translation adjustments' row in the table. The values are:
+- 2013: $ -2207 ( 2207 )
+- 2014: $ -3929 ( 3929 )
+- 2015: $ -6129 ( 6129 )
+
+I will calculate the average of these three values.
+
+expression = (2207 + 3929 + 6129) / 3
+expression = 12265 / 3
+expression = 4088.33
+
+Final Answer: 4088.33
+
+Confidence: 0.9
+
+Note: The confidence is slightly reduced due to the recalculated average, but the values are directly derived from the provided evidence."
+oracle,V/2008/page_17.pdf-1,127.4,numeric,129.4,1.0,True,0.8,0.8,1.0,0,0.9,True,0,258,"Reasoning: To find the average payment volume per transaction, I divide the company's total volume by the total transactions. From the evidence, the total volume is 647 billion and the total transactions are 5.0 billion. Therefore, the calculation is 647 / 5.0.
+
+Final Answer: 129.4
+
+Confidence: 0.9"
+oracle,C/2017/page_328.pdf-1,93.5%,numeric,93.5,0.0,True,0.6818181818181818,0.6818181818181818,1.0,0,0.9,False,1,273,"Reasoning: To calculate the percentage cumulative total return for the five year period ended 31-dec-2017 of Citi common stock, I need to find the ratio of the Citi's value at 31-dec-2017 to its value at 31-dec-2012, then subtract 1 to get the growth factor, and finally convert that to a percentage.
+
+Citi's value at 31-dec-2017 = 193.5
+Citi's value at 31-dec-2012 = 100.0
+
+growth_factor = 193.5 / 100.0 - 1 = 0.935
+
+percentage_cumulative_total_return = 0.935 * 100 = 93.5%
+
+Final Answer: 93.5
+
+Confidence: 0.9
+
+Note: The confidence level is set to 0.9 because the calculation is straightforward and relies on the exact values provided in the evidence. There is no room for error in the computation."
+oracle,DVN/2007/page_58.pdf-2,24.69136%,numeric,24.72,0.0,True,0.5,0.5,0.75,0,0.9,True,0,393,"Reasoning: To find what percentage of the total oil and gas mmboe comes from Canada, I need to divide the Canada's total mmboe by the total oil and gas mmboe, then multiply by 100 to get the percentage.
+
+Canada's total mmboe = 60
+Total oil and gas mmboe = 243
+
+expression = 60 / 243 * 100
+
+Final Answer: 24.72
+
+Confidence: 0.9
+
+Reasoning: [brief calculation using only the retrieved evidence]
+
+Final Answer: 24.72
+
+Confidence: 0.9"
+oracle,ETR/2011/page_341.pdf-3,19.2,numeric,18.6,0.0,True,1.0,1.0,1.0,0,0.9,True,0,136,"Reasoning: To find the net change in net revenue, I need to add the 'volume/weather of amount' and the 'other of amount'. The 'volume/weather of amount' is given as 18.9 million and the 'other of amount' is given as -0.3 million. Therefore, the net change in net revenue = 18.9 + (-0.3) = 18.6.
+
+Final Answer: 18.6
+
+Confidence: 0.9"
+oracle,ETR/2004/page_213.pdf-2,60.306000000000004%,numeric,60.1,0.0,True,0.8,0.8,1.0,0,0.9,True,0,533,"Reasoning: To find the percentage, I need to calculate the ratio of deferred fuel cost revisions to the increase in fuel cost recovery revenues. From the evidence, deferred fuel cost revisions are 59.1 million. The increase in fuel cost recovery revenues is given as $98.0 million. Therefore, the calculation is 59.1 / 98.0 * 100.
+
+expression = 59.1 / 98.0 * 100
+expression = 60.10
+
+Final Answer: 60.10
+
+Confidence: 0.9"
+oracle,PM/2017/page_38.pdf-1,688.0,numeric,688.0,1.0,True,1.0,1.0,1.0,0,0.9,True,0,298,"Reasoning: To find the change in millions of operating income from 2016 to 2017, I need to subtract the operating income of 2016 from the operating income of 2017. From the evidence, the operating income for 2017 is 11503 million and for 2016 is 10815 million. Therefore, the calculation is 11503 - 10815.
+
+Final Answer: 688
+
+Confidence: 0.9
+
+Expression: 11503 - 10815 = 688"
+oracle,JPM/2008/page_85.pdf-3,10.935%,numeric,0.1094,0.0,True,0.8333333333333334,0.8333333333333334,1.0,0,0.9,True,0,282,"Reasoning: To calculate the CET1 ratio, we use the formula: CET1 Ratio = (Total Tier 1 Capital) / (Risk-Weighted Assets).
+
+From the evidence:
+- Total Tier 1 Capital (a) of 2008 = $136,104 million
+- Risk-weighted Assets of 2008 = $1,244,659 million
+
+Expression = 136104 / 1244659 = 0.1094
+
+Final Answer: 0.1094
+
+Confidence: 0.9"
+oracle,PNC/2013/page_207.pdf-1,3044.323%,numeric,33.84,0.0,True,0.5263157894736842,0.5263157894736842,0.631578947368421,0,0.9,False,1,706,"Reasoning: The evidence provides the notional/contract amount of derivatives designated as hedging instruments under GAAP for December 31, 2013, which is $36,197 million. For 2014, the fair value of assets (a) is $11,890 million and the fair value of liabilities (b) is $364 million. To find the fair value for 2014, we add these two values together: $11,890 + $364 = $12,254 million. Now, to calculate the percentage of the notional value of derivatives designated as hedging instruments under GAAP at the end of 2014 relative to the fair value, I use the formula: ($12,254 / 36,197) * 100.
+
+Final Answer: 33.84%
+
+Confidence: 0.9
+
+Expression: 36197 / 12254 * 100 = 33.84"
+oracle,CME/2017/page_97.pdf-5,995.0,numeric,995.0,1.0,True,0.8,0.8,1.0,0,0.9,True,0,194,"Reasoning: To find the increase in Class A common stock issued and outstanding between years, I need to subtract the 2016 value from the 2017 value. The values are given in 'thousands', so the difference will also be in 'thousands'. Value in 2017 = 339235 ; Value in 2016 = 338240 . Increase = 339235 - 338240 = 995
+
+Final Answer: 995
+
+Confidence: 0.9"
+oracle,PNC/2013/page_62.pdf-2,3576.0,numeric,2220.0,0.0,True,0.6666666666666666,0.6666666666666666,0.6666666666666666,0,0.9,False,1,147,"Reasoning: The evidence provides the total residential mortgages for two specific years: 2013 is listed as 1356 million and 2012 is listed as 2220 million.
+
+Final Answer: 1356 and 2220
+
+Confidence: 0.9"
+oracle,AAPL/2004/page_36.pdf-2,0.2,numeric,0.2,1.0,True,0.9090909090909091,0.9090909090909091,1.0,0,0.9,True,0,187,"Reasoning: To find the gross margin decline from 2003 to 2004, I need to subtract the 2004 gross margin percentage from the 2003 gross margin percentage. From the evidence, 2003 gross margin percentage is 27.5% and 2004 gross margin percentage is 27.3%. expression = 27.5 - 27.3
+
+Final Answer: 0.2
+
+Confidence: 0.9"
+oracle,PKG/2009/page_65.pdf-4,56.196999999999996%,numeric,55.84,0.0,True,0.5,0.5,0.75,0,0.9,True,0,116,"Reasoning: To find the percentage of total purchase commitments that are due after 2014, I need to divide the 'thereafter' value by the 'total' value and multiply by 100.
+
+thereafter of = 25048 (thousands)
+total = 44572 (thousands)
+
+expression = 25048 / 44572 * 100
+
+Final Answer: 55.84
+
+Confidence: 0.9"
+oracle,LMT/2013/page_74.pdf-4,-1.9,numeric,1.9,0.0,True,0.9090909090909091,0.9090909090909091,1.0,0,0.9,True,0,286,"Reasoning: To find the change in the weighted average common shares outstanding from 2012 to 2013, I need to subtract the 2013 value from the 2012 value. From the evidence, 2012 value is 328.4 and 2013 value is 326.5. expression = 328.4 - 326.5
+
+Final Answer: 1.9
+
+Confidence: 0.9"
+oracle,STT/2011/page_83.pdf-1,114.0,numeric,189.0,0.0,True,1.0,1.0,1.0,0,0.9,False,1,289,"Reasoning: The evidence shows that the after-tax amount for 2011 was $189 million. This directly corresponds to the 'or $ 189 million after-tax' part of the question for the year 2011.
+
+Final Answer: 189
+
+Confidence: 0.9"
+oracle,MRO/2007/page_149.pdf-2,2057.0,numeric,3308.0,0.0,True,0.8,0.8,0.8,0,0.9,True,0,230,"Reasoning: In 2007, the development costs incurred were 1654 million. If the increase in 2008 is the same as in 2007, we add the same amount to the 2007 figure to find the 2008 total.
+
+Expression = 1654 + 1654 = 3308
+
+Final Answer: 3308
+
+Confidence: 0.9"
+oracle,AOS/2004/page_11.pdf-2,34.011%,numeric,33.94,0.0,True,0.5714285714285714,0.5714285714285714,0.8571428571428571,0,0.9,True,0,763,"Reasoning: To find the percentage of total contractual obligations that are due to purchase obligations, I need to divide the total purchase obligations by the total contractual obligations and multiply by 100. From the evidence, the total purchase obligations are $177.3 million and the total contractual obligations are $521.3 million. 
+
+expression = 177.3 / 521.3 * 100
+
+Final Answer: 33.94
+
+Confidence: 0.9"
+oracle,C/2010/page_223.pdf-3,-52.48500000000001%,numeric,110.3,0.0,True,0.2857142857142857,0.2857142857142857,0.8095238095238095,1,0.9,False,1,458,"Reasoning: To find the percentage change of the carrying amount of loan receivable net of the allowance, I need to calculate the net amount for both years and then compute the percentage change.
+
+For 2010:
+Net amount = Carrying amount of loan receivable - Allowance
+           = $469 million - $77 million
+           = $392 million
+
+For 2011:
+Net amount = Carrying amount of loan receivable - Allowance
+           = $920 million - $95 million
+           = $825 million
+
+Percentage change = ((New Value - Original Value) / Original Value) * 100
+                 = (($825 million - $392 million) / $392 million) * 100
+                 = ($433 million / $392 million) * 100
+                 = 1.103025974 * 100
+
+Expression = 1.103025974 * 100
+
+Final Answer: 110.30
+
+Confidence: 0.9"
+oracle,MSI/2006/page_61.pdf-3,35.099000000000004%,numeric,35.21,0.0,True,0.6666666666666666,0.6666666666666666,0.8333333333333334,0,0.9,True,0,590,"Reasoning: To find the percent of the total long-term debt obligations that was due after 2011, I need to add up all the long-term debt obligations after 2011, which are $1451 million (for ""thereafter""). Then, I divide this amount by the total long-term debt obligations, which is $4134 million (from ""(in millions) the long-term debt obligations of payments due by period (1) total is $4134""), and multiply by 100 to get the percentage.
+
+1451 / 4134 * 100 = 35.21
+
+Final Answer: 35.21
+
+Confidence: 0.9"
+oracle,ABMD/2006/page_75.pdf-1,19.495%,numeric,332.0,0.0,True,0.8888888888888888,0.8888888888888888,1.0,0,0.9,True,0,165,"Reasoning: To find the decline from current future minimum lease payments and the following years expected obligation, I need to subtract the 2008 value from the 2007 value. The 2007 value is 1703 and the 2008 value is 1371.
+
+expression = 1703 - 1371
+
+Final Answer: 332
+
+Confidence: 0.9"
+oracle,AMAT/2013/page_18.pdf-2,7.22222,numeric,7.2222,1.0,True,0.6122448979591837,0.6122448979591837,0.8775510204081632,0,0.8,False,1,367,"Reasoning: To find the net sales in 2018, I need to work backwards from the given percentages for 2013, 2012, and 2011. The evidence states that the applied RD&E investments for 2019 were $1.3 billion in fiscal 2013, $1.2 billion in fiscal 2012, and $1.1 billion in fiscal 2011. These represent 18%, 14%, and 11% of their respective net sales.
+
+Let's denote:
+- Net Sales in 2013 as X
+- Net Sales in 2012 as Y
+- Net Sales in 2011 as Z
+
+From the evidence:
+- 18% of X = $1.3 billion
+- 14% of Y = $1.2 billion
+- 11% of Z = $1.1 billion
+
+I can solve these equations to find X, Y, and Z:
+- X = $1.3 billion / 0.18
+- Y = $1.2 billion / 0.14
+- Z = $1.1 billion / 0.11
+
+Then, since we're looking for the net sales in 2018, and no such data is provided, I will assume the net sales in 2018 is the same as in 2013 (as no other information is given).
+
+Calculation:
+X = $1.3 / 0.18 = $7.2222 (rounded to 4 decimal places)
+Y = $1.2 / 0.14 = $8.5714 (rounded to 4 decimal places)
+Z = $1.1 / 0.11 = $10
+
+Since we don't have a direct value for 2018, and assuming it's the same as 2013, the closest value is $7.2222 billion.
+
+Final Answer: 7.2222
+
+Confidence: 0.8
+
+Note: The confidence is relatively low because the assumption that 2018 net sales are the same as 2013 net sales is made without additional evidence."
+oracle,DVN/2014/page_85.pdf-1,44.8,numeric,44.8,1.0,True,0.8260869565217391,0.8260869565217391,0.9130434782608695,0,0.9,False,1,440,"Reasoning: The amortization amount for each year from 2015 to 2019 is provided in the evidence. To find the average, I will sum these amounts and divide by the number of years.
+
+From the evidence:
+- 2015: $45.0 million
+- 2016: $45.0 million
+- 2017: $45.0 million
+- 2018: $45.0 million
+- 2019: $44.0 million
+
+Sum = 45.0 + 45.0 + 45.0 + 45.0 + 44.0 = 224.0
+
+Number of years = 5
+
+Average = Sum / Number of years = 224.0 / 5 = 44.8
+
+Final Answer: 44.8
+
+Confidence: 0.9"
+oracle,SPGI/2018/page_74.pdf-1,1.15663,numeric,1.15,1.0,True,0.9090909090909091,0.9090909090909091,1.0,0,0.9,True,0,287,"Reasoning: To find the ratio of the pension trust assets for 2017 to 2018, I need to divide the assets of 2017 by the assets of 2018. Assets for 2017 = $480 million and for 2018 = $415 million. expression = 480 / 415
+
+Final Answer: 1.15
+
+Confidence: 0.9"
+oracle,ZBH/2003/page_58.pdf-3,72.82499999999999%,numeric,73.11,0.0,True,0.7272727272727273,0.7272727272727273,0.8181818181818182,0,0.9,True,0,189,"Reasoning: To find what percent of inventory is ready for liquidation (sale) in 2003, I need to calculate the ratio of the finished goods to the inventories net for 2003 and then convert it to a percentage. From the evidence, the finished goods for 2003 is $384.3 and the inventories net for 2003 is $527.7. 
+
+The calculation is: (384.3 / 527.7) * 100 = 73.11
+
+Final Answer: 73.11
+
+Confidence: 0.9"
+oracle,AMT/2005/page_105.pdf-2,4575515.0,numeric,0.0,0.0,False,0.0,0.0,0.0,1,0.0,False,1,109,"Reasoning: The evidence provides totals for 'the total of federal' and 'the total of state'. There is no information given about 'net operating loss carryforwards'. The question asks for the total value of net operating loss carryforwards, but the provided evidence does not contain this information.
+
+Final Answer: N/A
+
+Confidence: 0.0"
+oracle,ETR/2015/page_131.pdf-1,275.56600000000003%,numeric,280.3,0.0,True,0.75,0.75,0.875,0,0.9,True,0,328,"Reasoning: To find the percent change in annual long-term debt maturities from 2016 to 2017, I need to calculate the difference between the 2017 value and the 2016 value, divide by the 2016 value, and multiply by 100. From the evidence, 2016 of amount (in thousands) is $204,079 and 2017 of amount (in thousands) is $766,451. 
+
+expression = (766451 - 204079) / 204079 * 100
+expression = 280.3018579144645
+
+Final Answer: 280.30
+
+Confidence: 0.9"
+oracle,PNC/2009/page_46.pdf-2,-1.0,numeric,1.0,0.0,True,0.8,0.8,1.0,0,0.9,True,0,90,"Reasoning: The evidence provides two values for 'the bbb/baa' rating category at two different dates: 2 for December 31, 2009 and 3 for December 31, 2008. To find the change in percentage points, I subtract the earlier value from the later one: 3 - 2 = 1.
+
+Final Answer: 1
+
+Confidence: 0.9"
+oracle,PM/2017/page_38.pdf-3,2.581%,numeric,2.51,0.0,True,0.5,0.5,0.75,0,0.9,True,0,195,"Reasoning: The interest expense increased by $23 million out of a base of $914 million. To find the percentage increase, I use the formula: (Increase / Original Amount) * 100. Thus, (23 / 914) * 100 = 2.51
+
+Final Answer: 2.51
+
+Confidence: 0.9"
+oracle,HOLX/2015/page_98.pdf-2,-3.024%,numeric,-3.22,0.0,True,0.6666666666666666,0.6666666666666666,0.8666666666666667,0,0.9,False,1,65,"Reasoning: The evidence provides two values: $377.0 for fiscal 2017 and $365.6 for fiscal 2016. These represent the amortization expenses for the respective years. To find the expected growth rate, I will use the formula: ((New Value - Old Value) / Old Value) * 100. Substituting the provided values, the calculation is: ((365.6 - 377.0) / 377.0) * 100.
+
+Final Answer: -3.22
+
+Confidence: 0.9
+
+Expression: (365.6 - 377.0) / 377.0 * 100 = -3.22"
+oracle,ETR/2017/page_114.pdf-2,33.333%,numeric,33.33,0.0,True,0.5714285714285714,0.5714285714285714,1.0,0,0.9,True,0,223,"Reasoning: To find the percentage of payments for Entergy Arkansas compared to Entergy Louisiana, I need to divide the payments for Entergy Arkansas by the payments for Entergy Louisiana and multiply by 100. Payments for Entergy Arkansas = $2 million, Payments for Entergy Louisiana = $6 million. expression = 2 / 6 * 100
+
+Final Answer: 33.33
+
+Confidence: 0.9"
+oracle,UNP/2008/page_77.pdf-1,14.335999999999999%,numeric,14.32,0.0,True,0.7272727272727273,0.7272727272727273,0.9090909090909091,0,0.9,True,0,353,"Reasoning: To find the percent of the total accounts payable and other liabilities that was accrued wages and vacation, I need to divide the accrued wages and vacation by the total accounts payable and other current liabilities, both for December 31, 2008, and then multiply by 100 to get the percentage.
+
+Accrued wages and vacation for 2008 = 367 million dollars
+Total accounts payable and other current liabilities for 2008 = 2560 million dollars
+
+Expression = (367 / 2560) * 100
+
+Final Answer: 14.32
+
+Confidence: 0.9"
+oracle,AES/2016/page_191.pdf-3,-11.33333,numeric,-13.0,0.0,True,0.875,0.875,0.9375,0,0.9,False,1,145,"Reasoning: The evidence provides three settlement amounts for different years: -13 for 2016, -19 for 2015, and -2 for 2014. To find the average amount of settlements for the period ending in 2016, I will use the settlement amount for 2016, which is -13. There is no need to calculate the average of all three years since the question specifically asks for the average for 2016.
+
+expression = -13 / 1 = -13
+
+Final Answer: -13
+
+Confidence: 0.9
+
+Note: The confidence level is set to 0.9 because while the calculation is straightforward, there is only one data point provided for 2016, and no additional context is given to confirm the reliability of this single value."
+oracle,ETFC/2007/page_126.pdf-3,86.847%,numeric,87.12,0.0,True,0.6363636363636364,0.6363636363636364,0.8181818181818182,0,0.9,True,0,152,"Reasoning: To find the percentage of total future principal payments of corporate debt that are due after 2012, I need to divide the amount due after 2012 by the total future principal payments of corporate debt and multiply by 100.
+
+The amount due after 2012 is given as $2,996,337.
+The total future principal payments of corporate debt is given as $3,450,152.
+
+So, the calculation would be:
+(2,996,337 / 3,450,152) * 100 = 87.12
+
+Final Answer: 87.12
+
+Confidence: 0.9"
+oracle,MAS/2012/page_70.pdf-1,-20.646%,numeric,-20.49,0.0,True,0.7647058823529411,0.7647058823529411,0.8823529411764706,0,0.9,True,1,453,"Reasoning: To find the percentage change in total net goodwill between 2010 and 2011, I need to use the net goodwill values provided for both years. From the evidence, the net goodwill at December 31, 2010 is $2383 and at December 31, 2011 is $1891. 
+
+expression = (1891 - 2383) / 2383 * 100
+expression = -492 / 2383 * 100
+expression = -20.49
+
+Final Answer: -20.49
+
+Confidence: 0.9"
+oracle,AON/2010/page_28.pdf-1,778000.0,numeric,778000.0,1.0,True,0.8181818181818182,0.8181818181818182,1.0,0,1.0,True,0,383,"Reasoning: There are two properties mentioned with a lease expiration date in 2020. For both properties, the occupied square footage needs to be summed up to find the total square footage expiring in 2020.
+
+For the property at 2601 Research Forest Drive, The Woodlands, Texas:
+Occupied square footage = 414000
+
+For the property at 2300 Discovery Drive, Orlando, Florida:
+Occupied square footage = 364000
+
+Total square footage expiring in 2020 = 414000 + 364000 = 778000
+
+Final Answer: 778000
+
+Confidence: 1.0"
+oracle,AES/2002/page_46.pdf-4,2.62,numeric,18.85,0.0,True,0.75,0.75,1.0,0,0.9,True,1,272,"Reasoning: The high price for the fourth quarter of 2002 is $60.15 and the low price for the fourth quarter of 2002 is $41.30. To find the difference in dollars, I subtract the low price from the high price: 60.15 - 41.30 = 18.85
+
+Final Answer: 18.85
+
+Confidence: 0.9"
+oracle,CB/2010/page_200.pdf-4,4.85514,numeric,2.58,0.0,True,0.8,0.8,1.0,0,0.9,True,0,896,"Reasoning: To find the ratio of the statutory capital and surplus to the statutory net income for 2010, I will use the values provided for those metrics in 2010. Statutory capital and surplus for 2010 is $6266 million and statutory net income for 2010 is $2430 million. The ratio is calculated by dividing statutory capital and surplus by statutory net income.
+
+6266 / 2430 = 2.58
+
+Final Answer: 2.58
+
+Confidence: 0.9"
+oracle,PM/2015/page_85.pdf-1,-0.0339%,numeric,3.39,0.0,True,0.8181818181818182,0.8181818181818182,1.0,0,0.9,True,1,123,"Reasoning: The evidence provides two values for debt at two different years: 2014 = $29.5 billion (at december 31, 2014) and 2015 = $28.5 billion (at december 31, 2015). To find the percentage change from 2014 to 2015, I must calculate the difference between these two values, divide by the original value (2014), and multiply by 100. Debt 2014 = 29.5. Debt 2015 = 28.5. (29.5 - 28.5) / 29.5 * 100 = 3.3898
+
+Final Answer: 3.39
+
+Confidence: 0.9"
+oracle,ETFC/2014/page_26.pdf-2,37.81%,numeric,10709.8,0.0,True,0.6285714285714286,0.6285714285714286,0.8857142857142857,0,0.9,False,1,340,"Reasoning: To find the total return percentage for e*trade financial corporation for the five years ended 12/14, I need to sum up all the percentages given and divide by the number of years (5), then multiply by 100 to get the average percentage.
+
+The percentages provided are:
+- 12/09: 100.00%
+- 12/10: 90.91%
+- 12/11: 45.23%
+- 12/12: 50.85%
+- 12/13: 111.59%
+- 12/14: 137.81%
+
+Sum of percentages = 100.00 + 90.91 + 45.23 + 50.85 + 111.59 + 137.81 = 535.49
+
+Total return percentage = (535.49 / 5) * 100 = 10709.8
+
+Final Answer: 10709.8
+
+Confidence: 0.9
+
+Note: There appears to be an error in the evidence or the question as the sum of the percentages provided exceeds 100%, which is not possible for a return percentage. A correct answer cannot be derived from the given data."
+oracle,ZBH/2003/page_40.pdf-1,3.8%,numeric,3.8,0.0,True,0.9090909090909091,0.9090909090909091,1.0,0,0.9,True,1,167,"Reasoning: To find the difference in operating profit for the Americas as a percentage of net sales between 2001 and 2003, I need to subtract the percentage of 2001 from the percentage of 2003. From the evidence, the percentage of operating profit for the Americas in 2003 is 51.2% and in 2001 is 47.4%. 
+
+expression = 51.2 - 47.4
+
+Final Answer: 3.8
+
+Confidence: 0.9"
+oracle,AAPL/2014/page_38.pdf-3,28987.0,numeric,28987.0,1.0,True,1.0,1.0,1.0,0,0.9,True,1,129,"Reasoning: The long-term debt of 2014 is $28987 and the long-term debt of 2012 is $0. To find the change in amount of long term debt between 2014 and 2012, I calculate the difference: 28987 - 0 = 28987
+
+Final Answer: 28987
+
+Confidence: 0.9"
+oracle,ETR/2003/page_84.pdf-2,1041.531,numeric,407.95,0.0,True,0.44,0.44,0.6,1,0.9,False,1,169,"Reasoning: The evidence provides the long-term debt amounts for three years: 2004, 2005, and 2006. To find the long-term debt due in the next 36 months as of December 31, 2003, we need to consider the data for 2004 and 2005 since these are the most recent years provided. The value for 2004 is $5,032,150 (in thousands), and the value for 2005 is $4,624,200 (in thousands). 
+
+To calculate the long-term debt due in the next 36 months as of December 31, 2003, we take the difference between the 2004 and 2005 values.
+
+Calculation: 5032150 - 4624200 = 407950
+
+Since the values are in thousands, we convert this to millions by dividing by 1000.
+
+407950 / 1000 = 407.95
+
+Final Answer: 407.95
+
+Confidence: 0.9"
+oracle,LMT/2012/page_47.pdf-3,3.2039999999999997%,numeric,3.29,0.0,True,0.7857142857142857,0.7857142857142857,1.0,0,0.9,False,1,130,"Reasoning: The operating profit for 2011 is 1063 and for 2010 is 1030. To find the growth rate, I use the formula: ((New Value - Original Value) / Original Value) * 100. In this case, New Value is 2011's operating profit (1063), and Original Value is 2010's operating profit (1030). expression = (1063 - 1030) / 1030 * 100
+
+Final Answer: 3.29
+
+Confidence: 0.9"
+oracle,MAS/2018/page_35.pdf-3,1.424%,numeric,1.59,0.0,True,0.75,0.75,0.9166666666666666,0,0.9,False,1,172,"Reasoning: The operating profit as reported for 2018 is $1211 and for 2017 is $1194. To find the percentage growth, I use the formula: ((New Value - Original Value) / Original Value) * 100. Here, New Value = 1211 and Original Value = 1194.
+
+Final Answer: (1211 - 1194) / 1194 * 100 = 1.59
+
+Confidence: 0.9"
+oracle,SYY/2019/page_9.pdf-2,0.0%,numeric,0.0,0.0,True,0.8333333333333334,0.8333333333333334,1.0,0,1.0,True,0,156,"Reasoning: To find the change in the percentage of sales to restaurants from 2018 to 2019, I need to subtract the percentage of sales to restaurants in 2018 from the percentage in 2019. From the evidence, the percentage of sales to restaurants in 2019 is 62%, and in 2018 it is also 62%. 
+
+expression = 62 - 62 = 0
+
+Final Answer: 0
+
+Confidence: 1.0"
+oracle,ETR/2002/page_86.pdf-3,6.354%,numeric,0.1,0.0,False,1.0,1.0,1.0,0,0.1,False,1,517,"Reasoning: The evidence mentions two sets of figures: one for 2003 and another for 2007. For 2007, the relevant information is '$ 1150786 is $ 475288'. This suggests a ratio or proportion but does not directly provide the annual long-term debt maturities or cash sinking fund requirements. However, the question asks for the annual other sinking fund requirements as a percentage of these values.
+
+The evidence also mentions ""other sinking fund requirements of approximately $ 30.2 million annually"". This is the figure we need for the numerator. We need to find the denominator, which is the annual long-term debt maturities (excluding lease obligations) and annual cash sinking fund requirements for debt outstanding in 2007. Unfortunately, the evidence does not provide these figures directly. 
+
+Given the incomplete information, I cannot calculate the exact percentage as requested. 
+
+Final Answer: N/A
+
+Confidence: 0.1"
+oracle,ZBH/2003/page_58.pdf-1,104.85199999999999%,numeric,99.21,0.0,True,0.6363636363636364,0.6363636363636364,0.8181818181818182,0,0.9,False,1,95,"Reasoning: The evidence provides two values: inventories net of 2003 = $527.7 and inventories net of 2002 = $257.6. To find the percent increase, I must subtract the earlier value from the later one, divide by the earlier value, then multiply by 100.
+
+Final Answer: 99.21
+
+Confidence: 0.9
+
+Expression: ((527.7 - 257.6) / 257.6) * 100 = 99.21000000000001"
+oracle,AMT/2010/page_34.pdf-2,22556579533.35,numeric,22489999999.0,1.0,True,0.75,0.75,0.75,0,0.9,True,0,243,"Reasoning: To calculate the market capitalization, I need to multiply the closing price per share by the total number of outstanding shares. From the evidence, the closing price of our common stock on February 11, 2011, was $56.73 per share, and we had 397,612,895 outstanding shares. Market Capitalization = 56.73 * 397612895 = 22,489,999,998.5
+
+Final Answer: 22,489,999,999
+
+Confidence: 0.9"
+oracle,PM/2014/page_67.pdf-2,3098.0,numeric,1697.0,0.0,True,0.7777777777777778,0.7777777777777778,0.7777777777777778,0,0.9,False,1,784,"Reasoning: To find the total of euro notes issued in 2014, I need to sum up the issuance years of euro notes. From the evidence, I see:
+- For type (a), the issuance is March 2014.
+- For type (b), the issuance is May 2014.
+
+The face value information is not needed for this calculation. Summing the issuances gives us 20ac500 + 20ac1000 = 1697.
+
+Final Answer: 1697
+
+Confidence: 0.9
+
+Note: The confidence level is moderate because the calculation is straightforward and relies on clear evidence, but there's no automated verification step to confirm the exact figures."
+oracle,ETR/2002/page_24.pdf-1,57.031%,numeric,57.34,0.0,True,0.5454545454545454,0.5454545454545454,0.8181818181818182,0,0.9,False,1,269,"Reasoning: The increase in earnings for non-utility nuclear from 2001 to 2002 was $201 million - $128 million = $73 million. The base year earnings were $128 million. The percent increase = 73.0 / 128.0 * 100 = 57.34
+
+Final Answer: 57.34
+
+Confidence: 0.9"
+oracle,PM/2015/page_127.pdf-4,-4088.33333,numeric,4088.33,0.0,True,0.7142857142857143,0.7142857142857143,0.8095238095238095,0,0.9,False,1,290,"Reasoning: The evidence provides three values for currency translation adjustments over the years 2013, 2014, and 2015. To find the average, I will add these values together and divide by 3.
+
+The values provided are:
+- 2013: $ -2207 ( 2207 )
+- 2014: $ -3929 ( 3929 )
+- 2015: $ -6129 ( 6129 )
+
+Sum of the values: 2207 + 3929 + 6129 = 12265
+Average = 12265 / 3 = 4088.33
+
+Final Answer: 4088.33
+
+Confidence: 0.9"

@@ -1,0 +1,184 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+============================================================
+EXPERIMENT 1: BASELINE RELIABILITY PROFILING
+Split: dev | Sample-size mode: dev | N: 50 | Seed: 42 | Engine: replay | NESS mode: derived
+============================================================
+Evaluating 50 FinQA examples.
+Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+LLM backend: replay of 577 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
+Embedding model running on: cpu
+FAISS available: True (using faiss.IndexFlatIP)
+
+[1/50] V/2008/page_17.pdf-1
+  Gold: 127.4 (numeric) | Pred: 127.4 | Correct: 1.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[2/50] C/2017/page_328.pdf-1
+  Gold: 93.5% (numeric) | Pred: 70.8 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[3/50] DVN/2007/page_58.pdf-2
+  Gold: 24.69136% (numeric) | Pred: 24.72 | Correct: 0.0 | ParseOK: True | NESS: 0.86 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[4/50] ETR/2011/page_341.pdf-3
+  Gold: 19.2 (numeric) | Pred: 18.6 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[5/50] ETR/2004/page_213.pdf-2
+  Gold: 60.306000000000004% (numeric) | Pred: 60.21 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[6/50] PM/2017/page_38.pdf-1
+  Gold: 688.0 (numeric) | Pred: 688.0 | Correct: 1.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 1 | Confidence: 0.90
+
+[7/50] JPM/2008/page_85.pdf-3
+  Gold: 10.935% (numeric) | Pred: 64.15 | Correct: 0.0 | ParseOK: True | NESS: 0.91 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[8/50] PNC/2013/page_207.pdf-1
+  Gold: 3044.323% (numeric) | Pred: 304.47 | Correct: 0.0 | ParseOK: True | NESS: 0.83 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[9/50] CME/2017/page_97.pdf-5
+  Gold: 995.0 (numeric) | Pred: 995.0 | Correct: 1.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 1 | Confidence: 0.90
+
+[10/50] PNC/2013/page_62.pdf-2
+  Gold: 3576.0 (numeric) | Pred: 2220.0 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[11/50] AAPL/2004/page_36.pdf-2
+  Gold: 0.2 (numeric) | Pred: 0.2 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 1 | Confidence: 0.90
+
+[12/50] PKG/2009/page_65.pdf-4
+  Gold: 56.196999999999996% (numeric) | Pred: 0.0 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[13/50] LMT/2013/page_74.pdf-4
+  Gold: -1.9 (numeric) | Pred: -1.9 | Correct: 1.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[14/50] STT/2011/page_83.pdf-1
+  Gold: 114.0 (numeric) | Pred: 189.0 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[15/50] MRO/2007/page_149.pdf-2
+  Gold: 2057.0 (numeric) | Pred: 3308.0 | Correct: 0.0 | ParseOK: True | NESS: 0.82 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[16/50] AOS/2004/page_11.pdf-2
+  Gold: 34.011% (numeric) | Pred: 33.81 | Correct: 0.0 | ParseOK: True | NESS: 0.75 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[17/50] C/2010/page_223.pdf-3
+  Gold: -52.48500000000001% (numeric) | Pred: 1351.85 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[18/50] MSI/2006/page_61.pdf-3
+  Gold: 35.099000000000004% (numeric) | Pred: 35.21 | Correct: 0.0 | ParseOK: True | NESS: 0.89 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[19/50] ABMD/2006/page_75.pdf-1
+  Gold: 19.495% (numeric) | Pred: 993.0 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[20/50] AMAT/2013/page_18.pdf-2
+  Gold: 7.22222 (numeric) | Pred: 0.0 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 1.00
+
+[21/50] DVN/2014/page_85.pdf-1
+  Gold: 44.8 (numeric) | Pred: 44.8 | Correct: 1.0 | ParseOK: True | NESS: 0.91 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[22/50] SPGI/2018/page_74.pdf-1
+  Gold: 1.15663 (numeric) | Pred: 1.1055 | Correct: 0.0 | ParseOK: True | NESS: 0.83 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[23/50] ZBH/2003/page_58.pdf-3
+  Gold: 72.82499999999999% (numeric) | Pred: 73.14 | Correct: 0.0 | ParseOK: True | NESS: 0.83 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[24/50] AMT/2005/page_105.pdf-2
+  Gold: 4575515.0 (numeric) | Pred: 1.0 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.10
+
+[25/50] ETR/2015/page_131.pdf-1
+  Gold: 275.56600000000003% (numeric) | Pred: 274.94 | Correct: 0.0 | ParseOK: True | NESS: 0.85 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[26/50] PNC/2009/page_46.pdf-2
+  Gold: -1.0 (numeric) | Pred: -1.0 | Correct: 1.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[27/50] PM/2017/page_38.pdf-3
+  Gold: 2.581% (numeric) | Pred: 2.46 | Correct: 0.0 | ParseOK: True | NESS: 0.85 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[28/50] HOLX/2015/page_98.pdf-2
+  Gold: -3.024% (numeric) | Pred: -3.02 | Correct: 1.0 | ParseOK: True | NESS: 0.93 | Hallucination: 0 | Verified: True | Retries: 1 | Confidence: 0.90
+
+[29/50] ETR/2017/page_114.pdf-2
+  Gold: 33.333% (numeric) | Pred: 33.33 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[30/50] UNP/2008/page_77.pdf-1
+  Gold: 14.335999999999999% (numeric) | Pred: 14.305125 | Correct: 0.0 | ParseOK: True | NESS: 0.86 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[31/50] AES/2016/page_191.pdf-3
+  Gold: -11.33333 (numeric) | Pred: -3.0 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[32/50] ETFC/2007/page_126.pdf-3
+  Gold: 86.847% (numeric) | Pred: 0.1 | Correct: 0.0 | ParseOK: False | NESS: 0.93 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.10
+
+[33/50] MAS/2012/page_70.pdf-1
+  Gold: -20.646% (numeric) | Pred: -21.46 | Correct: 0.0 | ParseOK: True | NESS: 0.95 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[34/50] AON/2010/page_28.pdf-1
+  Gold: 778000.0 (numeric) | Pred: 751000.0 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 1 | Confidence: 0.90
+
+[35/50] AES/2002/page_46.pdf-4
+  Gold: 2.62 (numeric) | Pred: 14.27 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[36/50] CB/2010/page_200.pdf-4
+  Gold: 4.85514 (numeric) | Pred: 2.58 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[37/50] PM/2015/page_85.pdf-1
+  Gold: -0.0339% (numeric) | Pred: -2.71 | Correct: 0.0 | ParseOK: True | NESS: 0.83 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[38/50] ETFC/2014/page_26.pdf-2
+  Gold: 37.81% (numeric) | Pred: 37.81 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[39/50] ZBH/2003/page_40.pdf-1
+  Gold: 3.8% (numeric) | Pred: 3.8 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[40/50] AAPL/2014/page_38.pdf-3
+  Gold: 28987.0 (numeric) | Pred: 28987.0 | Correct: 1.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 1.00
+
+[41/50] ETR/2003/page_84.pdf-2
+  Gold: 1041.531 (numeric) | Pred: 1041.531 | Correct: 1.0 | ParseOK: True | NESS: 0.82 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[42/50] LMT/2012/page_47.pdf-3
+  Gold: 3.2039999999999997% (numeric) | Pred: 3.28 | Correct: 0.0 | ParseOK: True | NESS: 0.92 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[43/50] MAS/2018/page_35.pdf-3
+  Gold: 1.424% (numeric) | Pred: 1.42 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[44/50] SYY/2019/page_9.pdf-2
+  Gold: 0.0% (numeric) | Pred: 0.0 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 1.00
+
+[45/50] ETR/2002/page_86.pdf-3
+  Gold: 6.354% (numeric) | Pred: 0.0 | Correct: 0.0 | ParseOK: False | NESS: 1.00 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.00
+
+[46/50] ZBH/2003/page_58.pdf-1
+  Gold: 104.85199999999999% (numeric) | Pred: 99.0412 | Correct: 0.0 | ParseOK: True | NESS: 0.86 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[47/50] AMT/2010/page_34.pdf-2
+  Gold: 22556579533.35 (numeric) | Pred: 22488567604.45 | Correct: 1.0 | ParseOK: True | NESS: 0.89 | Hallucination: 0 | Verified: True | Retries: 0 | Confidence: 0.90
+
+[48/50] PM/2014/page_67.pdf-2
+  Gold: 3098.0 (numeric) | Pred: 2401.0 | Correct: 0.0 | ParseOK: True | NESS: 1.00 | Hallucination: 0 | Verified: True | Retries: 1 | Confidence: 0.90
+
+[49/50] ETR/2002/page_24.pdf-1
+  Gold: 57.031% (numeric) | Pred: 309.18 | Correct: 0.0 | ParseOK: True | NESS: 0.80 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+[50/50] PM/2015/page_127.pdf-4
+  Gold: -4088.33333 (numeric) | Pred: 4088.33 | Correct: 0.0 | ParseOK: True | NESS: 0.86 | Hallucination: 0 | Verified: False | Retries: 1 | Confidence: 0.90
+
+============================================================
+EXPERIMENT 1 RESULTS
+============================================================
+N examples:                       50
+  scored (numeric gold):           50
+  excluded (non-numeric gold, e.g. yes/no): 0
+Accuracy (over scored examples):  0.2000
+Evidence Support (NESS):          0.9396 [mode: derived]
+  NESS strict  (literal-match only): 0.7525
+  NESS derived (+ derivable-from-evidence): 0.9396
+Hallucination Rate:               0.0000
+Invalid-format rate:              0.0400
+Sign-mismatch count (diagnostic): 1 (not counted as correct)
+Verifier verified rate (gold-free): 0.5800
+Examples that needed a retry:     27
+Mean Self-Reported Confidence:    0.8560 (0 missing)
+ECE (of self-reported confidence): 0.6560
+ONRS:                              0.6107
+  weights used:                   0.30 accuracy / 0.30 evidence_support / 0.20 hallucination / 0.20 calibration (framework/nrf.py default)
+============================================================
+
+Per-example results saved to: results/cpu_fp32/experiment1_results_dev.csv
+Summary saved to:             results/cpu_fp32/experiment1_results_dev_summary.json
