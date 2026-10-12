@@ -1,0 +1,21 @@
+name: Question about the project
+description: Ask about the method, the results, or how to run something
+title: "[Question] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for looking at this. The live demo is at https://aaronsunny007.github.io/Financial-NRF/ and
+        the results are explained in the README and `NRF_Experimental_Chapter.md`.
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where in the project is this about?
+      description: A tab, file or section, if it helps.

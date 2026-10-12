@@ -7,6 +7,13 @@ Aaron Prakash Gandi · Supervisor: Dr Tazar Hussain
 
 **[Live demo](https://aaronsunny007.github.io/Financial-NRF/)**: score your own evidence and responses in the browser, browse the recorded results, and re-weight the composite yourself.
 
+**Try it yourself.** On the demo page, the *Live analyser* scores any evidence and response you paste or load
+from a file, and the *Ask a question* tab runs a Qwen2.5-Instruct model in your own browser (WebGPU,
+desktop Chrome or Edge, about 2 GB the first time, nothing sent anywhere) and scores its answer. Questions
+and test reports are welcome as [issues](https://github.com/aaronsunny007/Financial-NRF/issues/new/choose).
+To run the scoring code and tests in a browser without installing anything, open the repo in
+[GitHub Codespaces](https://codespaces.new/aaronsunny007/Financial-NRF).
+
 ---
 
 ## What this is

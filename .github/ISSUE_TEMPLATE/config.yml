@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Try the live demo first
+    url: https://aaronsunny007.github.io/Financial-NRF/
+    about: Paste evidence and a model response, or ask the in-browser model a question, and see the scores.

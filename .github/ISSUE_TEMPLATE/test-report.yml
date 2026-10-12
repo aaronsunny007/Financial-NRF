@@ -1,0 +1,35 @@
+name: Test report
+description: You tried the demo or the scorer on your own input and want to report what happened
+title: "[Test] "
+labels: ["test-report"]
+body:
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence you used
+      description: The passages or table rows (remove anything private).
+    validations:
+      required: true
+  - type: textarea
+    id: response
+    attributes:
+      label: Model response you scored
+      description: Include the Final Answer and Confidence lines.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What the demo showed
+      description: Strict and revised evidence support, the hallucination flag, and the verifier result.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead, if different
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      description: Needed if you used the Ask tab (it relies on WebGPU).
