@@ -144,6 +144,13 @@
         font-size:.72rem;color:var(--muted)}
   .axis span:nth-child(2){display:flex;justify-content:space-between;padding-left:1px}
 
+  input[type=text],select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;
+    background:var(--bg);color:var(--fg);font:inherit;font-size:.93rem}
+  input[type=text]:focus,select:focus{border-color:var(--accent2)}
+  .file{display:inline-flex;align-items:center;gap:8px;margin:6px 0 0;font-weight:500;font-size:.82rem;color:var(--muted)}
+  .file input{font-size:.8rem;max-width:15em}
+  .status{font-size:.85rem;color:var(--muted);margin:8px 0 0;min-height:1.4em}
+  .resp{white-space:pre-wrap;background:var(--code);border-radius:8px;padding:10px 12px;font:13px/1.5 ui-monospace,Consolas,monospace;margin:0 0 14px}
   footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
     color:var(--muted);font-size:.85rem}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -178,13 +185,15 @@
 <div class="note">
   <strong>What runs here.</strong> The evidence-support score, hallucination detector and gold-free
   arithmetic verifier execute live in your browser on whatever you paste into the Analyser tab.
-  <strong>What does not.</strong> The language model. All reported results were produced with
-  Qwen2.5-3B-Instruct under 4-bit quantisation on a local NVIDIA RTX 3050; the results tabs show
-  recorded outputs rather than re-running generation.
+  <strong>What does not.</strong> The recorded experiments, which were generated with
+  Qwen2.5-3B-Instruct under 4-bit quantisation on a local NVIDIA RTX 3050; the results tabs show those
+  recorded outputs. The <em>Ask a question</em> tab can also run a Qwen model in your own browser
+  (WebGPU, desktop Chrome or Edge) and score what it answers.
 </div>
 
 <nav id="tabs">
   <button aria-selected="true" data-t="analyser">Live analyser</button>
+  <button data-t="ask">Ask a question</button>
   <button data-t="e1">Exp 1 · Baseline</button>
   <button data-t="e2">Exp 2 · Hallucination</button>
   <button data-t="e3">Exp 3 · Calibration</button>
@@ -204,8 +213,10 @@
     <div>
       <label for="ev">Retrieved evidence</label>
       <textarea id="ev" spellcheck="false"></textarea>
+      <label class="file">Or load from a file <input type="file" data-target="ev" accept=".txt,.md,.csv,.json,.log"></label>
       <label for="rs">Model response</label>
       <textarea id="rs" spellcheck="false"></textarea>
+      <label class="file">Or load from a file <input type="file" data-target="rs" accept=".txt,.md,.csv,.json,.log"></label>
       <div class="row">
         <label style="margin:0"><input type="radio" name="m" value="strict"> Strict NESS</label>
         <label style="margin:0"><input type="radio" name="m" value="derived" checked> Revised NESS</label>
@@ -220,6 +231,42 @@
       </div>
     </div>
     <div><div id="out" class="out"><em style="color:var(--muted)">Results appear here.</em></div></div>
+  </div>
+</section>
+
+<!-- ASK -->
+<section id="ask" hidden>
+  <h2>Ask a question</h2>
+  <p>Give the model some evidence and a question, and it answers in the project&rsquo;s own format
+  (reasoning, final answer, confidence). The answer is then scored by the framework on the spot,
+  exactly as in the analyser.</p>
+  <div class="note"><strong>Experimental, and it runs entirely in your browser.</strong> The model is
+  Qwen2.5-Instruct in 4-bit, run locally through WebGPU (WebLLM), so it needs desktop Chrome or Edge and a
+  graphics card with a few GB free. The first load downloads about 2&nbsp;GB, which your browser then keeps.
+  Nothing you type is sent to any server. It makes a single attempt, without the verifier-guided retry the
+  dissertation&rsquo;s pipeline uses, so its answers will not match the recorded runs. Use the 1.5B or 0.5B
+  model on weaker machines.</div>
+  <div class="grid">
+    <div>
+      <label for="q-ev">Evidence</label>
+      <textarea id="q-ev" spellcheck="false" placeholder="Paste the passages or table rows the answer should rely on"></textarea>
+      <label class="file">Or load from a file (.txt, .csv, or a FinQA .json item) <input type="file" id="q-file" accept=".txt,.md,.csv,.json,.log"></label>
+      <label for="q-q">Question</label>
+      <input type="text" id="q-q" placeholder="e.g. what percentage of total facilities are leased?">
+      <label for="ask-model">Model</label>
+      <select id="ask-model">
+        <option value="Qwen2.5-3B-Instruct-q4f16_1-MLC">Qwen2.5-3B-Instruct (the dissertation&rsquo;s model, about 2 GB)</option>
+        <option value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC">Qwen2.5-1.5B-Instruct (about 1 GB)</option>
+        <option value="Qwen2.5-0.5B-Instruct-q4f16_1-MLC">Qwen2.5-0.5B-Instruct (about 0.4 GB, weak)</option>
+      </select>
+      <div class="row"><button class="go" id="ask-go">Ask and score</button></div>
+      <p class="status" id="ask-status" role="status">The model loads the first time you ask.</p>
+      <h3>Example</h3>
+      <div style="display:grid;gap:7px">
+        <button class="ex" id="ask-ex">Leased share of total facilities</button>
+      </div>
+    </div>
+    <div><div id="ask-out" class="out"><em style="color:var(--muted)">The answer and its scores appear here.</em></div></div>
   </div>
 </section>
 
@@ -809,6 +856,100 @@ function run(){
 $('run').addEventListener('click',run);
 $('ev').value=EXAMPLES[0][0]; $('rs').value=EXAMPLES[0][1];
 run();
+
+/* ASK-START: optional in-browser generation with Qwen2.5 through WebLLM (WebGPU), loaded on demand.
+   The prompt mirrors rag_pipeline/rag.py (system prompt and two few-shot turns); one greedy attempt, no retry. */
+const WEBLLM_URL='https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@0.2.86/+esm';
+const ASK_SYSTEM="You are a financial numerical reasoning assistant. Use ONLY the retrieved evidence below. Do not invent numbers that are not present in or directly derivable from the evidence. Before calculating: (1) identify exactly which row/line the question refers to -- do not substitute a similarly-named row (e.g. do not use 'owned' when the question asks about 'total'); (2) if the evidence lists two values for two periods/entities using a construction like 'X and Y, respectively', match each value to its correct period in the SAME order they are listed, do not guess based on which number seems larger or more recent. If the question asks for a percentage, a rate, or a share of a total, your Final Answer MUST include a '%' sign (e.g. 'Final Answer: 9.86%', not 'Final Answer: 9.86') -- omitting it when a percentage was asked for is treated as a wrong unit, not a close answer. If the evidence genuinely does not contain a value you need, say so and give your best-supported answer with a low Confidence rather than a high-confidence guess. Put your full calculation in the Reasoning section, ending it with an explicit 'expression = result' (e.g. '8.1 / 56.0 * 100 = 14.46'), so the result can be checked. The Final Answer line must then contain ONLY that final value and its unit (e.g. 'Final Answer: 14.46%') -- do not repeat the full expression there.";
+const ASK_FEWSHOT=[{"evidence": "- [table_row] leased facilities -- united states: 2.1 | other countries: 6.0 | total: 8.1\n- [table_row] owned facilities -- united states: 30.7 | other countries: 17.2 | total: 47.9\n- [table_row] total facilities -- united states: 32.8 | other countries: 23.2 | total: 56.0", "question": "what percentage of total facilities (in square feet) are leased?", "answer": "Reasoning: The question asks for leased facilities as a percentage of TOTAL facilities, not owned facilities -- I need the 'total facilities' row as the denominator, not the 'owned facilities' row. Leased total = 8.1. Total facilities total = 56.0. 8.1 / 56.0 * 100 = 14.46\n\nFinal Answer: 14.46%\n\nConfidence: 0.9"}, {"evidence": "- [pre_text] the total notional amounts of cash flow hedges as of october 29 , 2011 and october 30 , 2010 were $153.7 million and $139.9 million , respectively .", "question": "what was the percentage change in cash flow hedges from 2010 to 2011?", "answer": "Reasoning: The evidence lists two dates then two values 'respectively' -- the FIRST value matches the FIRST date and the SECOND value matches the SECOND date. So 2011 = $153.7 million (matches 'october 29, 2011', listed first) and 2010 = $139.9 million (matches 'october 30, 2010', listed second). I must not assume the more recent year is the larger or smaller number -- I read it directly from the pairing. Change = (153.7 - 139.9) / 139.9 * 100 = 9.86\n\nFinal Answer: 9.86%\n\nConfidence: 0.9"}];
+const ASK_FORMAT='Return your answer in EXACTLY this format:\n\nReasoning: [brief calculation using only the retrieved evidence]\n\nFinal Answer: [one numerical answer]\n\nConfidence: [number between 0 and 1]';
+function askMessages(ev,q){
+  const m=[{role:'system',content:ASK_SYSTEM}];
+  for(const e of ASK_FEWSHOT){
+    m.push({role:'user',content:'Retrieved Financial Evidence:\n\n'+e.evidence+'\n\nQuestion:\n\n'+e.question+'\n\n'+ASK_FORMAT});
+    m.push({role:'assistant',content:e.answer});
+  }
+  m.push({role:'user',content:'\nRetrieved Financial Evidence:\n\n'+ev+'\n\nQuestion:\n\n'+q+'\n\n'+ASK_FORMAT+'\n\nDo not stop before providing Final Answer and Confidence.\n'});
+  return m;
+}
+let askEngine=null, askEngineId=null;
+async function askLoad(){
+  const st=$('ask-status'), id=$('ask-model').value;
+  if(askEngine && askEngineId===id) return true;
+  let adapter=null;
+  try{ adapter=('gpu' in navigator)?await navigator.gpu.requestAdapter():null; }catch(_){ adapter=null; }
+  if(!adapter){
+    st.textContent='This browser or device has no usable WebGPU, so the model cannot run here. Try desktop Chrome or Edge on a machine with a graphics card, or use the Live analyser with a response from elsewhere.';
+    return false;
+  }
+  try{
+    st.textContent='Loading the model library…';
+    const webllm=await import(WEBLLM_URL);
+    askEngine=await webllm.CreateMLCEngine(id,{initProgressCallback:p=>{
+      st.textContent=(p&&p.text)?p.text:('Loading… '+Math.round(100*((p&&p.progress)||0))+'%');
+    }});
+    askEngineId=id;
+    st.textContent='Model ready.';
+    return true;
+  }catch(e){
+    askEngine=null; askEngineId=null;
+    st.textContent='Could not load the model: '+((e&&e.message)?e.message:e)+'. Try a smaller model, or the analyser tab with a response from elsewhere.';
+    return false;
+  }
+}
+async function askRun(){
+  const ev=$('q-ev').value.trim(), q=$('q-q').value.trim(), st=$('ask-status'), out=$('ask-out'), btn=$('ask-go');
+  if(!ev||!q){ st.textContent='Enter both some evidence and a question.'; return; }
+  btn.disabled=true;
+  try{
+    if(!(await askLoad())) return;
+    st.textContent='Generating…';
+    out.innerHTML='<em style="color:var(--muted)">Generating…</em>';
+    const r=await askEngine.chat.completions.create({messages:askMessages(ev,q),temperature:0,max_tokens:500});
+    const text=(r&&r.choices&&r.choices[0]&&r.choices[0].message&&r.choices[0].message.content)||'';
+    $('ev').value=ev; $('rs').value=text;
+    run();
+    out.innerHTML='<h3>Model response</h3><div class="resp">'+esc(text)+'</div>'+$('out').innerHTML;
+    st.textContent='Done. The same response and evidence are now in the Live analyser tab.';
+  }catch(e){
+    st.textContent='Generation failed: '+((e&&e.message)?e.message:e);
+  }finally{ btn.disabled=false; }
+}
+$('ask-go').addEventListener('click',askRun);
+$('ask-ex').addEventListener('click',()=>{ $('q-ev').value=ASK_FEWSHOT[0].evidence; $('q-q').value='what percentage of the total facilities are owned?'; });
+
+/* Load a text, CSV or FinQA-style JSON file into a box. */
+function finqaToEvidence(o){
+  const item=Array.isArray(o)?o[0]:o;
+  if(!item||typeof item!=='object') return null;
+  if(typeof item.evidence==='string') return {ev:item.evidence,q:item.question||''};
+  if(!item.table&&!item.pre_text) return null;
+  const lines=[];
+  (item.pre_text||[]).forEach(t=>{ if(String(t).trim()) lines.push('- [pre_text] '+String(t).trim()); });
+  const tb=item.table||[]; const head=tb[0]||[];
+  tb.slice(1).forEach(r=>{ lines.push('- [table_row] '+r.map((c,i)=>(i?(head[i]||'')+': ':'')+c).join(' | ')); });
+  (item.post_text||[]).forEach(t=>{ if(String(t).trim()) lines.push('- [post_text] '+String(t).trim()); });
+  return {ev:lines.join('\n'),q:(item.qa&&item.qa.question)||''};
+}
+function loadFileInto(file,targetId){
+  const rd=new FileReader();
+  rd.onload=()=>{
+    let text=String(rd.result||'');
+    if(/\.json$/i.test(file.name)){
+      try{
+        const o=JSON.parse(text), conv=finqaToEvidence(o);
+        if(conv){ text=conv.ev; if(targetId==='q-ev'&&conv.q) $('q-q').value=conv.q; }
+      }catch(_){ /* not JSON after all: use the raw text */ }
+    }
+    $(targetId).value=text;
+  };
+  rd.readAsText(file);
+}
+document.querySelectorAll('input[type=file][data-target]').forEach(inp=>{
+  inp.addEventListener('change',()=>{ if(inp.files[0]) loadFileInto(inp.files[0],inp.dataset.target); });
+});
+$('q-file').addEventListener('change',e=>{ if(e.target.files[0]) loadFileInto(e.target.files[0],'q-ev'); });
+/* ASK-END */
 
 /* WEIGHTS-START: recorded component values (results/experiment4_results_dev.csv,
    results/experiment5_results_dev_summary.json) and the ONRS formula from
