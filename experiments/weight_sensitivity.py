@@ -30,6 +30,7 @@ import argparse
 import csv
 import json
 import math
+import os
 import statistics
 import sys
 from itertools import product
@@ -40,6 +41,8 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 from framework.nrf import NumericalReliabilityFramework  # noqa: E402
 
 RESULTS_DIR = Path(__file__).resolve().parents[1] / "results"
+# Overridden by --results-dir so the same sweep can be run on another set of
+# results (for example results/cpu_fp32); the defaults are the recorded runs.
 EXP4_CSV = RESULTS_DIR / "experiment4_results_dev.csv"
 EXP5_JSON = RESULTS_DIR / "experiment5_results_dev_summary.json"
 OUT_CSV = RESULTS_DIR / "weight_sensitivity_dev.csv"
@@ -112,7 +115,16 @@ def main():
     parser.add_argument("--step", type=float, default=0.05, help="grid spacing on the weight simplex")
     parser.add_argument("--r-threshold", type=float, default=-0.5,
                         help="ONRS 'tracks noise' when Pearson r(noise, ONRS) <= this")
+    parser.add_argument("--results-dir", type=Path, default=None,
+                        help="read Experiment 4/5 results from, and write the sweep to, this directory "
+                             "(default: results/)")
     args = parser.parse_args()
+
+    if args.results_dir is not None:
+        global EXP4_CSV, EXP5_JSON, OUT_CSV, OUT_JSON
+        d = args.results_dir.resolve()
+        EXP4_CSV, EXP5_JSON = d / EXP4_CSV.name, d / EXP5_JSON.name
+        OUT_CSV, OUT_JSON = d / OUT_CSV.name, d / OUT_JSON.name
 
     nrf = NumericalReliabilityFramework()
     exp4 = load_exp4()
@@ -213,7 +225,7 @@ def main():
     best_ranked = summary["most_negative_noise_r_among_correct_rankings"]
     if best_ranked is not None:
         print(f"Most negative r among weightings that rank correctly: {best_ranked:+.3f}")
-    print(f"\nWrote {OUT_CSV.relative_to(RESULTS_DIR.parent)} and {OUT_JSON.relative_to(RESULTS_DIR.parent)}")
+    print(f"\nWrote {OUT_CSV} and {OUT_JSON}".replace(str(RESULTS_DIR.parent) + os.sep, ""))
 
 
 if __name__ == "__main__":

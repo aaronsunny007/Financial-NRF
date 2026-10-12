@@ -30,6 +30,9 @@ on:
       dtype:
         description: CPU precision for the generator (float32 or bfloat16)
         default: 'float32'
+      replay_only:
+        description: Skip generation and replay the committed results/cpu_fp32/generations.jsonl
+        default: 'false'
 
 permissions:
   contents: write
@@ -37,6 +40,7 @@ permissions:
 
 jobs:
   plan:
+    if: ${{ inputs.replay_only != 'true' }}
     runs-on: ubuntu-latest
     outputs:
       shards: ${{ steps.p.outputs.shards }}
@@ -49,6 +53,7 @@ jobs:
 
   generate:
     name: generate (shard ${{ matrix.shard }})
+    if: ${{ inputs.replay_only != 'true' }}
     needs: plan
     runs-on: ubuntu-latest
     timeout-minutes: 345
@@ -160,6 +165,7 @@ jobs:
         run: curl -sSf -o data_loader/dev.json https://raw.githubusercontent.com/czyssrs/FinQA/main/dataset/dev.json
 
       - name: Collect shard caches from their branches
+        if: ${{ inputs.replay_only != 'true' }}
         env:
           RUN_ID: ${{ github.run_id }}
         run: |
@@ -172,6 +178,7 @@ jobs:
           ls -la caches
 
       - name: Merge caches
+        if: ${{ inputs.replay_only != 'true' }}
         run: |
           mkdir -p results/cpu_fp32
           cat caches/*.jsonl > results/cpu_fp32/generations_raw.jsonl
@@ -202,13 +209,18 @@ jobs:
           N_MAIN: ${{ inputs.n_main }}
           N_EXP2: ${{ inputs.n_exp2 }}
         run: |
-          set -o pipefail
           O=results/cpu_fp32
-          python -m experiments.experiment1 --engine replay --split dev --n "$N_MAIN" --ness-mode derived --output $O/experiment1_results_dev.csv | tee $O/log_experiment1.txt
-          python -m experiments.experiment2 --engine replay --split dev --n "$N_EXP2" --output $O/experiment2_results_dev.csv | tee $O/log_experiment2.txt
-          python -m experiments.experiment3 --engine replay --split dev --n "$N_MAIN" --output $O/experiment3_results_dev.csv | tee $O/log_experiment3.txt
-          python -m experiments.experiment4 --engine replay --split dev --n "$N_MAIN" --injection-mode evidence --output $O/experiment4_results_dev.csv | tee $O/log_experiment4.txt
-          python -m experiments.experiment5 --engine replay --split dev --n "$N_MAIN" --output $O/experiment5_results_dev.csv | tee $O/log_experiment5.txt
+          step() {
+            name=$1; shift
+            echo "=== $name"
+            if ! "$@" > $O/log_$name.txt 2>&1; then echo "FAILED: $name"; echo "FAILED" >> $O/log_$name.txt; tail -n 25 $O/log_$name.txt; fi
+          }
+          step experiment1 python -m experiments.experiment1 --engine replay --split dev --n "$N_MAIN" --ness-mode derived --output $O/experiment1_results_dev.csv
+          step experiment2 python -m experiments.experiment2 --engine replay --split dev --n "$N_EXP2" --output $O/experiment2_results_dev.csv
+          step experiment3 python -m experiments.experiment3 --engine replay --split dev --n "$N_MAIN" --output $O/experiment3_results_dev.csv
+          step experiment4 python -m experiments.experiment4 --engine replay --split dev --n "$N_MAIN" --injection-mode evidence --output $O/experiment4_results_dev.csv
+          step experiment5 python -m experiments.experiment5 --engine replay --split dev --n "$N_MAIN" --output $O/experiment5_results_dev.csv
+          ls -la $O
 
       - name: Upload results
         if: always()
@@ -218,6 +230,7 @@ jobs:
           path: results/cpu_fp32
 
       - name: Commit results to a branch
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
