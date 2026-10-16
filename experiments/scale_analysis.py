@@ -175,6 +175,41 @@ def pct(a, lo=2.5, hi=97.5):
     return [float(np.percentile(a, lo)), float(np.percentile(a, hi))]
 
 
+def auroc(score, label):
+    """P(score of a correct answer > score of an incorrect one), ties counted half."""
+    score, label = np.asarray(score, float), np.asarray(label, float)
+    ok = ~np.isnan(score) & ~np.isnan(label)
+    pos, neg = score[ok & (label == 1)], score[ok & (label == 0)]
+    if len(pos) == 0 or len(neg) == 0:
+        return float("nan")
+    diff = pos[:, None] - neg[None, :]
+    return float(((diff > 0).sum() + 0.5 * (diff == 0).sum()) / diff.size)
+
+
+def discrimination(cfg, boot, rng):
+    """How well each support/confidence measure separates correct from incorrect answers
+    on the clean (level 0) condition, with bootstrap intervals over items."""
+    t4 = cfg["t4"]
+    cols = {
+        "evidence_support_overlap": t4["ness"][:, 0],
+        "no_hallucination_flag": 1.0 - t4["hall"][:, 0],
+        "self_reported_confidence": t4["conf"][:, 0],
+    }
+    if cfg["nli4"] is not None:
+        cols["nli_frac_entailed"] = cfg["nli4"][:, 0]
+    y = t4["correct"][:, 0]
+    n = len(y)
+    out = {}
+    for name, x in cols.items():
+        pt = auroc(x, y)
+        bs = []
+        for _ in range(boot):
+            idx = rng.integers(0, n, n)
+            bs.append(auroc(x[idx], y[idx]))
+        out[name] = {"auroc": pt, "ci95": pct(bs)}
+    return out
+
+
 def analyse(cfg, boot, boot_sweep, rng):
     has5 = cfg["t5"] is not None
     n4, n5 = len(cfg["ids"]), len(cfg["ids5"])
@@ -264,6 +299,7 @@ def analyse(cfg, boot, boot_sweep, rng):
     base["mode"] = cfg.get("mode", "evidence")
     base["levels"] = levels.tolist()
     base["item_level_noise_effects"] = effects
+    base["discrimination_of_correctness"] = discrimination(cfg, min(boot, 500), rng)
     base["n_items"] = n4
     base["n_items_exp5"] = n5
     return base

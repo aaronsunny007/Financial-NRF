@@ -64,6 +64,16 @@ def render(s):
                 cells.append("not measured")
         L.append(f"| {k} | " + " | ".join(cells) + " |")
 
+    L.append("\n## Can the measures tell a correct answer from an incorrect one? (clean condition)\n")
+    L.append("Area under the ROC curve for separating correct from incorrect answers (0.5 is chance), with a bootstrap interval over items.\n")
+    names = ["evidence_support_overlap", "no_hallucination_flag", "self_reported_confidence", "nli_frac_entailed"]
+    L.append("| Run | overlap evidence support | no hallucination flag | self-reported confidence | entailment support |")
+    L.append("|---|---|---|---|---|")
+    for k in [x for x in order if runs[x].get("mode") != "corrupt"]:
+        d = runs[k].get("discrimination_of_correctness", {})
+        L.append(f"| {k} | " + " | ".join(
+            (f"{f(d[m]['auroc'])} {ci(d[m]['ci95'], 2, False)}" if m in d else "not measured") for m in names) + " |")
+
     corrupt = [k for k in order if runs[k].get("mode") == "corrupt"]
     if corrupt:
         L.append("\n## Corrupted evidence (a share of the numbers in the retrieved evidence replaced by wrong ones)\n")
