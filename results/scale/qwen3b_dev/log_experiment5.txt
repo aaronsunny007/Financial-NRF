@@ -1,0 +1,525 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+==============================================================
+EXPERIMENT 5: COMPARATIVE BASELINES ON IDENTICAL DATA
+Split: dev | N: 150 | Seed: 42 | Engine: replay | NESS mode: strict
+Conditions: ['closed_book', 'retrieval', 'oracle']  (total generations: 450)
+==============================================================
+All conditions share the same items, generator, prompt, scoring and
+verifier. Only the evidence supplied to the model differs.
+==============================================================
+Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+LLM backend: replay of 1723 cached generations, Qwen/Qwen2.5-3B-Instruct (float32, replayed from cache)
+Embedding model running on: cpu
+FAISS available: True (using faiss.IndexFlatIP)
+
+--------------------------------------------------------------
+CONDITION: CLOSED_BOOK
+--------------------------------------------------------------
+  [1/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [2/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [3/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [4/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [5/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [6/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [7/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [8/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [9/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [10/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [11/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [12/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [13/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [14/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [15/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [16/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [17/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [18/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [19/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [20/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [21/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [22/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [23/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [24/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [25/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [26/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [27/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [28/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [29/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [30/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [31/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [32/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [33/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [34/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [35/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [36/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [37/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [38/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [39/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [40/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [41/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [42/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [43/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [44/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [45/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [46/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [47/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [48/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [49/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [50/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [51/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [52/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [53/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [54/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [55/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [56/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [57/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [58/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [59/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [60/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [61/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [62/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [63/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [64/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [65/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [66/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [67/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [68/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [69/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [70/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [71/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [72/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [73/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [74/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [75/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [76/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [77/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [78/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [79/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [80/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [81/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [82/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [83/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [84/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [85/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [86/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [87/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [88/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [89/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [90/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [91/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [92/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [93/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [94/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [95/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [96/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [97/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [98/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [99/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [100/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [101/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [102/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [103/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [104/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [105/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [106/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [107/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [108/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [109/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [110/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [111/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [112/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [113/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [114/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [115/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [116/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [117/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [118/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [119/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [120/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [121/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [122/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [123/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [124/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [125/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [126/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [127/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [128/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [129/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [130/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [131/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [132/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [133/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [134/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [135/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [136/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [137/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [138/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [139/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [140/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [141/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [142/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [143/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [144/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [145/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [146/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [147/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [148/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [149/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [150/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+
+  Accuracy:        0.0000  95% CI [0.0000, 0.0251]
+  NESS:            0.0000
+  Hallucination:   1.0000
+  ECE:             0.2872
+  ONRS:            0.1426
+
+--------------------------------------------------------------
+CONDITION: RETRIEVAL
+--------------------------------------------------------------
+  [1/150] Correct: 1.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [2/150] Correct: 0.0 | NESS: 0.93 | Halluc: 0 | Conf: 0.90
+  [3/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [4/150] Correct: 0.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.90
+  [5/150] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [6/150] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [7/150] Correct: 0.0 | NESS: 0.79 | Halluc: 0 | Conf: 0.90
+  [8/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [9/150] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [10/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [11/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [12/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [13/150] Correct: 1.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [14/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [15/150] Correct: 0.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [16/150] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [17/150] Correct: 0.0 | NESS: 0.45 | Halluc: 1 | Conf: 0.90
+  [18/150] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.90
+  [19/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [20/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 1.00
+  [21/150] Correct: 1.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.90
+  [22/150] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [23/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [24/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.10
+  [25/150] Correct: 0.0 | NESS: 0.69 | Halluc: 0 | Conf: 0.90
+  [26/150] Correct: 1.0 | NESS: 0.60 | Halluc: 0 | Conf: 0.90
+  [27/150] Correct: 0.0 | NESS: 0.54 | Halluc: 0 | Conf: 0.90
+  [28/150] Correct: 1.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+  [29/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [30/150] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+  [31/150] Correct: 0.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.90
+  [32/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.10
+  [33/150] Correct: 0.0 | NESS: 0.85 | Halluc: 0 | Conf: 0.90
+  [34/150] Correct: 0.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [35/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [36/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [37/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [38/150] Correct: 0.0 | NESS: 0.81 | Halluc: 0 | Conf: 0.90
+  [39/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [40/150] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 1.00
+  [41/150] Correct: 1.0 | NESS: 0.68 | Halluc: 0 | Conf: 0.90
+  [42/150] Correct: 0.0 | NESS: 0.85 | Halluc: 0 | Conf: 0.90
+  [43/150] Correct: 0.0 | NESS: 0.62 | Halluc: 0 | Conf: 0.90
+  [44/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 1.00
+  [45/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.00
+  [46/150] Correct: 0.0 | NESS: 0.64 | Halluc: 0 | Conf: 0.90
+  [47/150] Correct: 1.0 | NESS: 0.89 | Halluc: 0 | Conf: 0.90
+  [48/150] Correct: 0.0 | NESS: 0.70 | Halluc: 0 | Conf: 0.90
+  [49/150] Correct: 0.0 | NESS: 0.47 | Halluc: 1 | Conf: 0.90
+  [50/150] Correct: 0.0 | NESS: 0.77 | Halluc: 0 | Conf: 0.90
+  [51/150] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [52/150] Correct: 0.0 | NESS: 0.44 | Halluc: 1 | Conf: 0.90
+  [53/150] Correct: 0.0 | NESS: 0.79 | Halluc: 0 | Conf: 0.90
+  [54/150] Correct: 0.0 | NESS: 0.87 | Halluc: 0 | Conf: 0.90
+  [55/150] Correct: 0.0 | NESS: 0.56 | Halluc: 0 | Conf: 0.90
+  [56/150] Correct: 1.0 | NESS: 0.77 | Halluc: 0 | Conf: 0.90
+  [57/150] Correct: 0.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [58/150] Correct: 0.0 | NESS: 0.55 | Halluc: 0 | Conf: 0.90
+  [59/150] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [60/150] Correct: 1.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [61/150] Correct: 1.0 | NESS: 0.77 | Halluc: 0 | Conf: 0.90
+  [62/150] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [63/150] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [64/150] Correct: 0.0 | NESS: 0.55 | Halluc: 0 | Conf: 0.90
+  [65/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [66/150] Correct: 0.0 | NESS: 0.81 | Halluc: 0 | Conf: 0.90
+  [67/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [68/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [69/150] Correct: 1.0 | NESS: 0.69 | Halluc: 0 | Conf: 0.90
+  [70/150] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.00
+  [71/150] Correct: 0.0 | NESS: 0.93 | Halluc: 0 | Conf: 0.90
+  [72/150] Correct: 0.0 | NESS: 0.85 | Halluc: 0 | Conf: 0.90
+  [73/150] Correct: 0.0 | NESS: 0.62 | Halluc: 0 | Conf: 0.90
+  [74/150] Correct: 0.0 | NESS: 0.65 | Halluc: 0 | Conf: 0.90
+  [75/150] Correct: 0.0 | NESS: 0.58 | Halluc: 0 | Conf: 0.90
+  [76/150] Correct: 0.0 | NESS: 0.33 | Halluc: 1 | Conf: 0.90
+  [77/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [78/150] Correct: 0.0 | NESS: 0.69 | Halluc: 0 | Conf: 0.90
+  [79/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [80/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [81/150] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [82/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [83/150] Correct: 0.0 | NESS: 0.58 | Halluc: 0 | Conf: 0.90
+  [84/150] Correct: 0.0 | NESS: 0.92 | Halluc: 0 | Conf: 0.90
+  [85/150] Correct: 0.0 | NESS: 0.81 | Halluc: 0 | Conf: 0.90
+  [86/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [87/150] Correct: 0.0 | NESS: 0.79 | Halluc: 0 | Conf: 0.90
+  [88/150] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [89/150] Correct: 0.0 | NESS: 0.92 | Halluc: 0 | Conf: 0.90
+  [90/150] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [91/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [92/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [93/150] Correct: 0.0 | NESS: 0.89 | Halluc: 0 | Conf: 0.90
+  [94/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [95/150] Correct: 0.0 | NESS: 0.79 | Halluc: 0 | Conf: 0.90
+  [96/150] Correct: 1.0 | NESS: 0.88 | Halluc: 0 | Conf: 0.90
+  [97/150] Correct: 1.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.90
+  [98/150] Correct: 1.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [99/150] Correct: 1.0 | NESS: 0.87 | Halluc: 0 | Conf: 0.90
+  [100/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [101/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [102/150] Correct: 1.0 | NESS: 0.62 | Halluc: 0 | Conf: 0.90
+  [103/150] Correct: 0.0 | NESS: 0.90 | Halluc: 0 | Conf: 0.90
+  [104/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [105/150] Correct: 1.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [106/150] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [107/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [108/150] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+  [109/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [110/150] Correct: 1.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [111/150] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [112/150] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [113/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [114/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.00
+  [115/150] Correct: 0.0 | NESS: 0.65 | Halluc: 0 | Conf: 0.90
+  [116/150] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [117/150] Correct: 0.0 | NESS: 0.41 | Halluc: 1 | Conf: 0.90
+  [118/150] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [119/150] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [120/150] Correct: 0.0 | NESS: 0.77 | Halluc: 0 | Conf: 1.00
+  [121/150] Correct: 1.0 | NESS: 0.94 | Halluc: 0 | Conf: 0.90
+  [122/150] Correct: 0.0 | NESS: 0.43 | Halluc: 1 | Conf: 0.90
+  [123/150] Correct: 0.0 | NESS: 0.64 | Halluc: 0 | Conf: 0.90
+  [124/150] Correct: 0.0 | NESS: 0.76 | Halluc: 0 | Conf: 0.90
+  [125/150] Correct: 1.0 | NESS: 0.79 | Halluc: 0 | Conf: 0.90
+  [126/150] Correct: 0.0 | NESS: 0.79 | Halluc: 0 | Conf: 0.90
+  [127/150] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+  [128/150] Correct: 0.0 | NESS: 0.62 | Halluc: 0 | Conf: 0.90
+  [129/150] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [130/150] Correct: 0.0 | NESS: 0.60 | Halluc: 0 | Conf: 0.90
+  [131/150] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [132/150] Correct: 0.0 | NESS: 0.68 | Halluc: 0 | Conf: 0.80
+  [133/150] Correct: 1.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [134/150] Correct: 0.0 | NESS: 0.94 | Halluc: 0 | Conf: 0.90
+  [135/150] Correct: 0.0 | NESS: 0.69 | Halluc: 0 | Conf: 0.90
+  [136/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [137/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [138/150] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+  [139/150] Correct: 0.0 | NESS: 0.60 | Halluc: 0 | Conf: 0.90
+  [140/150] Correct: 1.0 | NESS: 0.89 | Halluc: 0 | Conf: 0.90
+  [141/150] Correct: 1.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [142/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [143/150] Correct: 1.0 | NESS: 0.62 | Halluc: 0 | Conf: 0.90
+  [144/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [145/150] Correct: 0.0 | NESS: 0.88 | Halluc: 0 | Conf: 0.90
+  [146/150] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [147/150] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [148/150] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [149/150] Correct: 1.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.90
+  [150/150] Correct: 0.0 | NESS: 0.60 | Halluc: 0 | Conf: 0.90
+
+  Accuracy:        0.2550  95% CI [0.1918, 0.3306]
+  NESS:            0.7507
+  Hallucination:   0.0467
+  ECE:             0.6181
+  ONRS:            0.5688
+
+--------------------------------------------------------------
+CONDITION: ORACLE
+--------------------------------------------------------------
+  [1/150] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [2/150] Correct: 0.0 | NESS: 0.68 | Halluc: 0 | Conf: 0.90
+  [3/150] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [4/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [5/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [6/150] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [7/150] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [8/150] Correct: 0.0 | NESS: 0.53 | Halluc: 0 | Conf: 0.90
+  [9/150] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [10/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [11/150] Correct: 1.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [12/150] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [13/150] Correct: 0.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [14/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [15/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [16/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [17/150] Correct: 0.0 | NESS: 0.29 | Halluc: 1 | Conf: 0.90
+  [18/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [19/150] Correct: 0.0 | NESS: 0.89 | Halluc: 0 | Conf: 0.90
+  [20/150] Correct: 1.0 | NESS: 0.61 | Halluc: 0 | Conf: 0.80
+  [21/150] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [22/150] Correct: 1.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [23/150] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [24/150] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [25/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [26/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [27/150] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [28/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [29/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [30/150] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [31/150] Correct: 0.0 | NESS: 0.88 | Halluc: 0 | Conf: 0.90
+  [32/150] Correct: 0.0 | NESS: 0.64 | Halluc: 0 | Conf: 0.90
+  [33/150] Correct: 0.0 | NESS: 0.76 | Halluc: 0 | Conf: 0.90
+  [34/150] Correct: 1.0 | NESS: 0.82 | Halluc: 0 | Conf: 1.00
+  [35/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [36/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [37/150] Correct: 0.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [38/150] Correct: 0.0 | NESS: 0.63 | Halluc: 0 | Conf: 0.90
+  [39/150] Correct: 0.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [40/150] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [41/150] Correct: 0.0 | NESS: 0.44 | Halluc: 1 | Conf: 0.90
+  [42/150] Correct: 0.0 | NESS: 0.79 | Halluc: 0 | Conf: 0.90
+  [43/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [44/150] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 1.00
+  [45/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.10
+  [46/150] Correct: 0.0 | NESS: 0.64 | Halluc: 0 | Conf: 0.90
+  [47/150] Correct: 1.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [48/150] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.90
+  [49/150] Correct: 0.0 | NESS: 0.55 | Halluc: 0 | Conf: 0.90
+  [50/150] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+  [51/150] Correct: 1.0 | NESS: 0.85 | Halluc: 0 | Conf: 0.90
+  [52/150] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [53/150] Correct: 0.0 | NESS: 0.85 | Halluc: 0 | Conf: 0.90
+  [54/150] Correct: 1.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [55/150] Correct: 0.0 | NESS: 0.38 | Halluc: 1 | Conf: 0.90
+  [56/150] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [57/150] Correct: 0.0 | NESS: 0.90 | Halluc: 0 | Conf: 0.90
+  [58/150] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [59/150] Correct: 1.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.90
+  [60/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [61/150] Correct: 1.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [62/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [63/150] Correct: 0.0 | NESS: 0.93 | Halluc: 0 | Conf: 0.90
+  [64/150] Correct: 0.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.90
+  [65/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [66/150] Correct: 0.0 | NESS: 0.69 | Halluc: 0 | Conf: 0.90
+  [67/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [68/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [69/150] Correct: 1.0 | NESS: 0.85 | Halluc: 0 | Conf: 0.90
+  [70/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.00
+  [71/150] Correct: 0.0 | NESS: 0.96 | Halluc: 0 | Conf: 0.50
+  [72/150] Correct: 0.0 | NESS: 0.92 | Halluc: 0 | Conf: 0.90
+  [73/150] Correct: 0.0 | NESS: 0.44 | Halluc: 1 | Conf: 0.90
+  [74/150] Correct: 0.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [75/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [76/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.80
+  [77/150] Correct: 1.0 | NESS: 0.76 | Halluc: 0 | Conf: 0.90
+  [78/150] Correct: 0.0 | NESS: 0.69 | Halluc: 0 | Conf: 0.90
+  [79/150] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [80/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [81/150] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [82/150] Correct: 0.0 | NESS: 0.69 | Halluc: 0 | Conf: 0.90
+  [83/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [84/150] Correct: 0.0 | NESS: 0.76 | Halluc: 0 | Conf: 0.90
+  [85/150] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.90
+  [86/150] Correct: 0.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.90
+  [87/150] Correct: 0.0 | NESS: 0.65 | Halluc: 0 | Conf: 0.90
+  [88/150] Correct: 1.0 | NESS: 0.91 | Halluc: 0 | Conf: 0.90
+  [89/150] Correct: 1.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [90/150] Correct: 0.0 | NESS: 0.58 | Halluc: 0 | Conf: 0.90
+  [91/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [92/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [93/150] Correct: 0.0 | NESS: 0.93 | Halluc: 0 | Conf: 0.90
+  [94/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 1.00
+  [95/150] Correct: 0.0 | NESS: 0.69 | Halluc: 0 | Conf: 0.90
+  [96/150] Correct: 1.0 | NESS: 0.81 | Halluc: 0 | Conf: 0.90
+  [97/150] Correct: 0.0 | NESS: 0.87 | Halluc: 0 | Conf: 0.90
+  [98/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [99/150] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [100/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [101/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [102/150] Correct: 1.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [103/150] Correct: 0.0 | NESS: 0.29 | Halluc: 1 | Conf: 0.90
+  [104/150] Correct: 0.0 | NESS: 0.36 | Halluc: 1 | Conf: 0.90
+  [105/150] Correct: 1.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [106/150] Correct: 1.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [107/150] Correct: 0.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.90
+  [108/150] Correct: 0.0 | NESS: 0.47 | Halluc: 1 | Conf: 0.90
+  [109/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [110/150] Correct: 1.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [111/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [112/150] Correct: 0.0 | NESS: 0.54 | Halluc: 0 | Conf: 0.90
+  [113/150] Correct: 1.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [114/150] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [115/150] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [116/150] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [117/150] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [118/150] Correct: 1.0 | NESS: 0.90 | Halluc: 0 | Conf: 0.90
+  [119/150] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [120/150] Correct: 0.0 | NESS: 0.56 | Halluc: 0 | Conf: 0.90
+  [121/150] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [122/150] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [123/150] Correct: 1.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [124/150] Correct: 0.0 | NESS: 0.45 | Halluc: 1 | Conf: 0.90
+  [125/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [126/150] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [127/150] Correct: 0.0 | NESS: 0.59 | Halluc: 0 | Conf: 0.90
+  [128/150] Correct: 0.0 | NESS: 0.60 | Halluc: 0 | Conf: 0.90
+  [129/150] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [130/150] Correct: 0.0 | NESS: 0.69 | Halluc: 0 | Conf: 0.90
+  [131/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [132/150] Correct: 1.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [133/150] Correct: 1.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [134/150] Correct: 1.0 | NESS: 0.89 | Halluc: 0 | Conf: 0.90
+  [135/150] Correct: 0.0 | NESS: 0.64 | Halluc: 0 | Conf: 0.90
+  [136/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [137/150] Correct: 0.0 | NESS: 0.89 | Halluc: 0 | Conf: 0.90
+  [138/150] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [139/150] Correct: 0.0 | NESS: 0.53 | Halluc: 0 | Conf: 0.90
+  [140/150] Correct: 1.0 | NESS: 0.84 | Halluc: 0 | Conf: 0.90
+  [141/150] Correct: 1.0 | NESS: 0.70 | Halluc: 0 | Conf: 0.90
+  [142/150] Correct: 0.0 | NESS: 0.72 | Halluc: 0 | Conf: 0.90
+  [143/150] Correct: 1.0 | NESS: 0.70 | Halluc: 0 | Conf: 0.90
+  [144/150] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.00
+  [145/150] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 1.00
+  [146/150] Correct: 1.0 | NESS: 0.92 | Halluc: 0 | Conf: 0.90
+  [147/150] Correct: 1.0 | NESS: 0.84 | Halluc: 0 | Conf: 0.90
+  [148/150] Correct: 0.0 | NESS: 0.54 | Halluc: 0 | Conf: 0.90
+  [149/150] Correct: 0.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.90
+  [150/150] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+
+  Accuracy:        0.2617  95% CI [0.1978, 0.3377]
+  NESS:            0.7327
+  Hallucination:   0.0600
+  ECE:             0.6128
+  ONRS:            0.5638
+
+==============================================================
+EXPERIMENT 5 RESULTS -- CONTROLLED COMPARISON
+==============================================================
+Condition          Acc            95% CI    NESS   Halluc     ONRS
+closed_book     0.0000      [0.00, 0.03]  0.0000   1.0000   0.1426
+retrieval       0.2550      [0.19, 0.33]  0.7507   0.0467   0.5688
+oracle          0.2617      [0.20, 0.34]  0.7327   0.0600   0.5638
+
+--------------------------------------------------------------
+ERROR DECOMPOSITION  <- this is what answers the comparison question
+--------------------------------------------------------------
+  Closed-book accuracy:                 0.0000
+  Gain from retrieval over closed-book: +0.2550
+     -> how much the retrieval stage actually contributes.
+  Retrieval-attributable error:         +0.0067
+     -> accuracy recovered by supplying gold evidence instead
+        of retrieved evidence. This is the ceiling on what any
+        retrieval improvement could deliver for this generator.
+  Reasoning-attributable error:         0.7383
+     -> error remaining even with perfect evidence. Not
+        addressable by improving retrieval at all.
+
+  Compare the oracle row against the gold-retrieval condition
+  reported in the FinQA literature, and the retrieval row
+  against their retriever condition. Note these remain
+  different splits and differently-trained systems: use them
+  as context, not as a like-for-like scoreboard.
+==============================================================
+
+Per-example results saved to: results/scale/qwen3b_dev/experiment5_results_dev.csv
+Summary saved to:             results/scale/qwen3b_dev/experiment5_results_dev_summary.json

@@ -1,0 +1,19 @@
+{
+  "split": "dev",
+  "engine": "replay",
+  "n": 150,
+  "n_scored_numeric": 149,
+  "excluded_non_numeric_count": 1,
+  "accuracy": 0.2550335570469799,
+  "mean_confidence": 0.8731543624161097,
+  "confidence_missing_count": 0,
+  "mean_confidence_on_correct": 0.9026315789473678,
+  "mean_confidence_on_errors": 0.8630630630630642,
+  "confidence_gap_correct_minus_error": 0.039568515884303546,
+  "overconfidence_gap_confidence_minus_accuracy": 0.6181208053691298,
+  "high_confidence_error_count": 106,
+  "high_confidence_error_rate": 0.7114093959731543,
+  "high_confidence_threshold": 0.8,
+  "ece_of_self_reported_confidence": 0.6181208053691277,
+  "confidence_note": "Self-reported confidence elicited in the prompt, NOT token log-probabilities. Report as 'ECE of self-reported confidence'."
+}

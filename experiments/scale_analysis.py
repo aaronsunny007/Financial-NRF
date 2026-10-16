@@ -62,9 +62,10 @@ def load_config(d, split):
     """Per-item arrays for one run: (ids, levels, tables) or None if the run is incomplete."""
     p4 = d / f"experiment4_results_{split}_per_example.csv"
     p5 = d / f"experiment5_results_{split}.csv"
-    if not (p4.exists() and p5.exists()):
+    if not p4.exists():
         return None
-    rows4, rows5 = read_csv(p4), read_csv(p5)
+    rows4 = read_csv(p4)
+    rows5 = read_csv(p5) if p5.exists() else None
     ids = list(dict.fromkeys(r["id"] for r in rows4))
     levels = sorted({float(r["noise_level"]) for r in rows4})
     pos = {i: k for k, i in enumerate(ids)}
@@ -85,6 +86,9 @@ def load_config(d, split):
         "vs_clean": grid(rows4, "evidence_support_vs_clean_strict"),
     }
     conds = ["closed_book", "retrieval", "oracle"]
+    if rows5 is None:
+        return {"ids": ids, "levels": levels, "t4": t4, "t5": None, "ids5": [], "nli4": _load_nli4(d, split, pos, lv, ids, levels),
+                "mode": rows4[0].get("injection_mode", "evidence")}
     cond_rows = {c: {r["id"]: r for r in rows5 if r["condition"] == c} for c in conds}
     ids5 = [i for i in ids if all(i in cond_rows[c] for c in conds)]
     pos5 = {i: k for k, i in enumerate(ids5)}
@@ -99,14 +103,18 @@ def load_config(d, split):
     t5["numeric"] = np.array([[1.0 if cond_rows[c][i].get("answer_type") == "numeric" else 0.0
                                for c in conds] for i in ids5])
 
-    nli4 = nli5 = None
-    q4, q5 = d / f"experiment4_nli_{split}.csv", d / f"experiment5_nli_{split}.csv"
-    if q4.exists():
-        rows = read_csv(q4)
-        nli4 = np.full((len(ids), len(levels)), np.nan)
-        for r in rows:
-            nli4[pos[r["id"]], lv[float(r["noise_level"])]] = num(r["nli_frac_entailed"])
-    return {"ids": ids, "levels": levels, "t4": t4, "t5": t5, "ids5": ids5, "nli4": nli4}
+    return {"ids": ids, "levels": levels, "t4": t4, "t5": t5, "ids5": ids5,
+            "nli4": _load_nli4(d, split, pos, lv, ids, levels), "mode": rows4[0].get("injection_mode", "evidence")}
+
+
+def _load_nli4(d, split, pos, lv, ids, levels):
+    q4 = d / f"experiment4_nli_{split}.csv"
+    if not q4.exists():
+        return None
+    nli4 = np.full((len(ids), len(levels)), np.nan)
+    for r in read_csv(q4):
+        nli4[pos[r["id"]], lv[float(r["noise_level"])]] = num(r["nli_frac_entailed"])
+    return nli4
 
 
 # ---------------------------------------------------------------- statistics
@@ -168,6 +176,7 @@ def pct(a, lo=2.5, hi=97.5):
 
 
 def analyse(cfg, boot, boot_sweep, rng):
+    has5 = cfg["t5"] is not None
     n4, n5 = len(cfg["ids"]), len(cfg["ids5"])
     levels = np.array(cfg["levels"])
     all4, all5 = np.arange(n4), np.arange(n5)
@@ -175,9 +184,14 @@ def analyse(cfg, boot, boot_sweep, rng):
 
     def point(idx4, idx5, with_sweep=True):
         c4 = components(cfg["t4"], idx4)
-        c5 = components(cfg["t5"], idx5)
         composite = c4 @ DEFAULT_W
+        vc = np.nanmean(cfg["t4"]["vs_clean"][idx4], axis=0)
         res = {
+            "vs_clean_by_level": vc.tolist(),
+            "r_noise_support_vs_clean": corr(levels, vc),
+            # the composite with evidence support measured against the clean evidence
+            "r_noise_composite_vs_clean": corr(
+                levels, c4[:, 0] * DEFAULT_W[0] + vc * DEFAULT_W[1] + c4[:, 2] * DEFAULT_W[2] + c4[:, 3] * DEFAULT_W[3]),
             "r_noise_composite": corr(levels, composite),
             "r_noise_component": {k: corr(levels, c4[:, i]) for i, k in enumerate(KEYS)},
             "composite_by_level": composite.tolist(),
@@ -185,19 +199,23 @@ def analyse(cfg, boot, boot_sweep, rng):
             "ness_by_level": c4[:, 1].tolist(),
             "halluc_rate_by_level": (1.0 - c4[:, 2]).tolist(),
             "ece_by_level": (1.0 - c4[:, 3]).tolist(),
+        }
+        if has5:
+            c5 = components(cfg["t5"], idx5)
+            res.update({
             "exp5": {c: {"accuracy": float(c5[j, 0]), "ness": float(c5[j, 1]),
                          "halluc_rate": float(1.0 - c5[j, 2]), "composite": float(c5[j] @ DEFAULT_W)}
                      for j, c in enumerate(["closed_book", "retrieval", "oracle"])},
             "oracle_minus_retrieval_accuracy": float(c5[2, 0] - c5[1, 0]),
             "oracle_minus_retrieval_composite": float(c5[2] @ DEFAULT_W - c5[1] @ DEFAULT_W),
-        }
-        if with_sweep:
+            })
+        if with_sweep and has5:
             tr, rk, _ = sweep(c4, c5, levels, W)
             res["sweep"] = {"tracks": float(tr.mean()), "ranks": float(rk.mean()),
                             "both": float((tr & rk).mean())}
         return res
 
-    base = point(all4, all5)
+    base = point(all4, all5 if has5 else None)
 
     # item-level, paired noise effects: highest level minus level 0, per item
     t4 = cfg["t4"]
@@ -216,29 +234,35 @@ def analyse(cfg, boot, boot_sweep, rng):
         effects[name] = {"mean_change": float(d.mean()), "ci95": pct(bs), "n_items": int(len(d))}
 
     # bootstrap over items for the headline statistics
-    keys = ["r_noise_composite", "oracle_minus_retrieval_accuracy", "oracle_minus_retrieval_composite"]
+    keys = ["r_noise_composite", "r_noise_support_vs_clean", "r_halluc"]
+    if has5:
+        keys += ["oracle_minus_retrieval_accuracy", "oracle_minus_retrieval_composite"]
     bs = {k: [] for k in keys}
-    bs["r_halluc"] = []
     bs_sweep = {"tracks": [], "ranks": [], "both": []}
     for b in range(boot):
         i4 = rng.integers(0, n4, n4)
-        i5 = rng.integers(0, n5, n5)
-        c4 = components(t4 if False else cfg["t4"], i4)
-        c5 = components(cfg["t5"], i5)
+        c4 = components(cfg["t4"], i4)
         comp = c4 @ DEFAULT_W
         bs["r_noise_composite"].append(corr(levels, comp))
+        bs["r_noise_support_vs_clean"].append(corr(levels, np.nanmean(cfg["t4"]["vs_clean"][i4], axis=0)))
         bs["r_halluc"].append(corr(levels, 1.0 - c4[:, 2]))
-        bs["oracle_minus_retrieval_accuracy"].append(float(c5[2, 0] - c5[1, 0]))
-        bs["oracle_minus_retrieval_composite"].append(float(c5[2] @ DEFAULT_W - c5[1] @ DEFAULT_W))
-        if b < boot_sweep:
-            tr, rk, _ = sweep(c4, c5, levels, W)
-            bs_sweep["tracks"].append(float(tr.mean()))
-            bs_sweep["ranks"].append(float(rk.mean()))
-            bs_sweep["both"].append(float((tr & rk).mean()))
+        if has5:
+            i5 = rng.integers(0, n5, n5)
+            c5 = components(cfg["t5"], i5)
+            bs["oracle_minus_retrieval_accuracy"].append(float(c5[2, 0] - c5[1, 0]))
+            bs["oracle_minus_retrieval_composite"].append(float(c5[2] @ DEFAULT_W - c5[1] @ DEFAULT_W))
+            if b < boot_sweep:
+                tr, rk, _ = sweep(c4, c5, levels, W)
+                bs_sweep["tracks"].append(float(tr.mean()))
+                bs_sweep["ranks"].append(float(rk.mean()))
+                bs_sweep["both"].append(float((tr & rk).mean()))
     base["ci95"] = {k: pct(v) for k, v in bs.items()}
-    base["sweep_ci95"] = {k: pct(v) for k, v in bs_sweep.items()}
+    if has5:
+        base["sweep_ci95"] = {k: pct(v) for k, v in bs_sweep.items()}
+        base["p_oracle_not_better_composite"] = float(np.mean([x <= 0 for x in bs["oracle_minus_retrieval_composite"]]))
     base["r_noise_hallucination_rate"] = corr(levels, np.array(base["halluc_rate_by_level"]))
-    base["p_oracle_not_better_composite"] = float(np.mean([x <= 0 for x in bs["oracle_minus_retrieval_composite"]]))
+    base["mode"] = cfg.get("mode", "evidence")
+    base["levels"] = levels.tolist()
     base["item_level_noise_effects"] = effects
     base["n_items"] = n4
     base["n_items_exp5"] = n5
@@ -304,19 +328,21 @@ def main():
         results[d.name] = analyse(cfg, args.boot, args.boot_sweep, rng)
         results[d.name].update({"model": model, "split": split, "seed": seed})
         r = results[d.name]
+        both = f"{r['sweep']['both']:.3f}" if "sweep" in r else "n/a"
         print(f"{d.name}: n={r['n_items']}  r(noise,composite)={r['r_noise_composite']:+.2f} "
-              f"{r['ci95']['r_noise_composite']}  both={r['sweep']['both']:.3f}")
+              f"{r['ci95']['r_noise_composite']}  both={both}")
 
     validation = {}
     for model in sorted({m for m, _, s, _ in cfgs.values()}):
         dev = next((c for n, (m, sp, s, c) in cfgs.items() if m == model and sp == "dev" and s is None), None)
         test = next((c for n, (m, sp, s, c) in cfgs.items() if m == model and sp == "test" and s is None), None)
-        if dev and test:
+        if dev and test and dev["t5"] is not None and test["t5"] is not None:
             validation[model] = held_out(dev, test)
 
     seeds = {}
     for model in sorted({r["model"] for r in results.values()}):
-        runs = [r for r in results.values() if r["model"] == model and r["split"] == "dev"]
+        runs = [r for r in results.values()
+                if r["model"] == model and r["split"] == "dev" and r["seed"] is not None and "sweep" in r]
         if len(runs) >= 3:
             def spread(f):
                 v = [f(r) for r in runs if not math.isnan(f(r))]
