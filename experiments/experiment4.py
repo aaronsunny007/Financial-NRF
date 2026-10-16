@@ -201,6 +201,13 @@ def main():
             result = rag.answer(model_item, extra_evidence=extra)
             response = result.get("response", "")
             evidence_text = result.get("evidence_text", "")
+            # The same response scored against the CLEAN retrieved evidence (no injected
+            # sentences). Evidence support is normally measured against what the model was
+            # shown, which is why a model that grounds itself in corrupted passages still
+            # scores well; this variant asks whether it stayed grounded in the true ones.
+            clean_evidence = rag.build_evidence_text(
+                rag.retrieve(item, item["qa"]["question"])
+            ) if args.injection_mode == "evidence" else evidence_text
             gold_answer, answer_type = resolve_gold_answer(item)
 
             acc = nrf.numerical_accuracy(response, gold_answer)
@@ -234,6 +241,10 @@ def main():
                 "evidence_support_derived": support.derived_score,
                 "hallucination": halluc["hallucination"],
                 "self_reported_confidence": confidence,
+                "evidence_support_vs_clean_strict": nrf.numerical_evidence_support(
+                    response, clean_evidence).strict_score,
+                "evidence_text": evidence_text,
+                "response": response,
             }
             level_rows.append(row)
             per_example_rows.append(row)
@@ -251,6 +262,7 @@ def main():
         evidence_support_strict = sum(r["evidence_support_strict"] for r in level_rows) / n
         evidence_support_derived = sum(r["evidence_support_derived"] for r in level_rows) / n
         hallucination_rate = sum(r["hallucination"] for r in level_rows) / n
+        support_vs_clean = sum(r["evidence_support_vs_clean_strict"] for r in level_rows) / n
 
         conf_valid = [r for r in numeric if r["self_reported_confidence"] is not None]
         confidence_missing_count = n_scored - len(conf_valid)
@@ -284,6 +296,7 @@ def main():
             "evidence_support_strict": evidence_support_strict,
             "evidence_support_derived": evidence_support_derived,
             "hallucination_rate": hallucination_rate,
+            "evidence_support_vs_clean_strict": support_vs_clean,
             "ece": ece,
             "confidence_missing_count": confidence_missing_count,
             "onrs": onrs,

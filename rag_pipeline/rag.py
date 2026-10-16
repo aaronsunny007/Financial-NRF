@@ -206,7 +206,13 @@ from framework.verifier import PostHocArithmeticVerifier
 # warning (never silently), if 4-bit loading fails for any reason
 # (bitsandbytes not installed/incompatible, insufficient VRAM, etc.) --
 # see FinancialRAG._load_llm().
-LLM_MODEL_NAME = "Qwen/Qwen2.5-3B-Instruct"
+DEFAULT_LLM_MODEL_NAME = "Qwen/Qwen2.5-3B-Instruct"
+# NRF_LLM_MODEL swaps the generator (for example Qwen/Qwen2.5-1.5B-Instruct) without editing this file.
+LLM_MODEL_NAME = os.environ.get("NRF_LLM_MODEL", DEFAULT_LLM_MODEL_NAME)
+# NRF_TEMPERATURE > 0 switches from greedy to sampled decoding; NRF_GEN_SEED then selects the
+# random stream (mixed with a hash of the prompt, so a given prompt always draws the same sample).
+GEN_TEMPERATURE = float(os.environ.get("NRF_TEMPERATURE", "0"))
+GEN_SEED = int(os.environ.get("NRF_GEN_SEED", "0"))
 LLM_USE_4BIT = True
 FALLBACK_LLM_MODEL_NAME = "Qwen/Qwen2.5-1.5B-Instruct"
 
@@ -326,7 +332,13 @@ def shard_items(data):
 
 
 def _messages_key(messages, max_new_tokens) -> str:
-    payload = json.dumps([messages, max_new_tokens], sort_keys=True, ensure_ascii=False)
+    parts = [messages, max_new_tokens]
+    # Defaults (3B model, greedy) add nothing, so keys written before these options existed still match.
+    if LLM_MODEL_NAME != DEFAULT_LLM_MODEL_NAME:
+        parts.append({"model": LLM_MODEL_NAME})
+    if GEN_TEMPERATURE > 0:
+        parts.append({"temperature": GEN_TEMPERATURE, "seed": GEN_SEED})
+    payload = json.dumps(parts, sort_keys=True, ensure_ascii=False)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
@@ -929,14 +941,17 @@ and recompute carefully before answering again.
             max_length=MAX_PROMPT_TOKENS,
         ).to(LLM_DEVICE)
 
+        gen_kwargs = dict(
+            max_new_tokens=MAX_NEW_TOKENS,
+            do_sample=False,
+            pad_token_id=self.tokenizer.pad_token_id,
+            eos_token_id=self.tokenizer.eos_token_id,
+        )
+        if GEN_TEMPERATURE > 0:
+            gen_kwargs.update(do_sample=True, temperature=GEN_TEMPERATURE, top_p=0.95)
+            torch.manual_seed(GEN_SEED * 1_000_003 + int(_messages_key(messages, MAX_NEW_TOKENS)[:8], 16))
         with torch.no_grad():
-            outputs = self.model.generate(
-                **inputs,
-                max_new_tokens=MAX_NEW_TOKENS,
-                do_sample=False,
-                pad_token_id=self.tokenizer.pad_token_id,
-                eos_token_id=self.tokenizer.eos_token_id,
-            )
+            outputs = self.model.generate(**inputs, **gen_kwargs)
 
         generated_tokens = outputs[0][inputs["input_ids"].shape[1]:]
         response = self.tokenizer.decode(generated_tokens, skip_special_tokens=True)

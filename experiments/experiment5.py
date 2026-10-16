@@ -148,6 +148,7 @@ def evaluate(rag, nrf, item, condition, evidence_override=None):
         "verifier_verified": verification.get("verified"),
         "retry_count": result.get("retry_count", 0),
         "evidence_char_count": len(evidence_text),
+        "evidence_text": evidence_text,
         "response": response,
     }
 
