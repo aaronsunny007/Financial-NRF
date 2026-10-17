@@ -1,0 +1,80 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/Financial-NRF/Financial-NRF/experiments/experiment5.py", line 372, in <module>
+    main()
+  File "/home/runner/work/Financial-NRF/Financial-NRF/experiments/experiment5.py", line 280, in main
+    row = evaluate(rag, nrf, item, condition, evidence_override=override)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Financial-NRF/Financial-NRF/experiments/experiment5.py", line 124, in evaluate
+    result = rag.answer(item, evidence_override=evidence_override)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Financial-NRF/Financial-NRF/rag_pipeline/rag.py", line 1072, in answer
+    response = self.generate(question, evidence_text, correction_note=verification.reason)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Financial-NRF/Financial-NRF/rag_pipeline/rag.py", line 916, in generate
+    raise RuntimeError(
+RuntimeError: replay backend: no cached generation for this prompt (key 3f0f804d1408..., question 'what percent increase did inventories receive between 2002 a'). The shard runs did not cover it.
+==============================================================
+EXPERIMENT 5: COMPARATIVE BASELINES ON IDENTICAL DATA
+Split: dev | N: 100 | Seed: 42 | Engine: replay | NESS mode: strict
+Conditions: ['closed_book', 'retrieval', 'oracle']  (total generations: 300)
+==============================================================
+All conditions share the same items, generator, prompt, scoring and
+verifier. Only the evidence supplied to the model differs.
+==============================================================
+Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+LLM backend: replay of 1101 cached generations, Qwen/Qwen2.5-1.5B-Instruct (float32, replayed from cache)
+Embedding model running on: cpu
+FAISS available: True (using faiss.IndexFlatIP)
+
+--------------------------------------------------------------
+CONDITION: CLOSED_BOOK
+--------------------------------------------------------------
+  [1/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [2/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [3/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [4/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.40
+  [5/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [6/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [7/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [8/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.40
+  [9/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [10/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.50
+  [11/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [12/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.30
+  [13/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [14/100] Correct: 1.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [15/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [16/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [17/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.99
+  [18/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [19/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [20/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [21/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [22/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [23/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.10
+  [24/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [25/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.20
+  [26/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [27/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [28/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [29/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.80
+  [30/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [31/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [32/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [33/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [34/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [35/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [36/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [37/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.99
+  [38/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [39/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.80
+  [40/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.50
+  [41/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [42/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [43/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.50
+  [44/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.50
+  [45/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+FAILED
