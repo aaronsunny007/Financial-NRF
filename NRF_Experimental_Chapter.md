@@ -10,7 +10,9 @@
 > from different sample sizes into a single table without noting `n`.
 > **Read §2.8 with the hallucination rates and noise correlations:** a scoring
 > defect found after the runs (the model's own confidence value was counted as an
-> unsupported number) changes several of them, and the runs have not been repeated.
+> unsupported number) changes several of them. **Also read §2.9**, whose larger runs show that the Experiment 4
+> noise manipulation did not degrade the model, and that several conclusions drawn from the n = 50 data do not
+> hold. `ERRATUM.md` lists every correction.
 
 ---
 
@@ -378,6 +380,66 @@ GPU configuration with the corrected scorer would complete the comparison. The r
 figures in the rest of this chapter are left as run, and every place that quotes a
 hallucination rate or a noise correlation should be read with this section.
 
+### 2.9 Larger re-run: more items, a test split, other models, seeds, and a manipulation that works
+
+§2.8 left two things open: the corrected scorer had been run only at n = 50, and the question of whether the
+Experiment 4 manipulation degrades the system had never been asked. Both were addressed by re-running
+Experiments 1, 3, 4 and 5 on free CPU runners (`.github/workflows/cpu-rerun.yml`, float32, corrected scorer,
+unchanged scripts replayed from recorded generations) on more items, on the **test** split as well as dev, with
+other models, with sampled-decoding seeds, and with a second manipulation. Every statistic below has a
+95% bootstrap interval over items (`experiments/scale_analysis.py`); full tables are in `results/scale/SUMMARY.md`.
+
+| Run | Items | Notes |
+|---|---|---|
+| Qwen2.5-3B-Instruct, dev and test | 150 + 150 | greedy |
+| Qwen2.5-1.5B-Instruct, dev and test | 100 + 100 | greedy |
+| Qwen2.5-1.5B-Instruct, dev, three seeds | 100 each | sampled, temperature 0.7 |
+| Qwen2.5-3B, corrupted evidence, dev and test | 100 + 100 | see below |
+
+**The Experiment 4 manipulation does not degrade the model.** Paired within item, 0% against 40% injected noise
+(Qwen2.5-3B): accuracy +0.007 [−0.05, +0.07] on dev and −0.027 [−0.07, +0.03] on test; evidence support +0.009 and
+−0.005; hallucination flag −0.020 and −0.013; support against the clean evidence +0.003 and −0.005; none distinguishable
+from zero. Experiment 4 as designed therefore could not test whether a metric tracks degradation, and its flat composite
+is not a finding about the metric.
+
+**The five-level correlation is not a stable statistic.** The correlation of noise level with the composite is +0.09 on
+dev and −0.64 on test for the same model, with 95% intervals of about ±0.8. The share of the 1,771 weightings that pass
+both falsification tests is 0.0% on dev and 41.2% on test (bootstrap interval 0% to 81%). Weightings chosen on
+Qwen2.5-1.5B dev (56 passed both tests) did not generalise: none passed on test. The claims in §6.2 and §6.4 that the
+composite fails to track noise and that no weighting can rescue it are **not established**.
+
+**Corrupting the evidence is a manipulation that degrades the system.** A share (0, 25, 50, 75, 100%) of the numeric
+tokens in the retrieved evidence is replaced by a wrong value (`--injection-mode corrupt`). Every response is also scored
+against the clean evidence.
+
+| Qwen2.5-3B, 0% to 100% corruption | dev (n = 100) | test (n = 100) |
+|---|---|---|
+| accuracy at 0% and 100% | 0.22 and 0.03 | 0.22 and 0.02 |
+| accuracy, paired change per item | −0.190 [−0.27, −0.12] | −0.190 [−0.28, −0.12] |
+| composite, r with corruption level | −0.97 [−0.99, −0.82] | −0.93 [−0.98, −0.77] |
+| evidence support against the evidence shown | +0.004 [−0.02, +0.03] | −0.020 [−0.07, +0.02] |
+| hallucination flag | +0.010 [−0.04, +0.06] | +0.020 [−0.03, +0.07] |
+| entailment support (NLI) | +0.018 [−0.04, +0.08] | −0.069 [−0.13, −0.00] |
+| evidence support against the **clean** evidence | **−0.362 [−0.40, −0.33]** | **−0.376 [−0.42, −0.33]** |
+
+The composite does track corruption, but only through accuracy (which needs the gold answer) and the calibration term
+(which follows accuracy, because self-reported confidence is near-constant). The gold-free evidence measures are blind to
+it, because a model that repeats corrupted numbers faithfully is well supported by the corrupted text. Support measured
+against a trusted reference does fall. This is the structural argument of §6.2, now demonstrated with a valid manipulation
+and replicated on a held-out split.
+
+**Entailment does not improve on numeric overlap.** Each claim in the reasoning was scored with a small NLI model
+(`cross-encoder/nli-deberta-v3-small`, `experiments/entailment_scoring.py`). Its area under the ROC curve for separating
+correct from incorrect answers is 0.52 [0.42, 0.63] on dev and 0.56 [0.43, 0.68] on test. The overlap score's 0.64 on dev
+[0.53, 0.73] is 0.51 [0.39, 0.63] on test. Neither is a usable correctness signal, and neither detects corruption of the evidence
+they are given.
+
+**What stands.** Gold-free evidence support, entailment support and the hallucination flag cannot detect corrupted
+evidence unless they are given a clean reference; the composite's sensitivity comes from accuracy. **What does not.**
+That the composite fails to track degradation in general, that no weighting rescues it, that the hallucination flag tracks
+noise, and that oracle evidence is ranked below retrieval. The corrections to the submitted text are listed in
+`ERRATUM.md`.
+
 ---
 
 ## 3. Experiment 1 — Baseline Reliability Profiling
@@ -591,7 +653,7 @@ Total ONRS change 0% → 40%: **−0.0168**. Monotonically non-increasing: **Fal
 | Accuracy vs ONRS | **+0.98** |
 | Accuracy vs ECE | **−0.97** |
 
-### 6.2 Finding: ONRS does not reliably track context noise — and the cause is structural
+### 6.2 Finding: ONRS does not reliably track context noise — and the cause is structural *(as originally reported; §2.9 shows the injected noise did not degrade the model, so the test was uninformative. The structural cause is demonstrated there with corrupted evidence.)*
 
 The correlation between noise level and ONRS is **−0.10**, i.e. effectively none.
 ONRS does not decline monotonically; it oscillates within a 0.0377 band while
@@ -637,7 +699,7 @@ no trend, so it is not supported.)*
 This is a substantive, evidence-based critique of a metric proposed by this
 project, and is presented as such.
 
-### 6.4 Post-hoc check: can re-weighting rescue ONRS?
+### 6.4 Post-hoc check: can re-weighting rescue ONRS? *(as originally reported; not reproducible in the larger runs, see §2.9: 0.0% of weightings pass both tests on the 3B dev run, 41.2% on the 3B test run)*
 
 Recommendation 2 above, and the frozen weights generally, invite an obvious
 objection: perhaps ONRS failed only because 0.30 / 0.30 / 0.20 / 0.20 was the
@@ -758,7 +820,10 @@ revision in §2.7.
 
 ## 8. Limitations
 
-1. **Sample size.** Experiments 1 and 4 use n = 50; Experiments 2 and 3 use n = 10.
+1. **Sample size.** The original runs use n = 50 (n = 10 for Experiments 2 and 3); the larger runs of §2.9 use 100 to 150
+   items per split, which resolves large effects but not differences of a few points. Five-level noise correlations remain
+   unstable at these sizes (95% interval about ±0.8).
+   *(Original wording:)* Experiments 1 and 4 use n = 50; Experiments 2 and 3 use n = 10.
    The 95% CI on 34% accuracy at n = 50 is [0.224, 0.478]. Sample sizes are stated
    per experiment and must not be merged without annotation.
 2. **Model scale is hardware-bound.** 4 GB VRAM caps the generator at ~3B
@@ -833,6 +898,8 @@ python -m experiments.experiment4 --split dev --n 50
 
 python -m experiments.weight_sensitivity    # §6.4 sweep; re-scores saved results, no GPU
 python -m experiments.confidence_line_audit # §2.8 audit; re-scores saved results, no GPU
+python -m experiments.scale_analysis        # §2.9 bootstrap analysis of results/scale/
+python -m experiments.scale_report          # writes results/scale/SUMMARY.md
 python -m experiments.weight_sensitivity --results-dir results/cpu_fp32   # §2.8 re-run sweep
 # No GPU: Actions -> cpu-rerun -> Run workflow (shards the generation step over free CPU runners)
 ```
@@ -878,3 +945,7 @@ model outputs.
 | 1 CPU re-run (corrected scorer, float32) | 50 | Accuracy | 0.200 |
 | 5 CPU re-run (corrected scorer, float32) | 50 × 3 | Accuracy, retrieval / oracle | 0.200 / 0.200 |
 | 4 + 5 CPU re-run weight sweep | 1,771 weightings | Pass noise test and oracle ranking | 0.0% |
+| 2.9 Larger runs | 150 dev + 150 test | Qwen2.5-3B corr(noise, composite), dev / test | +0.09 / −0.64 (95% CI about ±0.8) |
+| 2.9 Larger runs | 150 dev + 150 test | Weightings passing both tests, dev / test | 0.0% / 41.2% |
+| 2.9 Corrupted evidence | 100 dev + 100 test | corr(corruption, composite), dev / test | −0.97 / −0.93 |
+| 2.9 Corrupted evidence | 100 dev + 100 test | Change in support vs shown / vs clean evidence (dev) | +0.004 / −0.362 |
