@@ -78,6 +78,53 @@ FULL_SAMPLES = 50
 
 NOISE_LEVELS = [0, 10, 20, 30, 40]
 
+# Injection mode "corrupt": instead of adding unrelated sentences (which the 3B model was found to
+# ignore, so they do not degrade it), a share of the numbers in the retrieved evidence is replaced
+# by wrong ones. A model that trusts its evidence now gets answers wrong, while evidence support
+# measured against the evidence it was shown stays high, and only support measured against the
+# clean evidence can see the damage. Levels are the percentage of numeric tokens corrupted.
+CORRUPT_LEVELS = [0, 25, 50, 75, 100]
+_CORRUPT_NUM = None  # compiled lazily below
+_CORRUPT_FACTORS = [0.5, 0.8, 1.25, 1.6, 2.0, 3.0]
+
+
+def corrupt_evidence(evidence: str, level: int, key: str) -> str:
+    """Replace `level`% of the numbers in `evidence` with wrong ones, deterministically per `key`.
+
+    Format is preserved (currency sign, percent sign, thousands commas, decimals). Four-digit
+    years (1900 to 2099) are left alone so the evidence stays recognisably about the same filing.
+    """
+    import hashlib
+    import re
+    global _CORRUPT_NUM
+    if _CORRUPT_NUM is None:
+        _CORRUPT_NUM = re.compile(r"(?<![\w.])(\$?)(\d+(?:,\d{3})*)(\.\d+)?(%?)")
+    if level <= 0:
+        return evidence
+
+    def h(i: int, salt: str) -> int:
+        return int(hashlib.sha256(f"{key}|{i}|{salt}".encode()).hexdigest()[:8], 16)
+
+    counter = [0]
+
+    def repl(m):
+        i = counter[0]
+        counter[0] += 1
+        whole = m.group(2).replace(",", "")
+        if not m.group(3) and len(whole) == 4 and 1900 <= int(whole) <= 2099:
+            return m.group(0)
+        if h(i, "pick") % 100 >= level:
+            return m.group(0)
+        value = float(whole + (m.group(3) or ""))
+        new = value * _CORRUPT_FACTORS[h(i, "factor") % len(_CORRUPT_FACTORS)]
+        decimals = len(m.group(3)) - 1 if m.group(3) else 0
+        text = f"{new:,.{decimals}f}" if "," in m.group(2) else f"{new:.{decimals}f}"
+        if text == m.group(2) + (m.group(3) or ""):
+            text = f"{value + 1:.{decimals}f}"
+        return f"{m.group(1)}{text}{m.group(4)}"
+
+    return _CORRUPT_NUM.sub(repl, evidence)
+
 # Each noise value is its own sentence, phrased in filing register, so it
 # becomes its own retrieval chunk and competes with genuine evidence on
 # equal footing -- the same reasoning as experiment2's adversarial set.
@@ -130,7 +177,7 @@ def main():
     parser.add_argument("--n", type=int, default=None, help="Override sample count per noise level")
     parser.add_argument("--seed", type=int, default=SEED)
     parser.add_argument("--top-k", type=int, default=None, help="Override retrieval top-k")
-    parser.add_argument("--injection-mode", choices=["evidence", "document"], default="evidence",
+    parser.add_argument("--injection-mode", choices=["evidence", "document", "corrupt"], default="evidence",
                         help="WHERE the noise is injected. 'evidence' (default) forces distractors into "
                              "the evidence block after retrieval, so the model definitely sees them -- "
                              "this is what tests whether ONRS RESPONDS to degradation. 'document' adds "
@@ -162,9 +209,13 @@ def main():
     print("EXPERIMENT 4: OVERALL RELIABILITY UNDER VARYING NOISE")
     print(f"Split: {args.split} | N per noise level: {n_examples} | Seed: {args.seed} | "
           f"Engine: {args.engine} | NESS mode: {args.ness_mode}")
-    print(f"Noise levels: {NOISE_LEVELS} | Total generations: {n_examples * len(NOISE_LEVELS)}")
-    print(f"Noise definition: level% of a {len(NOISE_SENTENCES)}-sentence distractor pool "
-          f"-> {[int(len(NOISE_SENTENCES) * lv / 100) for lv in NOISE_LEVELS]} sentences injected")
+    levels = CORRUPT_LEVELS if args.injection_mode == "corrupt" else NOISE_LEVELS
+    print(f"Noise levels: {levels} | Total generations: {n_examples * len(levels)}")
+    if args.injection_mode == "corrupt":
+        print("Corruption definition: level% of the numeric tokens in the retrieved evidence are replaced by wrong values")
+    else:
+        print(f"Noise definition: level% of a {len(NOISE_SENTENCES)}-sentence distractor pool "
+              f"-> {[int(len(NOISE_SENTENCES) * lv / 100) for lv in NOISE_LEVELS]} sentences injected")
     print("=" * 60)
 
     set_seed(args.seed)
@@ -183,24 +234,36 @@ def main():
     per_example_rows = []
     level_summaries = []
 
-    for noise_level in NOISE_LEVELS:
-        injected = int(len(NOISE_SENTENCES) * noise_level / 100)
+    for noise_level in levels:
+        injected = 0 if args.injection_mode == "corrupt" else int(len(NOISE_SENTENCES) * noise_level / 100)
         print("\n" + "-" * 60)
         print(f"NOISE LEVEL: {noise_level}%  ({injected} distractor sentence(s) injected)")
         print("-" * 60)
 
         level_rows = []
         for i, item in enumerate(data, 1):
-            if args.injection_mode == "document":
+            override = None
+            if args.injection_mode == "corrupt":
+                model_item, extra = item, None
+                clean_for_corrupt = rag.build_evidence_text(rag.retrieve(item, item["qa"]["question"]))
+                override = corrupt_evidence(clean_for_corrupt, noise_level, str(item.get("id")))
+            elif args.injection_mode == "document":
                 model_item, extra = apply_noise(item, noise_level), None
             else:  # evidence injection -- bypass retrieval so the noise is seen
                 model_item = item
                 extra = ("\n".join(f"- [pre_text] {s}" for s in NOISE_SENTENCES[:injected])
                          if injected else None)
 
-            result = rag.answer(model_item, extra_evidence=extra)
+            result = rag.answer(model_item, extra_evidence=extra, evidence_override=override)
             response = result.get("response", "")
             evidence_text = result.get("evidence_text", "")
+            # The same response scored against the CLEAN retrieved evidence (no injected
+            # sentences). Evidence support is normally measured against what the model was
+            # shown, which is why a model that grounds itself in corrupted passages still
+            # scores well; this variant asks whether it stayed grounded in the true ones.
+            clean_evidence = rag.build_evidence_text(
+                rag.retrieve(item, item["qa"]["question"])
+            ) if args.injection_mode in ("evidence", "corrupt") else evidence_text
             gold_answer, answer_type = resolve_gold_answer(item)
 
             acc = nrf.numerical_accuracy(response, gold_answer)
@@ -213,11 +276,14 @@ def main():
             # metric is insensitive" and "there was no degradation to
             # detect because retrieval removed it". Those have opposite
             # interpretations, so the check is recorded per example.
-            noise_reached = int(any(
-                str(v) in evidence_text
-                for v in ["918.7", "431.2", "77.4", "12840", "6320", "284.6",
-                          "1523.9", "67.8", "984.2", "4217.5"][:injected]
-            )) if injected else 0
+            if args.injection_mode == "corrupt":
+                noise_reached = int(noise_level > 0 and evidence_text != clean_for_corrupt)
+            else:
+                noise_reached = int(any(
+                    str(v) in evidence_text
+                    for v in ["918.7", "431.2", "77.4", "12840", "6320", "284.6",
+                              "1523.9", "67.8", "984.2", "4217.5"][:injected]
+                )) if injected else 0
 
             row = {
                 "noise_level": noise_level,
@@ -234,6 +300,10 @@ def main():
                 "evidence_support_derived": support.derived_score,
                 "hallucination": halluc["hallucination"],
                 "self_reported_confidence": confidence,
+                "evidence_support_vs_clean_strict": nrf.numerical_evidence_support(
+                    response, clean_evidence).strict_score,
+                "evidence_text": evidence_text,
+                "response": response,
             }
             level_rows.append(row)
             per_example_rows.append(row)
@@ -251,6 +321,7 @@ def main():
         evidence_support_strict = sum(r["evidence_support_strict"] for r in level_rows) / n
         evidence_support_derived = sum(r["evidence_support_derived"] for r in level_rows) / n
         hallucination_rate = sum(r["hallucination"] for r in level_rows) / n
+        support_vs_clean = sum(r["evidence_support_vs_clean_strict"] for r in level_rows) / n
 
         conf_valid = [r for r in numeric if r["self_reported_confidence"] is not None]
         confidence_missing_count = n_scored - len(conf_valid)
@@ -284,6 +355,7 @@ def main():
             "evidence_support_strict": evidence_support_strict,
             "evidence_support_derived": evidence_support_derived,
             "hallucination_rate": hallucination_rate,
+            "evidence_support_vs_clean_strict": support_vs_clean,
             "ece": ece,
             "confidence_missing_count": confidence_missing_count,
             "onrs": onrs,
@@ -356,8 +428,10 @@ def main():
             "split": args.split,
             "engine": args.engine,
             "ness_mode": args.ness_mode,
-            "noise_definition": f"level% of a {len(NOISE_SENTENCES)}-sentence distractor pool, "
-                                f"appended to pre_text as individual sentences",
+            "noise_definition": ("level% of the numeric tokens in the retrieved evidence replaced by wrong values"
+                                 if args.injection_mode == "corrupt" else
+                                 f"level% of a {len(NOISE_SENTENCES)}-sentence distractor pool, "
+                                 f"appended to pre_text as individual sentences"),
             "levels": level_summaries,
         }, f, indent=2, default=str)
 

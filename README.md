@@ -29,12 +29,15 @@ This project builds a measurement layer that asks those questions, applies it to
 retrieval-augmented question answering system over FinQA, and then attempts to falsify
 its own headline metric.
 
-**The central finding is negative, and that is the point of the work.** The composite
-reliability score proposed here fails two falsification tests: it does not track
-reliability when the evidence is degraded, and it ranks a demonstrably better system
-below a worse one. The aggregate fails; of the components, the verifier, accuracy and
-calibration measurements stand, and the claim that the hallucination flag tracks noise did
-not survive a re-run (see below).
+**The finding, after the larger runs.** The composite reliability score is not a reliability
+signal, but not for the reason first reported. In the original experiment the injected noise did
+not hurt the model, so a flat score there proved nothing (the first version of this README said
+otherwise). Once the evidence is genuinely corrupted, the composite does fall, but only through
+its accuracy term and the calibration term that is itself a function of accuracy. The evidence-support
+score, the entailment score and the hallucination flag, which are the parts that need no gold answer,
+do not move at all, because they are measured against the evidence the model was shown. Measured against the
+clean evidence, support does fall. See *What the larger runs show* below, `ERRATUM.md` for the
+corrections to the submitted dissertation, and `results/scale/SUMMARY.md` for every table.
 
 ---
 
@@ -61,9 +64,73 @@ weakest design decision.
 
 ---
 
-## Results
+## What the larger runs show
 
-All figures are on 50 FinQA items per condition. Wilson confidence intervals are
+After an audit found a scoring defect (see `ERRATUM.md`), the experiments were re-run on free CPU runners with the
+corrected scorer, on far more items: Qwen2.5-3B on 150 dev and 150 test items, Qwen2.5-1.5B on 100 and 100,
+a second model family (SmolLM2-1.7B), a corrupted-evidence variant on 100 and 100 per split, and three sampled-decoding
+seeds. Every statistic carries a
+bootstrap interval over items. Full tables are in `results/scale/SUMMARY.md`; code is
+`experiments/scale_analysis.py`.
+
+**1. The original noise manipulation does nothing.** Injecting up to four unrelated sentences changes none of
+the measures. The paired change from 0% to 40% noise, per item, for Qwen2.5-3B:
+
+| | accuracy | evidence support | hallucination flag |
+|---|---|---|---|
+| dev, n = 150 | +0.007 [−0.05, +0.07] | +0.009 [−0.01, +0.02] | −0.020 [−0.05, +0.01] |
+| test, n = 150 | −0.027 [−0.07, +0.03] | −0.005 [−0.03, +0.02] | −0.013 [−0.05, +0.02] |
+
+A flat composite under this noise is therefore the *correct* answer, not a failure. The original conclusion that the
+score "does not track reliability when the evidence is degraded" was not established by Experiment 4.
+
+**2. The five-point noise correlation, and the weight sweep built on it, are not reproducible.** For Qwen2.5-3B the
+correlation between noise level and the composite is +0.09 on dev and −0.64 on test, each with a 95% interval of
+about ±0.8. The share of the 1,771 weightings that pass both falsification tests is 0.0% on dev and 41.2% on test.
+Weightings chosen on dev did not hold up on test for Qwen2.5-1.5B (56 passed both on dev, none on test). The earlier
+statement that no re-weighting can rescue the composite is not supported by this data; neither is its opposite.
+
+**3. Corrupt the evidence and the picture is clear.** Replacing a share of the numbers in the retrieved evidence with
+wrong ones does degrade the model: accuracy falls from 0.22 to about 0.03 on both splits.
+
+| Qwen2.5-3B, 0% to 100% corruption | dev (n = 100) | test (n = 100) |
+|---|---|---|
+| accuracy, paired change per item | −0.190 [−0.27, −0.12] | −0.190 [−0.28, −0.12] |
+| composite, r with corruption level | −0.97 [−0.99, −0.82] | −0.93 [−0.98, −0.77] |
+| evidence support vs the evidence shown | +0.004 [−0.02, +0.03] | −0.020 [−0.07, +0.02] |
+| hallucination flag | +0.010 [−0.04, +0.06] | +0.020 [−0.03, +0.07] |
+| entailment support (NLI) | +0.018 [−0.04, +0.08] | −0.069 [−0.13, −0.00] |
+| evidence support vs the **clean** evidence | **−0.362 [−0.40, −0.33]** | **−0.376 [−0.42, −0.33]** |
+
+The composite tracks corruption, but only because accuracy (which needs the gold answer) falls and the calibration term
+follows it. The gold-free evidence measures cannot see the damage, because a model that faithfully repeats corrupted
+numbers is, by that definition, well supported. Measured against a trusted source they do see it.
+
+**4. Entailment is no better than numeric overlap.** Scoring each claim in the reasoning with an NLI model
+(`experiments/entailment_scoring.py`) separates correct from incorrect answers no better than chance
+(AUROC 0.52 on dev and 0.56 on test), and so does the overlap score, whose apparent 0.64 on dev (95% interval
+0.53 to 0.73) is 0.51 on test.
+
+**5. Other models and seeds agree that single numbers do not hold still.** On SmolLM2-1.7B (dev, n = 100) oracle evidence does beat
+retrieval (accuracy 0.28 against 0.16), the correlation of noise with the composite is −0.81 [−0.97, +0.52], and 73.1% of weightings pass
+both original tests, against 0.0% for Qwen2.5-3B on dev. Qwen2.5-1.5B sampled with three seeds gives noise correlations of +0.46, +0.52
+and −0.37 (the greedy run gave −0.27) and clean accuracy of 0.31, 0.26 and 0.32 (greedy 0.40). Noise changes accuracy by +0.02, +0.05
+and −0.11 per item across the three seeds; of eight noise-injection runs, one (the last seed, −0.22 to −0.01) has an interval that excludes
+zero, so the manipulation's effect is at most small and inconsistent.
+
+**What remains true.** The framework's design critique stands and is now properly demonstrated: gold-free evidence
+support, entailment and the hallucination flag are blind to corrupted evidence unless they are given a clean reference.
+**What does not:** the claims that the composite fails to track noise, that no weighting works, and that the hallucination
+flag tracks noise. **Limits:** Qwen2.5 at 1.5B and 3B plus one SmolLM2 model, float32 on CPU, FinQA only, 100 to 150
+items per run.
+
+---
+
+## Recorded results (the original n = 50 GPU run)
+
+These are the figures in the submitted dissertation. Read them with the corrections above.
+
+All figures in this section are on 50 FinQA items per condition. Wilson confidence intervals are
 reported throughout the accompanying documents.
 
 | Measure | Value | Condition |
@@ -78,7 +145,7 @@ reported throughout the accompanying documents.
 | Errors made at high confidence | 0.6400 | — |
 | Verifier outcomes | 56 / 20 / 12 / 12 | verified / ungrounded / no expression / self-contradictory (%) |
 
-### Failure one — the score does not track reliability
+### Failure one — as originally reported (not established; see above)
 
 Evidence was degraded across five graded noise levels, with a manipulation check
 confirming the corrupted evidence actually reached the model. The correlation between
@@ -91,13 +158,13 @@ internal consistency, which a model can satisfy while working from nonsense. Cal
 is a property of the confidence report. Three of the four components are insensitive to
 evidence quality by design, leaving only accuracy — 30% of the weight — to respond.
 
-### Failure two — the score inverts the ranking
+### Failure two — as originally reported (a tie in later runs; see above)
 
 Supplying oracle evidence raised accuracy from 0.340 to 0.420, yet the composite ranked
 that condition *lower*. A score whose purpose is to let you choose between systems chose
 the worse one.
 
-### Could different weights fix it? No.
+### Could different weights fix it? (as originally reported; not reproducible, see above)
 
 The obvious objection is that the composite failed only because its hand-picked weights
 were wrong. `experiments/weight_sensitivity.py` tests that directly. It re-scores the
@@ -273,21 +340,23 @@ committed results.
 
 ## Limitations
 
-- **Model scale is a constraint, not a result.** A 3B model at 4-bit precision is small
-  for multi-step numerical reasoning. Absolute accuracy would rise with scale; the
-  findings about the metric would not change.
-- **Fifty items per condition.** Directions are claimable; margins of a few points are
-  not, and are not claimed.
-- **The recorded runs predate a scoring fix.** The confidence value was counted as an
-  unsupported number (see above). The corrected scorer has been run only in float32 on
-  CPU (`results/cpu_fp32/`); a 4-bit GPU re-run would make the comparison like for like.
-- **Evidence support is numerical overlap, not entailment.** Correct numbers used inside
-  a wrong argument pass it.
-- **The composite weighting is assigned, not learned.** The sweep above shows that
-  no reweighting rescues it on this data, so the next step is better components, not
-  better weights: a noise-sensitive evidence measure, and entailment rather than overlap.
-  Five noise levels and n = 50 per condition are thin, so the sweep should be repeated
-  on a larger held-out run before treating it as settled.
+- **Model scale is a constraint, not a result.** The generators are 1.5B to 3B parameters at float32 on CPU.
+  Absolute accuracy would rise with scale. Whether the findings about the metric would not change was not tested
+  above 3B.
+- **100 to 150 items per run, FinQA only.** Enough to separate large effects (corruption halves accuracy) from none, not
+  to resolve differences of a few points; every statistic carries a bootstrap interval for that reason.
+- **Five noise levels make a poor correlation.** The Pearson r over five level averages has an interval of about ±0.8
+  at these sizes. The item-level paired effects are the statistics to trust.
+- **Greedy decoding is deterministic, so "seeds" mean sampled decoding.** The seed runs sample at temperature 0.7 with
+  Qwen2.5-1.5B; the greedy runs have no seed variance to report.
+- **Evidence support is numerical overlap**, and the entailment alternative (a small NLI model) did no better. Neither
+  sees corruption of the evidence it is given; only a trusted reference does.
+- **The corrupted-evidence test is synthetic.** Numbers are replaced by scaled versions of themselves. It shows what the
+  measures *can* detect, not how often real retrieval errors look like this.
+- **The composite weighting is assigned, not learned.** Whether some weighting works could not be settled with five-point
+  correlations; the corruption experiment shows the useful signal is accuracy, calibration-through-accuracy, and support
+  measured against a clean reference.
+- **The original recorded runs predate a scoring fix** (see `ERRATUM.md`). They are kept for provenance.
 
 ---
 
@@ -298,6 +367,8 @@ committed results.
 | `NRF_Report_IEEE_v3.docx` | The report, IEEE two-column format |
 | `NRF_Supporting_Evidence_v3.docx` | Supporting evidence and extended methodology |
 | `NRF_Experimental_Chapter.md` | The experimental chapter in full |
+| `ERRATUM.md`, `NRF_Erratum.docx` | Corrections to the submitted dissertation, with the evidence |
+| `results/scale/SUMMARY.md` | Tables from the larger runs |
 
 ---
 
