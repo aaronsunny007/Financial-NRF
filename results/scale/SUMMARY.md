@@ -40,12 +40,14 @@ Unlike the injected distractor sentences, this does degrade a model that trusts 
 | Run | Items | Accuracy at 0% / 100% | r(level, accuracy) | r(level, composite) [CI] | r(level, support vs shown evidence) | r(level, support vs clean evidence) [CI] | r(level, hallucination rate) |
 |---|---|---|---|---|---|---|---|
 | qwen3bcorrupt_dev | 100 | 0.22 / 0.03 | -0.94 | -0.97 [-0.99, -0.82] | +0.11 | -1.00 [-1.00, -0.99] | +0.00 |
+| qwen3bcorrupt_test | 100 | 0.22 / 0.02 | -0.90 | -0.93 [-0.98, -0.77] | -0.43 | -1.00 [-1.00, -0.98] | +0.69 |
 
 Same runs, item-level change from 0% to 100% corruption (paired within item):
 
 | Run | accuracy | evidence support (shown) | hallucination flag | support vs clean evidence | nli frac entailed |
 |---|---|---|---|---|---|
 | qwen3bcorrupt_dev | -0.190 [-0.270, -0.120] | +0.004 [-0.023, +0.032] | +0.010 [-0.040, +0.060] | -0.362 [-0.398, -0.326] | +0.018 [-0.036, +0.079] |
+| qwen3bcorrupt_test | -0.190 [-0.280, -0.120] | -0.020 [-0.065, +0.023] | +0.020 [-0.030, +0.070] | -0.376 [-0.422, -0.331] | -0.069 [-0.134, -0.000] |
 
 ## Weights chosen on dev, evaluated on test
 
