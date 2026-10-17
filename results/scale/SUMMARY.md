@@ -27,6 +27,20 @@ Area under the ROC curve for separating correct from incorrect answers (0.5 is c
 | qwen3b_dev | 0.64 [0.53, 0.73] | 0.53 [0.51, 0.55] | 0.53 [0.49, 0.56] | 0.52 [0.42, 0.63] |
 | qwen3b_test | 0.51 [0.39, 0.63] | 0.51 [0.46, 0.54] | 0.53 [0.49, 0.58] | 0.56 [0.43, 0.68] |
 
+## Corrupted evidence (a share of the numbers in the retrieved evidence replaced by wrong ones)
+
+Unlike the injected distractor sentences, this does degrade a model that trusts its evidence. The question is which measures notice. Each column is the Pearson r with the corruption level over the five levels, with a bootstrap interval over items.
+
+| Run | Items | Accuracy at 0% / 100% | r(level, accuracy) | r(level, composite) [CI] | r(level, support vs shown evidence) | r(level, support vs clean evidence) [CI] | r(level, hallucination rate) |
+|---|---|---|---|---|---|---|---|
+| qwen3bcorrupt_dev | 100 | 0.22 / 0.03 | -0.94 | -0.97 [-0.99, -0.82] | +0.11 | -1.00 [-1.00, -0.99] | +0.00 |
+
+Same runs, item-level change from 0% to 100% corruption (paired within item):
+
+| Run | accuracy | evidence support (shown) | hallucination flag | support vs clean evidence | nli frac entailed |
+|---|---|---|---|---|---|
+| qwen3bcorrupt_dev | -0.190 [-0.270, -0.120] | +0.004 [-0.023, +0.031] | +0.010 [-0.040, +0.060] | -0.362 [-0.400, -0.325] | +0.018 [-0.039, +0.076] |
+
 ## Weights chosen on dev, evaluated on test
 
 | Model | Pass both on dev | Of those, pass both on test | Share passing both on test (all weightings) | Dev's pick among correct rankings: dev r, test r, ranks on test |
