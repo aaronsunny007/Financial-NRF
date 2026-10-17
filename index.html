@@ -151,6 +151,15 @@
   .file input{font-size:.8rem;max-width:15em}
   .status{font-size:.85rem;color:var(--muted);margin:8px 0 0;min-height:1.4em}
   .resp{white-space:pre-wrap;background:var(--code);border-radius:8px;padding:10px 12px;font:13px/1.5 ui-monospace,Consolas,monospace;margin:0 0 14px}
+  .dbars{display:grid;gap:9px}
+  .d{display:grid;grid-template-columns:11em 1fr 4.2em;gap:10px;align-items:center;font-size:.84rem}
+  .d .l{color:var(--muted)}
+  .d .t{position:relative;height:18px}
+  .d .t::before{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;border-left:1px solid var(--line)}
+  .d .t i{position:absolute;top:0;height:100%;background:var(--series);min-width:2px}
+  .d .t i.neg{right:50%;border-radius:4px 0 0 4px}
+  .d .t i.pos{left:50%;border-radius:0 4px 4px 0}
+  .d .v{font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
   footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
     color:var(--muted);font-size:.85rem}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -176,10 +185,10 @@
 <div class="wrap">
 
 <div class="stats" aria-label="Headline results">
-  <div class="stat"><b>0.340</b><span>execution accuracy with ordinary retrieval, 50 FinQA items</span></div>
-  <div class="stat"><b>0.420</b><span>accuracy with oracle evidence, yet the composite scores that condition lower</span></div>
-  <div class="stat"><b>&minus;0.10</b><span>correlation between noise level and the composite, as recorded</span></div>
-  <div class="stat"><b>0 / 1,771</b><span>weightings that pass both falsification tests</span></div>
+  <div class="stat"><b>&minus;0.97</b><span>correlation of the composite with how much of the evidence is corrupted (Qwen2.5-3B, dev; &minus;0.93 on test)</span></div>
+  <div class="stat"><b>+0.00</b><span>change in evidence support measured against the evidence the model was shown, under full corruption</span></div>
+  <div class="stat"><b>&minus;0.36</b><span>change in the same support measured against the clean evidence</span></div>
+  <div class="stat"><b>0% / 41%</b><span>weightings passing both original tests, dev run against test run: the sweep is not reproducible</span></div>
 </div>
 
 <div class="note">
@@ -194,6 +203,7 @@
 <nav id="tabs">
   <button aria-selected="true" data-t="analyser">Live analyser</button>
   <button data-t="ask">Ask a question</button>
+  <button data-t="scale">Larger runs</button>
   <button data-t="e1">Exp 1 · Baseline</button>
   <button data-t="e2">Exp 2 · Hallucination</button>
   <button data-t="e3">Exp 3 · Calibration</button>
@@ -268,6 +278,59 @@
     </div>
     <div><div id="ask-out" class="out"><em style="color:var(--muted)">The answer and its scores appear here.</em></div></div>
   </div>
+</section>
+
+<!-- LARGER RUNS -->
+<section id="scale" hidden>
+  <h2>What the larger runs show</h2>
+  <div class="note"><strong>These supersede the n = 50 results in the other tabs.</strong> After an audit found a scoring defect, the
+  experiments were re-run on free CPU runners with the corrected scorer: Qwen2.5-3B on 150 dev and 150 test items, Qwen2.5-1.5B on
+  100 and 100, sampled seeds, and a corrupted-evidence variant. Every statistic has a bootstrap interval over items.
+  The corrections to the submitted dissertation are in <code>ERRATUM.md</code>; every table is in <code>results/scale/SUMMARY.md</code>.</div>
+
+  <h3>1. The original noise manipulation does nothing</h3>
+  <p>Adding up to four unrelated sentences to the evidence changes no measure. Paired change per item, 0% to 40% noise, Qwen2.5-3B:</p>
+  <div class="tw"><table><thead><tr><th>Split</th><th class="n">Accuracy</th><th class="n">Evidence support</th><th class="n">Hallucination flag</th></tr></thead><tbody>
+  <tr><td>dev, n = 150</td><td class="n">+0.007 [&minus;0.05, +0.07]</td><td class="n">+0.009 [&minus;0.01, +0.02]</td><td class="n">&minus;0.020 [&minus;0.05, +0.01]</td></tr>
+  <tr><td>test, n = 150</td><td class="n">&minus;0.027 [&minus;0.07, +0.03]</td><td class="n">&minus;0.005 [&minus;0.03, +0.02]</td><td class="n">&minus;0.013 [&minus;0.05, +0.02]</td></tr>
+  </tbody></table></div>
+  <p>A flat composite there is the correct answer, not a failure. The original conclusion that the score does not track degraded evidence
+  was not established by Experiment 4.</p>
+
+  <h3>2. The five-point correlation and the weight sweep are not reproducible</h3>
+  <div class="tw"><table><thead><tr><th>Qwen2.5-3B</th><th class="n">Corr(noise, composite)</th><th class="n">Weightings passing both tests</th></tr></thead><tbody>
+  <tr><td>dev run</td><td class="n">+0.09 [&minus;0.81, +0.82]</td><td class="n">0.0%</td></tr>
+  <tr><td>test run</td><td class="n">&minus;0.64 [&minus;0.92, +0.73]</td><td class="n">41.2%</td></tr>
+  </tbody></table></div>
+  <p>For Qwen2.5-1.5B, 56 weightings passed both tests on dev and none of them on test.</p>
+
+  <h3>3. Corrupt the evidence and the picture is clear</h3>
+  <p>Replacing a share of the numbers in the retrieved evidence with wrong ones does degrade the model: accuracy falls from 0.22 to about 0.03.
+  Change from 0% to 100% corruption, per item (Qwen2.5-3B, dev, n = 100; the test split gives the same picture):</p>
+  <div class="chart"><h4>Change from 0% to 100% corruption</h4><p>The gold-free measures do not move; only accuracy and support against the clean evidence do.</p>
+    <div class="dbars" role="img" aria-label="Change under full corruption: accuracy -0.190, support vs shown evidence +0.004, hallucination flag +0.010, entailment +0.018, support vs clean evidence -0.362">
+        <div class="d"><span class="l">Accuracy</span><span class="t"><i class="neg" style="width:23.8%" title="Accuracy: -0.190"></i></span><span class="v">-0.190</span></div>
+        <div class="d"><span class="l">Evidence support, shown evidence</span><span class="t"><i class="pos" style="width:0.5%" title="Evidence support, shown evidence: +0.004"></i></span><span class="v">+0.004</span></div>
+        <div class="d"><span class="l">Hallucination flag</span><span class="t"><i class="pos" style="width:1.2%" title="Hallucination flag: +0.010"></i></span><span class="v">+0.010</span></div>
+        <div class="d"><span class="l">Entailment support (NLI)</span><span class="t"><i class="pos" style="width:2.2%" title="Entailment support (NLI): +0.018"></i></span><span class="v">+0.018</span></div>
+        <div class="d"><span class="l">Support vs clean evidence</span><span class="t"><i class="neg" style="width:45.2%" title="Support vs clean evidence: -0.362"></i></span><span class="v">-0.362</span></div>
+    </div></div>
+  <div class="tw"><table><thead><tr><th>Qwen2.5-3B, corruption 0% to 100%</th><th class="n">dev (n = 100)</th><th class="n">test (n = 100)</th></tr></thead><tbody>
+  <tr><td>Accuracy, paired change per item</td><td class="n">&minus;0.190 [&minus;0.27, &minus;0.12]</td><td class="n">&minus;0.190 [&minus;0.28, &minus;0.12]</td></tr>
+  <tr><td>Composite, r with corruption level</td><td class="n">&minus;0.97 [&minus;0.99, &minus;0.82]</td><td class="n">&minus;0.93 [&minus;0.98, &minus;0.77]</td></tr>
+  <tr><td>Evidence support, shown evidence</td><td class="n">+0.004 [&minus;0.02, +0.03]</td><td class="n">&minus;0.020 [&minus;0.07, +0.02]</td></tr>
+  <tr><td>Hallucination flag</td><td class="n">+0.010 [&minus;0.04, +0.06]</td><td class="n">+0.020 [&minus;0.03, +0.07]</td></tr>
+  <tr><td>Entailment support (NLI)</td><td class="n">+0.018 [&minus;0.04, +0.08]</td><td class="n">&minus;0.069 [&minus;0.13, &minus;0.00]</td></tr>
+  <tr><td><strong>Support, clean evidence</strong></td><td class="n"><strong>&minus;0.362 [&minus;0.40, &minus;0.33]</strong></td><td class="n"><strong>&minus;0.376 [&minus;0.42, &minus;0.33]</strong></td></tr>
+  </tbody></table></div>
+  <p>The composite tracks corruption, but only through accuracy (which needs the gold answer) and the calibration term that follows it.
+  The gold-free evidence measures cannot see the damage, because a model that repeats corrupted numbers faithfully is well supported by
+  the corrupted text. Measured against a trusted source, support does fall.</p>
+
+  <h3>4. Entailment is no better than overlap</h3>
+  <p>Scoring each claim in the reasoning with a small NLI model separates correct from incorrect answers no better than chance
+  (AUROC 0.52 on dev, 0.56 on test); so does numeric overlap (0.64 on dev, 0.51 on test).</p>
+  <p><strong>Limits.</strong> Models of 0.5B to 3B at float32 on CPU, FinQA only, 100 to 150 items per run, and a synthetic corruption.</p>
 </section>
 
 <!-- EXP 1 -->
@@ -358,7 +421,7 @@
 <!-- EXP 4 -->
 <section id="e4" hidden>
   <h2>Experiment 4 — Composite response to graded context noise (n = 50 per level)</h2>
-  <div class="note"><strong>Scoring note.</strong> The hallucination column and the noise correlations below were scored the old way. A re-run with the corrected scorer (float32, CPU) measured noise vs hallucination at −0.12 rather than the recorded +0.76, with 0 to 3 of 50 flagged per level, and noise vs composite at +0.62 rather than −0.10. See <em>Method &amp; audit</em>.</div>
+  <div class="note"><strong>Read with the larger runs.</strong> The injected sentences were later shown not to degrade the model at all (paired accuracy change +0.007, 95% interval &minus;0.05 to +0.07, 150 items), so this experiment could not test the composite. The hallucination column was also scored the old way; corrected, noise vs hallucination is &minus;0.12 to &minus;0.42, not +0.76. See <em>Larger runs</em>.</div>
   <div class="charts">
     <div class="chart">
       <h4>Composite score by noise level</h4>
@@ -476,7 +539,7 @@
 <!-- WEIGHT SWEEP -->
 <section id="weights" hidden>
   <h2>Could different weights fix the composite?</h2>
-  <div class="note"><strong>Scoring note.</strong> The sweep uses the recorded component values. On the corrected scenarios, and on the measured float32 re-run (0.1% track noise, 0.0% rank correctly), the share of weightings that pass both tests is still 0.0%. See <em>Method &amp; audit</em>.</div>
+  <div class="note"><strong>Not reproducible.</strong> The sweep below uses the recorded n = 50 values. On larger runs the share of weightings passing both tests is 0.0% (3B dev) but 41.2% (3B test), so the earlier claim that none can pass was sampling noise. See <em>Larger runs</em>.</div>
   <p>The composite was run with one frozen weighting: 0.30 accuracy, 0.30 NESS, 0.20 hallucination
   and 0.20 calibration. Both of its failures could be blamed on that choice. To test this, the
   recorded component values from Experiments 4 and 5 were re-scored after the fact under all 1,771
@@ -546,18 +609,18 @@
   was found afterwards and is listed first, because it changes some recorded numbers.</p>
   <ul>
     <li><strong>Confidence value counted as unsupported evidence (found after the runs).</strong>
-    Evidence support counted the number in the model’s own “Confidence: 0.9” line as one the
-    retrieved text had to support. It never could, so every response was marked down and some
-    were pushed under the hallucination threshold by it alone. The scorer, and this page’s
-    analyser, now ignore the confidence line; the recorded runs were scored the old way and
-    have not been re-run. Measured from the saved files: Exp 1 strict hallucination
-    0.08 → 0.00; Exp 2 hallucination 0.10 → 0.20 becomes 0.00 → 0.00; Exp 5 ONRS retrieval
-    0.5891 → 0.6224 and oracle 0.5811 → 0.6211 (ranking still inverted, now a near tie);
-    Exp 4’s noise–hallucination correlation (+0.76) was then measured on a full float32
-    CPU re-run of all five experiments at −0.12, so it is not supported; the composite’s
-    correlation with noise was +0.62 there. Accuracy fell from 0.34 to 0.20 from numeric
-    precision alone. No weighting passes both tests in any scenario. Calibration and the
-    verifier are unaffected.</li>
+    Evidence support counted the number in the model&rsquo;s own &ldquo;Confidence: 0.9&rdquo; line as one the retrieved text had to
+    support. It never could, so every response was marked down and some were pushed under the hallucination threshold by it alone.
+    The scorer, and this page&rsquo;s analyser, now ignore the confidence line. Effects: the Exp 2 hallucination rise (0.10 to 0.20) and the
+    Exp 1 strict hallucination rate (0.08) were this defect alone.</li>
+    <li><strong>The noise manipulation did not degrade the model (found by the larger runs).</strong>
+    At 150 items per split, adding up to four unrelated sentences changed accuracy, evidence support, the hallucination flag,
+    entailment support and support against the clean evidence by amounts indistinguishable from zero. A flat composite under it is
+    therefore not evidence about the composite. The five-level correlations and the weight sweep built on them are not
+    reproducible: dev and test runs of the same model give +0.09 and &minus;0.64, and 0.0% and 41.2% of weightings passing both tests.
+    With a manipulation that does hurt (numbers in the evidence replaced by wrong ones), the composite tracks the damage only through
+    accuracy, while evidence support, entailment and the hallucination flag against the shown evidence do not move and support against the
+    clean evidence falls by 0.36. See <em>Larger runs</em> and <code>ERRATUM.md</code>.</li>
     <li><strong>Fabricated evidence-support constant.</strong> A missing dictionary key meant the
     metric silently returned exactly 0.8 for every example in every condition, pinning 30% of the
     composite weight to a constant.</li>
