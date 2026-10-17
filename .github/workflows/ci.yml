@@ -80,6 +80,20 @@ jobs:
           python -m experiments.weight_sensitivity --results-dir results/cpu_fp32
           git diff --exit-code -- results/cpu_fp32/weight_sensitivity_dev.csv results/cpu_fp32/weight_sensitivity_dev_summary.json
 
+      - name: Scale-up analysis runs on the committed results
+        run: |
+          python -m experiments.scale_analysis --boot 30 --boot-sweep 5 --out "$RUNNER_TEMP/scale_summary.json"
+          python -m experiments.scale_report --summary "$RUNNER_TEMP/scale_summary.json" --out "$RUNNER_TEMP/SUMMARY.md"
+
+      - name: Entailment claim extraction self-check
+        run: |
+          python - <<'PY'
+          from experiments.entailment_scoring import extract_claims
+          c = extract_claims("Reasoning: Leased total = 8.1. Total facilities = 56.0. 8.1 / 56.0 * 100 = 14.46\n\nFinal Answer: 14.46%\n\nConfidence: 0.9")
+          assert c == ["Leased total = 8.1.", "Total facilities = 56.0."], c
+          print("ok")
+          PY
+
       - name: Confidence-line audit reproduces committed results
         run: |
           python -m experiments.confidence_line_audit
