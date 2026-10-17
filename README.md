@@ -367,6 +367,8 @@ committed results.
 | `NRF_Report_IEEE_v3.docx` | The report, IEEE two-column format |
 | `NRF_Supporting_Evidence_v3.docx` | Supporting evidence and extended methodology |
 | `NRF_Experimental_Chapter.md` | The experimental chapter in full |
+| `ERRATUM.md`, `NRF_Erratum.docx` | Corrections to the submitted dissertation, with the evidence |
+| `results/scale/SUMMARY.md` | Tables from the larger runs |
 
 ---
 
