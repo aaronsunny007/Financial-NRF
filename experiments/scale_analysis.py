@@ -378,17 +378,27 @@ def main():
     seeds = {}
     for model in sorted({r["model"] for r in results.values()}):
         runs = [r for r in results.values()
-                if r["model"] == model and r["split"] == "dev" and r["seed"] is not None and "sweep" in r]
+                if r["model"] == model and r["split"] == "dev" and r["seed"] is not None and r.get("mode") != "corrupt"]
         if len(runs) >= 3:
             def spread(f):
-                v = [f(r) for r in runs if not math.isnan(f(r))]
+                v = []
+                for r in runs:
+                    try:
+                        x = f(r)
+                    except (KeyError, TypeError):
+                        continue
+                    if x is not None and not math.isnan(x):
+                        v.append(x)
+                if not v:
+                    return None
                 return {"mean": float(np.mean(v)), "sd": float(np.std(v, ddof=1)) if len(v) > 1 else float("nan"),
-                        "values": [float(x) for x in v]}
+                        "values": [float(x) for x in v], "n": len(v)}
             seeds[model] = {
                 "n_runs": len(runs),
                 "r_noise_composite": spread(lambda r: r["r_noise_composite"]),
                 "r_noise_hallucination_rate": spread(lambda r: r["r_noise_hallucination_rate"]),
-                "accuracy_retrieval": spread(lambda r: r["exp5"]["retrieval"]["accuracy"]),
+                "accuracy_clean": spread(lambda r: r["accuracy_by_level"][0]),
+                "accuracy_change_noise": spread(lambda r: r["item_level_noise_effects"]["accuracy"]["mean_change"]),
                 "share_pass_both": spread(lambda r: r["sweep"]["both"]),
             }
 

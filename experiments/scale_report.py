@@ -118,14 +118,20 @@ def render(s):
     L.append("\n## Spread across decoding seeds (same model, sampled at temperature 0.7)\n")
     sp = s.get("seed_spread", {})
     if sp:
-        L.append("| Model | Runs | r(noise, composite) mean ± sd | r(noise, hallucination) mean ± sd | Retrieval accuracy mean ± sd | Share passing both mean ± sd |")
-        L.append("|---|---|---|---|---|---|")
+        L.append("Each seed is a separate sampled run on the same items. The spread shows how much of a single run's number is "
+                 "generation luck.\n")
+        L.append("| Model | Runs | r(noise, composite) mean ± sd | r(noise, hallucination) mean ± sd | Clean accuracy mean ± sd | "
+                 "Accuracy change under noise mean ± sd | Share of weightings passing both |")
+        L.append("|---|---|---|---|---|---|---|")
+        def ms(x, d=2, sign=False):
+            if not x:
+                return "n/a"
+            return f"{f(x['mean'], d, sign)} ± {f(x['sd'], d)}"
         for m, r in sp.items():
-            def ms(x, d=2):
-                return f"{f(x['mean'], d, True)} ± {f(x['sd'], d)}"
-            L.append(f"| {m} | {r['n_runs']} | {ms(r['r_noise_composite'])} | {ms(r['r_noise_hallucination_rate'])} | "
-                     f"{f(r['accuracy_retrieval']['mean'])} ± {f(r['accuracy_retrieval']['sd'])} | "
-                     f"{pc(r['share_pass_both']['mean'])} ± {pc(r['share_pass_both']['sd'])} |")
+            both = r.get("share_pass_both")
+            both_s = f"{pc(both['mean'])} ± {pc(both['sd'])}" if both else "needs Experiment 5 (not run)"
+            L.append(f"| {m} | {r['n_runs']} | {ms(r['r_noise_composite'], 2, True)} | {ms(r['r_noise_hallucination_rate'], 2, True)} | "
+                     f"{ms(r['accuracy_clean'])} | {ms(r['accuracy_change_noise'], 3, True)} | {both_s} |")
     else:
         L.append("Fewer than three sampled runs are available for any model.")
     return "\n".join(L) + "\n"
