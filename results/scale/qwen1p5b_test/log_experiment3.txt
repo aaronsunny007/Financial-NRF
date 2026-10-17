@@ -1,0 +1,342 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+WARNING: running against the TEST split -- final reported runs only.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+============================================================
+EXPERIMENT 3: CONFIDENCE CALIBRATION AND OVERCONFIDENCE ANALYSIS
+Split: test | N: 100 | Seed: 42 | Engine: replay
+============================================================
+NOTE: 'confidence' here is the model's SELF-REPORTED value, elicited in
+the prompt. It is NOT derived from token log-probabilities. Report it as
+'ECE of self-reported confidence' -- see framework/nrf.py.
+Evaluating 100 examples.
+Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+LLM backend: replay of 1253 cached generations, Qwen/Qwen2.5-1.5B-Instruct (float32, replayed from cache)
+Embedding model running on: cpu
+FAISS available: True (using faiss.IndexFlatIP)
+
+[1/100] ETR/2016/page_23.pdf-2
+  Correct: 1.0 | Confidence: 1.00
+
+[2/100] INTC/2015/page_41.pdf-4
+  Correct: 1.0 | Confidence: 0.90
+
+[3/100] ADI/2011/page_61.pdf-2
+  Correct: 1.0 | Confidence: 0.90
+
+[4/100] FIS/2010/page_70.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[5/100] MAS/2017/page_27.pdf-2
+  Correct: 0.0 | Confidence: N/A
+
+[6/100] SYY/2006/page_71.pdf-1
+  Correct: 0.0 | Confidence: 1.00
+
+[7/100] AES/2010/page_227.pdf-3
+  Correct: 0.0 | Confidence: 1.00
+
+[8/100] GS/2015/page_188.pdf-2
+  Correct: 0.0 | Confidence: 1.00
+
+[9/100] MO/2016/page_19.pdf-1
+  Correct: 0.0 | Confidence: 1.00
+
+[10/100] CMCSA/2015/page_112.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[11/100] STT/2007/page_111.pdf-3
+  Correct: 1.0 | Confidence: 0.90
+
+[12/100] UAA/2016/page_42.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[13/100] GIS/2018/page_110.pdf-2
+  Correct: 1.0 | Confidence: 0.90
+
+[14/100] JKHY/2019/page_18.pdf-3
+  Correct: 0.0 | Confidence: 0.90
+
+[15/100] AWK/2014/page_121.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[16/100] MRO/2011/page_108.pdf-1
+  Correct: 1.0 | Confidence: 0.90
+
+[17/100] RCL/2012/page_75.pdf-1
+  Correct: 0.0 | Confidence: 0.50
+
+[18/100] ETR/2017/page_372.pdf-1
+  Correct: 1.0 | Confidence: 1.00
+
+[19/100] ADBE/2008/page_89.pdf-3
+  Correct: 0.0 | Confidence: 1.00
+
+[20/100] JPM/2010/page_273.pdf-2
+  Correct: 0.0 | Confidence: 1.00
+
+[21/100] PNC/2012/page_68.pdf-2
+  Correct: 0.0 | Confidence: 0.50
+
+[22/100] FIS/2016/page_31.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[23/100] AMT/2016/page_49.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[24/100] MAR/2018/page_43.pdf-2
+  Correct: 1.0 | Confidence: 0.90
+
+[25/100] AAL/2016/page_8.pdf-4
+  Correct: 1.0 | Confidence: 0.90
+
+[26/100] ETFC/2007/page_18.pdf-1
+  Correct: 1.0 | Confidence: 0.90
+
+[27/100] GPN/2010/page_87.pdf-3
+  Correct: 0.0 | Confidence: 0.90
+
+[28/100] ADBE/2008/page_89.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[29/100] DG/2005/page_44.pdf-2
+  Correct: 0.0 | Confidence: 1.00
+
+[30/100] ALXN/2016/page_153.pdf-2
+  Correct: 1.0 | Confidence: 0.90
+
+[31/100] UNP/2015/page_56.pdf-1
+  Correct: 1.0 | Confidence: 0.90
+
+[32/100] C/2009/page_45.pdf-1
+  Correct: 1.0 | Confidence: N/A
+
+[33/100] AAPL/2006/page_100.pdf-3
+  Correct: 1.0 | Confidence: 1.00
+
+[34/100] JPM/2018/page_90.pdf-1
+  Correct: 1.0 | Confidence: 0.90
+
+[35/100] PNC/2012/page_65.pdf-4
+  Correct: 0.0 | Confidence: 0.90
+
+[36/100] ABMD/2008/page_86.pdf-1
+  Correct: 1.0 | Confidence: 1.00
+
+[37/100] ETFC/2012/page_24.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[38/100] ETFC/2007/page_18.pdf-2
+  Correct: 0.0 | Confidence: 0.00
+
+[39/100] GS/2017/page_179.pdf-4
+  Correct: 1.0 | Confidence: 1.00
+
+[40/100] MKTX/2004/page_99.pdf-3
+  Correct: 0.0 | Confidence: 0.90
+
+[41/100] ETR/2013/page_21.pdf-3
+  Correct: 1.0 | Confidence: 0.90
+
+[42/100] GS/2013/page_220.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[43/100] FBHS/2017/page_83.pdf-1
+  Correct: 0.0 | Confidence: 1.00
+
+[44/100] ZBH/2008/page_57.pdf-2
+  Correct: 1.0 | Confidence: 0.90
+
+[45/100] K/2006/page_52.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[46/100] GPN/2014/page_92.pdf-1
+  Correct: 0.0 | Confidence: 0.99
+
+[47/100] FIS/2017/page_64.pdf-3
+  Correct: 0.0 | Confidence: 0.90
+
+[48/100] BLL/2010/page_37.pdf-2
+  Correct: 1.0 | Confidence: 0.90
+
+[49/100] PNC/2012/page_65.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[50/100] SNA/2018/page_31.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[51/100] FIS/2016/page_45.pdf-4
+  Correct: 0.0 | Confidence: 0.90
+
+[52/100] ETFC/2011/page_144.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[53/100] STT/2009/page_127.pdf-4
+  Correct: 0.0 | Confidence: 1.00
+
+[54/100] ILMN/2008/page_82.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[55/100] ETR/2004/page_239.pdf-3
+  Correct: 0.0 | Confidence: 0.90
+
+[56/100] HOLX/2007/page_126.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[57/100] FBHS/2017/page_83.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[58/100] UA/2007/page_70.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[59/100] FIS/2012/page_48.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[60/100] AON/2015/page_96.pdf-1
+  Correct: 0.0 | Confidence: 0.99
+
+[61/100] CME/2010/page_91.pdf-1
+  Correct: 1.0 | Confidence: 0.90
+
+[62/100] HIG/2004/page_140.pdf-1
+  Correct: 1.0 | Confidence: 0.90
+
+[63/100] CME/2010/page_123.pdf-2
+  Correct: 1.0 | Confidence: 1.00
+
+[64/100] AON/2007/page_175.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[65/100] ETR/2013/page_21.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[66/100] ABMD/2005/page_29.pdf-2
+  Correct: 0.0 | Confidence: 1.00
+
+[67/100] NWS/2017/page_119.pdf-2
+  Correct: 1.0 | Confidence: 0.90
+
+[68/100] PNC/2012/page_65.pdf-3
+  Correct: 0.0 | Confidence: 0.90
+
+[69/100] AES/2010/page_227.pdf-4
+  Correct: 0.0 | Confidence: 0.90
+
+[70/100] PNC/2012/page_68.pdf-4
+  Correct: 0.0 | Confidence: 0.90
+
+[71/100] GIS/2017/page_31.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[72/100] PM/2017/page_32.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[73/100] CME/2010/page_123.pdf-4
+  Correct: 1.0 | Confidence: 0.99
+
+[74/100] HUM/2014/page_44.pdf-1
+  Correct: 1.0 | Confidence: 0.90
+
+[75/100] VNO/2014/page_57.pdf-1
+  Correct: 1.0 | Confidence: 1.00
+
+[76/100] MSI/2014/page_76.pdf-3
+  Correct: 0.0 | Confidence: 0.90
+
+[77/100] MRO/2008/page_45.pdf-1
+  Correct: 1.0 | Confidence: 1.00
+
+[78/100] CB/2010/page_83.pdf-1
+  Correct: 1.0 | Confidence: 0.90
+
+[79/100] GS/2017/page_86.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[80/100] BLL/2012/page_31.pdf-3
+  Correct: 0.0 | Confidence: 1.00
+
+[81/100] BLL/2012/page_31.pdf-4
+  Correct: 0.0 | Confidence: 0.90
+
+[82/100] MRO/2007/page_136.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[83/100] AMT/2012/page_50.pdf-3
+  Correct: 1.0 | Confidence: 0.90
+
+[84/100] AWK/2012/page_117.pdf-4
+  Correct: 0.0 | Confidence: 0.99
+
+[85/100] SNA/2007/page_49.pdf-4
+  Correct: 0.0 | Confidence: 0.90
+
+[86/100] GS/2015/page_188.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[87/100] UPS/2012/page_32.pdf-4
+  Correct: 0.0 | Confidence: 0.90
+
+[88/100] AON/2015/page_96.pdf-3
+  Correct: 0.0 | Confidence: 1.00
+
+[89/100] STT/2009/page_127.pdf-2
+  Correct: 1.0 | Confidence: 1.00
+
+[90/100] RSG/2018/page_94.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[91/100] MRO/2004/page_46.pdf-1
+  Correct: 0.0 | Confidence: 1.00
+
+[92/100] IP/2006/page_30.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[93/100] APD/2016/page_40.pdf-2
+  Correct: 1.0 | Confidence: 0.90
+
+[94/100] CDNS/2018/page_66.pdf-4
+  Correct: 0.0 | Confidence: 0.90
+
+[95/100] CDNS/2015/page_30.pdf-2
+  Correct: 0.0 | Confidence: 0.90
+
+[96/100] AAPL/2006/page_131.pdf-2
+  Correct: 0.0 | Confidence: 1.00
+
+[97/100] L/2009/page_84.pdf-4
+  Correct: 1.0 | Confidence: 0.90
+
+[98/100] ECL/2016/page_52.pdf-4
+  Correct: 0.0 | Confidence: 1.00
+
+[99/100] ETR/2011/page_301.pdf-1
+  Correct: 0.0 | Confidence: 0.90
+
+[100/100] AWK/2013/page_122.pdf-3
+  Correct: 0.0 | Confidence: 0.90
+
+============================================================
+EXPERIMENT 3 RESULTS
+============================================================
+N examples:                          100
+  scored (numeric gold):              97
+  excluded (non-numeric gold):        3
+Accuracy:                            0.3402
+Mean Self-Reported Confidence:       0.9091 (2 missing, excluded)
+
+--- Overconfidence decomposition (this is what the RQ asks for) ---
+Mean confidence on CORRECT answers:  0.9309  (n=32)
+Mean confidence on INCORRECT answers:0.8979  (n=63)
+Confidence gap (correct - incorrect):0.0330
+    -> near zero means self-reported confidence carries almost no
+       information about whether the answer is actually right.
+Overconfidence gap (conf - accuracy):0.5688
+    -> how far stated confidence exceeds real accuracy.
+High-confidence errors (conf>=0.8):    60 (0.6186 of scored)
+    -> the concrete high-risk failure mode: confidently wrong.
+
+ECE (of self-reported confidence):   0.5722
+============================================================
+
+Per-example results saved to: results/scale/qwen1p5b_test/experiment3_results_test.csv
+Summary saved to:             results/scale/qwen1p5b_test/experiment3_results_test_summary.json
