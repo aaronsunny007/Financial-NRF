@@ -129,7 +129,12 @@ def render(s):
             return f"{f(x['mean'], d, sign)} ± {f(x['sd'], d)}"
         for m, r in sp.items():
             both = r.get("share_pass_both")
-            both_s = f"{pc(both['mean'])} ± {pc(both['sd'])}" if both else "needs Experiment 5 (not run)"
+            if not both:
+                both_s = "needs Experiment 5 (not run)"
+            elif both.get("n", 0) < 2:
+                both_s = f"{pc(both['mean'])} (only one run reached Experiment 5)"
+            else:
+                both_s = f"{pc(both['mean'])} ± {pc(both['sd'])}"
             L.append(f"| {m} | {r['n_runs']} | {ms(r['r_noise_composite'], 2, True)} | {ms(r['r_noise_hallucination_rate'], 2, True)} | "
                      f"{ms(r['accuracy_clean'])} | {ms(r['accuracy_change_noise'], 3, True)} | {both_s} |")
     else:

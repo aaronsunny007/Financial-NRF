@@ -394,6 +394,7 @@ other models, with sampled-decoding seeds, and with a second manipulation. Every
 | Qwen2.5-3B-Instruct, dev and test | 150 + 150 | greedy |
 | Qwen2.5-1.5B-Instruct, dev and test | 100 + 100 | greedy |
 | Qwen2.5-1.5B-Instruct, dev, three seeds | 100 each | sampled, temperature 0.7 |
+| SmolLM2-1.7B-Instruct, dev | 100 | greedy, second model family |
 | Qwen2.5-3B, corrupted evidence, dev and test | 100 + 100 | see below |
 
 **The Experiment 4 manipulation does not degrade the model.** Paired within item, 0% against 40% injected noise
@@ -427,6 +428,14 @@ The composite does track corruption, but only through accuracy (which needs the 
 it, because a model that repeats corrupted numbers faithfully is well supported by the corrupted text. Support measured
 against a trusted reference does fall. This is the structural argument of §6.2, now demonstrated with a valid manipulation
 and replicated on a held-out split.
+
+**Other models and seeds.** On SmolLM2-1.7B (dev) oracle evidence does beat retrieval (accuracy 0.28 against 0.16), the noise–composite
+correlation is −0.81 [−0.97, +0.52], and 73.1% of weightings pass both original tests, against 0.0% for Qwen2.5-3B on dev. Qwen2.5-1.5B,
+sampled at temperature 0.7 with three seeds, gives noise–composite correlations of +0.46, +0.52 and −0.37 (mean +0.20, sd 0.50; the greedy
+run gave −0.27), clean accuracy 0.31, 0.26 and 0.32 (greedy 0.40), and per-item accuracy changes under noise of +0.02, +0.05 and −0.11.
+Of eight noise-injection runs only one (the last seed, 95% CI −0.22 to −0.01) has an accuracy interval excluding zero; the manipulation's
+effect is at most small and inconsistent. The sign of the headline correlation, and the outcome of the weight sweep, change between seeds,
+splits and models.
 
 **Entailment does not improve on numeric overlap.** Each claim in the reasoning was scored with a small NLI model
 (`cross-encoder/nli-deberta-v3-small`, `experiments/entailment_scoring.py`). Its area under the ROC curve for separating

@@ -285,7 +285,7 @@
   <h2>What the larger runs show</h2>
   <div class="note"><strong>These supersede the n = 50 results in the other tabs.</strong> After an audit found a scoring defect, the
   experiments were re-run on free CPU runners with the corrected scorer: Qwen2.5-3B on 150 dev and 150 test items, Qwen2.5-1.5B on
-  100 and 100, sampled seeds, and a corrupted-evidence variant. Every statistic has a bootstrap interval over items.
+  100 and 100, SmolLM2-1.7B, three sampled seeds, and a corrupted-evidence variant. Every statistic has a bootstrap interval over items.
   The corrections to the submitted dissertation are in <code>ERRATUM.md</code>; every table is in <code>results/scale/SUMMARY.md</code>.</div>
 
   <h3>1. The original noise manipulation does nothing</h3>
@@ -327,10 +327,14 @@
   The gold-free evidence measures cannot see the damage, because a model that repeats corrupted numbers faithfully is well supported by
   the corrupted text. Measured against a trusted source, support does fall.</p>
 
+  <h3>Other models and seeds</h3>
+  <p>On SmolLM2-1.7B (dev) oracle evidence does beat retrieval (0.28 against 0.16) and 73.1% of weightings pass both original tests, against 0.0% for
+  Qwen2.5-3B on dev. Qwen2.5-1.5B sampled with three seeds gives noise correlations of +0.46, +0.52 and &minus;0.37, and clean accuracy of 0.31,
+  0.26 and 0.32. Single-run numbers do not hold still across seeds, splits or models.</p>
   <h3>4. Entailment is no better than overlap</h3>
   <p>Scoring each claim in the reasoning with a small NLI model separates correct from incorrect answers no better than chance
   (AUROC 0.52 on dev, 0.56 on test); so does numeric overlap (0.64 on dev, 0.51 on test).</p>
-  <p><strong>Limits.</strong> Models of 0.5B to 3B at float32 on CPU, FinQA only, 100 to 150 items per run, and a synthetic corruption.</p>
+  <p><strong>Limits.</strong> Models of 1.5B to 3B at float32 on CPU, FinQA only, 100 to 150 items per run, and a synthetic corruption.</p>
 </section>
 
 <!-- EXP 1 -->

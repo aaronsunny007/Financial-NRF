@@ -1,0 +1,268 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+==============================================================
+EXPERIMENT 5: COMPARATIVE BASELINES ON IDENTICAL DATA
+Split: dev | N: 100 | Seed: 42 | Engine: replay | NESS mode: strict
+Conditions: ['closed_book', 'retrieval', 'oracle']  (total generations: 300)
+==============================================================
+All conditions share the same items, generator, prompt, scoring and
+verifier. Only the evidence supplied to the model differs.
+==============================================================
+Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+LLM backend: replay of 1200 cached generations, Qwen/Qwen2.5-1.5B-Instruct (float32, replayed from cache)
+Embedding model running on: cpu
+FAISS available: True (using faiss.IndexFlatIP)
+
+--------------------------------------------------------------
+CONDITION: CLOSED_BOOK
+--------------------------------------------------------------
+  [1/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [2/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [3/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [4/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [5/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [6/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.99
+  [7/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [8/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [9/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [10/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [11/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [12/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [13/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [14/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [15/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [16/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.10
+  [17/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [18/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [19/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [20/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [21/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [22/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [23/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [24/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [25/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.30
+  [26/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [27/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [28/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [29/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.80
+  [30/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [31/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.10
+  [32/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [33/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [34/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [35/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [36/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [37/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.20
+  [38/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [39/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.20
+  [40/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.50
+  [41/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.50
+  [42/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [43/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [44/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [45/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [46/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [47/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [48/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [49/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [50/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.30
+  [51/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.10
+  [52/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [53/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [54/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [55/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [56/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [57/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [58/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [59/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [60/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [61/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [62/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [63/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [64/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [65/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [66/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.40
+  [67/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.50
+  [68/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [69/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [70/100] Correct: 1.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [71/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [72/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [73/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [74/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [75/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [76/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [77/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [78/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [79/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.40
+  [80/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.20
+  [81/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [82/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.50
+  [83/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [84/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [85/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [86/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [87/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [88/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.70
+  [89/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.50
+  [90/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.10
+  [91/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [92/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.50
+  [93/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+  [94/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.10
+  [95/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [96/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [97/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [98/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [99/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.10
+  [100/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: N/A
+
+  Accuracy:        0.0100  95% CI [0.0018, 0.0545]
+  NESS:            0.0000
+  Hallucination:   1.0000
+  ECE:             0.4012
+  ONRS:            0.1228
+
+--------------------------------------------------------------
+CONDITION: RETRIEVAL
+--------------------------------------------------------------
+  [1/100] Correct: 1.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.99
+  [2/100] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [3/100] Correct: 0.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [4/100] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 1.00
+  [5/100] Correct: 1.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [6/100] Correct: 1.0 | NESS: 0.33 | Halluc: 1 | Conf: 1.00
+  [7/100] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 1.00
+  [8/100] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.50
+  [9/100] Correct: 1.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [10/100] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [11/100] Correct: 0.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [12/100] Correct: 0.0 | NESS: 0.58 | Halluc: 0 | Conf: 0.90
+  [13/100] Correct: 1.0 | NESS: 0.77 | Halluc: 0 | Conf: 0.90
+  [14/100] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/Financial-NRF/Financial-NRF/experiments/experiment5.py", line 372, in <module>
+    main()
+  File "/home/runner/work/Financial-NRF/Financial-NRF/experiments/experiment5.py", line 280, in main
+    row = evaluate(rag, nrf, item, condition, evidence_override=override)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Financial-NRF/Financial-NRF/experiments/experiment5.py", line 124, in evaluate
+    result = rag.answer(item, evidence_override=evidence_override)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Financial-NRF/Financial-NRF/rag_pipeline/rag.py", line 1072, in answer
+    response = self.generate(question, evidence_text, correction_note=verification.reason)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Financial-NRF/Financial-NRF/rag_pipeline/rag.py", line 916, in generate
+    raise RuntimeError(
+RuntimeError: replay backend: no cached generation for this prompt (key 12bf0ce49a75..., question 'in 2011 what was the amount of tax related to the unrealized'). The shard runs did not cover it.
+
+  [15/100] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 1.00
+  [16/100] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [17/100] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 1.00
+  [18/100] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [19/100] Correct: 0.0 | NESS: 0.58 | Halluc: 0 | Conf: 1.00
+  [20/100] Correct: 0.0 | NESS: 0.86 | Halluc: 0 | Conf: 0.99
+  [21/100] Correct: 1.0 | NESS: 0.81 | Halluc: 0 | Conf: 0.90
+  [22/100] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [23/100] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.10
+  [24/100] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 1.00
+  [25/100] Correct: 1.0 | NESS: 0.64 | Halluc: 0 | Conf: 0.90
+  [26/100] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 1.00
+  [27/100] Correct: 0.0 | NESS: 0.36 | Halluc: 1 | Conf: 0.90
+  [28/100] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+  [29/100] Correct: 1.0 | NESS: 0.50 | Halluc: 0 | Conf: N/A
+  [30/100] Correct: 0.0 | NESS: 0.72 | Halluc: 0 | Conf: 0.90
+  [31/100] Correct: 1.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.90
+  [32/100] Correct: 0.0 | NESS: 0.44 | Halluc: 1 | Conf: 0.90
+  [33/100] Correct: 0.0 | NESS: 0.79 | Halluc: 0 | Conf: 0.90
+  [34/100] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 1.00
+  [35/100] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 1.00
+  [36/100] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.99
+  [37/100] Correct: 0.0 | NESS: 0.56 | Halluc: 0 | Conf: 1.00
+  [38/100] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [39/100] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [40/100] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 1.00
+  [41/100] Correct: 0.0 | NESS: 0.43 | Halluc: 1 | Conf: 1.00
+  [42/100] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.90
+  [43/100] Correct: 0.0 | NESS: 0.85 | Halluc: 0 | Conf: 0.90
+  [44/100] Correct: 1.0 | NESS: 0.86 | Halluc: 0 | Conf: 1.00
+  [45/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+  [46/100] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+  [47/100] Correct: 0.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.99
+  [48/100] Correct: 1.0 | NESS: 0.89 | Halluc: 0 | Conf: 1.00
+  [49/100] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 1.00
+  [50/100] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.90
+  [51/100] Correct: 1.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [52/100] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.99
+  [53/100] Correct: 0.0 | NESS: 0.54 | Halluc: 0 | Conf: 0.90
+  [54/100] Correct: 0.0 | NESS: 0.70 | Halluc: 0 | Conf: 0.99
+  [55/100] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 1.00
+  [56/100] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.99
+  [57/100] Correct: 0.0 | NESS: 0.62 | Halluc: 0 | Conf: 0.90
+  [58/100] Correct: 0.0 | NESS: 0.40 | Halluc: 1 | Conf: 1.00
+  [59/100] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 1.00
+  [60/100] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [61/100] Correct: 1.0 | NESS: 0.86 | Halluc: 0 | Conf: 1.00
+  [62/100] Correct: 0.0 | NESS: 0.40 | Halluc: 1 | Conf: 0.90
+  [63/100] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 1.00
+  [64/100] Correct: 1.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [65/100] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 0.90
+  [66/100] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.90
+  [67/100] Correct: 0.0 | NESS: 0.74 | Halluc: 0 | Conf: 0.90
+  [68/100] Correct: 0.0 | NESS: 0.77 | Halluc: 0 | Conf: 0.90
+  [69/100] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.99
+  [70/100] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.99
+  [71/100] Correct: 0.0 | NESS: 0.87 | Halluc: 0 | Conf: 0.90
+  [72/100] Correct: 0.0 | NESS: 0.88 | Halluc: 0 | Conf: 0.90
+  [73/100] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 1.00
+  [74/100] Correct: 0.0 | NESS: 0.64 | Halluc: 0 | Conf: 0.90
+  [75/100] Correct: 0.0 | NESS: 0.71 | Halluc: 0 | Conf: 1.00
+  [76/100] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.10
+  [77/100] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [78/100] Correct: 1.0 | NESS: 0.67 | Halluc: 0 | Conf: 0.90
+  [79/100] Correct: 0.0 | NESS: 0.73 | Halluc: 0 | Conf: 0.99
+  [80/100] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.90
+  [81/100] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [82/100] Correct: 0.0 | NESS: 0.75 | Halluc: 0 | Conf: 0.90
+  [83/100] Correct: 0.0 | NESS: 0.60 | Halluc: 0 | Conf: 0.90
+  [84/100] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [85/100] Correct: 0.0 | NESS: 0.70 | Halluc: 0 | Conf: 0.90
+  [86/100] Correct: 0.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [87/100] Correct: 0.0 | NESS: 0.42 | Halluc: 1 | Conf: 1.00
+  [88/100] Correct: 0.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [89/100] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 1.00
+  [90/100] Correct: 0.0 | NESS: 0.29 | Halluc: 1 | Conf: 0.90
+  [91/100] Correct: 1.0 | NESS: 0.70 | Halluc: 0 | Conf: 0.90
+  [92/100] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 0.90
+  [93/100] Correct: 0.0 | NESS: 0.85 | Halluc: 0 | Conf: 0.99
+  [94/100] Correct: 0.0 | NESS: 1.00 | Halluc: 0 | Conf: 1.00
+  [95/100] Correct: 0.0 | NESS: 0.64 | Halluc: 0 | Conf: 0.90
+  [96/100] Correct: 1.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [97/100] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 1.00
+  [98/100] Correct: 1.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.90
+  [99/100] Correct: 1.0 | NESS: 0.89 | Halluc: 0 | Conf: 0.90
+  [100/100] Correct: 1.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+
+  Accuracy:        0.2600  95% CI [0.1840, 0.3537]
+  NESS:            0.6950
+  Hallucination:   0.1200
+  ECE:             0.6565
+  ONRS:            0.5312
+
+--------------------------------------------------------------
+CONDITION: ORACLE
+--------------------------------------------------------------
+  [1/100] Correct: 1.0 | NESS: 0.67 | Halluc: 0 | Conf: 1.00
+  [2/100] Correct: 0.0 | NESS: 0.62 | Halluc: 0 | Conf: N/A
+  [3/100] Correct: 0.0 | NESS: 0.33 | Halluc: 1 | Conf: N/A
+  [4/100] Correct: 0.0 | NESS: 0.78 | Halluc: 0 | Conf: 0.99
+  [5/100] Correct: 1.0 | NESS: 0.57 | Halluc: 0 | Conf: 0.90
+  [6/100] Correct: 1.0 | NESS: 1.00 | Halluc: 0 | Conf: 1.00
+  [7/100] Correct: 0.0 | NESS: 0.77 | Halluc: 0 | Conf: 0.99
+  [8/100] Correct: 0.0 | NESS: 0.50 | Halluc: 0 | Conf: 0.90
+  [9/100] Correct: 1.0 | NESS: 0.88 | Halluc: 0 | Conf: 0.99
+  [10/100] Correct: 1.0 | NESS: 0.29 | Halluc: 1 | Conf: 0.90
+  [11/100] Correct: 0.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+  [12/100] Correct: 0.0 | NESS: 0.10 | Halluc: 1 | Conf: 0.99
+  [13/100] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 0.90
+FAILED

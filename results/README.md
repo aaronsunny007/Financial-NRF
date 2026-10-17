@@ -30,6 +30,11 @@ from code, construct `NumericalReliabilityFramework(exclude_confidence_from_supp
 (see `cpu_fp32/README.md`). Its numbers are a replication on different numerics and should be
 quoted next to, not in place of, the recorded runs.
 
+`scale/` holds the larger runs (more items, a test split, other models, sampled seeds, and a corrupted-evidence manipulation), one
+directory per run, named `<model>_<split>[_s<seed>]`; `scale/summary.json` and `scale/SUMMARY.md` are produced by
+`python -m experiments.scale_analysis` and `python -m experiments.scale_report`. Two of the seed runs (`qwen1p5b_dev_s1`, `_s2`) hit the
+six-hour job limit during Experiment 5, so they hold Experiments 1, 3 and 4 only.
+
 ## Which file backs which claim
 
 | Claim | File |
@@ -39,6 +44,7 @@ quoted next to, not in place of, the recorded runs.
 | Noise correlation −0.10 | `experiment4_results_dev.csv` (ONRS per noise level); the computed r is in `weight_sensitivity_dev_summary.json` |
 | Oracle vs retrieval, ranking inversion | `experiment5_results_dev_summary.json` |
 | Measured re-run with the corrected scorer | `cpu_fp32/` (`weight_sensitivity_dev_summary.json` there for the sweep) |
+| Larger runs, bootstrap intervals, held-out validation, seeds | `scale/SUMMARY.md` (`scale/summary.json`) |
 | Effect of the confidence-line scoring defect | `confidence_line_audit_dev.json` (`python -m experiments.confidence_line_audit`) |
 | No weighting passes both falsification tests | `weight_sensitivity_dev_summary.json` (one row per weighting in `weight_sensitivity_dev.csv`) |
 

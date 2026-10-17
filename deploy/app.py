@@ -291,12 +291,8 @@ and **calibration of self-reported confidence**, aggregated into a proposed
 Evaluated on FinQA with a locally hosted 3B instruction-tuned generator under
 4-bit quantisation. All figures below are loaded from recorded experiment runs.
 
-**Scoring note.** The recorded runs counted the model's own `Confidence: 0.9` value as
-an unsupported number in NESS. The scorer now ignores it, but the runs have not been
-repeated. See the Method tab for the measured effect on the hallucination rates and
-noise correlations.
-
-*MSc project — Aaron Prakash Gandi, School of Computing, Ulster University.*
+**Scoring note.** The recorded n = 50 runs used a scorer that counted the model's own confidence value as an unsupported number, and a
+noise manipulation that later runs showed does not degrade the model. Read them with the Method tab and `ERRATUM.md`.
 """
 
 with gr.Blocks(title="NRF — Financial RAG Reliability", theme=gr.themes.Soft()) as demo:
@@ -387,18 +383,14 @@ while the restricted version admits them 0.2% of the time over 400 adversarial t
 **Hallucination detection** — a threshold on NESS. A rule-based baseline, not a
 trained classifier.
 
-**Known scoring defect in the recorded runs.** NESS counted the number in the model's
-own `Confidence: 0.9` line as one the evidence had to support. It never could, so every
-response was marked down and some were pushed under the hallucination threshold by it
-alone. `framework/nrf.py` now excludes the confidence statement; the recorded results
-were not regenerated. Re-scored from the saved files: Experiment 1 strict hallucination
-rate 0.08 → 0.00; Experiment 2 hallucination 0.10 → 0.20 becomes 0.00 → 0.00;
-Experiment 5 ONRS retrieval 0.5891 → 0.6224 and oracle 0.5811 → 0.6211 (ranking still
-inverted, now a near tie). A full float32 CPU re-run of all five experiments
-(`results/cpu_fp32/`) then measured Experiment 4's noise–hallucination correlation at
-−0.12 instead of +0.76 and its noise–composite correlation at +0.62 instead of −0.10;
-accuracy fell from 0.34 to 0.20 from numeric precision alone. No weighting passes both
-tests in any scenario. Calibration and the verifier are unaffected.
+**Known scoring defect and what the larger runs show.** NESS counted the number in the model's own `Confidence: 0.9` line as one the
+evidence had to support, so every response was marked down and some were pushed under the hallucination threshold by it alone;
+`framework/nrf.py` now excludes it. The experiments were then re-run on free CPU runners with the corrected scorer on more items (Qwen2.5-3B on
+150 dev and 150 test, Qwen2.5-1.5B on 100 and 100, SmolLM2-1.7B, three sampled seeds, a corrupted-evidence variant). Findings: the injected-noise
+manipulation does not degrade the model, so a flat composite under it proves nothing; the five-level noise correlation and the weight-sweep outcome
+are not reproducible (0.0% of weightings pass both tests on 3B dev, 41.2% on 3B test); with evidence corrupted so that it does degrade the model, the
+composite falls (r = -0.97 dev, -0.93 test) only through accuracy, while evidence support against the shown evidence, entailment support and the
+hallucination flag do not move and support against the clean evidence falls by 0.36. See `ERRATUM.md` and `results/scale/SUMMARY.md`.
 
 **Calibration** — binned expected calibration error over *self-reported* confidence,
 elicited in the prompt. This is not a probability derived from token log-probabilities

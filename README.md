@@ -68,7 +68,8 @@ weakest design decision.
 
 After an audit found a scoring defect (see `ERRATUM.md`), the experiments were re-run on free CPU runners with the
 corrected scorer, on far more items: Qwen2.5-3B on 150 dev and 150 test items, Qwen2.5-1.5B on 100 and 100,
-a corrupted-evidence variant on 100 and 100 per split, and sampled-decoding seeds. Every statistic carries a
+a second model family (SmolLM2-1.7B), a corrupted-evidence variant on 100 and 100 per split, and three sampled-decoding
+seeds. Every statistic carries a
 bootstrap interval over items. Full tables are in `results/scale/SUMMARY.md`; code is
 `experiments/scale_analysis.py`.
 
@@ -110,10 +111,17 @@ numbers is, by that definition, well supported. Measured against a trusted sourc
 (AUROC 0.52 on dev and 0.56 on test), and so does the overlap score, whose apparent 0.64 on dev (95% interval
 0.53 to 0.73) is 0.51 on test.
 
+**5. Other models and seeds agree that single numbers do not hold still.** On SmolLM2-1.7B (dev, n = 100) oracle evidence does beat
+retrieval (accuracy 0.28 against 0.16), the correlation of noise with the composite is −0.81 [−0.97, +0.52], and 73.1% of weightings pass
+both original tests, against 0.0% for Qwen2.5-3B on dev. Qwen2.5-1.5B sampled with three seeds gives noise correlations of +0.46, +0.52
+and −0.37 (the greedy run gave −0.27) and clean accuracy of 0.31, 0.26 and 0.32 (greedy 0.40). Noise changes accuracy by +0.02, +0.05
+and −0.11 per item across the three seeds; of eight noise-injection runs, one (the last seed, −0.22 to −0.01) has an interval that excludes
+zero, so the manipulation's effect is at most small and inconsistent.
+
 **What remains true.** The framework's design critique stands and is now properly demonstrated: gold-free evidence
 support, entailment and the hallucination flag are blind to corrupted evidence unless they are given a clean reference.
 **What does not:** the claims that the composite fails to track noise, that no weighting works, and that the hallucination
-flag tracks noise. **Limits:** one model family and one 3B-scale generator at float32 on CPU, FinQA only, 100 to 150
+flag tracks noise. **Limits:** Qwen2.5 at 1.5B and 3B plus one SmolLM2 model, float32 on CPU, FinQA only, 100 to 150
 items per run.
 
 ---
@@ -332,7 +340,7 @@ committed results.
 
 ## Limitations
 
-- **Model scale is a constraint, not a result.** The generators are 0.5B to 3B parameters at float32 on CPU.
+- **Model scale is a constraint, not a result.** The generators are 1.5B to 3B parameters at float32 on CPU.
   Absolute accuracy would rise with scale. Whether the findings about the metric would not change was not tested
   above 3B.
 - **100 to 150 items per run, FinQA only.** Enough to separate large effects (corruption halves accuracy) from none, not
