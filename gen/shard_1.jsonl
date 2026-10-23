@@ -1,0 +1,2 @@
+{"_meta": {"model": "Qwen/Qwen2.5-3B-Instruct", "precision": "float32"}}
+{"key": "866157ad533ef5d4d958a003db5edcaeb855179972108bf817121e1d1951a919", "response": "Reasoning: To find the average goodwill impairment in 2018 and 2019, I need to add the impairment amounts for those years and divide by 2. From the evidence, the impairment amount for 2019 is $1,910 (thousands), and for 2018 it is $14,740 (thousands). Expression = (1910 + 14740) / 2\n\nFinal Answer: 8320\n\nConfidence: 0.9", "seconds": 221.51}
