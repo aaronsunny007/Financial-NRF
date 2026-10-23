@@ -6,3 +6,129 @@ Model name:                              AMD EPYC 7763 64-Core Processor
 ::group::python -m experiments.experiment4 --split test --n 100 --injection-mode corrupt --output scratch/e4.csv
 === 21:18:37 START python -m experiments.experiment4 --split test --n 100 --injection-mode corrupt --output scratch/e4.csv
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+WARNING: running against the TEST split -- final reported runs only.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+============================================================
+EXPERIMENT 4: OVERALL RELIABILITY UNDER VARYING NOISE
+Split: test | N per noise level: 100 | Seed: 42 | Engine: local | NESS mode: strict
+Noise levels: [0, 25, 50, 75, 100] | Total generations: 500
+Corruption definition: level% of the numeric tokens in the retrieved evidence are replaced by wrong values
+============================================================
+[shard] NRF_SHARD=11/20: handling items 11, 31, 51, ...
+Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+WARNING: No CUDA device detected; loading Qwen/Qwen2.5-3B-Instruct on CPU. This will be slow.
+Loading Qwen/Qwen2.5-3B-Instruct (float32)...
+Loaded Qwen/Qwen2.5-3B-Instruct (float32).
+LLM running on: cpu
+Embedding model running on: cpu
+FAISS available: True (using faiss.IndexFlatIP)
+
+------------------------------------------------------------
+NOISE LEVEL: 0%  (0 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/5] Correct: 1.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [2/5] Correct: 1.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 0.90
+  [3/5] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.00
+  [4/5] Correct: 1.0 | NESS: 0.73 | Hallucination: 0 | Confidence: 0.90
+  [5/5] Correct: 0.0 | NESS: 0.88 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 0.0000   <- manipulation check
+Accuracy:           0.6000
+Evidence Support:   0.8635 (strict 0.8635 / derived 0.9608)
+Hallucination Rate: 0.0000
+ECE:                0.1200 (0 missing confidence)
+ONRS:               0.8150
+
+------------------------------------------------------------
+NOISE LEVEL: 25%  (0 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/5] Correct: 0.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [2/5] Correct: 0.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [3/5] Correct: 0.0 | NESS: 0.86 | Hallucination: 0 | Confidence: 0.90
+  [4/5] Correct: 0.0 | NESS: 0.69 | Hallucination: 0 | Confidence: 0.90
+  [5/5] Correct: 0.0 | NESS: 0.73 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.0000
+Evidence Support:   0.8020 (strict 0.8020 / derived 0.9732)
+Hallucination Rate: 0.0000
+ECE:                0.9000 (0 missing confidence)
+ONRS:               0.4606
+
+------------------------------------------------------------
+NOISE LEVEL: 50%  (0 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/5] Correct: 0.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [2/5] Correct: 0.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [3/5] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [4/5] Correct: 0.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+  [5/5] Correct: 0.0 | NESS: 0.69 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.0000
+Evidence Support:   0.7894 (strict 0.7894 / derived 0.9073)
+Hallucination Rate: 0.0000
+ECE:                0.9000 (0 missing confidence)
+ONRS:               0.4568
+
+------------------------------------------------------------
+NOISE LEVEL: 75%  (0 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/5] Correct: 0.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [2/5] Correct: 0.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [3/5] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 0.90
+  [4/5] Correct: 0.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+  [5/5] Correct: 0.0 | NESS: 0.77 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.0000
+Evidence Support:   0.8048 (strict 0.8048 / derived 0.9380)
+Hallucination Rate: 0.0000
+ECE:                0.9000 (0 missing confidence)
+ONRS:               0.4614
+
+------------------------------------------------------------
+NOISE LEVEL: 100%  (0 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/5] Correct: 0.0 | NESS: 0.91 | Hallucination: 0 | Confidence: 0.90
+  [2/5] Correct: 0.0 | NESS: 0.82 | Hallucination: 0 | Confidence: 0.90
+  [3/5] Correct: 0.0 | NESS: 0.59 | Hallucination: 0 | Confidence: 0.90
+  [4/5] Correct: 0.0 | NESS: 0.73 | Hallucination: 0 | Confidence: 0.90
+  [5/5] Correct: 0.0 | NESS: 0.77 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.0000
+Evidence Support:   0.7636 (strict 0.7636 / derived 0.9081)
+Hallucination Rate: 0.0000
+ECE:                0.9000 (0 missing confidence)
+ONRS:               0.4491
+
+============================================================
+EXPERIMENT 4 RESULTS
+============================================================
+Injection mode: corrupt
+Noise  0% | Reached = 0.0000 | Accuracy = 0.6000 | NESS = 0.8635 | Hallucination = 0.0000 | ONRS = 0.8150
+Noise 25% | Reached = 1.0000 | Accuracy = 0.0000 | NESS = 0.8020 | Hallucination = 0.0000 | ONRS = 0.4606
+Noise 50% | Reached = 1.0000 | Accuracy = 0.0000 | NESS = 0.7894 | Hallucination = 0.0000 | ONRS = 0.4568
+Noise 75% | Reached = 1.0000 | Accuracy = 0.0000 | NESS = 0.8048 | Hallucination = 0.0000 | ONRS = 0.4614
+Noise 100% | Reached = 1.0000 | Accuracy = 0.0000 | NESS = 0.7636 | Hallucination = 0.0000 | ONRS = 0.4491
+------------------------------------------------------------
+ONRS at 0% noise: 0.8150
+ONRS at 100% noise: 0.4491
+Total change: -0.3660
+Monotonically non-increasing across levels: False
+
+  Interpretation: a NEGATIVE total change means ONRS tracked the
+  injected degradation, i.e. the metric behaved as a health signal.
+  A flat or positive trend would be a negative result FOR THE METRIC,
+  indicating it does not respond to the degradation it should signal.
+
+  BUT check the 'Reached' column first. If the noise did not reach the
+  model, a flat ONRS says nothing about the metric -- there was no
+  degradation to signal. Only levels where Reached > 0 test ONRS.
+============================================================
+
+Per-noise-level summary saved to: scratch/e4.csv
+Per-example results saved to:     scratch/e4_per_example.csv
+Summary JSON saved to:            scratch/e4_summary.json
