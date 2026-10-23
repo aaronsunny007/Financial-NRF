@@ -1,0 +1,2 @@
+{"_meta": {"model": "Qwen/Qwen2.5-3B-Instruct", "precision": "float32"}}
+{"key": "454b8ff210cab49e21f4ce113abba83f322d23156a1c4328c48d8fb2d1c0f257", "response": "Reasoning: The evidence shows that the variance in percent for total revenue from 2018 to 2019 is given as 5%. This variance represents the percentage change in total revenue.\n\nFinal Answer: 5\n\nConfidence: 1.0", "seconds": 189.87}
