@@ -159,3 +159,4 @@ Summary JSON saved to:            scratch/e4_summary.json
 ::endgroup::
 ::group::python -m experiments.experiment5 --split test --n 100 --output scratch/e5.csv
 === 22:59:34 START python -m experiments.experiment5 --split test --n 100 --output scratch/e5.csv
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
