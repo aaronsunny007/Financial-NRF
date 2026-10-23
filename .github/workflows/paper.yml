@@ -1,0 +1,24 @@
+name: paper
+
+# Builds paper/main.tex to a PDF on a runner (no LaTeX needed locally) and uploads it as an artifact.
+on:
+  push:
+    paths: ['paper/**', '.github/workflows/paper.yml']
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-science latexmk
+      - name: Build
+        working-directory: paper
+        run: latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: paper/main.pdf
