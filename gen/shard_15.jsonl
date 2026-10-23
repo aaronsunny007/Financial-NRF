@@ -1,0 +1,2 @@
+{"_meta": {"model": "Qwen/Qwen2.5-3B-Instruct", "precision": "float32"}}
+{"key": "15df5f0c14faa27c6e9621d93f6b2fff820510007d46abc157ec0d0cb39b9b82", "response": "Reasoning: The question asks for the 2019 average defined benefit schemes, but the evidence does not provide specific figures or averages for defined benefit schemes in 2019. The evidence describes various defined benefit schemes and their administration, but does not give any quantitative data for 2019.\n\nFinal Answer: N/A\n\nConfidence: 0.1", "seconds": 212.24}
