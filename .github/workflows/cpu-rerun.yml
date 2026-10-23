@@ -178,6 +178,10 @@ jobs:
             # so after Experiment 4 they are served from the cache and cost nothing.
             run() { echo "::group::$*"; echo "=== $(date -u +%T) START $*"; /usr/bin/time -v "$@" || true; echo "=== $(date -u +%T) END"; echo "::endgroup::"; }
             run python -m experiments.experiment4 --split "$SPLIT" --n "$N_MAIN" --injection-mode "$INJ" --output scratch/e4.csv
+            if [ "$INJ" = "corrupt" ]; then
+              # retrieval-condition prompts equal the 0% level of Experiment 4, so only closed-book and oracle are new
+              run python -m experiments.experiment5 --split "$SPLIT" --n "$N_MAIN" --output scratch/e5.csv
+            fi
             if [ "$INJ" = "evidence" ]; then
               run python -m experiments.experiment5 --split "$SPLIT" --n "$N_MAIN" --output scratch/e5.csv
               run python -m experiments.experiment1 --split "$SPLIT" --n "$N_MAIN" --ness-mode derived --output scratch/e1.csv
@@ -274,6 +278,9 @@ jobs:
             if ! "$@" > $O/log_$name.txt 2>&1; then echo "FAILED: $name"; echo "FAILED" >> $O/log_$name.txt; tail -n 25 $O/log_$name.txt; fi
           }
           step experiment4 python -m experiments.experiment4 --engine replay --split "$SPLIT" --n "$N_MAIN" --injection-mode "$INJ" --output $O/experiment4_results_${SPLIT}.csv
+          if [ "$INJ" = "corrupt" ]; then
+            step experiment5 python -m experiments.experiment5 --engine replay --split "$SPLIT" --n "$N_MAIN" --output $O/experiment5_results_${SPLIT}.csv
+          fi
           if [ "$INJ" = "evidence" ]; then
             step experiment1 python -m experiments.experiment1 --engine replay --split "$SPLIT" --n "$N_MAIN" --ness-mode derived --output $O/experiment1_results_${SPLIT}.csv
             step experiment3 python -m experiments.experiment3 --engine replay --split "$SPLIT" --n "$N_MAIN" --output $O/experiment3_results_${SPLIT}.csv
