@@ -1,0 +1,47 @@
+\section{Correcting the earlier version}
+\label{sec:erratum}
+
+This study began as an evaluation of the ONRS composite on FinQA using 4-bit models on a consumer GPU.
+Re-running it with more items and a test split exposed three problems, which we report because the earlier numbers are public.
+\begin{enumerate}[leftmargin=*,itemsep=2pt,topsep=2pt]
+\item \textbf{A scoring flaw.} The evidence-support score counted every number in the response, including the one in the model's own ``Confidence: 0.9'' line, which no evidence can support. Every response carried one extra unsupported number, lowering all support scores and pushing some under the hallucination threshold on that number alone. After removing the confidence statement, the hallucination rates reported earlier ($0.08$ in the baseline, $0.10\rightarrow0.20$ under noise) are $0.00$ in every condition.
+\item \textbf{A manipulation that did not work.} The noise experiment added up to four sentences about unrelated figures. At 150 items per split the paired per-item change in accuracy between $0$ and $40\%$ noise was $+0.007$ (95\% interval $-0.05$ to $+0.07$) on dev and $-0.027$ ($-0.08$ to $+0.02$) on test. The injected text reached the model but did not hurt it, so a metric could not be faulted for failing to track it. Corrupting the numbers of the evidence (Section~\ref{sec:setup}) is the replacement.
+\item \textbf{Unstable summary statistics.} The original conclusion that the composite fails to track noise and that no weighting of its four components rescues it came from a correlation over five noise-level means and a sweep of 1{,}771 weightings. On the same 3B model the correlation is $+0.09$ on dev and $-0.64$ on test, each with an interval of about $\pm0.8$, and the share of weightings passing both of the original falsification tests is $0.0\%$ on dev and $41.2\%$ on test. The results do not support a ranking of composites.
+\end{enumerate}
+A statement from the earlier version survives: evidence-support measures that compare a response with the supplied evidence cannot detect corrupted evidence.
+It was an argument then; Section~\ref{sec:results} makes it an experiment.
+The full list of corrected claims is in the repository (\texttt{ERRATUM.md}).
+
+\section{Discussion}
+
+\paragraph{What the result does and does not say.}
+The corrupted-evidence test does not show that overlap or entailment scores are useless.
+They measure faithfulness to the supplied context, and they do that job: a response that invents a number is flagged.
+The finding is about what that property cannot cover.
+When the failure is in the evidence, any score defined relative to the evidence reports ``faithful'' and is wrong about reliability.
+A composite that adds such a score to accuracy and calibration moves with corruption only through the two terms that depend on the gold answer, and so is no better than accuracy at a task where accuracy is unavailable.
+
+\paragraph{Implications for practice.}
+(i) Detecting bad evidence needs a signal about the evidence: agreement between independent retrievals or sources, checks of retrieved figures against a structured record, or a verifier for the evidence rather than for the response.
+(ii) Our clean-evidence reference scores well, which shows the information exists; the cost is access to a trusted copy.
+(iii) Validate an evidence-quality manipulation by its effect on the model before using it to evaluate a metric. The distractor sentences we first used would have been reported as a metric failure.
+
+\section{Limitations}
+
+The generators are small, open models (1.5B to 7B), run without fine-tuning; larger or instruction-tuned-for-finance models may express confidence differently.
+Accuracy is low (roughly 0.2 to 0.4 on FinQA with these prompts), which limits the power of the correct-versus-incorrect comparisons; we report intervals instead of claiming equality.
+Corruption is synthetic and numeric; it isolates the structural point but is not a model of how real filings are wrong.
+The retrieval-miss analysis defines a miss by the absence of gold numbers in the retrieved text, which can disagree with whether the answer was recoverable; the TAT-QA oracle is document-level because the dataset has no cell-level evidence labels.
+The entailment measure uses one small NLI model and the lexical baseline is a heuristic; neither is a model-based RAGAs judge, which we could not run for free and do not claim to reproduce.
+The 7B model is a 4-bit build run through a different inference engine than the float32 models, so differences between sizes are confounded with precision.
+We do not report a GPU 4-bit run of the smaller models.
+Item counts (100 per run) are modest; pooling over runs narrows the intervals but mixes models.
+
+\section{Conclusion}
+
+Reference-free reliability scores for numerical RAG are blind to corrupted evidence by construction, and a controlled test on two datasets and three model sizes confirms it: accuracy collapses while every measure that sees only the response and the supplied evidence stays at chance.
+The same measures are weak at flagging wrong answers on clean evidence and real retrieval misses.
+Practitioners who need reliability estimates should treat such scores as faithfulness checks and add a signal about the evidence itself.
+
+\section*{Reproducibility}
+Code, prompts, per-response outputs for every run, and the GitHub Actions workflow that regenerates them on free CPU runners are at \url{https://github.com/aaronsunny007/Financial-NRF}. Tables and figures in this paper are produced from the result files by \texttt{experiments/paper\_analysis.py} and \texttt{experiments/paper\_figures.py}.

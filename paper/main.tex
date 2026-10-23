@@ -1,0 +1,45 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\usepackage{microtype}
+
+\input{generated/numbers.tex}
+
+\title{Reference-Free Reliability Scores Cannot See Corrupted Evidence:\\
+A Controlled Test for Numerical Retrieval-Augmented QA in Finance}
+\author{Aaron Prakash Gandi\\\small Independent researcher\\\small\texttt{aarongandi007@gmail.com}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Reference-free scores for retrieval-augmented generation judge a response against the evidence that was retrieved, without the gold answer.
+Their structural limit is plain: if the retrieved evidence is wrong, a faithful answer is still wrong, and a score computed against that evidence cannot tell.
+We test this directly for numerical financial question answering.
+We replace a controlled share of the numbers in the retrieved evidence with wrong values and ask which measures notice, using FinQA and TAT-QA and generators from 1.5B to 7B parameters.
+Accuracy falls toward zero.
+Numeric-overlap support, entailment support, lexical groundedness, a hallucination flag and verbalized confidence do not move, and cannot tell a fully corrupted case from a clean one (AUROC \aucFinoverlap{} on FinQA, \aucTatoverlap{} on TAT-QA for numeric-overlap support, pooled over runs).
+Support computed against the \emph{uncorrupted} evidence does (AUROC \aucFinvsclean{} and \aucTatvsclean{}), but needs the reference these scores are meant to replace.
+The same measures are near chance as detectors of wrong answers and of real retrieval misses.
+Along the way we correct a scoring flaw in an earlier version of this work, show that an evidence-noise manipulation we first used did not degrade the model and therefore tested nothing, and show that composite-score rankings built from five-point correlations or weight sweeps are unstable.
+Code, per-response outputs and a pipeline that reproduces every result on free CPU runners are public.
+\end{abstract}
+
+\input{sections_front}
+\input{sections_results}
+\input{sections_back}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
