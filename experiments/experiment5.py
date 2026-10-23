@@ -72,7 +72,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from framework.nrf import NumericalReliabilityFramework
 from rag_pipeline.rag import FinancialRAG, SEED, set_seed, shard_items
-from data_loader.load_finqa import load_finqa
+from data_loader.load_finqa import load_dataset
 from experiments.finqa_gold import resolve_gold_answer
 
 
@@ -243,7 +243,7 @@ def main():
     print("=" * 62)
 
     set_seed(args.seed)
-    data = shard_items(load_finqa(args.split)[:n_examples])
+    data = shard_items(load_dataset(args.split)[:n_examples])
 
     rag_kwargs = {"seed": args.seed, "llm_backend": args.engine}
     if args.top_k is not None:

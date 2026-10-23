@@ -214,6 +214,10 @@ LLM_MODEL_NAME = os.environ.get("NRF_LLM_MODEL", DEFAULT_LLM_MODEL_NAME)
 GEN_TEMPERATURE = float(os.environ.get("NRF_TEMPERATURE", "0"))
 GEN_SEED = int(os.environ.get("NRF_GEN_SEED", "0"))
 LLM_USE_4BIT = True
+# NRF_GGUF="<hf repo id>:<file>" runs a 4-bit GGUF build through llama.cpp on the CPU instead of
+# loading Hugging Face weights (used for the 7B model, which does not fit in float32 on a CPU runner).
+GGUF_SPEC = os.environ.get("NRF_GGUF", "")
+GGUF_N_CTX = 8192
 FALLBACK_LLM_MODEL_NAME = "Qwen/Qwen2.5-1.5B-Instruct"
 
 # Alternative generation backend: instead of running a local quantized
@@ -632,8 +636,11 @@ class FinancialRAG:
 
         if self.llm_backend == "local":
             self.llm_model_name = self._load_llm()
-            self.model.eval()
-            print("LLM running on:", next(self.model.parameters()).device)
+            if GGUF_SPEC:
+                print("LLM running on: cpu (llama.cpp)")
+            else:
+                self.model.eval()
+                print("LLM running on:", next(self.model.parameters()).device)
         elif self.llm_backend == "replay":
             if self._gen_cache is None or not self._gen_cache.entries:
                 raise RuntimeError("llm_backend='replay' needs NRF_GEN_CACHE_READ to point at "
@@ -684,6 +691,8 @@ class FinancialRAG:
         ended up loaded and why, so a run's console output/log is a
         truthful record of what was actually used -- important since this
         directly affects Experiment 1's numbers."""
+        if GGUF_SPEC:
+            return self._load_gguf()
         self.tokenizer = AutoTokenizer.from_pretrained(
             LLM_MODEL_NAME if LLM_USE_4BIT else FALLBACK_LLM_MODEL_NAME
         )
@@ -747,6 +756,37 @@ class FinancialRAG:
         self._precision = precision
         print(f"Loaded {model_name} ({precision}).")
         return model_name
+
+    def _load_gguf(self) -> str:
+        """Load a 4-bit GGUF build through llama.cpp, for models too large to run in
+        float32 on a CPU runner. NRF_GGUF is "<hf repo id>:<file name>"; NRF_LLM_MODEL still
+        names the model for the cache key and the results metadata."""
+        from llama_cpp import Llama
+
+        repo_id, filename = GGUF_SPEC.split(":", 1)
+        print(f"Loading {repo_id}/{filename} through llama.cpp...")
+        self.model = Llama.from_pretrained(
+            repo_id=repo_id,
+            filename=filename,
+            n_ctx=GGUF_N_CTX,
+            n_threads=os.cpu_count() or 4,
+            seed=GEN_SEED,
+            verbose=False,
+        )
+        self.tokenizer = None
+        self._precision = f"{os.path.splitext(filename)[0].rsplit('-', 1)[-1]} 4-bit GGUF (llama.cpp)"
+        print(f"Loaded {filename} ({self._precision}).")
+        return LLM_MODEL_NAME
+
+    def _generate_gguf(self, messages: List[Dict[str, str]]) -> str:
+        out = self.model.create_chat_completion(
+            messages=messages,
+            max_tokens=MAX_NEW_TOKENS,
+            temperature=GEN_TEMPERATURE,
+            top_p=0.95 if GEN_TEMPERATURE > 0 else 1.0,
+            seed=(GEN_SEED * 1_000_003 + int(_messages_key(messages, MAX_NEW_TOKENS)[:8], 16)) % 2_000_000_000,
+        )
+        return out["choices"][0]["message"]["content"]
 
     # ------------------------------------------------------------------
     # Retrieval
@@ -930,6 +970,8 @@ and recompute carefully before answering again.
         return response
 
     def _generate_local(self, messages: List[Dict[str, str]]) -> str:
+        if GGUF_SPEC:
+            return self._generate_gguf(messages)
         prompt = self.tokenizer.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True
         )

@@ -40,7 +40,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from framework.nrf import NumericalReliabilityFramework
 from rag_pipeline.rag import FinancialRAG, SEED, set_seed, shard_items
-from data_loader.load_finqa import load_finqa
+from data_loader.load_finqa import load_dataset
 # resolve_gold_answer now lives in experiments/finqa_gold.py so that
 # experiments 1-4 all score against the SAME gold value. Previously this
 # logic lived only here, and experiments 2-4 scored against the raw display
@@ -329,7 +329,7 @@ def main():
 
     set_seed(args.seed)
 
-    data = shard_items(load_finqa(args.split)[:n_examples])
+    data = shard_items(load_dataset(args.split)[:n_examples])
     print(f"Evaluating {len(data)} FinQA examples.")
 
     rag_kwargs = {"seed": args.seed, "llm_backend": args.engine}
