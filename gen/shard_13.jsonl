@@ -1,0 +1,2 @@
+{"_meta": {"model": "Qwen/Qwen2.5-7B-Instruct", "precision": "Q4_K_M 4-bit GGUF (llama.cpp)"}}
+{"key": "9255a0b5327a769d244efdfa9b4d922d45aa191898062e807c94b05e87f5046c", "response": "Reasoning: The evidence lists the 'Outstanding at 1 April' for 2019 and 2018. For 2019, the number is 3,104,563, and for 2018, it is 2,682,738. The change is calculated by subtracting the 2018 value from the 2019 value: 3,104,563 - 2,682,738 = 421,825.\n\nFinal Answer: 421,825\n\nConfidence: 1.0", "seconds": 102.28}
