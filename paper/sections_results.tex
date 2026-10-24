@@ -18,9 +18,9 @@ Support computed against the \emph{clean} evidence falls from \vscZeroFin{} to \
 \end{figure}
 
 Table~\ref{tab:paired} gives the paired change per item from $0\%$ to $100\%$ corruption.
-Accuracy falls by 0.19 to 0.45 depending on run, and support against the clean evidence by 0.33 to 0.41.
+Accuracy falls by 0.19 to 0.58 depending on run, and support against the clean evidence by 0.29 to 0.41.
 The gold-free measures move by at most a few points.
-For the 7B model, numeric-overlap and entailment support decline slightly but reliably (about $-0.03$ and $-0.09$), an order of magnitude less than accuracy.
+For the 7B model on FinQA, numeric-overlap and entailment support decline slightly but reliably (about $-0.03$ and $-0.09$), an order of magnitude less than accuracy; on TAT-QA their changes are not distinguishable from zero.
 
 \begin{table}[t]
 \centering\small
@@ -32,7 +32,7 @@ For the 7B model, numeric-overlap and entailment support decline slightly but re
 The question is whether a measure can \emph{tell} the two situations apart, not only whether its average moves.
 Table~\ref{tab:corrupt-auroc} reports the AUROC for separating a response generated from fully corrupted evidence from one generated from the clean evidence of the same item.
 Every gold-free measure is close to chance: pooled over runs, numeric-overlap support gives \aucFinoverlap{} \aucFinoverlapci{} on FinQA and \aucTatoverlap{} \aucTatoverlapci{} on TAT-QA, entailment support \aucFinnli{} and \aucTatnli{}, and the hallucination flag \aucFinnohalluc{} and \aucTatnohalluc{}.
-Individual runs reach at most 0.58.
+No single run exceeds 0.58 for any gold-free measure.
 Accuracy, which needs the gold answer, reaches \aucFincorrect{} and \aucTatcorrect{} (it is limited because many clean responses are already wrong), and support against the clean evidence reaches \aucFinvsclean{} and \aucTatvsclean{}.
 The information that distinguishes the two cases is in the pair (response, clean evidence), which a deployed system does not have.
 
@@ -60,8 +60,10 @@ So the composite does fall with corrupted evidence, but only through the terms t
 On clean evidence the gold-free measures should be useful if they carry information about errors.
 Table~\ref{tab:error} shows they carry little.
 Pooled over runs, AUROC for separating correct from incorrect answers is \errFinoverlap{} for numeric-overlap support, \errFinnli{} for entailment support, \errFinlexical{} for lexical groundedness, \errFinnohalluc{} for the hallucination flag and \errFinconf{} for verbalized confidence on FinQA (TAT-QA: \errTatoverlap, \errTatnli, \errTatlexical, \errTatnohalluc, \errTatconf).
-Some individual runs deviate from 0.5 in both directions; for the 7B model numeric-overlap support is \emph{below} 0.5 on FinQA, because correct answers contain a computed result that is, by construction, not in the evidence, while a wrong answer that merely copies a figure scores as fully supported.
-Verbalized confidence is nearly constant (most responses say 0.9), so its AUROC is uninformative regardless of model.
+Individual runs deviate from 0.5 in both directions.
+Numeric-overlap support is \emph{below} 0.5 for the 7B model (0.30 on FinQA, 0.35 on TAT-QA) and above it for the 3B model (0.74 on TAT-QA): correct answers contain a computed result that is, by construction, not in the evidence, so how much weight such a score carries depends on how often the model computes versus copies.
+Verbalized confidence is nearly constant for the smaller models (most responses say 0.9) and uninformative there, but for the 7B model on TAT-QA it separates correct from incorrect answers with AUROC 0.73.
+On TAT-QA the pooled AUROCs for entailment support, lexical groundedness and confidence are \errTatnli, \errTatlexical{} and \errTatconf, modest but above chance; on FinQA all stay between 0.49 and 0.55.
 The lexical baseline performs no better than the entailment or overlap scores, so the weakness is not particular to the numeric-overlap design.
 
 \begin{table}[t]
@@ -76,11 +78,15 @@ The lexical baseline performs no better than the entailment or overlap scores, s
 Corruption is synthetic.
 A natural failure of the same kind occurs when the retriever does not surface the numbers the answer needs.
 Table~\ref{tab:retrieval} compares items by whether the retrieved evidence contains every number of the gold evidence.
-The miss rate is $\approx$\missFin\% on FinQA and varies by dataset definition on TAT-QA.
+The miss rate is \missFin\% on FinQA and \missTat\% on TAT-QA.
 Accuracy is much lower on misses than on hits.
-Whether a gold-free measure notices is inconsistent: pooled over FinQA runs numeric-overlap support gives AUROC \retFinoverlap{}, entailment \retFinnli{}, lexical groundedness \retFinlexical{}; for the 3B model on TAT-QA numeric-overlap support reaches 0.69, because with the needed figures absent the model invents or substitutes numbers that are then not in the evidence.
-That is a different failure from corrupted evidence: \emph{missing} evidence can leave a trace in the response, whereas \emph{wrong} evidence leaves none.
-Even where overlap support helps, accuracy itself separates hits from misses at least as well (FinQA pooled \retFincorrect).
+Whether a gold-free measure notices is inconsistent.
+Pooled over FinQA runs, numeric-overlap support gives AUROC \retFinoverlap{}, entailment \retFinnli{} and lexical groundedness \retFinlexical{}.
+On TAT-QA the pooled values are \retTatoverlap{}, \retTatnli{} and \retTatlexical{}, and verbalized confidence reaches \retTatconf{}, driven by the 7B model.
+Numeric-overlap support detects misses for the 3B model on TAT-QA (0.69), plausibly because with the needed figures absent the model substitutes numbers that are then not in the evidence, but the effect reverses for the 7B model (0.30 on FinQA, 0.34 on TAT-QA).
+This is a different failure from corrupted evidence in one respect: \emph{missing} evidence can leave some trace in the response or in the model's own confidence, whereas \emph{wrong} evidence that the model copies leaves almost none.
+The traces are model-dependent, and these associations are confounded with difficulty (a question whose evidence is missing is also a harder question).
+Accuracy itself separates hits from misses at least as well (pooled FinQA \retFincorrect{}, TAT-QA \retTatcorrect{}).
 
 \begin{table}[t]
 \centering\small

@@ -28,9 +28,9 @@ Their structural limit is plain: if the retrieved evidence is wrong, a faithful 
 We test this directly for numerical financial question answering.
 We replace a controlled share of the numbers in the retrieved evidence with wrong values and ask which measures notice, using FinQA and TAT-QA and generators from 1.5B to 7B parameters.
 Accuracy falls toward zero.
-Numeric-overlap support, entailment support, lexical groundedness, a hallucination flag and verbalized confidence do not move, and cannot tell a fully corrupted case from a clean one (AUROC \aucFinoverlap{} on FinQA, \aucTatoverlap{} on TAT-QA for numeric-overlap support, pooled over runs).
+Numeric-overlap support, entailment support, lexical groundedness, a hallucination flag and verbalized confidence move by at most a few points and barely separate a fully corrupted case from a clean one (AUROC at most 0.58 in any run; pooled numeric-overlap support \aucFinoverlap{} on FinQA and \aucTatoverlap{} on TAT-QA).
 Support computed against the \emph{uncorrupted} evidence does (AUROC \aucFinvsclean{} and \aucTatvsclean{}), but needs the reference these scores are meant to replace.
-The same measures are near chance as detectors of wrong answers and of real retrieval misses.
+As detectors of wrong answers and of real retrieval misses the same measures are weak and inconsistent: near chance when pooled on FinQA, somewhat better on TAT-QA, and with signs that differ between models.
 Along the way we correct a scoring flaw in an earlier version of this work, show that an evidence-noise manipulation we first used did not degrade the model and therefore tested nothing, and show that composite-score rankings built from five-point correlations or weight sweeps are unstable.
 Code, per-response outputs and a pipeline that reproduces every result on free CPU runners are public.
 \end{abstract}

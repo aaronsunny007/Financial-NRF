@@ -29,7 +29,7 @@ A composite that adds such a score to accuracy and calibration moves with corrup
 \section{Limitations}
 
 The generators are small, open models (1.5B to 7B), run without fine-tuning; larger or instruction-tuned-for-finance models may express confidence differently.
-Accuracy is low (roughly 0.2 to 0.4 on FinQA with these prompts), which limits the power of the correct-versus-incorrect comparisons; we report intervals instead of claiming equality.
+Accuracy is low for the smaller models (about 0.2 on FinQA for the 3B model; 0.55 to 0.62 for the 7B model), which limits the power of the correct-versus-incorrect comparisons; we report intervals instead of claiming equality.
 Corruption is synthetic and numeric; it isolates the structural point but is not a model of how real filings are wrong.
 The retrieval-miss analysis defines a miss by the absence of gold numbers in the retrieved text, which can disagree with whether the answer was recoverable; the TAT-QA oracle is document-level because the dataset has no cell-level evidence labels.
 The entailment measure uses one small NLI model and the lexical baseline is a heuristic; neither is a model-based RAGAs judge, which we could not run for free and do not claim to reproduce.
@@ -39,8 +39,8 @@ Item counts (100 per run) are modest; pooling over runs narrows the intervals bu
 
 \section{Conclusion}
 
-Reference-free reliability scores for numerical RAG are blind to corrupted evidence by construction, and a controlled test on two datasets and three model sizes confirms it: accuracy collapses while every measure that sees only the response and the supplied evidence stays at chance.
-The same measures are weak at flagging wrong answers on clean evidence and real retrieval misses.
+Reference-free reliability scores for numerical RAG are blind to corrupted evidence by construction, and a controlled test on two datasets and three model sizes confirms it: accuracy collapses while every measure that sees only the response and the supplied evidence stays near chance (AUROC at most 0.58).
+The same measures are weak and model-dependent at flagging wrong answers on clean evidence and real retrieval misses.
 Practitioners who need reliability estimates should treat such scores as faithfulness checks and add a signal about the evidence itself.
 
 \section*{Reproducibility}
