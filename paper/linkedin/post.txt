@@ -1,24 +1,28 @@
 POST
 ----
-I replaced the numbers in a model's retrieved evidence with wrong ones.
+I gave an AI the wrong numbers to read. Its reliability scores barely noticed.
 
-Accuracy dropped from 0.53 to 0.08. The numeric-overlap support score I was testing went from 0.78 to 0.75.
+This started as my dissertation project. I've since turned it into an independent research paper.
 
-That's the whole problem. Scores like this check whether the answer matches the evidence the model was given. If the evidence is wrong, a faithful answer is still wrong, and the score has nothing to catch.
+The setup: an AI answers finance questions by reading company reports. Many tools also give each answer a "reliability score" without knowing the right answer. Mostly they check one thing: does the answer match the text the AI was given?
 
-I tested it properly: FinQA and TAT-QA, Qwen2.5 3B and 7B, Llama 3.1 8B. Five measures that need no gold answer (numeric overlap, NLI entailment, lexical groundedness, a hallucination flag, the model's own confidence). None told corrupted evidence from clean evidence better than AUROC 0.58. Checking against the clean evidence got 0.85 to 0.93, but that needs the very reference you were trying to avoid.
+So I swapped the numbers in that text for wrong ones. Accuracy fell from 53% to 8%. The score that checks whether the answer's numbers appear in the text went from 0.78 to 0.75.
 
-Two things I got wrong on the way. A bug counted the model's own "Confidence: 0.9" as unsupported evidence. And my first noise experiment didn't hurt the model at all, so it tested nothing. Both are corrected in the write-up.
+Why: if the text itself is wrong, an answer that matches it still looks fine. The score can't see the problem.
 
-It's an independent project and a draft preprint, not peer reviewed. Code and every model response are public, and the whole pipeline reruns free on GitHub runners.
+I repeated this on two datasets and three AI models. None of five such scores could reliably tell wrong text from right text. Comparing against the original clean text did work, but that means you already need the right text.
 
-If you evaluate RAG on numbers, what tells you the evidence itself is right?
+I also found and fixed two mistakes in my own earlier work. They're explained in the paper.
 
-#RAG #NLP #FinTech
+It's a draft preprint, not peer reviewed. Code and results are public.
+
+If you use AI on financial documents, how do you check that the document itself is right?
+
+#AI #RAG #FinTech
 
 FIRST COMMENT (post this right after publishing; links in the body get less reach)
 ----
 Code, every model response and the paper draft: https://github.com/aaronsunny007/Financial-NRF
-(When it is on arXiv, replace or add the arXiv link here.)
+(When it is on arXiv, add the arXiv link here.)
 
 ATTACH: chart.png (single image, 1080x1080)
