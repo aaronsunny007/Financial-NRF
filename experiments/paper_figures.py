@@ -46,7 +46,7 @@ def fig_corruption(corruption, out):
     n = len(g)
     fig, axes = plt.subplots(1, n, figsize=(3.6 * n, 3.1), sharey=True, squeeze=False)
     for ax, ((dataset, model), names) in zip(axes[0], g.items()):
-        levels = np.array(corruption[names[0]]["levels"]) * 100
+        levels = np.array(corruption[names[0]]["levels"])
         for key in ["correct", "vs_clean"] + GOLD_FREE:
             ys = np.mean([corruption[nm]["mean_by_level"][key] for nm in names], axis=0)
             ax.plot(levels, ys, marker="o", ms=3.5, lw=1.8 if key in ("correct", "vs_clean") else 1.2,
