@@ -8,3 +8,158 @@ Model name:                              AMD EPYC 7763 64-Core Processor
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 /opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
   warnings.warn(
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+WARNING: running against the TEST split -- final reported runs only.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+============================================================
+EXPERIMENT 4: OVERALL RELIABILITY UNDER VARYING NOISE
+Split: test | N per noise level: 100 | Seed: 42 | Engine: local | NESS mode: strict
+Noise levels: [0, 25, 50, 75, 100] | Total generations: 500
+Corruption definition: level% of the numeric tokens in the retrieved evidence are replaced by wrong values
+============================================================
+[shard] NRF_SHARD=11/20: handling items 11, 31, 51, ...
+Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+Loading bartowski/Qwen2.5-7B-Instruct-GGUF/Qwen2.5-7B-Instruct-Q4_K_M.gguf through llama.cpp...
+Loaded Qwen2.5-7B-Instruct-Q4_K_M.gguf (Q4_K_M 4-bit GGUF (llama.cpp)).
+LLM running on: cpu (llama.cpp)
+Embedding model running on: cpu
+FAISS available: True (using faiss.IndexFlatIP)
+
+------------------------------------------------------------
+NOISE LEVEL: 0%  (0 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/5] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [2/5] Correct: 1.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 1.00
+  [3/5] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.80
+  [4/5] Correct: 1.0 | NESS: 0.79 | Hallucination: 0 | Confidence: 0.90
+  [5/5] Correct: 1.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 0.0000   <- manipulation check
+Accuracy:           0.6000
+Evidence Support:   0.8138 (strict 0.8138 / derived 0.9064)
+Hallucination Rate: 0.0000
+ECE:                0.3000 (0 missing confidence)
+ONRS:               0.7641
+
+------------------------------------------------------------
+NOISE LEVEL: 25%  (0 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/5] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [2/5] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 1.00
+  [3/5] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.80
+  [4/5] Correct: 1.0 | NESS: 0.79 | Hallucination: 0 | Confidence: 0.90
+  [5/5] Correct: 0.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.2000
+Evidence Support:   0.8138 (strict 0.8138 / derived 0.9064)
+Hallucination Rate: 0.0000
+ECE:                0.7000 (0 missing confidence)
+ONRS:               0.5641
+
+------------------------------------------------------------
+NOISE LEVEL: 50%  (0 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/5] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [2/5] Correct: 0.0 | NESS: 0.83 | Hallucination: 0 | Confidence: 1.00
+  [3/5] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.80
+  [4/5] Correct: 0.0 | NESS: 0.79 | Hallucination: 0 | Confidence: 0.90
+  [5/5] Correct: 0.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.0000
+Evidence Support:   0.8138 (strict 0.8138 / derived 0.8981)
+Hallucination Rate: 0.0000
+ECE:                0.9000 (0 missing confidence)
+ONRS:               0.4641
+
+------------------------------------------------------------
+NOISE LEVEL: 75%  (0 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/5] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [2/5] Correct: 0.0 | NESS: 0.80 | Hallucination: 0 | Confidence: 1.00
+  [3/5] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.80
+  [4/5] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [5/5] Correct: 0.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.0000
+Evidence Support:   0.8000 (strict 0.8000 / derived 0.9017)
+Hallucination Rate: 0.0000
+ECE:                0.9000 (0 missing confidence)
+ONRS:               0.4600
+
+------------------------------------------------------------
+NOISE LEVEL: 100%  (0 distractor sentence(s) injected)
+------------------------------------------------------------
+  [1/5] Correct: 0.0 | NESS: 0.75 | Hallucination: 0 | Confidence: 0.90
+  [2/5] Correct: 0.0 | NESS: 0.86 | Hallucination: 0 | Confidence: 1.00
+  [3/5] Correct: 0.0 | NESS: 1.00 | Hallucination: 0 | Confidence: 0.80
+  [4/5] Correct: 0.0 | NESS: 0.79 | Hallucination: 0 | Confidence: 0.90
+  [5/5] Correct: 0.0 | NESS: 0.70 | Hallucination: 0 | Confidence: 0.90
+
+Noise reached model: 1.0000   <- manipulation check
+Accuracy:           0.0000
+Evidence Support:   0.8186 (strict 0.8186 / derived 0.9064)
+Hallucination Rate: 0.0000
+ECE:                0.9000 (0 missing confidence)
+ONRS:               0.4656
+
+============================================================
+EXPERIMENT 4 RESULTS
+============================================================
+Injection mode: corrupt
+Noise  0% | Reached = 0.0000 | Accuracy = 0.6000 | NESS = 0.8138 | Hallucination = 0.0000 | ONRS = 0.7641
+Noise 25% | Reached = 1.0000 | Accuracy = 0.2000 | NESS = 0.8138 | Hallucination = 0.0000 | ONRS = 0.5641
+Noise 50% | Reached = 1.0000 | Accuracy = 0.0000 | NESS = 0.8138 | Hallucination = 0.0000 | ONRS = 0.4641
+Noise 75% | Reached = 1.0000 | Accuracy = 0.0000 | NESS = 0.8000 | Hallucination = 0.0000 | ONRS = 0.4600
+Noise 100% | Reached = 1.0000 | Accuracy = 0.0000 | NESS = 0.8186 | Hallucination = 0.0000 | ONRS = 0.4656
+------------------------------------------------------------
+ONRS at 0% noise: 0.7641
+ONRS at 100% noise: 0.4656
+Total change: -0.2986
+Monotonically non-increasing across levels: False
+
+  Interpretation: a NEGATIVE total change means ONRS tracked the
+  injected degradation, i.e. the metric behaved as a health signal.
+  A flat or positive trend would be a negative result FOR THE METRIC,
+  indicating it does not respond to the degradation it should signal.
+
+  BUT check the 'Reached' column first. If the noise did not reach the
+  model, a flat ONRS says nothing about the metric -- there was no
+  degradation to signal. Only levels where Reached > 0 test ONRS.
+============================================================
+
+Per-noise-level summary saved to: scratch/e4.csv
+Per-example results saved to:     scratch/e4_per_example.csv
+Summary JSON saved to:            scratch/e4_summary.json
+	Command being timed: "python -m experiments.experiment4 --split test --n 100 --injection-mode corrupt --output scratch/e4.csv"
+	User time (seconds): 8221.82
+	System time (seconds): 4.06
+	Percent of CPU this job got: 396%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 34:34.19
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 9076136
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 8
+	Minor (reclaiming a frame) page faults: 232078
+	Voluntary context switches: 2862
+	Involuntary context switches: 1224338
+	Swaps: 0
+	File system inputs: 9312
+	File system outputs: 3368
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== 00:25:35 END
+::endgroup::
+::group::python -m experiments.experiment5 --split test --n 100 --output scratch/e5.csv
+=== 00:25:35 START python -m experiments.experiment5 --split test --n 100 --output scratch/e5.csv
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
