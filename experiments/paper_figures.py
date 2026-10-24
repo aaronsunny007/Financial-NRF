@@ -44,8 +44,12 @@ def groups(corruption):
 def fig_corruption(corruption, out):
     g = groups(corruption)
     n = len(g)
-    fig, axes = plt.subplots(1, n, figsize=(3.6 * n, 3.1), sharey=True, squeeze=False)
-    for ax, ((dataset, model), names) in zip(axes[0], g.items()):
+    ncols = min(3, n)
+    nrows = -(-n // ncols)
+    fig, axes = plt.subplots(nrows, ncols, figsize=(3.7 * ncols, 3.0 * nrows), sharey=True, squeeze=False)
+    for ax in axes.flat[n:]:
+        ax.axis("off")
+    for ax, ((dataset, model), names) in zip(axes.flat, g.items()):
         levels = np.array(corruption[names[0]]["levels"])
         for key in ["correct", "vs_clean"] + GOLD_FREE:
             ys = np.mean([corruption[nm]["mean_by_level"][key] for nm in names], axis=0)
@@ -55,9 +59,10 @@ def fig_corruption(corruption, out):
         ax.set_xlabel("numbers in evidence replaced (%)")
         ax.set_ylim(-0.02, 1.02)
         ax.grid(alpha=0.25)
-    axes[0][0].set_ylabel("mean value")
+    for row in axes:
+        row[0].set_ylabel("mean value")
     h, l = axes[0][0].get_legend_handles_labels()
-    fig.legend(h, l, loc="lower center", ncol=4, fontsize=7.5, frameon=False, bbox_to_anchor=(0.5, -0.14))
+    fig.legend(h, l, loc="lower center", ncol=4, fontsize=7.5, frameon=False, bbox_to_anchor=(0.5, -0.07))
     fig.tight_layout()
     fig.savefig(out, bbox_inches="tight")
     plt.close(fig)
@@ -65,8 +70,13 @@ def fig_corruption(corruption, out):
 
 def fig_auroc(corruption, out):
     g = groups(corruption)
-    fig, axes = plt.subplots(1, len(g), figsize=(3.6 * len(g), 2.9), sharey=True, squeeze=False)
-    for ax, ((dataset, model), names) in zip(axes[0], g.items()):
+    n = len(g)
+    ncols = min(3, n)
+    nrows = -(-n // ncols)
+    fig, axes = plt.subplots(nrows, ncols, figsize=(3.9 * ncols, 2.9 * nrows), sharey=True, squeeze=False)
+    for ax in axes.flat[n:]:
+        ax.axis("off")
+    for ax, ((dataset, model), names) in zip(axes.flat, g.items()):
         for yi, key in enumerate(ALL[::-1]):
             vals = [corruption[nm]["auroc"][key] for nm in names if key in corruption[nm]["auroc"]]
             if not vals:

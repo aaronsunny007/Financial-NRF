@@ -22,9 +22,9 @@ It also lets us ask which measures move.
 
 \paragraph{Contributions.}
 \begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
-\item A controlled corrupted-evidence test of reference-free reliability measures on two numerical financial QA datasets (FinQA and TAT-QA) and models from 1.5B to 7B parameters.
+\item A controlled corrupted-evidence test of reference-free reliability measures on two numerical financial QA datasets (FinQA and TAT-QA) with three generators from two model families (Qwen2.5 3B and 7B, Llama-3.1 8B), and smaller models in the secondary analyses.
 Measures that use only the response and the supplied evidence (numeric-overlap support, entailment support, lexical groundedness, a hallucination flag, verbalized confidence) barely distinguish a fully corrupted case from a clean one (AUROC at most 0.58 in any run). A score that compares the response with the \emph{uncorrupted} evidence can (AUROC 0.85 to 0.93), but it needs the reference we are trying to avoid.
-\item As detectors of wrong answers on clean evidence, and of real retrieval misses (the retriever fails to surface the numbers the answer needs), the same measures are weak and inconsistent: near chance when pooled on FinQA, modestly informative on TAT-QA, and with effects that change sign between a 3B and a 7B model.
+\item As detectors of wrong answers on clean evidence, and of real retrieval misses (the retriever fails to surface the numbers the answer needs), the same measures are weak and inconsistent: near chance when pooled on FinQA, modestly informative on TAT-QA, and with effects that change sign between smaller and larger models.
 \item A correction to a published scoring flaw in this line of work (the model's own confidence statement was counted as unsupported evidence), a demonstration that a five-point correlation and a weight sweep are too unstable to rank composites, and a recommendation that any evidence-quality manipulation be validated by its effect on the model before it is used to judge a metric.
 \item All code, per-response outputs and the free CPU pipeline that produced them are public.\footnote{\url{https://github.com/aaronsunny007/Financial-NRF}}
 \end{itemize}
@@ -55,8 +55,9 @@ Each report (paragraphs and table rows) is split into chunks, one per sentence o
 A generator receives a fixed system prompt, two worked examples and the retrieved evidence, and must write its reasoning, a final answer and a self-reported confidence.
 A rule-based verifier may trigger one retry when the response's own arithmetic does not check out.
 Decoding is greedy unless stated.
-Generators are Qwen2.5-1.5B, -3B and -7B-Instruct \citep{qwen2024qwen25} and SmolLM2-1.7B-Instruct \citep{allal2025smollm2}.
-The 1.5B, 3B and SmolLM2 models run in float32 on CPU; the 7B model runs as a 4-bit GGUF build (Q4\_K\_M) through llama.cpp \citep{gerganov2023llamacpp}, which also resembles the 4-bit setting of earlier runs of this project.
+Generators are Qwen2.5-1.5B, -3B and -7B-Instruct \citep{qwen2024qwen25}, SmolLM2-1.7B-Instruct \citep{allal2025smollm2} and Llama-3.1-8B-Instruct.
+The corrupted-evidence test uses the 3B, 7B and Llama models; the 1.5B and SmolLM2 runs enter only the error-detection and retrieval-miss analyses.
+The 1.5B, 3B and SmolLM2 models run in float32 on CPU; the 7B and 8B models run as 4-bit GGUF builds (Q4\_K\_M) through llama.cpp \citep{gerganov2023llamacpp}, which also resembles the 4-bit setting of earlier runs of this project.
 
 \subsection{Data}
 \textbf{FinQA}: numeric questions from the dev and test splits (the pipeline treats yes/no questions as non-numeric and excludes them from accuracy).
