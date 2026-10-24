@@ -133,3 +133,33 @@ Monotonically non-increasing across levels: False
 Per-noise-level summary saved to: scratch/e4.csv
 Per-example results saved to:     scratch/e4_per_example.csv
 Summary JSON saved to:            scratch/e4_summary.json
+	Command being timed: "python -m experiments.experiment4 --split test --n 100 --injection-mode corrupt --output scratch/e4.csv"
+	User time (seconds): 9017.84
+	System time (seconds): 3.99
+	Percent of CPU this job got: 397%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 37:51.23
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 9100092
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 8
+	Minor (reclaiming a frame) page faults: 234867
+	Voluntary context switches: 2984
+	Involuntary context switches: 1449942
+	Swaps: 0
+	File system inputs: 9312
+	File system outputs: 3368
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== 00:49:35 END
+::endgroup::
+::group::python -m experiments.experiment5 --split test --n 100 --output scratch/e5.csv
+=== 00:49:35 START python -m experiments.experiment5 --split test --n 100 --output scratch/e5.csv
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
