@@ -149,6 +149,29 @@ def table_retrieval(ret):
     return "\n".join(lines)
 
 
+def table_paired(summary, res):
+    """Paired item-level change from 0% to 100% corruption, from results/scale/summary.json."""
+    cols = [("accuracy", "accuracy$^\\dagger$"), ("evidence_support", "numeric-overlap support"),
+            ("nli_frac_entailed", "entailment support"), ("hallucination_flag", "hallucination flag"),
+            ("support_vs_clean_evidence", "support vs clean$^\\ddagger$")]
+    lines = [r"\begin{tabular}{@{}l r " + "c" * len(cols) + r"@{}}", r"\toprule",
+             " & ".join(["Run", "$n$"] + [c[1] for c in cols]) + r" \\", r"\midrule"]
+    for name, v in res["corruption"].items():
+        if name.startswith("pooled_"):
+            continue
+        eff = summary["runs"].get(name, {}).get("item_level_noise_effects")
+        if not eff:
+            continue
+        cells = []
+        for key, _ in cols:
+            e = eff.get(key)
+            cells.append(f"{e['mean_change']:+.2f} \\small[{e['ci95'][0]:+.2f}, {e['ci95'][1]:+.2f}]" if e else "--")
+        split = "dev" if name.endswith("dev") else "test"
+        lines.append(" & ".join([tex_escape(f"{v['dataset']} / {v['model']} {split}"), str(v["n_items"])] + cells) + r" \\")
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    return "\n".join(lines)
+
+
 def numbers(res):
     """\\newcommand macros for the figures quoted in the prose."""
     out = []
@@ -157,6 +180,13 @@ def numbers(res):
         out.append(f"\\newcommand{{\\{name}}}{{{val}}}")
 
     for ds, tag in (("FinQA", "Fin"), ("TAT-QA", "Tat")):
+        runs = [v for k, v in res["corruption"].items() if v["dataset"] == ds and not k.startswith("pooled_")]
+        if runs:
+            for key, name in (("correct", "acc"), ("overlap", "ov"), ("nli", "nli"), ("vs_clean", "vsc")):
+                first = np.mean([r["mean_by_level"][key][0] for r in runs])
+                last = np.mean([r["mean_by_level"][key][-1] for r in runs])
+                mac(f"{name}Zero{tag}", f"{first:.2f}")
+                mac(f"{name}Full{tag}", f"{last:.2f}")
         c = res["corruption"].get(f"pooled_{ds}")
         if c:
             mac(f"n{tag}Corrupt", c["n_items"])
@@ -195,6 +225,10 @@ def main():
     fig_auroc(res["corruption"], args.paper / "figures" / "auroc.pdf")
     gen = args.paper / "generated"
     (gen / "table_corruption.tex").write_text(table_corruption(res["corruption"]), encoding="utf-8")
+    summary_path = Path("results/scale/summary.json")
+    if summary_path.exists():
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        (gen / "table_paired.tex").write_text(table_paired(summary, res), encoding="utf-8")
     (gen / "table_error.tex").write_text(table_error(res["error_detection"]), encoding="utf-8")
     (gen / "table_retrieval.tex").write_text(table_retrieval(res["retrieval_errors"]), encoding="utf-8")
     (gen / "numbers.tex").write_text(numbers(res), encoding="utf-8")
