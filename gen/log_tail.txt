@@ -163,3 +163,123 @@ Summary JSON saved to:            scratch/e4_summary.json
 /opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
   warnings.warn(
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+WARNING: running against the TEST split -- final reported runs only.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+==============================================================
+EXPERIMENT 5: COMPARATIVE BASELINES ON IDENTICAL DATA
+Split: test | N: 100 | Seed: 42 | Engine: local | NESS mode: strict
+Conditions: ['closed_book', 'retrieval', 'oracle']  (total generations: 300)
+==============================================================
+All conditions share the same items, generator, prompt, scoring and
+verifier. Only the evidence supplied to the model differs.
+==============================================================
+[shard] NRF_SHARD=13/20: handling items 13, 33, 53, ...
+Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+Loading bartowski/Qwen2.5-7B-Instruct-GGUF/Qwen2.5-7B-Instruct-Q4_K_M.gguf through llama.cpp...
+Loaded Qwen2.5-7B-Instruct-Q4_K_M.gguf (Q4_K_M 4-bit GGUF (llama.cpp)).
+LLM running on: cpu (llama.cpp)
+Embedding model running on: cpu
+FAISS available: True (using faiss.IndexFlatIP)
+
+--------------------------------------------------------------
+CONDITION: CLOSED_BOOK
+--------------------------------------------------------------
+  [1/5] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [2/5] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.80
+  [3/5] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [4/5] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 1.00
+  [5/5] Correct: 0.0 | NESS: 0.00 | Halluc: 1 | Conf: 0.00
+
+  Accuracy:        0.0000  95% CI [-0.0000, 0.4345]
+  NESS:            0.0000
+  Hallucination:   1.0000
+  ECE:             0.7600
+  ONRS:            0.0480
+
+--------------------------------------------------------------
+CONDITION: RETRIEVAL
+--------------------------------------------------------------
+  [1/5] Correct: 1.0 | NESS: 0.85 | Halluc: 0 | Conf: 1.00
+  [2/5] Correct: 1.0 | NESS: 0.81 | Halluc: 0 | Conf: 0.90
+  [3/5] Correct: 1.0 | NESS: 0.77 | Halluc: 0 | Conf: 0.90
+  [4/5] Correct: 1.0 | NESS: 0.80 | Halluc: 0 | Conf: 1.00
+  [5/5] Correct: 1.0 | NESS: 0.38 | Halluc: 1 | Conf: 0.90
+
+  Accuracy:        1.0000  95% CI [0.5655, 1.0000]
+  NESS:            0.7206
+  Hallucination:   0.2000
+  ECE:             0.0600
+  ONRS:            0.8642
+
+--------------------------------------------------------------
+CONDITION: ORACLE
+--------------------------------------------------------------
+  [1/5] Correct: 1.0 | NESS: 0.82 | Halluc: 0 | Conf: 0.90
+  [2/5] Correct: 1.0 | NESS: 0.62 | Halluc: 0 | Conf: 0.90
+  [3/5] Correct: 1.0 | NESS: 0.77 | Halluc: 0 | Conf: 0.90
+  [4/5] Correct: 1.0 | NESS: 0.83 | Halluc: 0 | Conf: 0.90
+  [5/5] Correct: 1.0 | NESS: 0.38 | Halluc: 1 | Conf: 0.90
+
+  Accuracy:        1.0000  95% CI [0.5655, 1.0000]
+  NESS:            0.6841
+  Hallucination:   0.2000
+  ECE:             0.1000
+  ONRS:            0.8452
+
+==============================================================
+EXPERIMENT 5 RESULTS -- CONTROLLED COMPARISON
+==============================================================
+Condition          Acc            95% CI    NESS   Halluc     ONRS
+closed_book     0.0000     [-0.00, 0.43]  0.0000   1.0000   0.0480
+retrieval       1.0000      [0.57, 1.00]  0.7206   0.2000   0.8642
+oracle          1.0000      [0.57, 1.00]  0.6841   0.2000   0.8452
+
+--------------------------------------------------------------
+ERROR DECOMPOSITION  <- this is what answers the comparison question
+--------------------------------------------------------------
+  Closed-book accuracy:                 0.0000
+  Gain from retrieval over closed-book: +1.0000
+     -> how much the retrieval stage actually contributes.
+  Retrieval-attributable error:         +0.0000
+     -> accuracy recovered by supplying gold evidence instead
+        of retrieved evidence. This is the ceiling on what any
+        retrieval improvement could deliver for this generator.
+  Reasoning-attributable error:         0.0000
+     -> error remaining even with perfect evidence. Not
+        addressable by improving retrieval at all.
+
+  Compare the oracle row against the gold-retrieval condition
+  reported in the FinQA literature, and the retrieval row
+  against their retriever condition. Note these remain
+  different splits and differently-trained systems: use them
+  as context, not as a like-for-like scoreboard.
+==============================================================
+
+Per-example results saved to: scratch/e5.csv
+Summary saved to:             scratch/e5_summary.json
+	Command being timed: "python -m experiments.experiment5 --split test --n 100 --output scratch/e5.csv"
+	User time (seconds): 1988.25
+	System time (seconds): 2.40
+	Percent of CPU this job got: 393%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 8:25.30
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8965204
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 226206
+	Voluntary context switches: 2265
+	Involuntary context switches: 293199
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 208
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== 00:49:57 END
+::endgroup::
