@@ -26,7 +26,13 @@ A composite that adds such a score to accuracy and calibration moves with corrup
 (ii) Our clean-evidence reference scores well, which shows the information exists; the cost is access to a trusted copy.
 (iii) Validate an evidence-quality manipulation by its effect on the model before using it to evaluate a metric. The distractor sentences we first used would have been reported as a metric failure.
 
-\section{Limitations}
+\section{Conclusion}
+
+Reference-free reliability scores for numerical RAG are blind to corrupted evidence by construction, and a controlled test on two datasets and three generators from two model families confirms it: accuracy collapses while every measure that sees only the response and the supplied evidence stays near chance (AUROC at most 0.58).
+The same measures are weak and model-dependent at flagging wrong answers on clean evidence and real retrieval misses.
+Practitioners who need reliability estimates should treat such scores as faithfulness checks and add a signal about the evidence itself.
+
+\section*{Limitations}
 
 The generators are small, open models (1.5B to 8B), run without fine-tuning; larger or instruction-tuned-for-finance models may express confidence differently.
 Accuracy is low for the smaller models (about 0.2 on FinQA for the 3B model; 0.47 to 0.62 for the 7B and 8B models), which limits the power of the correct-versus-incorrect comparisons; we report intervals instead of claiming equality.
@@ -37,11 +43,8 @@ The 7B and 8B models are 4-bit builds run through a different inference engine t
 We do not report a GPU 4-bit run of the smaller models.
 Item counts (100 per run) are modest; pooling over runs narrows the intervals but mixes models.
 
-\section{Conclusion}
-
-Reference-free reliability scores for numerical RAG are blind to corrupted evidence by construction, and a controlled test on two datasets and three generators from two model families confirms it: accuracy collapses while every measure that sees only the response and the supplied evidence stays near chance (AUROC at most 0.58).
-The same measures are weak and model-dependent at flagging wrong answers on clean evidence and real retrieval misses.
-Practitioners who need reliability estimates should treat such scores as faithfulness checks and add a signal about the evidence itself.
-
 \section*{Reproducibility}
 Code, prompts, per-response outputs for every run, and the GitHub Actions workflow that regenerates them on free CPU runners are at \url{https://github.com/aaronsunny007/Financial-NRF}. Tables and figures in this paper are produced from the result files by \texttt{experiments/paper\_analysis.py} and \texttt{experiments/paper\_figures.py}.
+
+\section*{Acknowledgements}
+The experiments, analysis code and a first draft of this text were produced with the assistance of Claude (Anthropic), working in an agentic coding environment. The author directed the study, reviewed the results and the text, and is responsible for all claims. No external funding supported this work.

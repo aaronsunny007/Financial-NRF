@@ -10,24 +10,24 @@ Numeric-overlap support computed against the evidence the model was shown barely
 The reason is mechanical: the model copies the corrupted figures it was shown into its reasoning, and those figures are in the evidence.
 Support computed against the \emph{clean} evidence falls from \vscZeroFin{} to \vscFullFin{} on FinQA and from \vscZeroTat{} to \vscFullTat{} on TAT-QA, because the copied figures are not in the clean evidence.
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/corruption.pdf}
 \caption{Mean value of each measure against the share of numbers in the retrieved evidence that were replaced by wrong ones (dev and test runs averaged within a dataset and model; 100 items per run). Solid lines need the gold answer or the clean evidence; dashed lines use only the response and the evidence shown to the model.}
 \label{fig:corruption}
-\end{figure}
+\end{figure*}
 
 Table~\ref{tab:paired} gives the paired change per item from $0\%$ to $100\%$ corruption.
 Accuracy falls by 0.19 to 0.58 depending on run, and support against the clean evidence by 0.29 to 0.41.
 The gold-free measures move by at most a few points.
 For Qwen2.5-7B on FinQA, numeric-overlap and entailment support decline slightly but reliably (about $-0.03$ and $-0.09$), an order of magnitude less than accuracy; in every other run, including Llama-3.1-8B, their changes are indistinguishable from zero or of the same small size.
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering\small
 \resizebox{\textwidth}{!}{\input{generated/table_paired.tex}}
 \caption{Change from $0\%$ to $100\%$ corruption, paired within item, with 95\% bootstrap intervals over items. $^\dagger$ needs the gold answer. $^\ddagger$ needs the clean evidence.}
 \label{tab:paired}
-\end{table}
+\end{table*}
 
 The question is whether a measure can \emph{tell} the two situations apart, not only whether its average moves.
 Table~\ref{tab:corrupt-auroc} reports the AUROC for separating a response generated from fully corrupted evidence from one generated from the clean evidence of the same item.
@@ -36,19 +36,19 @@ No single run exceeds 0.58 for any gold-free measure.
 Accuracy, which needs the gold answer, reaches \aucFincorrect{} and \aucTatcorrect{} (it is limited because many clean responses are already wrong), and support against the clean evidence reaches \aucFinvsclean{} and \aucTatvsclean{}.
 The information that distinguishes the two cases is in the pair (response, clean evidence), which a deployed system does not have.
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/auroc.pdf}
 \caption{AUROC for telling a response produced from $100\%$-corrupted evidence from one produced from clean evidence (95\% bootstrap intervals over items; one marker per run). The dotted line is chance.}
 \label{fig:auroc}
-\end{figure}
+\end{figure*}
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering\small
 \resizebox{\textwidth}{!}{\input{generated/table_corruption.tex}}
 \caption{AUROC (95\% interval) for separating $100\%$-corrupted from clean evidence. $^\dagger$ needs the gold answer. $^\ddagger$ needs the clean evidence. Pooled rows combine the runs above them.}
 \label{tab:corrupt-auroc}
-\end{table}
+\end{table*}
 
 The composite behaves accordingly.
 Its correlation with the corruption level over the five levels is between $-0.90$ and $-0.97$ in every run, with intervals that exclude zero, and it comes entirely from the accuracy term and from the calibration term, which is a function of accuracy.
@@ -66,12 +66,12 @@ Verbalized confidence is nearly constant for the smaller models (most responses 
 On TAT-QA the pooled AUROCs for entailment support, lexical groundedness and confidence are \errTatnli, \errTatlexical{} and \errTatconf, modest but above chance; on FinQA all pooled values stay between 0.47 and 0.55.
 The lexical baseline performs no better than the entailment or overlap scores, so the weakness is not particular to the numeric-overlap design.
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering\small
 \resizebox{\textwidth}{!}{\input{generated/table_error.tex}}
 \caption{AUROC for separating correct from incorrect answers under clean evidence (numeric questions only; 95\% bootstrap intervals over items).}
 \label{tab:error}
-\end{table}
+\end{table*}
 
 \subsection{Real retrieval misses}
 
@@ -88,9 +88,9 @@ This is a different failure from corrupted evidence in one respect: \emph{missin
 The traces are model-dependent, and these associations are confounded with difficulty (a question whose evidence is missing is also a harder question).
 Accuracy itself separates hits from misses at least as well (pooled FinQA \retFincorrect{}, TAT-QA \retTatcorrect{}).
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering\small
 \resizebox{\textwidth}{!}{\input{generated/table_retrieval.tex}}
 \caption{Items split by whether the retrieved evidence contains every number of the gold evidence (FinQA: annotated gold facts; TAT-QA: operands of the annotated derivation). AUROC: can the measure tell complete from incomplete retrieved evidence? $^\dagger$ needs the gold answer.}
 \label{tab:retrieval}
-\end{table}
+\end{table*}

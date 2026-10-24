@@ -1,23 +1,28 @@
 \documentclass[11pt]{article}
-\usepackage[utf8]{inputenc}
+
+% "preprint" gives the non-anonymous version with page numbers (for arXiv);
+% use "review" for an anonymized submission and "final" for camera-ready.
+\usepackage[preprint]{acl}
+
+\usepackage{times}
+\usepackage{latexsym}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage[margin=1in]{geometry}
-\usepackage{booktabs}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
 \usepackage{graphicx}
+\usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{amsmath}
-\usepackage[numbers,sort&compress]{natbib}
-\usepackage[hidelinks]{hyperref}
 \usepackage{url}
-\usepackage{microtype}
 
 \input{generated/numbers.tex}
 
 \title{Reference-Free Reliability Scores Cannot See Corrupted Evidence:\\
 A Controlled Test for Numerical Retrieval-Augmented QA in Finance}
-\author{Aaron Prakash Gandi\\\small Independent researcher\\\small\texttt{aarongandi007@gmail.com}}
-\date{}
+
+\author{Aaron Prakash Gandi \\
+  Independent researcher \\
+  \texttt{aarongandi007@gmail.com}}
 
 \begin{document}
 \maketitle
@@ -39,7 +44,7 @@ Code, per-response outputs and a pipeline that reproduces every result on free C
 \input{sections_results}
 \input{sections_back}
 
-\bibliographystyle{plainnat}
 \bibliography{references}
+\bibliographystyle{acl_natbib}
 
 \end{document}
