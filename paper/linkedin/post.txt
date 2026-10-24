@@ -1,0 +1,24 @@
+POST
+----
+I replaced the numbers in a model's retrieved evidence with wrong ones.
+
+Accuracy dropped from 0.53 to 0.08. The numeric-overlap support score I was testing went from 0.78 to 0.75.
+
+That's the whole problem. Scores like this check whether the answer matches the evidence the model was given. If the evidence is wrong, a faithful answer is still wrong, and the score has nothing to catch.
+
+I tested it properly: FinQA and TAT-QA, Qwen2.5 3B and 7B, Llama 3.1 8B. Five measures that need no gold answer (numeric overlap, NLI entailment, lexical groundedness, a hallucination flag, the model's own confidence). None told corrupted evidence from clean evidence better than AUROC 0.58. Checking against the clean evidence got 0.85 to 0.93, but that needs the very reference you were trying to avoid.
+
+Two things I got wrong on the way. A bug counted the model's own "Confidence: 0.9" as unsupported evidence. And my first noise experiment didn't hurt the model at all, so it tested nothing. Both are corrected in the write-up.
+
+It's an independent project and a draft preprint, not peer reviewed. Code and every model response are public, and the whole pipeline reruns free on GitHub runners.
+
+If you evaluate RAG on numbers, what tells you the evidence itself is right?
+
+#RAG #NLP #FinTech
+
+FIRST COMMENT (post this right after publishing; links in the body get less reach)
+----
+Code, every model response and the paper draft: https://github.com/aaronsunny007/Financial-NRF
+(When it is on arXiv, replace or add the arXiv link here.)
+
+ATTACH: chart.png (single image, 1080x1080)
