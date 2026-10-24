@@ -6,6 +6,9 @@ on:
     paths: ['paper/**', '.github/workflows/paper.yml']
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,3 +25,14 @@ jobs:
         with:
           name: paper-pdf
           path: paper/main.pdf
+      - name: Publish the PDF on the paper-pdf branch
+        run: |
+          mkdir -p /tmp/pdf && cp paper/main.pdf /tmp/pdf/main.pdf
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan paper-pdf
+          git rm -rf -q . || true
+          cp /tmp/pdf/main.pdf main.pdf
+          git add main.pdf
+          git commit -qm "Built from ${{ github.sha }}"
+          git push -qf origin paper-pdf
