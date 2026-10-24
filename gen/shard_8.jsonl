@@ -1,0 +1,2 @@
+{"_meta": {"model": "Qwen/Qwen2.5-3B-Instruct", "precision": "float32"}}
+{"key": "20dc960f41110ede930931b6226105c3365e3e8b74591949e3d310bc8738cde8", "response": "Reasoning: To find the increase in Charges and Non-cash Benefits from 2017 to 2018, I need to subtract the value for 2017 from the value for 2018. From the evidence, I see that the Charges and Non-cash Benefits for 2018 is $6,971,946 and for 2017 is $1,828,814. \n\nFinal Answer: 5143122\n\nConfidence: 0.9", "seconds": 231.0}
