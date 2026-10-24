@@ -1,0 +1,8 @@
+shard 17
+4
+               total        used        free      shared  buff/cache   available
+Mem:              15           1           5           0           9          14
+Model name:                              INTEL(R) XEON(R) PLATINUM 8573C
+::group::python -m experiments.experiment4 --split dev --n 100 --injection-mode corrupt --output scratch/e4.csv
+=== 02:00:42 START python -m experiments.experiment4 --split dev --n 100 --injection-mode corrupt --output scratch/e4.csv
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
