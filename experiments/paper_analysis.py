@@ -17,7 +17,8 @@ Three questions, each answered per run directory under results/scale/ and pooled
 
 3. Real retrieval errors. In Experiment 5's retrieval condition the retriever sometimes misses the
    evidence the answer needs. Items are split by whether the retrieved evidence contains every
-   number of the dataset's gold evidence; the script compares accuracy and each measure between
+   number of the dataset's gold evidence (FinQA: the annotated gold facts; TAT-QA: the operands of
+   the annotated derivation); the script compares accuracy and each measure between
    the two groups and reports how well each measure detects a retrieval miss.
 
 "Lexical groundedness" is the baseline standing in for overlap-style faithfulness scoring that
@@ -59,9 +60,11 @@ RUNS = {
     "tat3b_dev": ("TAT-QA", "Qwen2.5-3B fp32"),
     "tat3b_test": ("TAT-QA", "Qwen2.5-3B fp32"),
     "q7b_test": ("FinQA", "Qwen2.5-7B Q4"),
+    "llama8bcorrupt_test": ("FinQA", "Llama-3.1-8B Q4"),
     "tat7b_test": ("TAT-QA", "Qwen2.5-7B Q4"),
 }
 
+TAT_CONSTANTS = {1.0, 2.0, 100.0, 1000.0, 1000000.0}
 _WORD = re.compile(r"[A-Za-z]{4,}")
 _NUM = re.compile(r"\d[\d,]*\.?\d*")
 
@@ -185,8 +188,13 @@ def gold_numbers(dataset, split):
 
     out = {}
     for item in load_dataset(split):
-        gi = item["qa"].get("gold_inds") or {}
-        out[item["id"]] = numbers_of(" ".join(str(v) for v in gi.values()))
+        if dataset == "TAT-QA":
+            # TAT-QA has no cell-level evidence labels, so the gold evidence is the operands of its
+            # annotated derivation (the scale constants and averaging divisors are not evidence)
+            out[item["id"]] = numbers_of(item["qa"].get("program", "")) - TAT_CONSTANTS
+        else:
+            gi = item["qa"].get("gold_inds") or {}
+            out[item["id"]] = numbers_of(" ".join(str(v) for v in gi.values()))
     return out
 
 
