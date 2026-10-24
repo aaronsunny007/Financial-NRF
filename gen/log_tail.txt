@@ -129,3 +129,31 @@ Monotonically non-increasing across levels: False
 Per-noise-level summary saved to: scratch/e4.csv
 Per-example results saved to:     scratch/e4_per_example.csv
 Summary JSON saved to:            scratch/e4_summary.json
+	Command being timed: "python -m experiments.experiment4 --split dev --n 100 --injection-mode corrupt --output scratch/e4.csv"
+	User time (seconds): 274.89
+	System time (seconds): 26.40
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 5:03.46
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 15020340
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 777959
+	Minor (reclaiming a frame) page faults: 2566263
+	Voluntary context switches: 1021582
+	Involuntary context switches: 12466
+	Swaps: 0
+	File system inputs: 10521200
+	File system outputs: 3112
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+=== 02:05:13 END
+::endgroup::
+::group::python -m experiments.experiment5 --split dev --n 100 --output scratch/e5.csv
+=== 02:05:13 START python -m experiments.experiment5 --split dev --n 100 --output scratch/e5.csv
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
