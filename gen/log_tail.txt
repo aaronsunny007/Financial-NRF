@@ -1,0 +1,7 @@
+shard 10
+4
+               total        used        free      shared  buff/cache   available
+Mem:              15           1           5           0           9          14
+Model name:                              Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+::group::python -m experiments.experiment4 --split dev --n 100 --injection-mode corrupt --output scratch/e4.csv
+=== 02:00:35 START python -m experiments.experiment4 --split dev --n 100 --injection-mode corrupt --output scratch/e4.csv
