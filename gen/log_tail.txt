@@ -1,0 +1,7 @@
+shard 1
+4
+               total        used        free      shared  buff/cache   available
+Mem:              15           1           4           0          10          14
+Model name:                              AMD EPYC 9V45 96-Core Processor
+::group::python -m experiments.experiment4 --split dev --n 100 --injection-mode corrupt --output scratch/e4.csv
+=== 00:43:35 START python -m experiments.experiment4 --split dev --n 100 --injection-mode corrupt --output scratch/e4.csv
