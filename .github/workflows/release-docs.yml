@@ -3,6 +3,8 @@ name: release-docs
 # Publishes the three Word documents as assets of a GitHub Release, so they can be removed from the repository tree
 # (the files stay in git history). Run once from the Actions tab.
 on:
+  push:
+    paths: ['.github/workflows/release-docs.yml']
   workflow_dispatch:
     inputs:
       tag:
@@ -20,7 +22,7 @@ jobs:
       - name: Create the release with the documents attached
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ inputs.tag }}
+          TAG: ${{ inputs.tag || 'dissertation-docs-v1' }}
         run: |
           ls -la NRF_Report_IEEE_v3.docx NRF_Supporting_Evidence_v3.docx NRF_Erratum.docx
           gh release create "$TAG" \
