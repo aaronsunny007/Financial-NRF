@@ -1,0 +1,86 @@
+\section{Introduction}
+
+Retrieval-augmented generation (RAG) is the standard way to ground a language model's answers about a document, and in finance the answer is usually a number: a ratio, a change, a total.
+A wrong number that is stated with confidence is costly, so a practical question is whether the system can tell when its own answer is not to be trusted, without the gold answer.
+A family of \emph{reference-free} scores tries to do this.
+They check whether the numbers in the response appear in the retrieved evidence, whether the evidence entails the response, or whether the model's stated confidence matches its accuracy \citep{es2024ragas,saadfalcon2024ares,min2023factscore}.
+Several such signals are often folded into one composite, so that a single figure summarizes reliability.
+
+This paper examines one such composite for numerical RAG, the Overall Numerical Reliability Score (ONRS), which weights accuracy, numeric evidence support, a hallucination rate and the calibration of verbalized confidence.
+We ask a narrow question: \emph{when the retrieved evidence is wrong, does a reference-free measure notice?}
+The question has a structural answer that we state first and then test.
+A measure that compares the response with the evidence \emph{that was supplied} can only report whether the response is faithful to that evidence.
+If the evidence itself has been corrupted, a faithful response is still wrong, and the measure has no way to see it.
+
+The test needs a manipulation that actually degrades the model.
+Our first attempt did not have one.
+We began by adding unrelated sentences to the evidence and tracking the composite against the amount added, and we initially read the flat result as a failure of the composite.
+A manipulation check at larger scale showed that the added sentences did not hurt the model at all, so that experiment could not test anything (Section~\ref{sec:erratum}).
+We therefore replace a controlled share of the numbers in the retrieved evidence with wrong ones.
+This does hurt: accuracy falls to near zero at full corruption.
+It also lets us ask which measures move.
+
+\paragraph{Contributions.}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+\item A controlled corrupted-evidence test of reference-free reliability measures on two numerical financial QA datasets (FinQA and TAT-QA) with three generators from two model families (Qwen2.5 3B and 7B, Llama-3.1 8B), and smaller models in the secondary analyses.
+Measures that use only the response and the supplied evidence (numeric-overlap support, entailment support, lexical groundedness, a hallucination flag, verbalized confidence) barely distinguish a fully corrupted case from a clean one (AUROC at most 0.58 in any run). A score that compares the response with the \emph{uncorrupted} evidence can (AUROC 0.85 to 0.93), but it needs the reference we are trying to avoid.
+\item As detectors of wrong answers on clean evidence, and of real retrieval misses (the retriever fails to surface the numbers the answer needs), the same measures are weak and inconsistent: near chance when pooled on FinQA, modestly informative on TAT-QA, and with effects that change sign between smaller and larger models.
+\item A correction to a published scoring flaw in this line of work (the model's own confidence statement was counted as unsupported evidence), a demonstration that a five-point correlation and a weight sweep are too unstable to rank composites, and a recommendation that any evidence-quality manipulation be validated by its effect on the model before it is used to judge a metric.
+\item All code, per-response outputs and the free CPU pipeline that produced them are public.\footnote{\url{https://github.com/aaronsunny007/Financial-NRF}}
+\end{itemize}
+
+\section{Related Work}
+
+\paragraph{Reference-free evaluation of RAG.}
+RAGAs and ARES score faithfulness, answer relevance and context relevance, using a language model as judge or a fine-tuned classifier \citep{es2024ragas,saadfalcon2024ares}.
+Their faithfulness component checks the answer against the context that was retrieved.
+That is the property whose limit we examine: it is silent about whether the context is right.
+Atomic-claim scoring \citep{min2023factscore} and sampling-consistency checks \citep{manakul2023selfcheckgpt} target hallucination in open-ended text.
+Natural-language-inference models have been used to score factual consistency between a source and a generated text \citep{maynez2020faithfulness,laban2022summac,zha2023alignscore}; we use an NLI cross-encoder as one of our measures.
+
+\paragraph{Confidence and calibration.}
+Expected calibration error \citep{guo2017calibration} summarizes the gap between confidence and accuracy.
+Language models can verbalize a confidence \citep{kadavath2022know,xiong2024confidence}, but the figure is often poorly informative; we find the same for the small models studied here.
+
+\paragraph{Financial numerical QA.}
+FinQA \citep{chen2021finqa} asks multi-step arithmetic questions over earnings-report pages, with annotated gold evidence.
+TAT-QA \citep{zhu2021tatqa} pairs tables with paragraphs and includes arithmetic, span and counting questions.
+Both are usually evaluated with gold evidence supplied; we use them in a retrieval setting \citep{lewis2020rag} where retrieval errors occur naturally.
+
+\section{Setup}
+\label{sec:setup}
+
+\subsection{System}
+Each report (paragraphs and table rows) is split into chunks, one per sentence or table row, embedded with all-MiniLM-L6-v2 \citep{reimers2019sbert}, and the eight chunks most similar to the question are retrieved by exact cosine search.
+A generator receives a fixed system prompt, two worked examples and the retrieved evidence, and must write its reasoning, a final answer and a self-reported confidence.
+A rule-based verifier may trigger one retry when the response's own arithmetic does not check out.
+Decoding is greedy unless stated.
+Generators are Qwen2.5-1.5B, -3B and -7B-Instruct \citep{qwen2024qwen25}, SmolLM2-1.7B-Instruct \citep{allal2025smollm2} and Llama-3.1-8B-Instruct.
+The corrupted-evidence test uses the 3B, 7B and Llama models; the 1.5B and SmolLM2 runs enter only the error-detection and retrieval-miss analyses.
+The 1.5B, 3B and SmolLM2 models run in float32 on CPU; the 7B and 8B models run as 4-bit GGUF builds (Q4\_K\_M) through llama.cpp \citep{gerganov2023llamacpp}, which also resembles the 4-bit setting of earlier runs of this project.
+
+\subsection{Data}
+\textbf{FinQA}: numeric questions from the dev and test splits (the pipeline treats yes/no questions as non-numeric and excludes them from accuracy).
+\textbf{TAT-QA}: the arithmetic questions with a numeric answer, converted to the same item format; TAT-QA's own test labels are hidden, so its train file serves as our \emph{dev} split and its dev file as our \emph{test} split.
+Percentage answers are compared as percentages.
+Accuracy uses a 2\% relative (or 0.01 absolute) tolerance on the final answer.
+
+\subsection{Measures under test}
+\label{sec:measures}
+\begin{description}[leftmargin=0pt,itemsep=1pt,topsep=2pt]
+\item[Numeric-overlap support (NESS)] the share of the numbers in the response's reasoning and answer that occur in the supplied evidence. A response is flagged as hallucinated when this falls below 0.5. The model's own confidence statement is excluded from the count (Section~\ref{sec:erratum}).
+\item[Entailment support] each number-bearing, non-arithmetic sentence of the reasoning is the hypothesis and the evidence, in windows of at most 280 words, is the premise. We take the maximum entailment probability over windows from the cross-encoder nli-deberta-v3-small \citep{he2021debertav3} and report the share of claims with probability at least 0.5.
+\item[Lexical groundedness] the share of the reasoning's content words (four or more letters) found in the evidence. A cheap stand-in for overlap-style faithfulness scoring.
+\item[Hallucination flag, self-reported confidence] as defined above.
+\end{description}
+Two further quantities are \emph{not} reference-free and serve as reference points: accuracy (needs the gold answer) and support \emph{against the clean evidence} (needs the uncorrupted evidence).
+ONRS $=0.30\,\text{acc}+0.30\,\text{NESS}+0.20\,(1-\text{hallucination rate})+0.20\,(1-\text{ECE})$, with the ECE computed on the verbalized confidence.
+
+\subsection{Manipulations}
+\textbf{Corrupted evidence.} After retrieval, a fraction $p\in\{0,25,50,75,100\}\%$ of the numeric tokens in the evidence is replaced by a wrong value (the original multiplied by 0.5, 0.8, 1.25, 1.6, 2 or 3, chosen deterministically per token), preserving currency signs, percent signs, thousands separators and decimals; four-digit years are left alone.
+Every other part of the pipeline is unchanged.
+\textbf{Retrieval miss.} A natural condition: an item is a \emph{miss} when the retrieved evidence lacks at least one number of the dataset's gold evidence (all FinQA gold facts; for TAT-QA the annotated paragraphs and, if the answer uses the table, the whole table).
+
+\subsection{Statistics}
+Every interval is a 95\% percentile bootstrap over items (2000 resamples; the rows belonging to one item stay together).
+The detection tasks are scored with AUROC, the probability that a randomly chosen positive case scores higher than a randomly chosen negative one (0.5 is chance).

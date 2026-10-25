@@ -1,0 +1,96 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Corrupted evidence}
+\label{sec:res-corrupt}
+
+Figure~\ref{fig:corruption} shows how each quantity changes as more of the numbers in the retrieved evidence are replaced.
+Accuracy falls steeply: averaged over runs, from \accZeroFin{} to \accFullFin{} on FinQA and from \accZeroTat{} to \accFullTat{} on TAT-QA.
+Numeric-overlap support computed against the evidence the model was shown barely changes (FinQA \ovZeroFin{} to \ovFullFin{}, TAT-QA \ovZeroTat{} to \ovFullTat{}), as does entailment support and the hallucination flag.
+The reason is mechanical: the model copies the corrupted figures it was shown into its reasoning, and those figures are in the evidence.
+Support computed against the \emph{clean} evidence falls from \vscZeroFin{} to \vscFullFin{} on FinQA and from \vscZeroTat{} to \vscFullTat{} on TAT-QA, because the copied figures are not in the clean evidence.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/corruption.pdf}
+\caption{Mean value of each measure against the share of numbers in the retrieved evidence that were replaced by wrong ones (dev and test runs averaged within a dataset and model; 100 items per run). Solid lines need the gold answer or the clean evidence; dashed lines use only the response and the evidence shown to the model.}
+\label{fig:corruption}
+\end{figure*}
+
+Table~\ref{tab:paired} gives the paired change per item from $0\%$ to $100\%$ corruption.
+Accuracy falls by 0.19 to 0.58 depending on run, and support against the clean evidence by 0.29 to 0.41.
+The gold-free measures move by at most a few points.
+For Qwen2.5-7B on FinQA, numeric-overlap and entailment support decline slightly but reliably (about $-0.03$ and $-0.09$), an order of magnitude less than accuracy; in every other run, including Llama-3.1-8B, their changes are indistinguishable from zero or of the same small size.
+
+\begin{table*}[t]
+\centering\small
+\resizebox{\textwidth}{!}{\input{generated/table_paired.tex}}
+\caption{Change from $0\%$ to $100\%$ corruption, paired within item, with 95\% bootstrap intervals over items. $^\dagger$ needs the gold answer. $^\ddagger$ needs the clean evidence.}
+\label{tab:paired}
+\end{table*}
+
+The question is whether a measure can \emph{tell} the two situations apart, not only whether its average moves.
+Table~\ref{tab:corrupt-auroc} reports the AUROC for separating a response generated from fully corrupted evidence from one generated from the clean evidence of the same item.
+Every gold-free measure is close to chance: pooled over runs, numeric-overlap support gives \aucFinoverlap{} \aucFinoverlapci{} on FinQA and \aucTatoverlap{} \aucTatoverlapci{} on TAT-QA, entailment support \aucFinnli{} and \aucTatnli{}, and the hallucination flag \aucFinnohalluc{} and \aucTatnohalluc{}.
+No single run exceeds 0.58 for any gold-free measure.
+Accuracy, which needs the gold answer, reaches \aucFincorrect{} and \aucTatcorrect{} (it is limited because many clean responses are already wrong), and support against the clean evidence reaches \aucFinvsclean{} and \aucTatvsclean{}.
+The information that distinguishes the two cases is in the pair (response, clean evidence), which a deployed system does not have.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/auroc.pdf}
+\caption{AUROC for telling a response produced from $100\%$-corrupted evidence from one produced from clean evidence (95\% bootstrap intervals over items; one marker per run). The dotted line is chance.}
+\label{fig:auroc}
+\end{figure*}
+
+\begin{table*}[t]
+\centering\small
+\resizebox{\textwidth}{!}{\input{generated/table_corruption.tex}}
+\caption{AUROC (95\% interval) for separating $100\%$-corrupted from clean evidence. $^\dagger$ needs the gold answer. $^\ddagger$ needs the clean evidence. Pooled rows combine the runs above them.}
+\label{tab:corrupt-auroc}
+\end{table*}
+
+The composite behaves accordingly.
+Its correlation with the corruption level over the five levels is between $-0.90$ and $-0.97$ in every run, with intervals that exclude zero, and it comes entirely from the accuracy term and from the calibration term, which is a function of accuracy.
+Replacing numeric-overlap support by support against the clean evidence in the composite moves its correlation with the corruption level only from the range above to between $-0.94$ and $-0.99$, because the composite is already dominated by accuracy.
+So the composite does fall with corrupted evidence, but only through the terms that need the gold answer.
+
+\subsection{Detecting wrong answers on clean evidence}
+
+On clean evidence the gold-free measures should be useful if they carry information about errors.
+Table~\ref{tab:error} shows they carry little.
+Pooled over runs, AUROC for separating correct from incorrect answers is \errFinoverlap{} for numeric-overlap support, \errFinnli{} for entailment support, \errFinlexical{} for lexical groundedness, \errFinnohalluc{} for the hallucination flag and \errFinconf{} for verbalized confidence on FinQA (TAT-QA: \errTatoverlap, \errTatnli, \errTatlexical, \errTatnohalluc, \errTatconf).
+Individual runs deviate from 0.5 in both directions.
+Numeric-overlap support is \emph{below} 0.5 for the 7B and 8B models (0.30 and 0.35 for Qwen2.5-7B on FinQA and TAT-QA, 0.27 for Llama-3.1-8B on FinQA) and above it for the 3B model on TAT-QA (0.71 on dev, 0.74 on test): correct answers contain a computed result that is, by construction, not in the evidence, so how much weight such a score carries depends on how often the model computes versus copies.
+Verbalized confidence is nearly constant for the smaller models (most responses say 0.9) and uninformative there, but for the larger models it carries some signal (AUROC 0.73 for Qwen2.5-7B on TAT-QA, 0.65 for Llama-3.1-8B on FinQA), and entailment support reaches 0.70 for Llama-3.1-8B.
+On TAT-QA the pooled AUROCs for entailment support, lexical groundedness and confidence are \errTatnli, \errTatlexical{} and \errTatconf, modest but above chance; on FinQA all pooled values stay between 0.47 and 0.55.
+The lexical baseline performs no better than the entailment or overlap scores, so the weakness is not particular to the numeric-overlap design.
+
+\begin{table*}[t]
+\centering\small
+\resizebox{\textwidth}{!}{\input{generated/table_error.tex}}
+\caption{AUROC for separating correct from incorrect answers under clean evidence (numeric questions only; 95\% bootstrap intervals over items).}
+\label{tab:error}
+\end{table*}
+
+\subsection{Real retrieval misses}
+
+Corruption is synthetic.
+A natural failure of the same kind occurs when the retriever does not surface the numbers the answer needs.
+Table~\ref{tab:retrieval} compares items by whether the retrieved evidence contains every number of the gold evidence.
+The miss rate is \missFin\% on FinQA and \missTat\% on TAT-QA.
+Accuracy is much lower on misses than on hits.
+Whether a gold-free measure notices is inconsistent.
+Pooled over FinQA runs, numeric-overlap support gives AUROC \retFinoverlap{}, entailment \retFinnli{} and lexical groundedness \retFinlexical{}.
+On TAT-QA the pooled values are \retTatoverlap{}, \retTatnli{} and \retTatlexical{}, and verbalized confidence reaches \retTatconf{}, driven by the larger models (0.83 for Qwen2.5-7B on TAT-QA, 0.79 for Llama-3.1-8B on FinQA).
+Numeric-overlap support detects misses for the 3B model on TAT-QA (0.69), plausibly because with the needed figures absent the model substitutes numbers that are then not in the evidence, but the effect reverses for the 7B and 8B models (0.30 and 0.34 for Qwen2.5-7B, 0.38 for Llama-3.1-8B).
+This is a different failure from corrupted evidence in one respect: \emph{missing} evidence can leave some trace in the response or in the model's own confidence, whereas \emph{wrong} evidence that the model copies leaves almost none.
+The traces are model-dependent, and these associations are confounded with difficulty (a question whose evidence is missing is also a harder question).
+Accuracy itself separates hits from misses at least as well (pooled FinQA \retFincorrect{}, TAT-QA \retTatcorrect{}).
+
+\begin{table*}[t]
+\centering\small
+\resizebox{\textwidth}{!}{\input{generated/table_retrieval.tex}}
+\caption{Items split by whether the retrieved evidence contains every number of the gold evidence (FinQA: annotated gold facts; TAT-QA: operands of the annotated derivation). AUROC: can the measure tell complete from incomplete retrieved evidence? $^\dagger$ needs the gold answer.}
+\label{tab:retrieval}
+\end{table*}

@@ -25,6 +25,20 @@ def load_finqa(split="test"):
     return data
 
 
+def load_dataset(split="test"):
+    """Dataset selected by NRF_DATASET: "finqa" (default) or "tatqa"."""
+    import os
+
+    name = os.environ.get("NRF_DATASET", "finqa").lower()
+    if name == "finqa":
+        return load_finqa(split)
+    if name == "tatqa":
+        from data_loader.load_tatqa import load_tatqa
+
+        return load_tatqa(split)
+    raise ValueError(f"NRF_DATASET must be 'finqa' or 'tatqa', got {name!r}")
+
+
 if __name__ == "__main__":
 
     print("=" * 60)

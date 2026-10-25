@@ -1,0 +1,43 @@
+name: paper
+
+# Builds paper/main.tex to a PDF on a runner (no LaTeX needed locally) and uploads it as an artifact.
+on:
+  push:
+    paths: ['paper/**', '.github/workflows/paper.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-science latexmk
+      - name: Build
+        working-directory: paper
+        run: latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+      - name: Build and test-compile the arXiv package
+        run: bash paper/make_arxiv.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: |
+            paper/main.pdf
+            paper/arxiv.zip
+      - name: Publish the PDF on the paper-pdf branch
+        run: |
+          mkdir -p /tmp/pdf && cp paper/main.pdf /tmp/pdf/main.pdf && cp paper/arxiv.zip /tmp/pdf/arxiv.zip
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan paper-pdf
+          git rm -rf -q . || true
+          cp /tmp/pdf/main.pdf main.pdf
+          cp /tmp/pdf/arxiv.zip arxiv.zip
+          git add main.pdf arxiv.zip
+          git commit -qm "Built from ${{ github.sha }}"
+          git push -qf origin paper-pdf
