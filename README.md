@@ -1,9 +1,28 @@
 # Financial-NRF
 
+**Can an AI's "reliability score" tell when the document it read was wrong?** Short answer: no.
+
+> **In plain English**
+>
+> 1. AI tools that answer questions from company reports often attach a "reliability score" to each answer, without knowing the right answer.
+> 2. Those scores mostly check one thing: does the answer match the text the AI was given?
+> 3. So I tested what happens when the text is wrong. I replaced the numbers in the reports with wrong ones, on two public finance datasets and three open AI models.
+> 4. The AI's accuracy collapsed, but the scores that need no right answer barely moved. Only a check against the original clean text caught the problem, and that needs the very thing the scores were meant to replace.
+> 5. One example: accuracy fell from **0.22 to 0.03** when the evidence was corrupted (Qwen2.5-3B on FinQA; the other runs agree).
+
+![Accuracy collapses as the evidence is corrupted, while the evidence-support score stays flat](docs/corruption_chart.png)
+
+**[Paper draft (PDF)](paper/main.pdf)** · **[Live demo](https://aaronsunny007.github.io/Financial-NRF/)** · [Dissertation documents (release)](https://github.com/aaronsunny007/Financial-NRF/releases/tag/dissertation-docs-v1) · [Erratum](ERRATUM.md)
+
+---
+
 **A Numerical Reliability Framework for Retrieval-Augmented AI Systems**
 
 MSc dissertation project — Ulster University
 Aaron Prakash Gandi · Supervisor: Dr Tazar Hussain
+
+The experiments were later extended and written up as an independent research paper (`paper/`), which corrects parts of the
+submitted dissertation; `ERRATUM.md` lists every corrected claim.
 
 **[Live demo](https://aaronsunny007.github.io/Financial-NRF/)**: score your own evidence and responses in the browser, browse the recorded results, and re-weight the composite yourself.
 
@@ -118,11 +137,18 @@ and −0.37 (the greedy run gave −0.27) and clean accuracy of 0.31, 0.26 and 0
 and −0.11 per item across the three seeds; of eight noise-injection runs, one (the last seed, −0.22 to −0.01) has an interval that excludes
 zero, so the manipulation's effect is at most small and inconsistent.
 
+**6. A second dataset and larger models give the same answer.** The corrupted-evidence test was repeated on TAT-QA (Qwen2.5-3B on 100
+dev and 100 test items, Qwen2.5-7B) and on FinQA with 4-bit Qwen2.5-7B and Llama-3.1-8B, run through llama.cpp on the same free CPU runners.
+Accuracy at full corruption is 0.01 to 0.09 in every run. No measure that needs no gold answer (numeric overlap, entailment, lexical
+groundedness, the hallucination flag, stated confidence) separates corrupted from clean evidence better than AUROC 0.58 in any single run,
+while support measured against the clean evidence reaches 0.85 to 0.93. As detectors of wrong answers and of real retrieval misses, the
+same measures are weak and change sign between smaller and larger models. All tables: `results/paper/ANALYSIS.md`; the write-up is `paper/main.pdf`.
+
 **What remains true.** The framework's design critique stands and is now properly demonstrated: gold-free evidence
 support, entailment and the hallucination flag are blind to corrupted evidence unless they are given a clean reference.
 **What does not:** the claims that the composite fails to track noise, that no weighting works, and that the hallucination
-flag tracks noise. **Limits:** Qwen2.5 at 1.5B and 3B plus one SmolLM2 model, float32 on CPU, FinQA only, 100 to 150
-items per run.
+flag tracks noise. **Limits:** small open models (1.5B to 8B), float32 on CPU or 4-bit through llama.cpp, FinQA and the arithmetic
+subset of TAT-QA, 100 to 150 items per run.
 
 ---
 
@@ -340,10 +366,10 @@ committed results.
 
 ## Limitations
 
-- **Model scale is a constraint, not a result.** The generators are 1.5B to 3B parameters at float32 on CPU.
-  Absolute accuracy would rise with scale. Whether the findings about the metric would not change was not tested
-  above 3B.
-- **100 to 150 items per run, FinQA only.** Enough to separate large effects (corruption halves accuracy) from none, not
+- **Model scale is a constraint, not a result.** The generators are 1.5B to 8B parameters (float32 on CPU up to 3B,
+  4-bit through llama.cpp for the 7B and 8B models, so size is confounded with precision). Absolute accuracy would rise
+  with scale. Nothing above 8B was tested.
+- **100 to 150 items per run, two datasets.** FinQA and the arithmetic questions of TAT-QA. Enough to separate large effects (corruption halves accuracy) from none, not
   to resolve differences of a few points; every statistic carries a bootstrap interval for that reason.
 - **Five noise levels make a poor correlation.** The Pearson r over five level averages has an interval of about ±0.8
   at these sizes. The item-level paired effects are the statistics to trust.
@@ -364,11 +390,22 @@ committed results.
 
 | File | Contents |
 |---|---|
-| `NRF_Report_IEEE_v3.docx` | The report, IEEE two-column format |
-| `NRF_Supporting_Evidence_v3.docx` | Supporting evidence and extended methodology |
+| [`paper/main.pdf`](paper/main.pdf) | The research paper draft (ACL format); sources in `paper/`, arXiv notes in `paper/ARXIV.md` |
+| [Release `dissertation-docs-v1`](https://github.com/aaronsunny007/Financial-NRF/releases/tag/dissertation-docs-v1) | The three Word documents, kept out of the repository tree: `NRF_Report_IEEE_v3.docx` (the report, IEEE two-column), `NRF_Supporting_Evidence_v3.docx` (supporting evidence and extended methodology) and `NRF_Erratum.docx` (corrections, with the evidence) |
 | `NRF_Experimental_Chapter.md` | The experimental chapter in full |
-| `ERRATUM.md`, `NRF_Erratum.docx` | Corrections to the submitted dissertation, with the evidence |
+| `ERRATUM.md` | Corrections to the submitted dissertation, with the evidence |
 | `results/scale/SUMMARY.md` | Tables from the larger runs |
+| `results/paper/ANALYSIS.md` | Tables behind the paper: corrupted-evidence detection, error detection, retrieval misses |
+| `docs/STUDY_GUIDE.md` | A step-by-step walkthrough of `scale_analysis.py` and `entailment_scoring.py` |
+
+---
+
+## How this was built
+
+Much of the code, the analysis scripts and the first drafts of the write-ups were produced with the help of an AI coding
+assistant (Claude, via Claude Code); the commit history shows which commits those were. The research questions, the
+decisions about what to test and what to withdraw, and responsibility for every claim are the author's. Every number in the
+paper is generated from the result files in this repository by the scripts here, so each can be re-run and checked.
 
 ---
 

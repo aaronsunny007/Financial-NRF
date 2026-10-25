@@ -1,10 +1,9 @@
 name: release-docs
 
+# (The release dissertation-docs-v1 was created from this workflow; the files were then removed from the tree, so re-running it needs them restored.)
 # Publishes the three Word documents as assets of a GitHub Release, so they can be removed from the repository tree
 # (the files stay in git history). Run once from the Actions tab.
 on:
-  push:
-    paths: ['.github/workflows/release-docs.yml']
   workflow_dispatch:
     inputs:
       tag:

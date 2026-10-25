@@ -1,6 +1,7 @@
 # Erratum and re-analysis
 
-**Applies to:** the submitted dissertation, `NRF_Report_IEEE_v3.docx`, `NRF_Supporting_Evidence_v3.docx` and
+**Applies to:** the submitted dissertation, `NRF_Report_IEEE_v3.docx`, `NRF_Supporting_Evidence_v3.docx` (both, with a Word copy of this erratum, now attached to the
+[`dissertation-docs-v1` release](https://github.com/aaronsunny007/Financial-NRF/releases/tag/dissertation-docs-v1)) and
 `NRF_Experimental_Chapter.md` as they stood before this repository was audited. The current files in the repository
 carry the corrections below; the submitted copies do not.
 
