@@ -1,0 +1,36 @@
+name: release-docs
+
+# Publishes the three Word documents as assets of a GitHub Release, so they can be removed from the repository tree
+# (the files stay in git history). Run once from the Actions tab.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag
+        default: 'dissertation-docs-v1'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create the release with the documents attached
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          ls -la NRF_Report_IEEE_v3.docx NRF_Supporting_Evidence_v3.docx NRF_Erratum.docx
+          gh release create "$TAG" \
+            NRF_Report_IEEE_v3.docx NRF_Supporting_Evidence_v3.docx NRF_Erratum.docx \
+            --target "$GITHUB_SHA" \
+            --title "Dissertation documents (as submitted, with the erratum)" \
+            --notes "The three Word documents that used to live in the repository root.
+
+          - NRF_Report_IEEE_v3.docx: the report, IEEE two-column format
+          - NRF_Supporting_Evidence_v3.docx: supporting evidence and extended methodology
+          - NRF_Erratum.docx: corrections to the submitted dissertation, with the evidence
+
+          Parts of the first two were superseded by later, larger runs. ERRATUM.md in the repository lists every corrected claim; read it alongside these files."
