@@ -188,12 +188,13 @@ def table_evidence_checks(checks, runs):
         if key not in best or v["n_items"] > best[key][1]["n_items"]:
             best[key] = (name, v)
     modes = {"corrupt": "numbers scaled", "period_swap": "periods swapped", "row_swap": "rows swapped"}
-    lines = [r"\begin{tabular}{@{}l l r c c c@{}}", r"\toprule",
-             r"Dataset & Error & $n$ & redundancy & numbers vs trusted copy & cells vs trusted table \\", r"\midrule"]
+    lines = [r"\begin{tabular}{@{}l l r r c c c@{}}", r"\toprule",
+             r"Dataset & Error & $n$ & edited & redundancy & numbers vs trusted copy & cells vs trusted table$^\S$ \\", r"\midrule"]
     for (dataset, mode), (name, v) in sorted(best.items(), key=lambda kv: (kv[0][0], list(modes).index(kv[0][1]))):
         top = v["levels"][max(v["levels"], key=int)]
-        lines.append(" & ".join([dataset, modes[mode], str(v["n_items"]), auc(top["redundancy"]),
-                                 auc(top["number_source"]), auc(top["pair_source"])]) + r" \\")
+        lines.append(" & ".join([dataset, modes[mode], str(v["n_items"]), f"{100 * top['share_items_edited']:.0f}\\%",
+                                 auc(top["redundancy"]), auc(top["number_source"]),
+                                 auc(top["pair_source"]) + f" ({100 * top['pair_source']['coverage']:.0f}\\%)"]) + r" \\")
     lines += [r"\bottomrule", r"\end{tabular}"]
     return "\n".join(lines), best
 

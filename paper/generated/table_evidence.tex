@@ -1,8 +1,12 @@
-\begin{tabular}{@{}l l r c c c@{}}
+\begin{tabular}{@{}l l r r c c c@{}}
 \toprule
-Dataset & Error & $n$ & redundancy & numbers vs trusted copy & cells vs trusted table \\
+Dataset & Error & $n$ & edited & redundancy & numbers vs trusted copy & cells vs trusted table$^\S$ \\
 \midrule
-FinQA & numbers scaled & 100 & 0.64 \small[0.60, 0.69] & 1.00 \small[1.00, 1.00] & 1.00 \small[1.00, 1.00] \\
-TAT-QA & numbers scaled & 100 & 0.68 \small[0.64, 0.72] & 1.00 \small[1.00, 1.00] & 1.00 \small[1.00, 1.00] \\
+FinQA & numbers scaled & 100 & 100\% & 0.64 \small[0.60, 0.69] & 1.00 \small[1.00, 1.00] & 1.00 \small[1.00, 1.00] (31\%) \\
+FinQA & periods swapped & 100 & 23\% & 0.50 \small[0.50, 0.50] & 0.50 \small[0.50, 0.50] & 0.87 \small[0.79, 0.94] (31\%) \\
+FinQA & rows swapped & 100 & 30\% & 0.50 \small[0.50, 0.50] & 0.50 \small[0.50, 0.50] & 0.97 \small[0.92, 1.00] (31\%) \\
+TAT-QA & numbers scaled & 100 & 100\% & 0.68 \small[0.64, 0.73] & 1.00 \small[1.00, 1.00] & 1.00 \small[1.00, 1.00] (95\%) \\
+TAT-QA & periods swapped & 100 & 86\% & 0.50 \small[0.50, 0.50] & 0.50 \small[0.50, 0.50] & 0.96 \small[0.93, 0.98] (94\%) \\
+TAT-QA & rows swapped & 100 & 93\% & 0.50 \small[0.50, 0.50] & 0.50 \small[0.50, 0.50] & 0.99 \small[0.98, 1.00] (94\%) \\
 \bottomrule
 \end{tabular}

@@ -19,6 +19,7 @@ Usage:
 import argparse
 import csv
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -62,7 +63,10 @@ def analyse_run(path, boot, rng):
                 score += [fn(clean[i], clean[i]), fn(edited[i], clean[i])]
                 label += [1.0, 0.0]
                 group += [i, i]
-            res[name] = {"needs": needs, **boot_auroc(score, label, group, boot, rng)}
+            # items on which the check is defined (it needs numbers, or table cells, in the evidence)
+            defined = sum(not math.isnan(fn(clean[i], clean[i])) for i in ids)
+            res[name] = {"needs": needs, "coverage": defined / len(ids), **boot_auroc(score, label, group, boot, rng)}
+        res["share_items_edited"] = sum(clean[i] != edited[i] for i in ids) / len(ids)
         out["levels"][str(int(level))] = res
     return out
 
@@ -80,8 +84,8 @@ def main():
         if r:
             result[name] = r
             top = r["levels"][max(r["levels"], key=int)]
-            print(f"{name:28s} {r['mode']:12s} n={r['n_items']:3d}  " + "  ".join(
-                f"{k}={v['auroc']:.2f}" for k, v in top.items()))
+            print(f"{name:28s} {r['mode']:12s} n={r['n_items']:3d} edited={top['share_items_edited']:.2f}  " + "  ".join(
+                f"{k}={v['auroc']:.2f}(cov {v['coverage']:.2f})" for k, v in top.items() if k != "share_items_edited"))
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(result, indent=1), encoding="utf-8")
     print("wrote", args.out)
