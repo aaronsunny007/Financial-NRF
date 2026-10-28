@@ -1,0 +1,140 @@
+name: judge
+
+# Scores the responses of a finished run with a model-based faithfulness judge (experiments/llm_judge.py), on
+# free CPU runners through llama.cpp. The responses are read from results/scale/<tag>/ in the repository.
+# Each shard pushes its output to a judge-<run>-<k> branch; the collect job merges them into
+# results/scale/<tag>/judge_<split>.csv on a judge-results-<run> branch.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Run directory under results/scale/
+        default: 'q7bcorrupt_test'
+      split:
+        description: Split of that run (dev or test)
+        default: 'test'
+      gguf:
+        description: Judge model as <hf repo>:<file>
+        default: 'bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf'
+      shards:
+        description: Number of parallel shards
+        default: '10'
+      limit:
+        description: Judge only this many rows per shard (0 = all; use a small number for a pilot)
+        default: '0'
+      cleanup:
+        description: Delete the temporary judge-* branches and do nothing else
+        default: 'false'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: ${{ inputs.cleanup == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          for b in $(git ls-remote --heads origin 'judge-*' | awk '{print $2}'); do
+            git push origin --delete "${b#refs/heads/}" || true
+          done
+
+  plan:
+    if: ${{ inputs.cleanup != 'true' }}
+    runs-on: ubuntu-latest
+    outputs:
+      shards: ${{ steps.p.outputs.shards }}
+    steps:
+      - id: p
+        env:
+          SHARDS: ${{ inputs.shards }}
+        run: python3 -c "import json,os; print('shards=' + json.dumps(list(range(int(os.environ['SHARDS'])))))" >> "$GITHUB_OUTPUT"
+
+  judge:
+    name: judge (shard ${{ matrix.shard }})
+    if: ${{ inputs.cleanup != 'true' }}
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        shard: ${{ fromJSON(needs.plan.outputs.shards) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install llama.cpp
+        run: pip install llama-cpp-python huggingface_hub --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+      - name: Judge this shard's rows
+        env:
+          TAG: ${{ inputs.tag }}
+          SPLIT: ${{ inputs.split }}
+          GGUF: ${{ inputs.gguf }}
+          SHARDS: ${{ inputs.shards }}
+          SHARD: ${{ matrix.shard }}
+          LIMIT: ${{ inputs.limit }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          mkdir -p out
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          push_state() {
+            git add -f out/judge_${SHARD}.jsonl 2>/dev/null || true
+            git commit -qm "judge shard ${SHARD}" 2>/dev/null || true
+            git push -qf origin HEAD:refs/heads/judge-${RUN_ID}-${SHARD} 2>/dev/null || true
+          }
+          python -m experiments.llm_judge --dir "results/scale/$TAG" --split "$SPLIT" --gguf "$GGUF" \
+            --shard "${SHARD}/${SHARDS}" --limit "$LIMIT" --out out/judge_${SHARD}.jsonl > out/log_${SHARD}.txt 2>&1 &
+          pid=$!
+          while kill -0 $pid 2>/dev/null; do sleep 240; push_state; done
+          wait $pid || true
+          push_state
+          tail -n 5 out/log_${SHARD}.txt
+
+  collect:
+    needs: judge
+    if: ${{ !cancelled() && inputs.cleanup != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Merge the shard outputs
+        env:
+          TAG: ${{ inputs.tag }}
+          SPLIT: ${{ inputs.split }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          git fetch -q origin "+refs/heads/judge-${RUN_ID}-*:refs/remotes/judge/*"
+          mkdir -p parts "results/scale/$TAG"
+          for ref in $(git for-each-ref --format='%(refname)' refs/remotes/judge); do
+            k=${ref##*/}; k=${k##*-}
+            git show "$ref:out/judge_${k}.jsonl" > "parts/judge_${k}.jsonl" 2>/dev/null || echo "no output on $ref"
+          done
+          python3 - <<'PY'
+          import csv, glob, json, os
+          rows = {}
+          for p in glob.glob("parts/*.jsonl"):
+              for line in open(p):
+                  if line.strip():
+                      r = json.loads(line)
+                      rows[(r["level"], r["id"])] = r
+          out = f"results/scale/{os.environ['TAG']}/judge_{os.environ['SPLIT']}.csv"
+          with open(out, "w", newline="") as f:
+              w = csv.writer(f)
+              w.writerow(["noise_level", "id", "claims", "supported", "faithfulness"])
+              for (lv, i), r in sorted(rows.items()):
+                  w.writerow([lv, i, r["claims"], r["supported"], r["faithfulness"]])
+          print(len(rows), "judged rows ->", out)
+          PY
+      - name: Commit to a results branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "judge-results-${{ github.run_id }}"
+          git add -f results/scale/${{ inputs.tag }}/judge_${{ inputs.split }}.csv
+          git commit -m "Judge scores for ${{ inputs.tag }} (run ${{ github.run_id }})"
+          git push origin "judge-results-${{ github.run_id }}"
