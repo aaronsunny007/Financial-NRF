@@ -144,9 +144,9 @@ needs no gold answer separates corrupted from clean evidence better than AUROC 0
 groundedness, the hallucination flag, stated confidence, and a RAGAs-style faithfulness judge (Llama-3.1-8B, 0.46 to 0.55). Support measured
 against the clean evidence reaches 0.84 to 0.94.
 
-Two realistic errors that keep every number the document contains and only misplace it (swapped periods, swapped rows) cost Qwen2.5-7B up to
-54 points of accuracy on TAT-QA. Every response-side score stays at 0.49 to 0.55, and so does support measured against the clean *numbers*
-(0.50 to 0.52), because each number is still genuine. Checks on the evidence itself (`framework/evidence_consistency.py`,
+Two realistic errors that keep every number the document contains and only misplace it (swapped periods, swapped rows) cost Qwen2.5-7B and Llama-3.1-8B up to
+54 points of accuracy on TAT-QA. Every response-side score stays at 0.43 to 0.55 (almost all at 0.48 to 0.55), and so does support measured against the clean *numbers*
+(0.43 to 0.52), because each number is still genuine. Checks on the evidence itself (`framework/evidence_consistency.py`,
 `experiments/evidence_checks.py`): redundancy of figures across passages 0.64 to 0.68 for scaled numbers and 0.50 for swaps; arithmetic
 self-consistency 0.44 to 0.50 (it does not work); numbers against a trusted copy 1.00 for scaled and 0.50 for swapped; table cells against a
 trusted structured copy 0.87 to 0.99 for the swaps. As detectors of wrong answers and of real retrieval misses the response-side measures are
@@ -386,7 +386,7 @@ committed results.
 - **Evidence support is numerical overlap**, and the entailment alternative (a small NLI model) did no better. Neither
   sees corruption of the evidence it is given; only a trusted reference does.
 - **The corrupted-evidence tests are injected, not natural.** Numbers are scaled, or periods and rows are swapped (the swaps were run
-  for Qwen2.5-7B only). The swaps are closer to real parsing failures, but they still show what the measures *can* detect, not how often real
+  for Qwen2.5-7B and Llama-3.1-8B only). The swaps are closer to real parsing failures, but they still show what the measures *can* detect, not how often real
   errors look like this. The cell-level check that catches them assumes a trusted structured copy of the source.
 - **The composite weighting is assigned, not learned.** Whether some weighting works could not be settled with five-point
   correlations; the corruption experiment shows the useful signal is accuracy, calibration-through-accuracy, and support

@@ -61,16 +61,16 @@ So the composite does fall with corrupted evidence, but only through the terms t
 
 Scaling every number is a blunt error. The realistic manipulations keep every number the document contains and only misplace it (Section~\ref{sec:setup}).
 They still hurt the model, more on TAT-QA, where a table row is nearly always in the retrieved evidence (the evidence of $86$ to $93$ of $100$ items is changed), than on FinQA, where only $23$ to $30$ of $100$ items have an affected table row.
-For Qwen2.5-7B, accuracy on TAT-QA falls from $0.62$ to $0.15$ when periods are swapped and to $0.08$ when rows are swapped; on FinQA it falls from $0.53$ to $0.46$ and $0.39$.
+For Qwen2.5-7B, accuracy on TAT-QA falls from $0.62$ to $0.15$ when periods are swapped and to $0.08$ when rows are swapped; on FinQA it falls from $0.53$ to $0.46$ and $0.39$. Llama-3.1-8B, a second generator family, behaves alike: on TAT-QA from $0.56$ to $0.16$ and $0.09$, on FinQA from $0.48$ to $0.46$ and $0.42$. The evidence is the same for both generators, so the shares of items edited coincide.
 
-Table~\ref{tab:realistic} gives the AUROC for telling the fully edited evidence from the clean evidence. No response-side measure notices, the model-based judge included: all stay between $0.49$ and $0.55$.
-More important is the last column. Support measured against the clean evidence, which separated scaled numbers almost perfectly (AUROC $0.84$ to $0.94$ in Table~\ref{tab:corrupt-auroc}), is at $0.50$ to $0.52$ here, because every number in the edited evidence still occurs in the clean evidence.
+Table~\ref{tab:realistic} gives the AUROC for telling the fully edited evidence from the clean evidence. No response-side measure notices: across the eight runs they lie between $0.43$ and $0.55$ (the model-based judge, run for the Qwen generator only, between $0.49$ and $0.55$). The two lowest values, numeric-overlap support ($0.43$) and lexical groundedness ($0.45$) on TAT-QA rows swapped for Llama, are slight reversals, not detections.
+More important is the last column. Support measured against the clean evidence, which separated scaled numbers almost perfectly (AUROC $0.84$ to $0.94$ in Table~\ref{tab:corrupt-auroc}), is between $0.43$ and $0.52$ here, because every number in the edited evidence still occurs in the clean evidence.
 A verifier that compares the \emph{numbers} of the evidence with a trusted copy is blind to this class of error.
 
 \begin{table*}[t]
 \centering\small
 \resizebox{\textwidth}{!}{\input{generated/table_realistic.tex}}
-\caption{AUROC (95\% interval) for separating fully edited from clean evidence when table rows have their periods or values swapped (Qwen2.5-7B, 100 items per row). $^\dagger$ needs the gold answer. $^\ddagger$ needs the clean evidence; it compares numbers only.}
+\caption{AUROC (95\% interval) for separating fully edited from clean evidence when table rows have their periods or values swapped (Qwen2.5-7B and Llama-3.1-8B, 100 items per row; the judge was run for the Qwen runs only). $^\dagger$ needs the gold answer. $^\ddagger$ needs the clean evidence; it compares numbers only.}
 \label{tab:realistic}
 \end{table*}
 
