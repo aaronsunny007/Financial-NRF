@@ -26,7 +26,7 @@ on:
         description: Judge only this many rows per shard ('all' for every row; a small number for a pilot)
         default: 'all'
       cleanup:
-        description: Delete the temporary judge-* branches and do nothing else
+        description: Delete the temporary judge-*, cpu-gen-*, cpu-rerun-results-* and claude/gap-closure branches and do nothing else
         default: 'false'
 
 permissions:
@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          for b in $(git ls-remote --heads origin 'judge-*' | awk '{print $2}'); do
+          for b in $(git ls-remote --heads origin 'judge-*' 'cpu-gen-*' 'cpu-rerun-results-*' 'claude/gap-closure' | awk '{print $2}'); do
             git push origin --delete "${b#refs/heads/}" || true
           done
 
