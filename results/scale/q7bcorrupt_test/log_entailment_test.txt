@@ -1,5 +1,5 @@
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 /opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
   warnings.warn(
-experiment4_results_test_per_example.csv: 500 rows, 489 with at least one claim -> experiment4_nli_test.csv
-experiment5_results_test.csv: 300 rows, 266 with at least one claim -> experiment5_nli_test.csv
+experiment4_results_test_per_example.csv: 1000 rows, 986 with at least one claim -> experiment4_nli_test.csv
+experiment5_results_test.csv: 600 rows, 542 with at least one claim -> experiment5_nli_test.csv

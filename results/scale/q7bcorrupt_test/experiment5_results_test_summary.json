@@ -2,55 +2,55 @@
   "split": "test",
   "engine": "replay",
   "ness_mode": "strict",
-  "n_per_condition": 100,
+  "n_per_condition": 200,
   "oracle_skipped_no_gold_inds": 0,
   "conditions": {
     "closed_book": {
       "condition": "closed_book",
-      "n": 100,
-      "n_scored_numeric": 97,
+      "n": 200,
+      "n_scored_numeric": 193,
       "accuracy": 0.0,
       "accuracy_ci_low": 0.0,
-      "accuracy_ci_high": 0.03809538920445529,
+      "accuracy_ci_high": 0.019516199827678698,
       "evidence_support": 0.0,
       "hallucination_rate": 1.0,
       "verifier_verified_rate": 0.0,
-      "mean_self_reported_confidence": 0.21649484536082478,
-      "ece": 0.21649484536082475,
-      "onrs": 0.15670103092783505
+      "mean_self_reported_confidence": 0.22590673575129527,
+      "ece": 0.22590673575129538,
+      "onrs": 0.15481865284974095
     },
     "retrieval": {
       "condition": "retrieval",
-      "n": 100,
-      "n_scored_numeric": 97,
-      "accuracy": 0.5463917525773195,
-      "accuracy_ci_low": 0.4474391434787438,
-      "accuracy_ci_high": 0.6418097379352756,
-      "evidence_support": 0.7831980532797093,
+      "n": 200,
+      "n_scored_numeric": 193,
+      "accuracy": 0.5492227979274611,
+      "accuracy_ci_low": 0.4787446236115389,
+      "accuracy_ci_high": 0.6177796883225237,
+      "evidence_support": 0.775832517560782,
       "hallucination_rate": 0.02,
-      "verifier_verified_rate": 0.71,
-      "mean_self_reported_confidence": 0.9036082474226811,
-      "ece": 0.35721649484536117,
-      "onrs": 0.7234336427880365
+      "verifier_verified_rate": 0.685,
+      "mean_self_reported_confidence": 0.9044041450777229,
+      "ece": 0.3551813471502594,
+      "onrs": 0.722480325216421
     },
     "oracle": {
       "condition": "oracle",
-      "n": 100,
-      "n_scored_numeric": 97,
-      "accuracy": 0.6185567010309279,
-      "accuracy_ci_low": 0.5191255982790659,
-      "accuracy_ci_high": 0.7089548764456509,
-      "evidence_support": 0.748724757702177,
-      "hallucination_rate": 0.02,
-      "verifier_verified_rate": 0.68,
-      "mean_self_reported_confidence": 0.9128865979381448,
-      "ece": 0.2943298969072168,
-      "onrs": 0.7473184582384881
+      "n": 200,
+      "n_scored_numeric": 193,
+      "accuracy": 0.5958549222797928,
+      "accuracy_ci_low": 0.5254040885294873,
+      "accuracy_ci_high": 0.6625643083947401,
+      "evidence_support": 0.7335713814756329,
+      "hallucination_rate": 0.055,
+      "verifier_verified_rate": 0.63,
+      "mean_self_reported_confidence": 0.90854922279793,
+      "ece": 0.3126943005181349,
+      "onrs": 0.7252890310230007
     }
   },
   "error_decomposition": {
-    "retrieval_attributable_error": 0.07216494845360832,
-    "reasoning_attributable_error": 0.38144329896907214,
-    "retrieval_contribution_over_closed_book": 0.5463917525773195
+    "retrieval_attributable_error": 0.04663212435233166,
+    "reasoning_attributable_error": 0.40414507772020725,
+    "retrieval_contribution_over_closed_book": 0.5492227979274611
   }
 }
