@@ -1,0 +1,2 @@
+{"_meta": {"model": "meta-llama/Llama-3.1-8B-Instruct", "precision": "Q4_K_M 4-bit GGUF (llama.cpp)"}}
+{"key": "060e5fcffa8cde6c51ab0629eb480fa343f3fc7628861eb5ff986dfc5def4fa5", "response": "Reasoning: The evidence lists three values for total rental expense under operating leases for fiscal years 2006, 2005, and 2004, respectively. The question asks for the percentage change from 2005 to 2006. So 2006 = $100690000 and 2005 = $92710000. Change = (100690000 - 92710000) / 92710000 * 100 = 882.5\n\nFinal Answer: 882.5%\n\nConfidence: 0.9", "seconds": 117.31}
