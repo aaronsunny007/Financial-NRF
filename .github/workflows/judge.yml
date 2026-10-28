@@ -6,8 +6,6 @@ name: judge
 # results/scale/<tag>/judge_<split>.csv on a judge-results-<run> branch.
 
 on:
-  push:
-    paths: ['.github/workflows/judge.yml']   # a push to this file runs a 1-shard, 2-row pilot
   workflow_dispatch:
     inputs:
       tag:
