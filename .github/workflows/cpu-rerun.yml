@@ -50,6 +50,12 @@ on:
       gguf:
         description: "Run a 4-bit GGUF build through llama.cpp instead, as <hf repo>:<file> (model then only names the run)"
         default: ''
+      seed_from:
+        description: Path of an earlier generations.jsonl in the repository whose entries are reused (prompts that match are not regenerated)
+        default: ''
+      levels:
+        description: Comma-separated corruption levels overriding the mode's default (for example 0,50,100)
+        default: ''
       resume_from:
         description: Run id whose shard branches should seed the caches (to finish an interrupted run)
         default: ''
@@ -106,6 +112,8 @@ jobs:
       NRF_GEN_CACHE: ${{ github.workspace }}/gen/shard_${{ matrix.shard }}.jsonl
       NRF_CPU_DTYPE: ${{ inputs.dtype }}
       NRF_DATASET: ${{ inputs.dataset }}
+      NRF_LEVELS: ${{ inputs.levels }}
+      NRF_GEN_CACHE_READ: ${{ inputs.seed_from != '' && format('{0}/{1}', github.workspace, inputs.seed_from) || '' }}
       NRF_GGUF: ${{ inputs.gguf }}
       NRF_LLM_MODEL: ${{ inputs.model }}
       NRF_TEMPERATURE: ${{ inputs.temperature }}
@@ -202,6 +210,7 @@ jobs:
     env:
       HF_HUB_DISABLE_PROGRESS_BARS: '1'
       NRF_DATASET: ${{ inputs.dataset }}
+      NRF_LEVELS: ${{ inputs.levels }}
       NRF_LLM_MODEL: ${{ inputs.model }}
       NRF_TEMPERATURE: ${{ inputs.temperature }}
       NRF_GEN_SEED: ${{ inputs.gen_seed }}
@@ -231,6 +240,7 @@ jobs:
         env:
           RUN_ID: ${{ github.run_id }}
           TAG: ${{ inputs.tag }}
+          SEED_FROM: ${{ inputs.seed_from }}
         run: |
           git fetch -q origin "+refs/heads/cpu-gen-${RUN_ID}-*:refs/remotes/gen/*"
           mkdir -p caches "results/${TAG}"
@@ -242,7 +252,9 @@ jobs:
           python - <<'PY'
           import glob, json, os
           seen, meta, n_in = {}, {}, 0
-          for path in sorted(glob.glob("caches/*.jsonl")):
+          seed = os.environ.get("SEED_FROM", "")
+          paths = sorted(glob.glob("caches/*.jsonl")) + ([seed] if seed and os.path.exists(seed) else [])
+          for path in paths:
               for line in open(path, encoding="utf-8"):
                   line = line.strip()
                   if not line:

@@ -57,6 +57,7 @@ confidence, ECE is NaN and ONRS is reported as None for that level rather
 than defaulting ECE to 0 and silently claiming perfect calibration.
 """
 
+import os
 import sys
 import csv
 import json
@@ -125,6 +126,66 @@ def corrupt_evidence(evidence: str, level: int, key: str) -> str:
 
     return _CORRUPT_NUM.sub(repl, evidence)
 
+# Realistic evidence errors. Unlike "corrupt", these keep every number the document really contains
+# and only misplace it, the way a mis-parsed table or an off-by-one column does:
+#   period_swap  the values of a table row are rotated across its period headers
+#                ("2015: 5829 | 2014: 5735" becomes "2015: 5735 | 2014: 5829")
+#   row_swap     a table row's values are exchanged with those of the next table row in the evidence
+# The level is the share of eligible table rows affected (chosen deterministically per item, so the sets nest).
+REALISTIC_LEVELS = [0, 50, 100]
+EVIDENCE_EDIT_MODES = ("corrupt", "period_swap", "row_swap")
+
+
+def _row_pick(key: str, i: int, level: int) -> bool:
+    import hashlib
+    return int(hashlib.sha256(f"{key}|{i}|row".encode()).hexdigest()[:8], 16) % 100 < level
+
+
+def swap_periods(evidence: str, level: int, key: str) -> str:
+    """Rotate the values of table rows across their column headers."""
+    if level <= 0:
+        return evidence
+    out = []
+    eligible = 0
+    for line in evidence.split("\n"):
+        if line.startswith("- [table_row] ") and " -- " in line:
+            label, payload = line.split(" -- ", 1)
+            parts = payload.split(" | ")
+            if len(parts) >= 2 and all(": " in p for p in parts):
+                heads = [p.split(": ", 1)[0] for p in parts]
+                vals = [p.split(": ", 1)[1] for p in parts]
+                if len(set(vals)) > 1:
+                    eligible += 1
+                    if _row_pick(key, eligible, level):
+                        vals = vals[1:] + vals[:1]
+                        line = label + " -- " + " | ".join(f"{h}: {v}" for h, v in zip(heads, vals))
+        out.append(line)
+    return "\n".join(out)
+
+
+def swap_rows(evidence: str, level: int, key: str) -> str:
+    """Exchange the values of a table row with those of the next table row in the evidence."""
+    if level <= 0:
+        return evidence
+    lines = evidence.split("\n")
+    idx = [i for i, l in enumerate(lines) if l.startswith("- [table_row] ") and " -- " in l]
+    if len(idx) < 2:
+        return evidence
+    heads = [lines[i].split(" -- ", 1)[0] for i in idx]
+    payloads = [lines[i].split(" -- ", 1)[1] for i in idx]
+    new = list(payloads)
+    for k in range(len(idx)):
+        if _row_pick(key, k + 1, level) and payloads[k] != payloads[(k + 1) % len(idx)]:
+            new[k] = payloads[(k + 1) % len(idx)]
+    for k, i in enumerate(idx):
+        lines[i] = heads[k] + " -- " + new[k]
+    return "\n".join(lines)
+
+
+def edit_evidence(mode: str, evidence: str, level: int, key: str) -> str:
+    return {"corrupt": corrupt_evidence, "period_swap": swap_periods, "row_swap": swap_rows}[mode](evidence, level, key)
+
+
 # Each noise value is its own sentence, phrased in filing register, so it
 # becomes its own retrieval chunk and competes with genuine evidence on
 # equal footing -- the same reasoning as experiment2's adversarial set.
@@ -177,7 +238,7 @@ def main():
     parser.add_argument("--n", type=int, default=None, help="Override sample count per noise level")
     parser.add_argument("--seed", type=int, default=SEED)
     parser.add_argument("--top-k", type=int, default=None, help="Override retrieval top-k")
-    parser.add_argument("--injection-mode", choices=["evidence", "document", "corrupt"], default="evidence",
+    parser.add_argument("--injection-mode", choices=["evidence", "document", "corrupt", "period_swap", "row_swap"], default="evidence",
                         help="WHERE the noise is injected. 'evidence' (default) forces distractors into "
                              "the evidence block after retrieval, so the model definitely sees them -- "
                              "this is what tests whether ONRS RESPONDS to degradation. 'document' adds "
@@ -209,10 +270,19 @@ def main():
     print("EXPERIMENT 4: OVERALL RELIABILITY UNDER VARYING NOISE")
     print(f"Split: {args.split} | N per noise level: {n_examples} | Seed: {args.seed} | "
           f"Engine: {args.engine} | NESS mode: {args.ness_mode}")
-    levels = CORRUPT_LEVELS if args.injection_mode == "corrupt" else NOISE_LEVELS
+    if args.injection_mode == "corrupt":
+        levels = CORRUPT_LEVELS
+    elif args.injection_mode in EVIDENCE_EDIT_MODES:
+        levels = REALISTIC_LEVELS
+    else:
+        levels = NOISE_LEVELS
+    if os.environ.get("NRF_LEVELS"):
+        levels = [int(x) for x in os.environ["NRF_LEVELS"].split(",")]
     print(f"Noise levels: {levels} | Total generations: {n_examples * len(levels)}")
     if args.injection_mode == "corrupt":
         print("Corruption definition: level% of the numeric tokens in the retrieved evidence are replaced by wrong values")
+    elif args.injection_mode in EVIDENCE_EDIT_MODES:
+        print(f"Evidence edit '{args.injection_mode}': level% of the eligible table rows in the retrieved evidence are misplaced")
     else:
         print(f"Noise definition: level% of a {len(NOISE_SENTENCES)}-sentence distractor pool "
               f"-> {[int(len(NOISE_SENTENCES) * lv / 100) for lv in NOISE_LEVELS]} sentences injected")
@@ -235,7 +305,7 @@ def main():
     level_summaries = []
 
     for noise_level in levels:
-        injected = 0 if args.injection_mode == "corrupt" else int(len(NOISE_SENTENCES) * noise_level / 100)
+        injected = 0 if args.injection_mode in EVIDENCE_EDIT_MODES else int(len(NOISE_SENTENCES) * noise_level / 100)
         print("\n" + "-" * 60)
         print(f"NOISE LEVEL: {noise_level}%  ({injected} distractor sentence(s) injected)")
         print("-" * 60)
@@ -243,10 +313,10 @@ def main():
         level_rows = []
         for i, item in enumerate(data, 1):
             override = None
-            if args.injection_mode == "corrupt":
+            if args.injection_mode in EVIDENCE_EDIT_MODES:
                 model_item, extra = item, None
                 clean_for_corrupt = rag.build_evidence_text(rag.retrieve(item, item["qa"]["question"]))
-                override = corrupt_evidence(clean_for_corrupt, noise_level, str(item.get("id")))
+                override = edit_evidence(args.injection_mode, clean_for_corrupt, noise_level, str(item.get("id")))
             elif args.injection_mode == "document":
                 model_item, extra = apply_noise(item, noise_level), None
             else:  # evidence injection -- bypass retrieval so the noise is seen
@@ -263,7 +333,7 @@ def main():
             # scores well; this variant asks whether it stayed grounded in the true ones.
             clean_evidence = rag.build_evidence_text(
                 rag.retrieve(item, item["qa"]["question"])
-            ) if args.injection_mode in ("evidence", "corrupt") else evidence_text
+            ) if args.injection_mode in ("evidence",) + EVIDENCE_EDIT_MODES else evidence_text
             gold_answer, answer_type = resolve_gold_answer(item)
 
             acc = nrf.numerical_accuracy(response, gold_answer)
@@ -276,7 +346,7 @@ def main():
             # metric is insensitive" and "there was no degradation to
             # detect because retrieval removed it". Those have opposite
             # interpretations, so the check is recorded per example.
-            if args.injection_mode == "corrupt":
+            if args.injection_mode in EVIDENCE_EDIT_MODES:
                 noise_reached = int(noise_level > 0 and evidence_text != clean_for_corrupt)
             else:
                 noise_reached = int(any(
