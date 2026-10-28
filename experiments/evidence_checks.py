@@ -5,6 +5,7 @@ experiments/paper_analysis.py shows that checks on the response cannot. This scr
 the three checks in framework/evidence_consistency.py, which look at the evidence instead:
 
     redundancy        needs only the evidence
+    arithmetic        needs only the evidence (a negative result)
     number_source     needs a trusted copy of the source (here, the clean retrieved evidence)
     pair_source       needs a trusted *structured* copy (here, the clean table cells)
 
@@ -28,12 +29,14 @@ import numpy as np
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 from experiments.paper_analysis import boot_auroc  # noqa: E402
-from framework.evidence_consistency import number_source_check, pair_source_check, redundancy_rate  # noqa: E402
+from framework.evidence_consistency import (arithmetic_explained_rate, number_source_check, pair_source_check,  # noqa: E402
+                                            redundancy_rate)  # noqa: E402
 
 csv.field_size_limit(sys.maxsize)
 MODES = ("corrupt", "period_swap", "row_swap")
 CHECKS = {
     "redundancy": ("needs only the evidence", lambda ev, src: redundancy_rate(ev)),
+    "arithmetic": ("needs only the evidence", lambda ev, src: arithmetic_explained_rate(ev)),
     "number_source": ("needs a trusted copy of the source", number_source_check),
     "pair_source": ("needs a trusted structured copy", pair_source_check),
 }

@@ -14,34 +14,43 @@ The full list of corrected claims is in the repository (\texttt{ERRATUM.md}).
 
 \section{Discussion}
 
-\paragraph{What the result does and does not say.}
-The corrupted-evidence test does not show that overlap or entailment scores are useless.
+\paragraph{What the results do and do not say.}
+The tests do not show that overlap, entailment or judge scores are useless.
 They measure faithfulness to the supplied context, and they do that job: a response that invents a number is flagged.
 The finding is about what that property cannot cover.
 When the failure is in the evidence, any score defined relative to the evidence reports ``faithful'' and is wrong about reliability.
 A composite that adds such a score to accuracy and calibration moves with corruption only through the two terms that depend on the gold answer, and so is no better than accuracy at a task where accuracy is unavailable.
 
-\paragraph{Implications for practice.}
-(i) Detecting bad evidence needs a signal about the evidence: agreement between independent retrievals or sources, checks of retrieved figures against a structured record, or a verifier for the evidence rather than for the response.
-(ii) Our clean-evidence reference scores well, which shows the information exists; the cost is access to a trusted copy.
+\paragraph{What gets past the limit.}
+Only checks that bring in something outside the response and the evidence it was given.
+The cheapest such signal, redundancy inside the evidence, is weak and fails when numbers are moved rather than changed.
+A trusted copy of the numbers handles changed numbers but not moved ones, which is the more realistic failure of a mis-parsed table.
+The check that handled every error we tried compares (row, column, value) cells with a trusted structured source, such as the XBRL record behind a filing. It needs that source to exist and the evidence to carry table structure, which limits it to part of the items (a third on FinQA).
+Where such a source exists the practical conclusion is simple: verify the evidence against it before generation, and do not read a faithfulness score as a reliability estimate.
+
+\paragraph{Implications for practice and for evaluation.}
+(i) A reliability pipeline needs a signal about the evidence, not only about the response.
+(ii) A verifier that compares numbers is not enough; compare structure.
 (iii) Validate an evidence-quality manipulation by its effect on the model before using it to evaluate a metric. The distractor sentences we first used would have been reported as a metric failure.
 
 \section{Conclusion}
 
-Reference-free reliability scores for numerical RAG are blind to corrupted evidence by construction, and a controlled test on two datasets and three generators from two model families confirms it: accuracy collapses while every measure that sees only the response and the supplied evidence stays near chance (AUROC at most 0.58).
-The same measures are weak and model-dependent at flagging wrong answers on clean evidence and real retrieval misses.
-Practitioners who need reliability estimates should treat such scores as faithfulness checks and add a signal about the evidence itself.
+Reference-free reliability scores for numerical RAG cannot see wrong evidence, and a controlled test on two datasets and four generators from two model families confirms it: accuracy collapses while every measure that sees only the response and the supplied evidence stays near chance (AUROC at most 0.60).
+Realistic errors that merely misplace genuine numbers cost as much accuracy and escape even a check of the numbers against the clean evidence; only a cell-level check against a trusted structured copy catches them.
+The same response-side measures are weak and model-dependent at flagging wrong answers on clean evidence and real retrieval misses.
+Practitioners who need reliability estimates should treat such scores as faithfulness checks and add a verification of the evidence against a trusted structured source.
 
 \section*{Limitations}
 
-The generators are small, open models (1.5B to 8B), run without fine-tuning; larger or instruction-tuned-for-finance models may express confidence differently.
-Accuracy is low for the smaller models (about 0.2 on FinQA for the 3B model; 0.47 to 0.62 for the 7B and 8B models), which limits the power of the correct-versus-incorrect comparisons; we report intervals instead of claiming equality.
-Corruption is synthetic and numeric; it isolates the structural point but is not a model of how real filings are wrong.
-The retrieval-miss analysis defines a miss by the absence of gold numbers in the retrieved text, which can disagree with whether the answer was recoverable; the TAT-QA oracle is document-level because the dataset has no cell-level evidence labels.
-The entailment measure uses one small NLI model and the lexical baseline is a heuristic; neither is a model-based RAGAs judge, which we could not run for free and do not claim to reproduce.
-The 7B and 8B models are 4-bit builds run through a different inference engine than the float32 models, so differences between sizes are confounded with precision.
+The generators are open models of 1.5B to 14B parameters, run without fine-tuning; larger or finance-tuned models may behave differently, and the 14B model was run on 100 items.
+Accuracy is low for the smaller models (about 0.2 on FinQA for the 3B model; 0.47 to 0.62 for the 7B and larger models), which limits the power of the correct-versus-incorrect comparisons; we report intervals instead of claiming equality.
+The scaled-number corruption is synthetic and numeric. The realistic errors (swapped periods and rows) are closer to real parsing failures but are still injected, were run for one generator (Qwen2.5-7B) and only on table rows, and on FinQA affect only the quarter to third of items whose retrieved evidence has an eligible table row.
+The cell-level check is, by construction, an upper bound: it assumes a trusted structured copy and that the evidence carries table structure.
+The retrieval-miss analysis defines a miss by the absence of gold numbers in the retrieved text, which can disagree with whether the answer was recoverable; the TAT-QA gold evidence is the operands of the annotated derivation because the dataset has no cell-level evidence labels.
+The entailment measure uses one small NLI model; the lexical baseline is a heuristic; the faithfulness judge is a single 4-bit 8B model with one prompt, run only on the clean and fully edited evidence, and a stronger judge or a different prompt may do better. It is a RAGAs-\emph{style} score, not the RAGAs implementation.
+The 7B, 8B and 14B models are 4-bit builds run through a different inference engine than the float32 models, so differences between sizes are confounded with precision.
 We do not report a GPU 4-bit run of the smaller models.
-Item counts (100 per run) are modest; pooling over runs narrows the intervals but mixes models.
+Item counts (100 to 200 per run) are modest; pooling over runs narrows the intervals but mixes models.
 
 \section*{Reproducibility}
 Code, prompts, per-response outputs for every run, and the GitHub Actions workflow that regenerates them on free CPU runners are at \url{https://github.com/aaronsunny007/Financial-NRF}. Tables and figures in this paper are produced from the result files by \texttt{experiments/paper\_analysis.py} and \texttt{experiments/paper\_figures.py}.

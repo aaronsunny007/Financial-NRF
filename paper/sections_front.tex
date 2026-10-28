@@ -20,12 +20,16 @@ We therefore replace a controlled share of the numbers in the retrieved evidence
 This does hurt: accuracy falls to near zero at full corruption.
 It also lets us ask which measures move.
 
+\paragraph{Why this is not as obvious as it sounds.}
+That a score defined relative to the supplied evidence cannot see wrong evidence follows from its definition. What does not follow is how the scores behave in practice, whether anything cheap gets past the limit, and which errors the obvious fix handles. We find that the obvious fix, comparing the numbers of the evidence with a trusted copy, handles scaled numbers perfectly and the realistic misplaced-number errors not at all, and that what handles both needs a trusted \emph{structured} copy.
+
 \paragraph{Contributions.}
 \begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
-\item A controlled corrupted-evidence test of reference-free reliability measures on two numerical financial QA datasets (FinQA and TAT-QA) with three generators from two model families (Qwen2.5 3B and 7B, Llama-3.1 8B), and smaller models in the secondary analyses.
-Measures that use only the response and the supplied evidence (numeric-overlap support, entailment support, lexical groundedness, a hallucination flag, verbalized confidence) barely distinguish a fully corrupted case from a clean one (AUROC at most 0.58 in any run). A score that compares the response with the \emph{uncorrupted} evidence can (AUROC 0.85 to 0.93), but it needs the reference we are trying to avoid.
-\item As detectors of wrong answers on clean evidence, and of real retrieval misses (the retriever fails to surface the numbers the answer needs), the same measures are weak and inconsistent: near chance when pooled on FinQA, modestly informative on TAT-QA, and with effects that change sign between smaller and larger models.
-\item A correction to a published scoring flaw in this line of work (the model's own confidence statement was counted as unsupported evidence), a demonstration that a five-point correlation and a weight sweep are too unstable to rank composites, and a recommendation that any evidence-quality manipulation be validated by its effect on the model before it is used to judge a metric.
+\item A controlled corrupted-evidence test of reference-free reliability measures, with a model-based faithfulness judge among them, on FinQA and TAT-QA and four generators from two families (Qwen2.5 3B, 7B and 14B, Llama-3.1 8B; 100 to 200 items per run). Measures that use only the response and the supplied evidence barely distinguish a fully corrupted case from a clean one (AUROC at most 0.60 in any run). A score that compares the response with the \emph{uncorrupted} evidence can (AUROC 0.84 to 0.94), but it needs the reference we are trying to avoid.
+\item Two realistic error types that misplace real numbers (a swapped period, a swapped row). They cost accuracy (up to 54 points on TAT-QA), are invisible to every response-side measure, and are invisible to the number-level clean reference that caught scaled numbers (AUROC 0.50 to 0.52).
+\item A comparison of checks on the evidence itself: redundancy (weak, only for scaled numbers), arithmetic self-consistency (does not work), numbers against a trusted copy (perfect for scaled numbers, chance for swaps) and table cells against a trusted structured copy (AUROC 0.87 to 0.99 for the swaps).
+\item As detectors of wrong answers and of real retrieval misses the response-side measures are weak and model-dependent: near chance when pooled on FinQA, modestly informative on TAT-QA, with effects that change sign between smaller and larger models.
+\item A correction to a scoring flaw in this line of work (the model's own confidence statement counted as unsupported evidence), a demonstration that an evidence-noise manipulation we first used did not degrade the model, and that five-point correlations and weight sweeps are too unstable to rank composites.
 \item All code, per-response outputs and the free CPU pipeline that produced them are public.\footnote{\url{https://github.com/aaronsunny007/Financial-NRF}}
 \end{itemize}
 

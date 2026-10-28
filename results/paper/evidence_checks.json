@@ -9,8 +9,17 @@
      "coverage": 1.0,
      "auroc": 0.55355,
      "ci95": [
-      0.5307275,
-      0.57778125
+      0.5311775,
+      0.57865625
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.4616,
+     "ci95": [
+      0.41924500000000003,
+      0.49830875
      ]
     },
     "number_source": {
@@ -18,7 +27,7 @@
      "coverage": 1.0,
      "auroc": 0.975,
      "ci95": [
-      0.95,
+      0.9548749999999999,
       0.995
      ]
     },
@@ -27,8 +36,8 @@
      "coverage": 0.31,
      "auroc": 0.9032258064516129,
      "ci95": [
-      0.8272380636604775,
-      0.9701648841354723
+      0.8275862068965517,
+      0.9666666666666667
      ]
     },
     "share_items_edited": 0.96
@@ -39,8 +48,17 @@
      "coverage": 1.0,
      "auroc": 0.606,
      "ci95": [
-      0.5728687499999999,
-      0.64263625
+      0.5725475,
+      0.64290125
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.4384,
+     "ci95": [
+      0.39233999999999997,
+      0.48145
      ]
     },
     "number_source": {
@@ -57,7 +75,7 @@
      "coverage": 0.31,
      "auroc": 0.9838709677419355,
      "ci95": [
-      0.95,
+      0.9463789682539683,
       1.0
      ]
     },
@@ -69,8 +87,17 @@
      "coverage": 1.0,
      "auroc": 0.6629,
      "ci95": [
-      0.6235325,
-      0.705675
+      0.6258,
+      0.70890625
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.44005,
+     "ci95": [
+      0.38919875,
+      0.49041124999999997
      ]
     },
     "number_source": {
@@ -87,7 +114,7 @@
      "coverage": 0.31,
      "auroc": 0.9838709677419355,
      "ci95": [
-      0.9473060344827586,
+      0.9464285714285714,
       1.0
      ]
     },
@@ -99,8 +126,179 @@
      "coverage": 1.0,
      "auroc": 0.63655,
      "ci95": [
-      0.59824875,
-      0.6876525
+      0.5944925,
+      0.68215
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.47985,
+     "ci95": [
+      0.43629,
+      0.52327875
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "coverage": 1.0,
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "coverage": 0.31,
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "share_items_edited": 1.0
+   }
+  }
+ },
+ "q14bcorrupt_test": {
+  "mode": "corrupt",
+  "n_items": 100,
+  "levels": {
+   "25": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.55355,
+     "ci95": [
+      0.53154625,
+      0.58085
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.4616,
+     "ci95": [
+      0.41887875,
+      0.50125
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "coverage": 1.0,
+     "auroc": 0.975,
+     "ci95": [
+      0.95,
+      0.995
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "coverage": 0.31,
+     "auroc": 0.9032258064516129,
+     "ci95": [
+      0.8275862068965517,
+      0.96875
+     ]
+    },
+    "share_items_edited": 0.96
+   },
+   "50": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.606,
+     "ci95": [
+      0.574545,
+      0.64145625
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.4384,
+     "ci95": [
+      0.39554875,
+      0.4794
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "coverage": 1.0,
+     "auroc": 0.995,
+     "ci95": [
+      0.985,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "coverage": 0.31,
+     "auroc": 0.9838709677419355,
+     "ci95": [
+      0.9464285714285714,
+      1.0
+     ]
+    },
+    "share_items_edited": 0.99
+   },
+   "75": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.6629,
+     "ci95": [
+      0.6241337499999999,
+      0.7029025
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.44005,
+     "ci95": [
+      0.38314125,
+      0.48790875
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "coverage": 1.0,
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "coverage": 0.31,
+     "auroc": 0.9838709677419355,
+     "ci95": [
+      0.9444444444444444,
+      1.0
+     ]
+    },
+    "share_items_edited": 1.0
+   },
+   "100": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.63655,
+     "ci95": [
+      0.59539125,
+      0.680755
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.47985,
+     "ci95": [
+      0.43193625,
+      0.5262175
      ]
     },
     "number_source": {
@@ -127,46 +325,64 @@
  },
  "q7bcorrupt_test": {
   "mode": "corrupt",
-  "n_items": 100,
+  "n_items": 200,
   "levels": {
    "25": {
     "redundancy": {
      "needs": "needs only the evidence",
      "coverage": 1.0,
-     "auroc": 0.55355,
+     "auroc": 0.5709125,
      "ci95": [
-      0.5315924999999999,
-      0.582065
+      0.554725,
+      0.590365
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.46035,
+     "ci95": [
+      0.4336753125,
+      0.48629687499999996
      ]
     },
     "number_source": {
      "needs": "needs a trusted copy of the source",
      "coverage": 1.0,
-     "auroc": 0.975,
+     "auroc": 0.9775,
      "ci95": [
-      0.95,
-      0.995
+      0.96,
+      0.99
      ]
     },
     "pair_source": {
      "needs": "needs a trusted structured copy",
-     "coverage": 0.31,
-     "auroc": 0.9032258064516129,
+     "coverage": 0.335,
+     "auroc": 0.9029850746268657,
      "ci95": [
-      0.8280541871921182,
-      0.9735294117647058
+      0.8538362068965517,
+      0.947780399473222
      ]
     },
-    "share_items_edited": 0.96
+    "share_items_edited": 0.97
    },
    "50": {
     "redundancy": {
      "needs": "needs only the evidence",
      "coverage": 1.0,
-     "auroc": 0.606,
+     "auroc": 0.6323,
      "ci95": [
-      0.57577375,
-      0.6447449999999999
+      0.603615625,
+      0.6628403125
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.4559875,
+     "ci95": [
+      0.42422156250000004,
+      0.4852378125
      ]
     },
     "number_source": {
@@ -174,29 +390,38 @@
      "coverage": 1.0,
      "auroc": 0.995,
      "ci95": [
-      0.985,
+      0.9875,
       1.0
      ]
     },
     "pair_source": {
      "needs": "needs a trusted structured copy",
-     "coverage": 0.31,
-     "auroc": 0.9838709677419355,
+     "coverage": 0.335,
+     "auroc": 0.9850746268656716,
      "ci95": [
-      0.9468749999999999,
+      0.9622605774728417,
       1.0
      ]
     },
-    "share_items_edited": 0.99
+    "share_items_edited": 0.995
    },
    "75": {
     "redundancy": {
      "needs": "needs only the evidence",
      "coverage": 1.0,
-     "auroc": 0.6629,
+     "auroc": 0.6817125,
      "ci95": [
-      0.62052125,
-      0.708005
+      0.650195625,
+      0.7148715625
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.4404125,
+     "ci95": [
+      0.409333125,
+      0.4695128125
      ]
     },
     "number_source": {
@@ -210,10 +435,10 @@
     },
     "pair_source": {
      "needs": "needs a trusted structured copy",
-     "coverage": 0.31,
-     "auroc": 0.9838709677419355,
+     "coverage": 0.335,
+     "auroc": 0.9925373134328358,
      "ci95": [
-      0.948125,
+      0.9754098360655737,
       1.0
      ]
     },
@@ -223,10 +448,19 @@
     "redundancy": {
      "needs": "needs only the evidence",
      "coverage": 1.0,
-     "auroc": 0.63655,
+     "auroc": 0.6647375,
      "ci95": [
-      0.59896125,
-      0.687015
+      0.63323,
+      0.6970534374999999
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.463025,
+     "ci95": [
+      0.429321875,
+      0.491571875
      ]
     },
     "number_source": {
@@ -240,7 +474,7 @@
     },
     "pair_source": {
      "needs": "needs a trusted structured copy",
-     "coverage": 0.31,
+     "coverage": 0.335,
      "auroc": 1.0,
      "ci95": [
       1.0,
@@ -265,6 +499,15 @@
       0.5
      ]
     },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.5,
+     "ci95": [
+      0.5,
+      0.5
+     ]
+    },
     "number_source": {
      "needs": "needs a trusted copy of the source",
      "coverage": 1.0,
@@ -279,14 +522,23 @@
      "coverage": 0.31,
      "auroc": 0.8064516129032258,
      "ci95": [
-      0.7142857142857143,
-      0.9020192307692307
+      0.7221813725490196,
+      0.890625
      ]
     },
     "share_items_edited": 0.19
    },
    "100": {
     "redundancy": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.5,
+     "ci95": [
+      0.5,
+      0.5
+     ]
+    },
+    "arithmetic": {
      "needs": "needs only the evidence",
      "coverage": 1.0,
      "auroc": 0.5,
@@ -309,8 +561,8 @@
      "coverage": 0.31,
      "auroc": 0.8709677419354839,
      "ci95": [
-      0.7947526737967914,
-      0.9397121212121212
+      0.7962752525252526,
+      0.9400714285714284
      ]
     },
     "share_items_edited": 0.23
@@ -327,8 +579,17 @@
      "coverage": 1.0,
      "auroc": 0.44505,
      "ci95": [
-      0.4127975,
-      0.47190499999999996
+      0.41254124999999997,
+      0.47160125
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.50065,
+     "ci95": [
+      0.4984,
+      0.5032
      ]
     },
     "number_source": {
@@ -345,8 +606,8 @@
      "coverage": 0.31,
      "auroc": 0.8387096774193549,
      "ci95": [
-      0.74625,
-      0.9107142857142857
+      0.7578629032258064,
+      0.9166666666666666
      ]
     },
     "share_items_edited": 0.24
@@ -359,6 +620,15 @@
      "ci95": [
       0.5,
       0.5
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.49635,
+     "ci95": [
+      0.4849,
+      0.50395125
      ]
     },
     "number_source": {
@@ -375,7 +645,7 @@
      "coverage": 0.31,
      "auroc": 0.967741935483871,
      "ci95": [
-      0.9166666666666666,
+      0.9142733990147783,
       1.0
      ]
     },
@@ -393,8 +663,17 @@
      "coverage": 0.99,
      "auroc": 0.5681052953780227,
      "ci95": [
-      0.5457254810495626,
-      0.59679625
+      0.5444566253644314,
+      0.5954025000000001
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.99,
+     "auroc": 0.45199469441893686,
+     "ci95": [
+      0.41556856443220075,
+      0.48271813827571847
      ]
     },
     "number_source": {
@@ -402,7 +681,7 @@
      "coverage": 0.99,
      "auroc": 0.9949494949494949,
      "ci95": [
-      0.9845360824742269,
+      0.9846938775510204,
       1.0
      ]
     },
@@ -411,8 +690,8 @@
      "coverage": 0.32,
      "auroc": 0.921875,
      "ci95": [
-      0.85,
-      0.978857334525939
+      0.8528676470588235,
+      0.9814814814814815
      ]
     },
     "share_items_edited": 0.99
@@ -423,8 +702,17 @@
      "coverage": 0.99,
      "auroc": 0.6221303948576676,
      "ci95": [
-      0.5846938775510204,
-      0.6668897531355014
+      0.5847924010828821,
+      0.6623646150902969
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.99,
+     "auroc": 0.4326089174574023,
+     "ci95": [
+      0.3872323047393123,
+      0.47090385412328195
      ]
     },
     "number_source": {
@@ -441,7 +729,7 @@
      "coverage": 0.32,
      "auroc": 0.984375,
      "ci95": [
-      0.9516129032258065,
+      0.9482531760435572,
       1.0
      ]
     },
@@ -453,8 +741,17 @@
      "coverage": 0.99,
      "auroc": 0.6605555555555556,
      "ci95": [
-      0.6209787878787879,
-      0.7084190096844736
+      0.6200946583178727,
+      0.7051087941268354
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.99,
+     "auroc": 0.44222222222222224,
+     "ci95": [
+      0.40239739795918367,
+      0.4828602092352092
      ]
     },
     "number_source": {
@@ -483,8 +780,17 @@
      "coverage": 0.99,
      "auroc": 0.665050505050505,
      "ci95": [
-      0.6186317803030303,
-      0.7118431122448979
+      0.6201988265306122,
+      0.713556505779444
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.99,
+     "auroc": 0.44247474747474747,
+     "ci95": [
+      0.4010088383838384,
+      0.48295994634967393
      ]
     },
     "number_source": {
@@ -519,8 +825,17 @@
      "coverage": 1.0,
      "auroc": 0.55355,
      "ci95": [
-      0.5336212499999999,
-      0.580935
+      0.53329375,
+      0.5792612500000001
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.4616,
+     "ci95": [
+      0.42229,
+      0.49787
      ]
     },
     "number_source": {
@@ -528,7 +843,7 @@
      "coverage": 1.0,
      "auroc": 0.975,
      "ci95": [
-      0.955,
+      0.95,
       0.995
      ]
     },
@@ -537,7 +852,7 @@
      "coverage": 0.31,
      "auroc": 0.9032258064516129,
      "ci95": [
-      0.8305989583333333,
+      0.8214285714285714,
       0.967741935483871
      ]
     },
@@ -549,8 +864,17 @@
      "coverage": 1.0,
      "auroc": 0.606,
      "ci95": [
-      0.5702612499999999,
-      0.6448125
+      0.5753475,
+      0.6438525
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.4384,
+     "ci95": [
+      0.39404,
+      0.4800025
      ]
     },
     "number_source": {
@@ -567,7 +891,7 @@
      "coverage": 0.31,
      "auroc": 0.9838709677419355,
      "ci95": [
-      0.9386875,
+      0.9444444444444444,
       1.0
      ]
     },
@@ -579,8 +903,17 @@
      "coverage": 1.0,
      "auroc": 0.6629,
      "ci95": [
-      0.6247425,
-      0.70538125
+      0.62089375,
+      0.71061
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.44005,
+     "ci95": [
+      0.38873874999999997,
+      0.48700375
      ]
     },
     "number_source": {
@@ -597,7 +930,7 @@
      "coverage": 0.31,
      "auroc": 0.9838709677419355,
      "ci95": [
-      0.9453869047619048,
+      0.9482296798029557,
       1.0
      ]
     },
@@ -609,8 +942,17 @@
      "coverage": 1.0,
      "auroc": 0.63655,
      "ci95": [
-      0.59542375,
-      0.67997875
+      0.59763375,
+      0.68245625
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 1.0,
+     "auroc": 0.47985,
+     "ci95": [
+      0.43304125,
+      0.5204599999999999
      ]
     },
     "number_source": {
@@ -645,8 +987,17 @@
      "coverage": 0.99,
      "auroc": 0.5856545250484645,
      "ci95": [
-      0.5637776606978879,
-      0.616374242229828
+      0.5613173723344557,
+      0.6144544497084548
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.99,
+     "auroc": 0.4797979797979798,
+     "ci95": [
+      0.4344393281297827,
+      0.5235370678883798
      ]
     },
     "number_source": {
@@ -654,8 +1005,8 @@
      "coverage": 0.99,
      "auroc": 0.9696969696969697,
      "ci95": [
-      0.9418418367346939,
-      0.9899520202020202
+      0.9444444444444444,
+      0.98989898989899
      ]
     },
     "pair_source": {
@@ -663,8 +1014,8 @@
      "coverage": 0.95,
      "auroc": 0.9526315789473684,
      "ci95": [
-      0.9201612903225806,
-      0.9791666666666666
+      0.9218544407894737,
+      0.979381443298969
      ]
     },
     "share_items_edited": 0.94
@@ -675,8 +1026,17 @@
      "coverage": 0.99,
      "auroc": 0.6437373737373737,
      "ci95": [
-      0.6066951893939394,
-      0.6856784848484847
+      0.6054589540816326,
+      0.6883025
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.99,
+     "auroc": 0.47015151515151515,
+     "ci95": [
+      0.4171590909090909,
+      0.5220444834183674
      ]
     },
     "number_source": {
@@ -693,7 +1053,7 @@
      "coverage": 0.95,
      "auroc": 0.9947368421052631,
      "ci95": [
-      0.9838709677419355,
+      0.9836956521739131,
       1.0
      ]
     },
@@ -705,8 +1065,17 @@
      "coverage": 0.99,
      "auroc": 0.685,
      "ci95": [
-      0.638195707070707,
-      0.7344830303030303
+      0.6341337499999999,
+      0.7363140530303031
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.99,
+     "auroc": 0.46146464646464647,
+     "ci95": [
+      0.4114592803030303,
+      0.5152249999999999
      ]
     },
     "number_source": {
@@ -735,8 +1104,17 @@
      "coverage": 0.99,
      "auroc": 0.6808585858585858,
      "ci95": [
-      0.6383253914141414,
-      0.7313361742424243
+      0.6391386440940012,
+      0.7289025
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.99,
+     "auroc": 0.4718181818181818,
+     "ci95": [
+      0.41942930780559645,
+      0.5267026970738311
      ]
     },
     "number_source": {
@@ -771,8 +1149,17 @@
      "coverage": 0.98,
      "auroc": 0.5910558100791337,
      "ci95": [
-      0.5556355794270833,
-      0.6284890469107038
+      0.5556561921258449,
+      0.6318929361979166
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.98,
+     "auroc": 0.5002603082049146,
+     "ci95": [
+      0.45886349437734275,
+      0.5444471367839302
      ]
     },
     "number_source": {
@@ -780,7 +1167,7 @@
      "coverage": 0.98,
      "auroc": 0.9897959183673469,
      "ci95": [
-      0.974351725226173,
+      0.9744897959183674,
       1.0
      ]
     },
@@ -789,7 +1176,7 @@
      "coverage": 0.94,
      "auroc": 0.9840425531914894,
      "ci95": [
-      0.967391304347826,
+      0.9635416666666666,
       1.0
      ]
     },
@@ -801,8 +1188,17 @@
      "coverage": 0.98,
      "auroc": 0.634527280299875,
      "ci95": [
-      0.5914620472593255,
-      0.6827038301749271
+      0.5913682265366933,
+      0.6849387466341923
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.98,
+     "auroc": 0.4963036234902124,
+     "ci95": [
+      0.4460417456126926,
+      0.5501606449020642
      ]
     },
     "number_source": {
@@ -810,7 +1206,7 @@
      "coverage": 0.98,
      "auroc": 0.9948979591836735,
      "ci95": [
-      0.9798939393939394,
+      0.984375,
       1.0
      ]
     },
@@ -831,8 +1227,17 @@
      "coverage": 0.98,
      "auroc": 0.6654518950437318,
      "ci95": [
-      0.6192490953729212,
-      0.722324872796961
+      0.6174510355060391,
+      0.7220962619741774
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.98,
+     "auroc": 0.46314035818408994,
+     "ci95": [
+      0.4025099479644934,
+      0.5265724364060056
      ]
     },
     "number_source": {
@@ -840,7 +1245,7 @@
      "coverage": 0.98,
      "auroc": 0.9948979591836735,
      "ci95": [
-      0.9845360824742269,
+      0.984375,
       1.0
      ]
     },
@@ -861,8 +1266,17 @@
      "coverage": 0.98,
      "auroc": 0.6677426072469804,
      "ci95": [
-      0.6202845168679716,
-      0.7196753956684715
+      0.6240141312111009,
+      0.7199006634527089
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.98,
+     "auroc": 0.48193461057892545,
+     "ci95": [
+      0.41622324916701375,
+      0.5414500395668471
      ]
     },
     "number_source": {
@@ -889,111 +1303,147 @@
  },
  "tat7bcorrupt_test": {
   "mode": "corrupt",
-  "n_items": 100,
+  "n_items": 200,
   "levels": {
    "25": {
     "redundancy": {
      "needs": "needs only the evidence",
-     "coverage": 0.98,
-     "auroc": 0.5910558100791337,
+     "coverage": 0.97,
+     "auroc": 0.594298012541184,
      "ci95": [
-      0.5556457668679716,
-      0.6293079444566818
+      0.5705823522396675,
+      0.6194523731577928
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.97,
+     "auroc": 0.491896056966734,
+     "ci95": [
+      0.46641487019785766,
+      0.5191535379741465
      ]
     },
     "number_source": {
      "needs": "needs a trusted copy of the source",
-     "coverage": 0.98,
-     "auroc": 0.9897959183673469,
+     "coverage": 0.97,
+     "auroc": 0.9742268041237113,
      "ci95": [
-      0.9742268041237113,
-      1.0
+      0.9583333333333334,
+      0.9873112469876429
      ]
     },
     "pair_source": {
      "needs": "needs a trusted structured copy",
-     "coverage": 0.94,
-     "auroc": 0.9840425531914894,
+     "coverage": 0.905,
+     "auroc": 0.9640883977900553,
      "ci95": [
-      0.9633401864035087,
-      1.0
+      0.9428489326765188,
+      0.9810836239465272
      ]
     },
-    "share_items_edited": 0.97
+    "share_items_edited": 0.94
    },
    "50": {
     "redundancy": {
      "needs": "needs only the evidence",
-     "coverage": 0.98,
-     "auroc": 0.634527280299875,
+     "coverage": 0.97,
+     "auroc": 0.6557152726113296,
      "ci95": [
-      0.5953862567194903,
-      0.6824331007913369
+      0.6211726700748871,
+      0.6893860469218699
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.97,
+     "auroc": 0.4812147943458391,
+     "ci95": [
+      0.44284719651402354,
+      0.5170236409836448
      ]
     },
     "number_source": {
      "needs": "needs a trusted copy of the source",
-     "coverage": 0.98,
-     "auroc": 0.9948979591836735,
+     "coverage": 0.97,
+     "auroc": 0.9974226804123711,
      "ci95": [
-      0.9846938775510204,
+      0.9921875,
       1.0
      ]
     },
     "pair_source": {
      "needs": "needs a trusted structured copy",
-     "coverage": 0.94,
-     "auroc": 1.0,
+     "coverage": 0.905,
+     "auroc": 0.994475138121547,
      "ci95": [
-      1.0,
+      0.9859550561797753,
       1.0
      ]
     },
-    "share_items_edited": 0.99
+    "share_items_edited": 0.975
    },
    "75": {
     "redundancy": {
      "needs": "needs only the evidence",
-     "coverage": 0.98,
-     "auroc": 0.6654518950437318,
+     "coverage": 0.97,
+     "auroc": 0.6930066957168668,
      "ci95": [
-      0.617752539722606,
-      0.7193857769615346
+      0.6583246591180504,
+      0.7326147649822455
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.97,
+     "auroc": 0.4785311935381018,
+     "ci95": [
+      0.43518635426928903,
+      0.5205987889918742
      ]
     },
     "number_source": {
      "needs": "needs a trusted copy of the source",
-     "coverage": 0.98,
-     "auroc": 0.9948979591836735,
+     "coverage": 0.97,
+     "auroc": 0.9974226804123711,
      "ci95": [
-      0.9844515141752578,
+      0.9921875,
       1.0
      ]
     },
     "pair_source": {
      "needs": "needs a trusted structured copy",
-     "coverage": 0.94,
+     "coverage": 0.905,
      "auroc": 1.0,
      "ci95": [
       1.0,
       1.0
      ]
     },
-    "share_items_edited": 1.0
+    "share_items_edited": 0.98
    },
    "100": {
     "redundancy": {
      "needs": "needs only the evidence",
-     "coverage": 0.98,
-     "auroc": 0.6677426072469804,
+     "coverage": 0.97,
+     "auroc": 0.6829099798065682,
      "ci95": [
-      0.6208954611102143,
-      0.717911083269952
+      0.6506504484137501,
+      0.7206489507963767
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.97,
+     "auroc": 0.5000132851525135,
+     "ci95": [
+      0.45674229480811246,
+      0.5375967336274039
      ]
     },
     "number_source": {
      "needs": "needs a trusted copy of the source",
-     "coverage": 0.98,
+     "coverage": 0.97,
      "auroc": 1.0,
      "ci95": [
       1.0,
@@ -1002,14 +1452,14 @@
     },
     "pair_source": {
      "needs": "needs a trusted structured copy",
-     "coverage": 0.94,
+     "coverage": 0.905,
      "auroc": 1.0,
      "ci95": [
       1.0,
       1.0
      ]
     },
-    "share_items_edited": 1.0
+    "share_items_edited": 0.985
    }
   }
  },
@@ -1019,6 +1469,15 @@
   "levels": {
    "50": {
     "redundancy": {
+     "needs": "needs only the evidence",
+     "coverage": 0.98,
+     "auroc": 0.5,
+     "ci95": [
+      0.5,
+      0.5
+     ]
+    },
+    "arithmetic": {
      "needs": "needs only the evidence",
      "coverage": 0.98,
      "auroc": 0.5,
@@ -1041,14 +1500,23 @@
      "coverage": 0.94,
      "auroc": 0.9202127659574468,
      "ci95": [
-      0.8826530612244898,
-      0.9567671809256663
+      0.8814242619493908,
+      0.953137081185567
      ]
     },
     "share_items_edited": 0.79
    },
    "100": {
     "redundancy": {
+     "needs": "needs only the evidence",
+     "coverage": 0.98,
+     "auroc": 0.5,
+     "ci95": [
+      0.5,
+      0.5
+     ]
+    },
+    "arithmetic": {
      "needs": "needs only the evidence",
      "coverage": 0.98,
      "auroc": 0.5,
@@ -1071,8 +1539,8 @@
      "coverage": 0.94,
      "auroc": 0.9574468085106383,
      "ci95": [
-      0.9281848306332843,
-      0.9835235507246377
+      0.9277604166666668,
+      0.9840425531914894
      ]
     },
     "share_items_edited": 0.86
@@ -1089,8 +1557,17 @@
      "coverage": 0.98,
      "auroc": 0.22881091211995003,
      "ci95": [
-      0.17833639424548514,
-      0.27032770556077607
+      0.18284235118262498,
+      0.27455625
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.98,
+     "auroc": 0.5438879633486048,
+     "ci95": [
+      0.5208755780618298,
+      0.5734159835388963
      ]
     },
     "number_source": {
@@ -1107,7 +1584,7 @@
      "coverage": 0.94,
      "auroc": 0.9521276595744681,
      "ci95": [
-      0.9193548387096774,
+      0.9202127659574468,
       0.979381443298969
      ]
     },
@@ -1121,6 +1598,15 @@
      "ci95": [
       0.5,
       0.5
+     ]
+    },
+    "arithmetic": {
+     "needs": "needs only the evidence",
+     "coverage": 0.98,
+     "auroc": 0.5009891711786756,
+     "ci95": [
+      0.5,
+      0.5032653457224422
      ]
     },
     "number_source": {
@@ -1137,7 +1623,7 @@
      "coverage": 0.94,
      "auroc": 0.9946808510638298,
      "ci95": [
-      0.9837789270687237,
+      0.9835164835164835,
       1.0
      ]
     },

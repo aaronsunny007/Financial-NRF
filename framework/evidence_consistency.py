@@ -10,6 +10,10 @@ need:
                            text; independently damaged copies stop matching.
     number_source_check    needs a trusted copy of the source. The share of the evidence's numbers that occur
                            in that copy. Catches changed figures, but not figures that were merely moved.
+    arithmetic_explained_rate  needs nothing but the evidence. The share of its numbers that are the sum,
+                           difference, ratio-as-percent or percent change of two numbers of one table row, to
+                           the precision they are printed at. A negative result: about one number in ten is
+                           "explained" in clean and in corrupted evidence alike.
     pair_source_check      needs a trusted *structured* copy. The share of the evidence's table cells, as
                            (row label, column header, value) triples, that match the copy. Catches moved figures
                            (a swapped period or row) as well.
@@ -94,6 +98,47 @@ def pair_source_check(evidence: str, source: str) -> float:
     return sum(c in known for c in cells) / len(cells)
 
 
+def _numbers_with_decimals(line: str):
+    out = []
+    for m in _NUM.finditer(line):
+        whole = m.group(1).replace(",", "")
+        if not m.group(2) and len(whole) == 4 and 1900 <= int(whole) <= 2099:
+            continue
+        if not m.group(2) and int(whole) < 10:
+            continue
+        out.append((float(whole + (m.group(2) or "")), len(m.group(2)) - 1 if m.group(2) else 0))
+    return out
+
+
+def arithmetic_explained_rate(evidence: str) -> float:
+    """Share of the evidence's numbers explained by an arithmetic relation of two numbers of one table row."""
+    import itertools
+
+    lines = _lines(evidence)
+    per_line = [_numbers_with_decimals(l) for l in lines]
+    rows = [[v for v, _ in per_line[i]] for i, l in enumerate(lines) if l.startswith("- [table_row]")]
+    total = explained = 0
+    for numbers in per_line:
+        for c, decimals in numbers:
+            total += 1
+            tol = 0.5 * 10 ** (-decimals) + 1e-9
+            found = False
+            for vals in rows:
+                for a, b in itertools.permutations(vals, 2):
+                    if a == c or b == c:
+                        continue
+                    if abs(a + b - c) <= tol or abs(a - b - c) <= tol:
+                        found = True
+                    elif b != 0 and (abs((a - b) / b * 100 - c) <= tol or abs(a / b * 100 - c) <= tol):
+                        found = True
+                    if found:
+                        break
+                if found:
+                    break
+            explained += found
+    return explained / total if total else NAN
+
+
 def _run_tests() -> None:
     clean = ("- [table_row] net revenue -- 2015: $5829 | 2014: $5735\n"
              "- [pre_text] net revenue was $ 5829 million in 2015 and $ 5735 million in 2014 .")
@@ -111,6 +156,9 @@ def _run_tests() -> None:
     assert pair_source_check(scaled, clean) == 0.0
     assert math.isnan(pair_source_check("- [pre_text] nothing numeric here .", clean))
     assert math.isnan(redundancy_rate(""))
+    table = "- [table_row] revenue -- 2015: 120.5 | 2014: 100.0 | change: 20.5"
+    assert arithmetic_explained_rate(table) > 0.0          # 20.5 = 120.5 - 100.0
+    assert arithmetic_explained_rate("- [table_row] revenue -- 2015: 120.5 | 2014: 100.0 | change: 77.7") < 1.0
     print("evidence_consistency: all tests passed")
 
 
