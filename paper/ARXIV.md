@@ -23,7 +23,7 @@ Regenerate locally with `bash paper/make_arxiv.sh` after building `main.pdf` onc
 1. **Endorsement.** A first submission to cs.* usually needs an endorsement from an established author in the category.
    arXiv shows the endorsement request link during submission; you can also be endorsed automatically if you have an
    institutional email with prior arXiv-indexed papers.
-2. **Verify the bibliography** (`references.bib` was written from memory) against the publisher records; arXiv does not check it.
+2. **Bibliography.** `references.bib` was written from memory and then checked by web search on 2026-10-28 against the ACL Anthology, arXiv, NeurIPS and ICLR pages (titles, author lists, venues and years all match). Page numbers and DOIs are not included; add them if your target venue's style requires them.
 3. **AI-assistance disclosure.** The Acknowledgements say the experiments, code and a first draft were produced with Claude
    (Anthropic) and that you reviewed and take responsibility. arXiv and ACL policies hold the human author responsible and
    expect AI assistance to be disclosed rather than listed as an author. Keep, edit or extend that sentence as you see fit; do

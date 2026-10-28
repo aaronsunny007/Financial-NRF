@@ -67,6 +67,10 @@ RUNS = {
     "q7browswap_test": ("FinQA", "Qwen2.5-7B Q4"),
     "tat7bperiodswap_test": ("TAT-QA", "Qwen2.5-7B Q4"),
     "tat7browswap_test": ("TAT-QA", "Qwen2.5-7B Q4"),
+    "llama8bperiodswap_test": ("FinQA", "Llama-3.1-8B Q4"),
+    "llama8browswap_test": ("FinQA", "Llama-3.1-8B Q4"),
+    "tatllama8bperiodswap_test": ("TAT-QA", "Llama-3.1-8B Q4"),
+    "tatllama8browswap_test": ("TAT-QA", "Llama-3.1-8B Q4"),
 }
 MODES = {"corrupt": "numbers scaled", "period_swap": "periods swapped", "row_swap": "rows swapped"}
 
