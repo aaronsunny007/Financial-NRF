@@ -62,7 +62,13 @@ RUNS = {
     "q7b_test": ("FinQA", "Qwen2.5-7B Q4"),
     "llama8bcorrupt_test": ("FinQA", "Llama-3.1-8B Q4"),
     "tat7b_test": ("TAT-QA", "Qwen2.5-7B Q4"),
+    "q14bcorrupt_test": ("FinQA", "Qwen2.5-14B Q4"),
+    "q7bperiodswap_test": ("FinQA", "Qwen2.5-7B Q4"),
+    "q7browswap_test": ("FinQA", "Qwen2.5-7B Q4"),
+    "tat7bperiodswap_test": ("TAT-QA", "Qwen2.5-7B Q4"),
+    "tat7browswap_test": ("TAT-QA", "Qwen2.5-7B Q4"),
 }
+MODES = {"corrupt": "numbers scaled", "period_swap": "periods swapped", "row_swap": "rows swapped"}
 
 TAT_CONSTANTS = {1.0, 2.0, 100.0, 1000.0, 1000000.0}
 _WORD = re.compile(r"[A-Za-z]{4,}")
@@ -142,14 +148,25 @@ def load_nli(path, keycols):
     return {tuple(r[k] for k in keycols): num(r["nli_frac_entailed"]) for r in read_csv(path)}
 
 
+def load_judge(d, split):
+    """(level, id) -> faithfulness from the model-based judge (experiments/llm_judge.py), if it was run."""
+    p = d / f"judge_{split}.csv"
+    if not p.exists():
+        return {}
+    return {(float(r["noise_level"]), r["id"]): num(r["faithfulness"]) for r in read_csv(p)}
+
+
 def load_exp4(d, split):
     p = d / f"experiment4_results_{split}_per_example.csv"
     if not p.exists():
         return None
     nli = load_nli(d / f"experiment4_nli_{split}.csv", ["noise_level", "id"])
+    judge = load_judge(d, split)
     rows = []
     for r in read_csv(p):
         rows.append({
+            "mode": r.get("injection_mode", "evidence"),
+            "judge": judge.get((float(r["noise_level"]), r["id"]), float("nan")),
             "id": r["id"], "level": float(r["noise_level"]),
             "correct": num(r["correct"]), "numeric": r.get("answer_type") == "numeric",
             "overlap": num(r["evidence_support"]), "vs_clean": num(r.get("evidence_support_vs_clean_strict")),
@@ -165,6 +182,8 @@ def load_exp5(d, split):
     if not p.exists():
         return None
     nli = load_nli(d / f"experiment5_nli_{split}.csv", ["condition", "id"])
+    judge = load_judge(d, split)
+    clean_level = min((k[0] for k in judge), default=None)
     rows = []
     for r in read_csv(p):
         rows.append({
@@ -174,6 +193,8 @@ def load_exp5(d, split):
             "conf": num(r["self_reported_confidence"]),
             "lexical": lexical_groundedness(r.get("response"), r.get("evidence_text")),
             "nli": nli.get((r["condition"], r["id"]), float("nan")),
+            # the retrieval condition has the same evidence and response as the clean level of Experiment 4
+            "judge": judge.get((clean_level, r["id"]), float("nan")) if r["condition"] == "retrieval" else float("nan"),
             "evidence_text": r.get("evidence_text", ""),
         })
     return rows
@@ -201,8 +222,8 @@ def gold_numbers(dataset, split):
 # --------------------------------------------------------------------------- analyses
 
 GOLD_FREE = [("overlap", "numeric-overlap support"), ("nli", "entailment support"),
-             ("lexical", "lexical groundedness"), ("no_halluc", "no-hallucination flag"),
-             ("conf", "self-reported confidence")]
+             ("lexical", "lexical groundedness"), ("judge", "LLM-judge faithfulness"),
+             ("no_halluc", "no-hallucination flag"), ("conf", "self-reported confidence")]
 NEEDS_MORE = [("correct", "accuracy (needs gold answer)"),
               ("vs_clean", "support vs clean evidence (needs clean evidence)")]
 
@@ -306,13 +327,17 @@ def main():
         r4 = load_exp4(d, split)
         if r4 is None:
             continue
-        mode = "corrupt" if "corrupt" in name else "evidence"
-        if mode == "corrupt":
-            corrupt_rows[name] = r4
-            result["corruption"][name] = {"dataset": dataset, "model": model, **corruption_detection(r4, args.boot, rng)}
-        clean_rows[name] = [r for r in r4 if r["level"] == 0.0]
-        result["error_detection"][name] = {"dataset": dataset, "model": model,
-                                           **error_detection(r4, args.boot, rng)}
+        mode = r4[0]["mode"]
+        if mode in MODES:
+            result["corruption"][name] = {"dataset": dataset, "model": model, "mode": mode,
+                                          **corruption_detection(r4, args.boot, rng)}
+            if mode == "corrupt":
+                corrupt_rows[name] = r4
+        if mode in ("corrupt", "evidence"):
+            # the swap runs reuse the clean responses of a corrupt run, so they are left out of the error tables
+            clean_rows[name] = [r for r in r4 if r["level"] == 0.0]
+            result["error_detection"][name] = {"dataset": dataset, "model": model,
+                                               **error_detection(r4, args.boot, rng)}
         r5 = load_exp5(d, split)
         if r5 is not None:
             exp5_rows[name] = r5

@@ -18,12 +18,12 @@ import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 
 # Okabe-Ito, colour-blind safe
-COL = {"overlap": "#0072B2", "nli": "#009E73", "lexical": "#CC79A7", "no_halluc": "#E69F00",
+COL = {"judge": "#882255", "overlap": "#0072B2", "nli": "#009E73", "lexical": "#CC79A7", "no_halluc": "#E69F00",
        "conf": "#56B4E9", "correct": "#D55E00", "vs_clean": "#000000"}
-LABEL = {"overlap": "numeric-overlap support", "nli": "entailment support", "lexical": "lexical groundedness",
+LABEL = {"judge": "LLM-judge faithfulness", "overlap": "numeric-overlap support", "nli": "entailment support", "lexical": "lexical groundedness",
          "no_halluc": "no-hallucination flag", "conf": "self-reported confidence",
          "correct": "accuracy (gold answer)", "vs_clean": "support vs clean evidence"}
-GOLD_FREE = ["overlap", "nli", "lexical", "no_halluc", "conf"]
+GOLD_FREE = ["overlap", "nli", "lexical", "judge", "no_halluc", "conf"]
 ALL = GOLD_FREE + ["correct", "vs_clean"]
 
 
@@ -35,7 +35,7 @@ def groups(corruption):
     """(dataset, model) -> list of run names, excluding pooled rows."""
     g = {}
     for name, v in corruption.items():
-        if name.startswith("pooled_"):
+        if name.startswith("pooled_") or v.get("mode", "corrupt") != "corrupt":
             continue
         g.setdefault((v["dataset"], v["model"]), []).append(name)
     return g
@@ -52,8 +52,11 @@ def fig_corruption(corruption, out):
     for ax, ((dataset, model), names) in zip(axes.flat, g.items()):
         levels = np.array(corruption[names[0]]["levels"])
         for key in ["correct", "vs_clean"] + GOLD_FREE:
-            ys = np.mean([corruption[nm]["mean_by_level"][key] for nm in names], axis=0)
-            ax.plot(levels, ys, marker="o", ms=3.5, lw=1.8 if key in ("correct", "vs_clean") else 1.2,
+            ys = np.mean([corruption[nm]["mean_by_level"].get(key, [float("nan")] * len(levels)) for nm in names], axis=0)
+            ok = ~np.isnan(ys)
+            if not ok.any():
+                continue
+            ax.plot(levels[ok], ys[ok], marker="o", ms=3.5, lw=1.8 if key in ("correct", "vs_clean") else 1.2,
                     ls="-" if key in ("correct", "vs_clean") else "--", color=COL[key], label=LABEL[key])
         ax.set_title(f"{dataset}, {model}", fontsize=9)
         ax.set_xlabel("numbers in evidence replaced (%)")
@@ -110,6 +113,8 @@ def auc(v):
 def table_corruption(corruption):
     rows = []
     for name, v in corruption.items():
+        if v.get("mode", "corrupt") != "corrupt":
+            continue
         run = f"{v['dataset']} / {v['model']}" if not name.startswith("pooled_") else f"{v['dataset']} pooled"
         split = "" if name.startswith("pooled_") else (" dev" if name.endswith("dev") else " test")
         rows.append((name.startswith("pooled_"), run + split, v["n_items"], [auc(v["auroc"].get(k)) for k in ALL]))
@@ -159,6 +164,40 @@ def table_retrieval(ret):
     return "\n".join(lines)
 
 
+def table_realistic(corruption):
+    """Response-side measures under realistic evidence errors (periods or rows swapped)."""
+    keys = ALL
+    lines = [r"\begin{tabular}{@{}l l r " + "c" * len(keys) + r"@{}}", r"\toprule",
+             " & ".join(["Run", "Error", "$n$"] + [tex_escape(LABEL[k]).replace(" (gold answer)", "$^\\dagger$")
+                                                   .replace("support vs clean evidence", "numbers vs clean$^\\ddagger$") for k in keys]) + r" \\", r"\midrule"]
+    names = {"period_swap": "periods swapped", "row_swap": "rows swapped"}
+    for name, v in corruption.items():
+        if v.get("mode") not in names:
+            continue
+        lines.append(" & ".join([tex_escape(f"{v['dataset']} / {v['model']}"), names[v["mode"]], str(v["n_items"])]
+                                + [auc(v["auroc"].get(k)) for k in keys]) + r" \\")
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    return "\n".join(lines)
+
+
+def table_evidence_checks(checks, runs):
+    """Evidence-side checks: one row per dataset and edit mode (the edit depends only on the item, not on the model)."""
+    best = {}
+    for name, v in checks.items():
+        key = (runs[name][0], v["mode"])
+        if key not in best or v["n_items"] > best[key][1]["n_items"]:
+            best[key] = (name, v)
+    modes = {"corrupt": "numbers scaled", "period_swap": "periods swapped", "row_swap": "rows swapped"}
+    lines = [r"\begin{tabular}{@{}l l r c c c@{}}", r"\toprule",
+             r"Dataset & Error & $n$ & redundancy & numbers vs trusted copy & cells vs trusted table \\", r"\midrule"]
+    for (dataset, mode), (name, v) in sorted(best.items(), key=lambda kv: (kv[0][0], list(modes).index(kv[0][1]))):
+        top = v["levels"][max(v["levels"], key=int)]
+        lines.append(" & ".join([dataset, modes[mode], str(v["n_items"]), auc(top["redundancy"]),
+                                 auc(top["number_source"]), auc(top["pair_source"])]) + r" \\")
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    return "\n".join(lines), best
+
+
 def table_paired(summary, res):
     """Paired item-level change from 0% to 100% corruption, from results/scale/summary.json."""
     cols = [("accuracy", "accuracy$^\\dagger$"), ("evidence_support", "numeric-overlap support"),
@@ -167,7 +206,7 @@ def table_paired(summary, res):
     lines = [r"\begin{tabular}{@{}l r " + "c" * len(cols) + r"@{}}", r"\toprule",
              " & ".join(["Run", "$n$"] + [c[1] for c in cols]) + r" \\", r"\midrule"]
     for name, v in res["corruption"].items():
-        if name.startswith("pooled_"):
+        if name.startswith("pooled_") or v.get("mode", "corrupt") != "corrupt":
             continue
         eff = summary["runs"].get(name, {}).get("item_level_noise_effects")
         if not eff:
@@ -239,6 +278,20 @@ def main():
     if summary_path.exists():
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
         (gen / "table_paired.tex").write_text(table_paired(summary, res), encoding="utf-8")
+    (gen / "table_realistic.tex").write_text(table_realistic(res["corruption"]), encoding="utf-8")
+    ev_path = Path("results/paper/evidence_checks.json")
+    if ev_path.exists():
+        from experiments.paper_analysis import RUNS
+        checks = json.loads(ev_path.read_text(encoding="utf-8"))
+        tex, best = table_evidence_checks(checks, RUNS)
+        (gen / "table_evidence.tex").write_text(tex, encoding="utf-8")
+        macros = []
+        for (dataset, mode), (name, v) in best.items():
+            top = v["levels"][max(v["levels"], key=int)]
+            tag = ("Fin" if dataset == "FinQA" else "Tat") + {"corrupt": "Scaled", "period_swap": "Period", "row_swap": "Row"}[mode]
+            for key, short in (("redundancy", "Red"), ("number_source", "Num"), ("pair_source", "Pair")):
+                macros.append(f"\\newcommand{{\\ev{short}{tag}}}{{{top[key]['auroc']:.2f}}}")
+        (gen / "numbers_evidence.tex").write_text("\n".join(macros), encoding="utf-8")
     (gen / "table_error.tex").write_text(table_error(res["error_detection"]), encoding="utf-8")
     (gen / "table_retrieval.tex").write_text(table_retrieval(res["retrieval_errors"]), encoding="utf-8")
     (gen / "numbers.tex").write_text(numbers(res), encoding="utf-8")

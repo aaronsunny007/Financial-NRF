@@ -1,0 +1,772 @@
+{
+ "llama8bcorrupt_test": {
+  "mode": "corrupt",
+  "n_items": 100,
+  "levels": {
+   "25": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.55355,
+     "ci95": [
+      0.53001125,
+      0.57811
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.975,
+     "ci95": [
+      0.95,
+      0.995
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9032258064516129,
+     "ci95": [
+      0.8333333333333334,
+      0.9681795131845841
+     ]
+    }
+   },
+   "50": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.606,
+     "ci95": [
+      0.5705775,
+      0.64477625
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.995,
+     "ci95": [
+      0.982375,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9838709677419355,
+     "ci95": [
+      0.9411764705882353,
+      1.0
+     ]
+    }
+   },
+   "75": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.6629,
+     "ci95": [
+      0.62273625,
+      0.70818875
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9838709677419355,
+     "ci95": [
+      0.9444444444444444,
+      1.0
+     ]
+    }
+   },
+   "100": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.63655,
+     "ci95": [
+      0.5982975,
+      0.68736
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   }
+  }
+ },
+ "q7bcorrupt_test": {
+  "mode": "corrupt",
+  "n_items": 100,
+  "levels": {
+   "25": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.55355,
+     "ci95": [
+      0.5303800000000001,
+      0.5815724999999999
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.975,
+     "ci95": [
+      0.95,
+      0.995
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9032258064516129,
+     "ci95": [
+      0.8356617647058824,
+      0.9655172413793104
+     ]
+    }
+   },
+   "50": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.606,
+     "ci95": [
+      0.57457125,
+      0.6486149999999999
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.995,
+     "ci95": [
+      0.985,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9838709677419355,
+     "ci95": [
+      0.9464285714285714,
+      1.0
+     ]
+    }
+   },
+   "75": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.6629,
+     "ci95": [
+      0.62159875,
+      0.70527
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9838709677419355,
+     "ci95": [
+      0.953125,
+      1.0
+     ]
+    }
+   },
+   "100": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.63655,
+     "ci95": [
+      0.5950775,
+      0.6811050000000001
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   }
+  }
+ },
+ "qwen3bcorrupt_dev": {
+  "mode": "corrupt",
+  "n_items": 100,
+  "levels": {
+   "25": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.5681052953780227,
+     "ci95": [
+      0.5423910825425977,
+      0.5965997800471363
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.9949494949494949,
+     "ci95": [
+      0.9846938775510204,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.921875,
+     "ci95": [
+      0.8515029325513197,
+      0.9811431623931623
+     ]
+    }
+   },
+   "50": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.6221303948576676,
+     "ci95": [
+      0.5825591776349351,
+      0.6630112499999999
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.984375,
+     "ci95": [
+      0.95,
+      1.0
+     ]
+    }
+   },
+   "75": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.6605555555555556,
+     "ci95": [
+      0.6223375,
+      0.7042313311688312
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   },
+   "100": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.665050505050505,
+     "ci95": [
+      0.6239949494949495,
+      0.712189393939394
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   }
+  }
+ },
+ "qwen3bcorrupt_test": {
+  "mode": "corrupt",
+  "n_items": 100,
+  "levels": {
+   "25": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.55355,
+     "ci95": [
+      0.5346449999999999,
+      0.57806
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.975,
+     "ci95": [
+      0.95,
+      0.995
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9032258064516129,
+     "ci95": [
+      0.8382352941176471,
+      0.9672144396551724
+     ]
+    }
+   },
+   "50": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.606,
+     "ci95": [
+      0.5758949999999999,
+      0.6468912499999999
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.995,
+     "ci95": [
+      0.985,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9838709677419355,
+     "ci95": [
+      0.9453869047619048,
+      1.0
+     ]
+    }
+   },
+   "75": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.6629,
+     "ci95": [
+      0.62199875,
+      0.7069537499999999
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9838709677419355,
+     "ci95": [
+      0.9444444444444444,
+      1.0
+     ]
+    }
+   },
+   "100": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.63655,
+     "ci95": [
+      0.60481625,
+      0.6879125
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   }
+  }
+ },
+ "tat3bcorrupt_dev": {
+  "mode": "corrupt",
+  "n_items": 100,
+  "levels": {
+   "25": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.5856545250484645,
+     "ci95": [
+      0.56142375,
+      0.6165871453168045
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.9696969696969697,
+     "ci95": [
+      0.9432989690721649,
+      0.99
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9526315789473684,
+     "ci95": [
+      0.9175526792794834,
+      0.9792794243986254
+     ]
+    }
+   },
+   "50": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.6437373737373737,
+     "ci95": [
+      0.6060451262626263,
+      0.6904606373008435
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.99,
+     "ci95": [
+      0.975,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9947368421052631,
+     "ci95": [
+      0.9841223404255319,
+      1.0
+     ]
+    }
+   },
+   "75": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.685,
+     "ci95": [
+      0.6408421173469387,
+      0.7288528571428572
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   },
+   "100": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.6808585858585858,
+     "ci95": [
+      0.63954,
+      0.7249318427835051
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   }
+  }
+ },
+ "tat3bcorrupt_test": {
+  "mode": "corrupt",
+  "n_items": 100,
+  "levels": {
+   "25": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.5910558100791337,
+     "ci95": [
+      0.5549343889654117,
+      0.6331110578659855
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.9897959183673469,
+     "ci95": [
+      0.9738144188596491,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9840425531914894,
+     "ci95": [
+      0.9631344193262411,
+      0.99760101010101
+     ]
+    }
+   },
+   "50": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.634527280299875,
+     "ci95": [
+      0.5865324819557184,
+      0.6750533326829152
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.9948979591836735,
+     "ci95": [
+      0.9846938775510204,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   },
+   "75": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.6654518950437318,
+     "ci95": [
+      0.6160972123515018,
+      0.7202488763561414
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.9948979591836735,
+     "ci95": [
+      0.984375,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   },
+   "100": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.6677426072469804,
+     "ci95": [
+      0.6225065112075336,
+      0.7146164843729241
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   }
+  }
+ },
+ "tat7bcorrupt_test": {
+  "mode": "corrupt",
+  "n_items": 100,
+  "levels": {
+   "25": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.5910558100791337,
+     "ci95": [
+      0.553756451637588,
+      0.6290047240326954
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.9897959183673469,
+     "ci95": [
+      0.9744897959183674,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 0.9840425531914894,
+     "ci95": [
+      0.9662689393939394,
+      1.0
+     ]
+    }
+   },
+   "50": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.634527280299875,
+     "ci95": [
+      0.5944415985035807,
+      0.6814237893907586
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.9948979591836735,
+     "ci95": [
+      0.9845360824742269,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   },
+   "75": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.6654518950437318,
+     "ci95": [
+      0.6222629813983401,
+      0.7217775635659834
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 0.9948979591836735,
+     "ci95": [
+      0.9845360824742269,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   },
+   "100": {
+    "redundancy": {
+     "needs": "needs only the evidence",
+     "auroc": 0.6677426072469804,
+     "ci95": [
+      0.6133427132435466,
+      0.71939770056862
+     ]
+    },
+    "number_source": {
+     "needs": "needs a trusted copy of the source",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    },
+    "pair_source": {
+     "needs": "needs a trusted structured copy",
+     "auroc": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ]
+    }
+   }
+  }
+ }
+}
