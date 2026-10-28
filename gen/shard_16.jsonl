@@ -1,0 +1,2 @@
+{"_meta": {"model": "meta-llama/Llama-3.1-8B-Instruct", "precision": "Q4_K_M 4-bit GGUF (llama.cpp)"}}
+{"key": "ae7765234b63d52d2d1f4a6e5c903ccc681cfb78701b574c11cf6b8e857364e7", "response": "Reasoning: The question asks for the number of destinations per continent, and the evidence states that there are 7 continents and 455 destinations in total. To find the number of destinations per continent, I need to divide the total number of destinations by the number of continents. 455 / 7 = 65.0\n\nFinal Answer: 65.0\n\nConfidence: 0.8", "seconds": 114.21}
