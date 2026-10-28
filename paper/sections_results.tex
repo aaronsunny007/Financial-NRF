@@ -33,6 +33,7 @@ The question is whether a measure can \emph{tell} the two situations apart, not 
 Table~\ref{tab:corrupt-auroc} reports the AUROC for separating a response generated from fully corrupted evidence from one generated from the clean evidence of the same item.
 Every gold-free measure is close to chance: pooled over runs, numeric-overlap support gives \aucFinoverlap{} \aucFinoverlapci{} on FinQA and \aucTatoverlap{} \aucTatoverlapci{} on TAT-QA, entailment support \aucFinnli{} and \aucTatnli{}, and the hallucination flag \aucFinnohalluc{} and \aucTatnohalluc{}.
 No single run exceeds 0.60 for any gold-free measure (the best, entailment support for Qwen2.5-14B, is 0.60 with interval 0.55 to 0.65).
+The model-based judge is no better: \aucFinjudge{} \aucFinjudgeci{} pooled on FinQA and \aucTatjudge{} \aucTatjudgeci{} on TAT-QA, and between 0.46 and 0.55 in every run. It reads the corrupted evidence, finds the response consistent with it, and has nothing else to go on.
 Accuracy, which needs the gold answer, reaches \aucFincorrect{} and \aucTatcorrect{} (it is limited because many clean responses are already wrong), and support against the clean evidence reaches \aucFinvsclean{} and \aucTatvsclean{}.
 The information that distinguishes the two cases is in the pair (response, clean evidence), which a deployed system does not have.
 
@@ -62,7 +63,7 @@ Scaling every number is a blunt error. The realistic manipulations keep every nu
 They still hurt the model, more on TAT-QA, where a table row is nearly always in the retrieved evidence (the evidence of $86$ to $93$ of $100$ items is changed), than on FinQA, where only $23$ to $30$ of $100$ items have an affected table row.
 For Qwen2.5-7B, accuracy on TAT-QA falls from $0.62$ to $0.15$ when periods are swapped and to $0.08$ when rows are swapped; on FinQA it falls from $0.53$ to $0.46$ and $0.39$.
 
-Table~\ref{tab:realistic} gives the AUROC for telling the fully edited evidence from the clean evidence. No response-side measure notices: all stay between $0.49$ and $0.53$.
+Table~\ref{tab:realistic} gives the AUROC for telling the fully edited evidence from the clean evidence. No response-side measure notices, the model-based judge included: all stay between $0.49$ and $0.55$.
 More important is the last column. Support measured against the clean evidence, which separated scaled numbers almost perfectly (AUROC $0.84$ to $0.94$ in Table~\ref{tab:corrupt-auroc}), is at $0.50$ to $0.52$ here, because every number in the edited evidence still occurs in the clean evidence.
 A verifier that compares the \emph{numbers} of the evidence with a trusted copy is blind to this class of error.
 
@@ -79,10 +80,10 @@ On clean evidence the gold-free measures should be useful if they carry informat
 Table~\ref{tab:error} shows they carry little.
 Pooled over runs, AUROC for separating correct from incorrect answers is \errFinoverlap{} for numeric-overlap support, \errFinnli{} for entailment support, \errFinlexical{} for lexical groundedness, \errFinnohalluc{} for the hallucination flag and \errFinconf{} for verbalized confidence on FinQA (TAT-QA: \errTatoverlap, \errTatnli, \errTatlexical, \errTatnohalluc, \errTatconf).
 Individual runs deviate from 0.5 in both directions.
-Numeric-overlap support is \emph{below} 0.5 for the 7B and 8B models (0.30 and 0.35 for Qwen2.5-7B on FinQA and TAT-QA, 0.27 for Llama-3.1-8B on FinQA) and above it for the 3B model on TAT-QA (0.71 on dev, 0.74 on test): correct answers contain a computed result that is, by construction, not in the evidence, so how much weight such a score carries depends on how often the model computes versus copies.
-Verbalized confidence is nearly constant for the smaller models (most responses say 0.9) and uninformative there, but for the larger models it carries some signal (AUROC 0.73 for Qwen2.5-7B on TAT-QA, 0.65 for Llama-3.1-8B on FinQA), and entailment support reaches 0.70 for Llama-3.1-8B.
-On TAT-QA the pooled AUROCs for entailment support, lexical groundedness and confidence are \errTatnli, \errTatlexical{} and \errTatconf, modest but above chance; on FinQA all pooled values stay between 0.47 and 0.55.
-The lexical baseline performs no better than the entailment or overlap scores, so the weakness is not particular to the numeric-overlap design.
+Numeric-overlap support is \emph{below} 0.5 for the larger models (0.36 and 0.39 for Qwen2.5-7B on FinQA and TAT-QA, 0.37 for Qwen2.5-14B and 0.27 for Llama-3.1-8B on FinQA) and above it for the 3B model on TAT-QA (0.71 on dev, 0.74 on test): correct answers contain a computed result that is, by construction, not in the evidence, so how much weight such a score carries depends on how often the model computes versus copies.
+Verbalized confidence is nearly constant for the smaller models (most responses say 0.9) and uninformative there, but for the larger models it carries some signal (AUROC 0.62 to 0.73 for Qwen2.5-7B and 14B and Llama-3.1-8B), and entailment support reaches 0.70 for Llama-3.1-8B.
+On TAT-QA the pooled AUROCs for entailment support, lexical groundedness and confidence are \errTatnli, \errTatlexical{} and \errTatconf, modest but above chance; on FinQA all pooled values stay between 0.46 and 0.57.
+The model-based judge does no better than these cheaper scores: pooled \errFinjudge{} on FinQA and \errTatjudge{} on TAT-QA, and between 0.51 and 0.67 per run (it was run on the clean evidence of eight runs). The lexical baseline performs no better than the entailment or overlap scores either, so the weakness is not particular to the numeric-overlap design.
 
 \begin{table*}[t]
 \centering\small
@@ -100,8 +101,9 @@ The miss rate is \missFin\% on FinQA and \missTat\% on TAT-QA.
 Accuracy is much lower on misses than on hits.
 Whether a gold-free measure notices is inconsistent.
 Pooled over FinQA runs, numeric-overlap support gives AUROC \retFinoverlap{}, entailment \retFinnli{} and lexical groundedness \retFinlexical{}.
-On TAT-QA the pooled values are \retTatoverlap{}, \retTatnli{} and \retTatlexical{}, and verbalized confidence reaches \retTatconf{}, driven by the larger models (0.83 for Qwen2.5-7B on TAT-QA, 0.79 for Llama-3.1-8B on FinQA).
-Numeric-overlap support detects misses for the 3B model on TAT-QA (0.69), plausibly because with the needed figures absent the model substitutes numbers that are then not in the evidence, but the effect reverses for the 7B and 8B models (0.30 and 0.34 for Qwen2.5-7B, 0.38 for Llama-3.1-8B).
+On TAT-QA the pooled values are \retTatoverlap{}, \retTatnli{} and \retTatlexical{}, and verbalized confidence reaches \retTatconf{}, driven by the larger models (0.76 for Qwen2.5-7B on TAT-QA, 0.79 for Llama-3.1-8B on FinQA).
+The judge gives \retFinjudge{} on FinQA and \retTatjudge{} on TAT-QA pooled, and between 0.51 and 0.71 per run.
+Numeric-overlap support detects misses for the 3B model on TAT-QA (0.64 on dev, 0.69 on test), plausibly because with the needed figures absent the model substitutes numbers that are then not in the evidence, but the effect reverses for the larger models (0.37 to 0.44).
 This is a different failure from corrupted evidence in one respect: \emph{missing} evidence can leave some trace in the response or in the model's own confidence, whereas \emph{wrong} evidence that the model copies leaves almost none.
 The traces are model-dependent, and these associations are confounded with difficulty (a question whose evidence is missing is also a harder question).
 Accuracy itself separates hits from misses at least as well (pooled FinQA \retFincorrect{}, TAT-QA \retTatcorrect{}).
