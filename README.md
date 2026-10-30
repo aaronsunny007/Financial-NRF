@@ -148,7 +148,7 @@ Two realistic errors that keep every number the document contains and only mispl
 54 points of accuracy on TAT-QA. Every response-side score stays at 0.43 to 0.55 (almost all at 0.48 to 0.55), and so does support measured against the clean *numbers*
 (0.43 to 0.52), because each number is still genuine. Checks on the evidence itself (`framework/evidence_consistency.py`,
 `experiments/evidence_checks.py`): redundancy of figures across passages 0.64 to 0.68 for scaled numbers and 0.50 for swaps; arithmetic
-self-consistency 0.44 to 0.50 (it does not work); numbers against a trusted copy 1.00 for scaled and 0.50 for swapped; table cells against a
+self-consistency 0.42 to 0.55 (at or near chance, it does not work); numbers against a trusted copy 1.00 for scaled and 0.50 for swapped; table cells against a
 trusted structured copy 0.87 to 0.99 for the swaps. As detectors of wrong answers and of real retrieval misses the response-side measures are
 weak and model-dependent. All tables: `results/paper/ANALYSIS.md`; the write-up is `paper/main.pdf`.
 

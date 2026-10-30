@@ -74,7 +74,9 @@ def load_rows(directory: Path, split: str):
     path = directory / f"experiment4_results_{split}_per_example.csv"
     rows = list(csv.DictReader(open(path, newline="", encoding="utf-8")))
     levels = sorted({float(r["noise_level"]) for r in rows})
-    keep = {levels[0], levels[-1]}
+    if 0.0 not in levels or len(levels) < 2:
+        raise SystemExit(f"{path}: needs a level-0 (clean) and at least one edited level, found {levels}")
+    keep = {0.0, levels[-1]}
     return [r for r in rows if float(r["noise_level"]) in keep]
 
 
@@ -102,6 +104,10 @@ def main():
         self_test()
         return
 
+    if not (args.dir and args.gguf and args.out):
+        ap.error("--dir, --gguf and --out are required (or use --self-test)")
+    if ":" not in args.gguf:
+        ap.error("--gguf must be <hf repo id>:<file name>")
     k, n = (int(x) for x in args.shard.split("/"))
     rows = [r for i, r in enumerate(load_rows(args.dir, args.split)) if i % n == k]
     if args.limit:

@@ -36,17 +36,24 @@ _NUM = re.compile(r"(?<![\w.])\$?\s?(\d+(?:,\d{3})*)(\.\d+)?(%?)")
 NAN = float("nan")
 
 
-def extract_numbers(line: str) -> List[float]:
-    """Numeric values on one line, leaving out four-digit years and single digits (list markers, '1 )')."""
+def _numbers_with_decimals(line: str) -> List[Tuple[float, int]]:
+    """(value, decimal places) of the numbers on one line, leaving out bare four-digit years and single digits
+    (list markers, '1 )'). A figure written with a thousands separator ('1,985') is a quantity, not a year."""
     out = []
     for m in _NUM.finditer(line):
         whole = m.group(1).replace(",", "")
-        if not m.group(2) and len(whole) == 4 and 1900 <= int(whole) <= 2099:
-            continue
-        if not m.group(2) and int(whole) < 10:
-            continue
-        out.append(float(whole + (m.group(2) or "")))
+        if not m.group(2):
+            if len(whole) == 4 and "," not in m.group(1) and 1900 <= int(whole) <= 2099:
+                continue
+            if int(whole) < 10:
+                continue
+        out.append((float(whole + (m.group(2) or "")), len(m.group(2)) - 1 if m.group(2) else 0))
     return out
+
+
+def extract_numbers(line: str) -> List[float]:
+    """Numeric values on one line, leaving out four-digit years and single digits (list markers, '1 )')."""
+    return [v for v, _ in _numbers_with_decimals(line)]
 
 
 def _lines(evidence: str) -> List[str]:
@@ -98,44 +105,35 @@ def pair_source_check(evidence: str, source: str) -> float:
     return sum(c in known for c in cells) / len(cells)
 
 
-def _numbers_with_decimals(line: str):
-    out = []
-    for m in _NUM.finditer(line):
-        whole = m.group(1).replace(",", "")
-        if not m.group(2) and len(whole) == 4 and 1900 <= int(whole) <= 2099:
+def _explained(c: float, decimals: int, vals: List[float]) -> bool:
+    import itertools
+
+    tol = 0.5 * 10 ** (-decimals) + 1e-9
+    for a, b in itertools.permutations(vals, 2):
+        if a == c or b == c:
             continue
-        if not m.group(2) and int(whole) < 10:
-            continue
-        out.append((float(whole + (m.group(2) or "")), len(m.group(2)) - 1 if m.group(2) else 0))
-    return out
+        if abs(a + b - c) <= tol or abs(a - b - c) <= tol:
+            return True
+        if b != 0 and (abs((a - b) / b * 100 - c) <= tol or abs(a / b * 100 - c) <= tol):
+            return True
+    return False
 
 
 def arithmetic_explained_rate(evidence: str) -> float:
-    """Share of the evidence's numbers explained by an arithmetic relation of two numbers of one table row."""
-    import itertools
+    """Share of the evidence's numbers explained by an arithmetic relation of two numbers of one table row.
 
+    A number on a table row is tested against the other numbers of that row only. A number in a text sentence
+    is tested against each table row in turn, since a sentence may state a total or change derived from a row."""
     lines = _lines(evidence)
     per_line = [_numbers_with_decimals(l) for l in lines]
-    rows = [[v for v, _ in per_line[i]] for i, l in enumerate(lines) if l.startswith("- [table_row]")]
+    is_row = [l.startswith("- [table_row]") for l in lines]
+    rows = [[v for v, _ in per_line[i]] for i in range(len(lines)) if is_row[i]]
     total = explained = 0
-    for numbers in per_line:
+    for i, numbers in enumerate(per_line):
         for c, decimals in numbers:
             total += 1
-            tol = 0.5 * 10 ** (-decimals) + 1e-9
-            found = False
-            for vals in rows:
-                for a, b in itertools.permutations(vals, 2):
-                    if a == c or b == c:
-                        continue
-                    if abs(a + b - c) <= tol or abs(a - b - c) <= tol:
-                        found = True
-                    elif b != 0 and (abs((a - b) / b * 100 - c) <= tol or abs(a / b * 100 - c) <= tol):
-                        found = True
-                    if found:
-                        break
-                if found:
-                    break
-            explained += found
+            candidates = [[v for v, _ in numbers]] if is_row[i] else rows
+            explained += any(_explained(c, decimals, vals) for vals in candidates)
     return explained / total if total else NAN
 
 
@@ -159,6 +157,12 @@ def _run_tests() -> None:
     table = "- [table_row] revenue -- 2015: 120.5 | 2014: 100.0 | change: 20.5"
     assert arithmetic_explained_rate(table) > 0.0          # 20.5 = 120.5 - 100.0
     assert arithmetic_explained_rate("- [table_row] revenue -- 2015: 120.5 | 2014: 100.0 | change: 77.7") < 1.0
+    # 20.5 = 120.5 - 100.0 holds only across two different table rows, so it does not count
+    cross = "- [table_row] a -- x: 120.5 | y: 100.0\n- [table_row] b -- p: 77.7 | q: 20.5"
+    assert arithmetic_explained_rate(cross) == 0.0
+    # a sentence may state a figure derived from a row
+    assert arithmetic_explained_rate("- [table_row] a -- x: 120.5 | y: 100.0\n- [pre_text] it rose 20.5 .") > 0.0
+    assert extract_numbers("2015: $1,985 | 2014: $2,050 | 3: 12 | 1985") == [1985.0, 2050.0, 12.0]
     print("evidence_consistency: all tests passed")
 
 

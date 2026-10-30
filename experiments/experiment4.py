@@ -61,6 +61,7 @@ import os
 import sys
 import csv
 import json
+import hashlib
 import math
 import argparse
 from pathlib import Path
@@ -137,7 +138,6 @@ EVIDENCE_EDIT_MODES = ("corrupt", "period_swap", "row_swap")
 
 
 def _row_pick(key: str, i: int, level: int) -> bool:
-    import hashlib
     return int(hashlib.sha256(f"{key}|{i}|row".encode()).hexdigest()[:8], 16) % 100 < level
 
 
@@ -277,7 +277,12 @@ def main():
     else:
         levels = NOISE_LEVELS
     if os.environ.get("NRF_LEVELS"):
-        levels = [int(x) for x in os.environ["NRF_LEVELS"].split(",")]
+        try:
+            levels = [int(x) for x in os.environ["NRF_LEVELS"].replace("%", "").split(",") if x.strip()]
+        except ValueError:
+            raise SystemExit(f"NRF_LEVELS={os.environ['NRF_LEVELS']!r} is not a comma-separated list of integers")
+        if not levels or levels[0] != 0:
+            raise SystemExit(f"NRF_LEVELS must start with 0 (the clean level), got {levels}")
     print(f"Noise levels: {levels} | Total generations: {n_examples * len(levels)}")
     if args.injection_mode == "corrupt":
         print("Corruption definition: level% of the numeric tokens in the retrieved evidence are replaced by wrong values")

@@ -54,20 +54,26 @@ def analyse_run(path, boot, rng):
         return None
     mode = rows[0]["injection_mode"]
     levels = sorted({float(r["noise_level"]) for r in rows})
-    clean = {r["id"]: r["evidence_text"] for r in rows if float(r["noise_level"]) == levels[0]}
+    if 0.0 not in levels:
+        raise SystemExit(f"{path}: no level-0 (clean) rows, so there is no clean evidence to compare with")
+    clean = {r["id"]: r["evidence_text"] for r in rows if float(r["noise_level"]) == 0.0}
     out = {"mode": mode, "n_items": len(clean), "levels": {}}
-    for level in levels[1:]:
+    # the clean evidence scored against itself does not depend on the edit level
+    clean_score = {name: {i: fn(clean[i], clean[i]) for i in clean} for name, (_, fn) in CHECKS.items()}
+    for level in (l for l in levels if l != 0.0):
         edited = {r["id"]: r["evidence_text"] for r in rows if float(r["noise_level"]) == level}
         ids = [i for i in clean if i in edited]
+        if not ids:
+            continue
         res = {}
         for name, (needs, fn) in CHECKS.items():
             score, label, group = [], [], []
             for i in ids:
-                score += [fn(clean[i], clean[i]), fn(edited[i], clean[i])]
+                score += [clean_score[name][i], fn(edited[i], clean[i])]
                 label += [1.0, 0.0]
                 group += [i, i]
             # items on which the check is defined (it needs numbers, or table cells, in the evidence)
-            defined = sum(not math.isnan(fn(clean[i], clean[i])) for i in ids)
+            defined = sum(not math.isnan(clean_score[name][i]) for i in ids)
             res[name] = {"needs": needs, "coverage": defined / len(ids), **boot_auroc(score, label, group, boot, rng)}
         res["share_items_edited"] = sum(clean[i] != edited[i] for i in ids) / len(ids)
         out["levels"][str(int(level))] = res
@@ -86,6 +92,8 @@ def main():
         r = analyse_run(path, args.boot, rng)
         if r:
             result[name] = r
+            if not r["levels"]:
+                continue
             top = r["levels"][max(r["levels"], key=int)]
             print(f"{name:28s} {r['mode']:12s} n={r['n_items']:3d} edited={top['share_items_edited']:.2f}  " + "  ".join(
                 f"{k}={v['auroc']:.2f}(cov {v['coverage']:.2f})" for k, v in top.items() if k != "share_items_edited"))

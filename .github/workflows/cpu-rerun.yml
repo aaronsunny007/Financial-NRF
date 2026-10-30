@@ -253,7 +253,10 @@ jobs:
           import glob, json, os
           seen, meta, n_in = {}, {}, 0
           seed = os.environ.get("SEED_FROM", "")
-          paths = sorted(glob.glob("caches/*.jsonl")) + ([seed] if seed and os.path.exists(seed) else [])
+          if seed and not os.path.exists(seed):
+              raise SystemExit(f"seed_from {seed!r} does not exist in the repository")
+          # the seed goes first so that the shards' own metadata (model, precision) wins over it
+          paths = ([seed] if seed else []) + sorted(glob.glob("caches/*.jsonl"))
           for path in paths:
               for line in open(path, encoding="utf-8"):
                   line = line.strip()
