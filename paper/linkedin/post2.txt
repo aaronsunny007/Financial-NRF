@@ -1,0 +1,27 @@
+POST 2 (follow-up; post a few days after the first, once the live page has been opened and checked)
+----
+Last week I showed that wrong numbers fool AI reliability scores. The obvious reply: "wrong numbers are easy to catch."
+
+So I tried the harder case. I kept every number real and just put some in the wrong place: swapped the years in a table row, or swapped two rows. This is what a badly parsed table does.
+
+Same AI, same questions. On one dataset accuracy fell from 62% to 8%.
+
+Every reliability score I tested that doesn't know the right answer stayed between 0.43 and 0.55. Where 0.5 is a coin flip. I ran it on two model families, Qwen and Llama.
+
+One check did notice: comparing each table cell (row, year, value) against a trusted copy of the table. It caught the swaps 87% to 99% of the time.
+
+So the fix isn't a smarter score. It's keeping a trusted copy of the source and checking against it.
+
+I put the results on a page you can click through: no sign-up, nothing to install.
+
+Do you check the documents your AI reads, or only what it says back?
+
+#AI #RAG #FinTech
+
+FIRST COMMENT (post right after publishing)
+----
+Results page: https://aaronsunny007.github.io/Financial-NRF/  (open the "Paper findings" tab)
+Paper draft and code: https://github.com/aaronsunny007/Financial-NRF
+
+ATTACH: a screenshot of the last table on the "Paper findings" tab (the one with the bold 0.87 to 0.99 column), or reuse chart.png
+NOTE: "62% to 8%" is Qwen2.5-7B on TAT-QA with rows swapped (n = 100). Check the live URL opens before posting.
