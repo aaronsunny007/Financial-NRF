@@ -6,8 +6,8 @@
 >
 > 1. AI tools that answer questions from company reports often attach a "reliability score" to each answer, without knowing the right answer.
 > 2. Those scores mostly check one thing: does the answer match the text the AI was given?
-> 3. So I tested what happens when the text is wrong. I replaced the numbers in the reports with wrong ones, on two public finance datasets and three open AI models.
-> 4. The AI's accuracy collapsed, but the scores that need no right answer barely moved. Only a check against the original clean text caught the problem, and that needs the very thing the scores were meant to replace.
+> 3. So I tested what happens when the text is wrong. I replaced the numbers in the reports with wrong ones, on two public finance datasets and four open AI models (3B to 14B parameters).
+> 4. The AI's accuracy collapsed, but the scores that need no right answer barely moved. Only a check against a trusted copy of the original table caught it, and that needs the very thing the scores were meant to replace. Even checking the numbers alone fails when real numbers are merely misplaced (a wrong year's column).
 > 5. One example: accuracy fell from **0.22 to 0.03** when the evidence was corrupted (Qwen2.5-3B on FinQA; the other runs agree).
 
 ![Accuracy collapses as the evidence is corrupted, while the evidence-support score stays flat](docs/corruption_chart.png)
@@ -137,18 +137,26 @@ and −0.37 (the greedy run gave −0.27) and clean accuracy of 0.31, 0.26 and 0
 and −0.11 per item across the three seeds; of eight noise-injection runs, one (the last seed, −0.22 to −0.01) has an interval that excludes
 zero, so the manipulation's effect is at most small and inconsistent.
 
-**6. A second dataset and larger models give the same answer.** The corrupted-evidence test was repeated on TAT-QA (Qwen2.5-3B on 100
-dev and 100 test items, Qwen2.5-7B) and on FinQA with 4-bit Qwen2.5-7B and Llama-3.1-8B, run through llama.cpp on the same free CPU runners.
-Accuracy at full corruption is 0.01 to 0.09 in every run. No measure that needs no gold answer (numeric overlap, entailment, lexical
-groundedness, the hallucination flag, stated confidence) separates corrupted from clean evidence better than AUROC 0.58 in any single run,
-while support measured against the clean evidence reaches 0.85 to 0.93. As detectors of wrong answers and of real retrieval misses, the
-same measures are weak and change sign between smaller and larger models. All tables: `results/paper/ANALYSIS.md`; the write-up is `paper/main.pdf`.
+**6. A second dataset, larger models, a model-based judge, and realistic errors.** The corrupted-evidence test was repeated on TAT-QA
+(Qwen2.5-3B on 100 dev and 100 test items, Qwen2.5-7B on 200) and on FinQA with 4-bit Qwen2.5-7B (200 items), Qwen2.5-14B and
+Llama-3.1-8B, run through llama.cpp on the same free CPU runners. Accuracy at full corruption is 0.01 to 0.09 in every run. No measure that
+needs no gold answer separates corrupted from clean evidence better than AUROC 0.60 in any single run: numeric overlap, entailment, lexical
+groundedness, the hallucination flag, stated confidence, and a RAGAs-style faithfulness judge (Llama-3.1-8B, 0.46 to 0.55). Support measured
+against the clean evidence reaches 0.84 to 0.94.
+
+Two realistic errors that keep every number the document contains and only misplace it (swapped periods, swapped rows) cost Qwen2.5-7B and Llama-3.1-8B up to
+54 points of accuracy on TAT-QA. Every response-side score stays at 0.43 to 0.55 (almost all at 0.48 to 0.55), and so does support measured against the clean *numbers*
+(0.43 to 0.52), because each number is still genuine. Checks on the evidence itself (`framework/evidence_consistency.py`,
+`experiments/evidence_checks.py`): redundancy of figures across passages 0.64 to 0.68 for scaled numbers and 0.50 for swaps; arithmetic
+self-consistency 0.42 to 0.55 (at or near chance, it does not work); numbers against a trusted copy 1.00 for scaled and 0.50 for swapped; table cells against a
+trusted structured copy 0.87 to 0.99 for the swaps. As detectors of wrong answers and of real retrieval misses the response-side measures are
+weak and model-dependent. All tables: `results/paper/ANALYSIS.md`; the write-up is `paper/main.pdf`.
 
 **What remains true.** The framework's design critique stands and is now properly demonstrated: gold-free evidence
 support, entailment and the hallucination flag are blind to corrupted evidence unless they are given a clean reference.
 **What does not:** the claims that the composite fails to track noise, that no weighting works, and that the hallucination
-flag tracks noise. **Limits:** small open models (1.5B to 8B), float32 on CPU or 4-bit through llama.cpp, FinQA and the arithmetic
-subset of TAT-QA, 100 to 150 items per run.
+flag tracks noise. **Limits:** open models of 1.5B to 14B, float32 on CPU or 4-bit through llama.cpp, FinQA and the arithmetic
+subset of TAT-QA, 100 to 200 items per run.
 
 ---
 
@@ -366,10 +374,10 @@ committed results.
 
 ## Limitations
 
-- **Model scale is a constraint, not a result.** The generators are 1.5B to 8B parameters (float32 on CPU up to 3B,
-  4-bit through llama.cpp for the 7B and 8B models, so size is confounded with precision). Absolute accuracy would rise
-  with scale. Nothing above 8B was tested.
-- **100 to 150 items per run, two datasets.** FinQA and the arithmetic questions of TAT-QA. Enough to separate large effects (corruption halves accuracy) from none, not
+- **Model scale is a constraint, not a result.** The generators are 1.5B to 14B parameters (float32 on CPU up to 3B,
+  4-bit through llama.cpp for the 7B, 8B and 14B models, so size is confounded with precision). Absolute accuracy would rise
+  with scale. Nothing above 14B was tested.
+- **100 to 200 items per run, two datasets.** FinQA and the arithmetic questions of TAT-QA. Enough to separate large effects (corruption halves accuracy) from none, not
   to resolve differences of a few points; every statistic carries a bootstrap interval for that reason.
 - **Five noise levels make a poor correlation.** The Pearson r over five level averages has an interval of about ±0.8
   at these sizes. The item-level paired effects are the statistics to trust.
@@ -377,8 +385,9 @@ committed results.
   Qwen2.5-1.5B; the greedy runs have no seed variance to report.
 - **Evidence support is numerical overlap**, and the entailment alternative (a small NLI model) did no better. Neither
   sees corruption of the evidence it is given; only a trusted reference does.
-- **The corrupted-evidence test is synthetic.** Numbers are replaced by scaled versions of themselves. It shows what the
-  measures *can* detect, not how often real retrieval errors look like this.
+- **The corrupted-evidence tests are injected, not natural.** Numbers are scaled, or periods and rows are swapped (the swaps were run
+  for Qwen2.5-7B and Llama-3.1-8B only). The swaps are closer to real parsing failures, but they still show what the measures *can* detect, not how often real
+  errors look like this. The cell-level check that catches them assumes a trusted structured copy of the source.
 - **The composite weighting is assigned, not learned.** Whether some weighting works could not be settled with five-point
   correlations; the corruption experiment shows the useful signal is accuracy, calibration-through-accuracy, and support
   measured against a clean reference.

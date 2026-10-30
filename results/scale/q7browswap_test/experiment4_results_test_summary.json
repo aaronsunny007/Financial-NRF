@@ -1,0 +1,59 @@
+{
+  "split": "test",
+  "engine": "replay",
+  "ness_mode": "strict",
+  "noise_definition": "level% of a 10-sentence distractor pool, appended to pre_text as individual sentences",
+  "levels": [
+    {
+      "noise_level": 0,
+      "injection_mode": "row_swap",
+      "injected_sentences": 0,
+      "noise_reached_model_rate": 0.0,
+      "n": 100,
+      "n_scored_numeric": 97,
+      "accuracy": 0.5463917525773195,
+      "evidence_support": 0.7831980532797093,
+      "evidence_support_strict": 0.7831980532797093,
+      "evidence_support_derived": 0.9084080188817028,
+      "hallucination_rate": 0.02,
+      "evidence_support_vs_clean_strict": 0.7831980532797093,
+      "ece": 0.35721649484536117,
+      "confidence_missing_count": 0,
+      "onrs": 0.7234336427880365
+    },
+    {
+      "noise_level": 50,
+      "injection_mode": "row_swap",
+      "injected_sentences": 0,
+      "noise_reached_model_rate": 0.24,
+      "n": 100,
+      "n_scored_numeric": 97,
+      "accuracy": 0.4536082474226804,
+      "evidence_support": 0.7839183633301903,
+      "evidence_support_strict": 0.7839183633301903,
+      "evidence_support_derived": 0.9117258140604914,
+      "hallucination_rate": 0.02,
+      "evidence_support_vs_clean_strict": 0.7839183633301903,
+      "ece": 0.455154639175258,
+      "confidence_missing_count": 0,
+      "onrs": 0.6762270553908096
+    },
+    {
+      "noise_level": 100,
+      "injection_mode": "row_swap",
+      "injected_sentences": 0,
+      "noise_reached_model_rate": 0.3,
+      "n": 100,
+      "n_scored_numeric": 97,
+      "accuracy": 0.4020618556701031,
+      "evidence_support": 0.7859497529044742,
+      "evidence_support_strict": 0.7859497529044742,
+      "evidence_support_derived": 0.9121587024087021,
+      "hallucination_rate": 0.02,
+      "evidence_support_vs_clean_strict": 0.7859497529044742,
+      "ece": 0.5015463917525775,
+      "confidence_missing_count": 0,
+      "onrs": 0.6520942042218576
+    }
+  ]
+}

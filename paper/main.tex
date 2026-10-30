@@ -16,6 +16,11 @@
 \usepackage{url}
 
 \input{generated/numbers.tex}
+\input{generated/numbers_evidence.tex}
+% judge scores arrive from a separate run; these defaults keep the paper compiling until they exist
+\providecommand{\aucFinjudge}{n/a}\providecommand{\aucTatjudge}{n/a}
+\providecommand{\errFinjudge}{n/a}\providecommand{\errTatjudge}{n/a}
+\providecommand{\retFinjudge}{n/a}\providecommand{\retTatjudge}{n/a}
 
 \title{Reference-Free Reliability Scores Cannot See Corrupted Evidence:\\
 A Controlled Test for Numerical Retrieval-Augmented QA in Finance}
@@ -28,15 +33,12 @@ A Controlled Test for Numerical Retrieval-Augmented QA in Finance}
 \maketitle
 
 \begin{abstract}
-Reference-free scores for retrieval-augmented generation judge a response against the evidence that was retrieved, without the gold answer.
-Their structural limit is plain: if the retrieved evidence is wrong, a faithful answer is still wrong, and a score computed against that evidence cannot tell.
-We test this directly for numerical financial question answering.
-We replace a controlled share of the numbers in the retrieved evidence with wrong values and ask which measures notice, using FinQA and TAT-QA and three generators from two model families (Qwen2.5 3B and 7B, Llama-3.1 8B).
-Accuracy falls toward zero.
-Numeric-overlap support, entailment support, lexical groundedness, a hallucination flag and verbalized confidence move by at most a few points and barely separate a fully corrupted case from a clean one (AUROC at most 0.58 in any run; pooled numeric-overlap support \aucFinoverlap{} on FinQA and \aucTatoverlap{} on TAT-QA).
-Support computed against the \emph{uncorrupted} evidence does (AUROC \aucFinvsclean{} and \aucTatvsclean{}), but needs the reference these scores are meant to replace.
-As detectors of wrong answers and of real retrieval misses the same measures are weak and inconsistent: near chance when pooled on FinQA, somewhat better on TAT-QA, and with signs that differ between models.
-Along the way we correct a scoring flaw in an earlier version of this work, show that an evidence-noise manipulation we first used did not degrade the model and therefore tested nothing, and show that composite-score rankings built from five-point correlations or weight sweeps are unstable.
+Reference-free reliability scores for retrieval-augmented generation judge a response against the evidence that was retrieved, without the gold answer. Their structural limit is plain: if the evidence is wrong, a faithful answer is still wrong. We test how far that limit bites, and what gets past it, in numerical financial question answering (FinQA and TAT-QA; Qwen2.5 3B, 7B and 14B and Llama-3.1 8B, up to 200 items per run).
+When a controlled share of the numbers in the evidence is replaced, accuracy falls to near zero, while numeric-overlap support, entailment support, lexical groundedness, a model-based faithfulness judge, a hallucination flag and verbalized confidence stay close to chance at telling corrupted from clean evidence (AUROC at most 0.60 in any run; pooled numeric-overlap support \aucFinoverlap{} on FinQA and \aucTatoverlap{} on TAT-QA, the judge \aucFinjudge{} and \aucTatjudge{}).
+Realistic errors that only misplace real numbers (a swapped period or row) cost up to 54 points of accuracy on TAT-QA and are invisible to every response-side score, and also to support measured against a clean copy of the \emph{numbers} (AUROC 0.43 to 0.52), because every number is still genuine. The results hold for two generator families (Qwen2.5-7B and Llama-3.1-8B).
+What does see them is a cell-level check against a trusted structured copy (AUROC \evPairFinPeriod{} to \evPairTatRow{}); checks that need only the evidence work weakly (redundancy, \evRedFinScaled{} to \evRedTatScaled{} on scaled numbers, 0.50 on swaps) or barely at all (arithmetic self-consistency, AUROC 0.42 to 0.55).
+The same response-side measures are also weak and model-dependent as detectors of wrong answers and of real retrieval misses.
+Along the way we correct a scoring flaw and an invalid noise manipulation in an earlier version of this work.
 Code, per-response outputs and a pipeline that reproduces every result on free CPU runners are public.
 \end{abstract}
 

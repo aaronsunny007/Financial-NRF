@@ -2,55 +2,55 @@
   "split": "test",
   "engine": "replay",
   "ness_mode": "strict",
-  "n_per_condition": 100,
+  "n_per_condition": 200,
   "oracle_skipped_no_gold_inds": 0,
   "conditions": {
     "closed_book": {
       "condition": "closed_book",
-      "n": 100,
-      "n_scored_numeric": 100,
+      "n": 200,
+      "n_scored_numeric": 200,
       "accuracy": 0.0,
       "accuracy_ci_low": 0.0,
-      "accuracy_ci_high": 0.03699480747600191,
+      "accuracy_ci_high": 0.018846005918320894,
       "evidence_support": 0.0,
       "hallucination_rate": 1.0,
       "verifier_verified_rate": 0.0,
-      "mean_self_reported_confidence": 0.5299999999999998,
-      "ece": 0.53,
-      "onrs": 0.094
+      "mean_self_reported_confidence": 0.49499999999999955,
+      "ece": 0.49500000000000005,
+      "onrs": 0.10099999999999998
     },
     "retrieval": {
       "condition": "retrieval",
-      "n": 100,
-      "n_scored_numeric": 100,
-      "accuracy": 0.62,
-      "accuracy_ci_low": 0.5220957382071034,
-      "accuracy_ci_high": 0.7090255079986562,
-      "evidence_support": 0.7972669380491628,
+      "n": 200,
+      "n_scored_numeric": 200,
+      "accuracy": 0.59,
+      "accuracy_ci_low": 0.5207633107255152,
+      "accuracy_ci_high": 0.655844408209187,
+      "evidence_support": 0.7771000554782036,
       "hallucination_rate": 0.04,
-      "verifier_verified_rate": 0.58,
-      "mean_self_reported_confidence": 0.9070000000000004,
-      "ece": 0.28700000000000025,
-      "onrs": 0.7597800814147487
+      "verifier_verified_rate": 0.49,
+      "mean_self_reported_confidence": 0.9000000000000026,
+      "ece": 0.3100000000000004,
+      "onrs": 0.740130016643461
     },
     "oracle": {
       "condition": "oracle",
-      "n": 100,
-      "n_scored_numeric": 100,
-      "accuracy": 0.67,
-      "accuracy_ci_low": 0.5730516033971138,
-      "accuracy_ci_high": 0.7543701620610456,
-      "evidence_support": 0.717409344468168,
-      "hallucination_rate": 0.11,
-      "verifier_verified_rate": 0.58,
-      "mean_self_reported_confidence": 0.9135000000000002,
-      "ece": 0.2435000000000003,
-      "onrs": 0.7455228033404504
+      "n": 200,
+      "n_scored_numeric": 200,
+      "accuracy": 0.64,
+      "accuracy_ci_low": 0.5714139956562683,
+      "accuracy_ci_high": 0.703309122686602,
+      "evidence_support": 0.6935878512055066,
+      "hallucination_rate": 0.13,
+      "verifier_verified_rate": 0.52,
+      "mean_self_reported_confidence": 0.9075000000000023,
+      "ece": 0.2675000000000003,
+      "onrs": 0.720576355361652
     }
   },
   "error_decomposition": {
     "retrieval_attributable_error": 0.050000000000000044,
-    "reasoning_attributable_error": 0.32999999999999996,
-    "retrieval_contribution_over_closed_book": 0.62
+    "reasoning_attributable_error": 0.36,
+    "retrieval_contribution_over_closed_book": 0.59
   }
 }

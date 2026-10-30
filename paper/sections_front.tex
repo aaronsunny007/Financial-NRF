@@ -20,12 +20,16 @@ We therefore replace a controlled share of the numbers in the retrieved evidence
 This does hurt: accuracy falls to near zero at full corruption.
 It also lets us ask which measures move.
 
+\paragraph{Why this is not as obvious as it sounds.}
+That a score defined relative to the supplied evidence cannot see wrong evidence follows from its definition. What does not follow is how the scores behave in practice, whether anything cheap gets past the limit, and which errors the obvious fix handles. We find that the obvious fix, comparing the numbers of the evidence with a trusted copy, handles scaled numbers perfectly and the realistic misplaced-number errors not at all, and that what handles both needs a trusted \emph{structured} copy.
+
 \paragraph{Contributions.}
 \begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
-\item A controlled corrupted-evidence test of reference-free reliability measures on two numerical financial QA datasets (FinQA and TAT-QA) with three generators from two model families (Qwen2.5 3B and 7B, Llama-3.1 8B), and smaller models in the secondary analyses.
-Measures that use only the response and the supplied evidence (numeric-overlap support, entailment support, lexical groundedness, a hallucination flag, verbalized confidence) barely distinguish a fully corrupted case from a clean one (AUROC at most 0.58 in any run). A score that compares the response with the \emph{uncorrupted} evidence can (AUROC 0.85 to 0.93), but it needs the reference we are trying to avoid.
-\item As detectors of wrong answers on clean evidence, and of real retrieval misses (the retriever fails to surface the numbers the answer needs), the same measures are weak and inconsistent: near chance when pooled on FinQA, modestly informative on TAT-QA, and with effects that change sign between smaller and larger models.
-\item A correction to a published scoring flaw in this line of work (the model's own confidence statement was counted as unsupported evidence), a demonstration that a five-point correlation and a weight sweep are too unstable to rank composites, and a recommendation that any evidence-quality manipulation be validated by its effect on the model before it is used to judge a metric.
+\item A controlled corrupted-evidence test of reference-free reliability measures, with a model-based faithfulness judge among them, on FinQA and TAT-QA and four generators from two families (Qwen2.5 3B, 7B and 14B, Llama-3.1 8B; 100 to 200 items per run). Measures that use only the response and the supplied evidence barely distinguish a fully corrupted case from a clean one (AUROC at most 0.60 in any run). A score that compares the response with the \emph{uncorrupted} evidence can (AUROC 0.84 to 0.94), but it needs the reference we are trying to avoid.
+\item Two realistic error types that misplace real numbers (a swapped period, a swapped row). They cost accuracy (up to 54 points on TAT-QA), are invisible to every response-side measure, and are invisible to the number-level clean reference that caught scaled numbers (AUROC 0.43 to 0.52), for both generator families.
+\item A comparison of checks on the evidence itself: redundancy (weak, only for scaled numbers), arithmetic self-consistency (AUROC 0.42 to 0.55, at or near chance), numbers against a trusted copy (perfect for scaled numbers, chance for swaps) and table cells against a trusted structured copy (AUROC 0.87 to 0.99 for the swaps).
+\item As detectors of wrong answers and of real retrieval misses the response-side measures are weak and model-dependent: near chance when pooled on FinQA, modestly informative on TAT-QA, with effects that change sign between smaller and larger models.
+\item A correction to a scoring flaw in this line of work (the model's own confidence statement counted as unsupported evidence), a demonstration that an evidence-noise manipulation we first used did not degrade the model, and that five-point correlations and weight sweeps are too unstable to rank composites.
 \item All code, per-response outputs and the free CPU pipeline that produced them are public.\footnote{\url{https://github.com/aaronsunny007/Financial-NRF}}
 \end{itemize}
 
@@ -35,6 +39,7 @@ Measures that use only the response and the supplied evidence (numeric-overlap s
 RAGAs and ARES score faithfulness, answer relevance and context relevance, using a language model as judge or a fine-tuned classifier \citep{es2024ragas,saadfalcon2024ares}.
 Their faithfulness component checks the answer against the context that was retrieved.
 That is the property whose limit we examine: it is silent about whether the context is right.
+RAGAs-style faithfulness splits the answer into claims and has a language model judge each against the context \citep{es2024ragas,zheng2023judging}; we include such a judge as a baseline (Section~\ref{sec:measures}).
 Atomic-claim scoring \citep{min2023factscore} and sampling-consistency checks \citep{manakul2023selfcheckgpt} target hallucination in open-ended text.
 Natural-language-inference models have been used to score factual consistency between a source and a generated text \citep{maynez2020faithfulness,laban2022summac,zha2023alignscore}; we use an NLI cross-encoder as one of our measures.
 
@@ -55,9 +60,9 @@ Each report (paragraphs and table rows) is split into chunks, one per sentence o
 A generator receives a fixed system prompt, two worked examples and the retrieved evidence, and must write its reasoning, a final answer and a self-reported confidence.
 A rule-based verifier may trigger one retry when the response's own arithmetic does not check out.
 Decoding is greedy unless stated.
-Generators are Qwen2.5-1.5B, -3B and -7B-Instruct \citep{qwen2024qwen25}, SmolLM2-1.7B-Instruct \citep{allal2025smollm2} and Llama-3.1-8B-Instruct.
-The corrupted-evidence test uses the 3B, 7B and Llama models; the 1.5B and SmolLM2 runs enter only the error-detection and retrieval-miss analyses.
-The 1.5B, 3B and SmolLM2 models run in float32 on CPU; the 7B and 8B models run as 4-bit GGUF builds (Q4\_K\_M) through llama.cpp \citep{gerganov2023llamacpp}, which also resembles the 4-bit setting of earlier runs of this project.
+Generators are Qwen2.5-1.5B, -3B, -7B and -14B-Instruct \citep{qwen2024qwen25}, SmolLM2-1.7B-Instruct \citep{allal2025smollm2} and Llama-3.1-8B-Instruct.
+The corrupted-evidence tests use the 3B, 7B, 14B and Llama models; the 1.5B and SmolLM2 runs enter only the error-detection and retrieval-miss analyses.
+The 1.5B, 3B and SmolLM2 models run in float32 on CPU; the 7B, 8B and 14B models run as 4-bit GGUF builds (Q4\_K\_M) through llama.cpp \citep{gerganov2023llamacpp}, which also resembles the 4-bit setting of earlier runs of this project.
 
 \subsection{Data}
 \textbf{FinQA}: numeric questions from the dev and test splits (the pipeline treats yes/no questions as non-numeric and excludes them from accuracy).
@@ -71,15 +76,25 @@ Accuracy uses a 2\% relative (or 0.01 absolute) tolerance on the final answer.
 \item[Numeric-overlap support (NESS)] the share of the numbers in the response's reasoning and answer that occur in the supplied evidence. A response is flagged as hallucinated when this falls below 0.5. The model's own confidence statement is excluded from the count (Section~\ref{sec:erratum}).
 \item[Entailment support] each number-bearing, non-arithmetic sentence of the reasoning is the hypothesis and the evidence, in windows of at most 280 words, is the premise. We take the maximum entailment probability over windows from the cross-encoder nli-deberta-v3-small \citep{he2021debertav3} and report the share of claims with probability at least 0.5.
 \item[Lexical groundedness] the share of the reasoning's content words (four or more letters) found in the evidence. A cheap stand-in for overlap-style faithfulness scoring.
+\item[LLM-judge faithfulness] a RAGAs-style score from a language model. The judge, a different 8B model from the generator (Llama-3.1-8B, or Qwen2.5-7B for the Llama generator, 4-bit through llama.cpp), is shown the evidence and the response, lists the factual claims of the response, and marks each SUPPORTED or UNSUPPORTED by the evidence. The score is the share of claims marked SUPPORTED. The judge sees the same evidence as the generator, so it is a reference-free check of the same kind. To bound its cost it is run on the clean and fully edited evidence only.
 \item[Hallucination flag, self-reported confidence] as defined above.
 \end{description}
 Two further quantities are \emph{not} reference-free and serve as reference points: accuracy (needs the gold answer) and support \emph{against the clean evidence} (needs the uncorrupted evidence).
 ONRS $=0.30\,\text{acc}+0.30\,\text{NESS}+0.20\,(1-\text{hallucination rate})+0.20\,(1-\text{ECE})$, with the ECE computed on the verbalized confidence.
 
+\subsection{Evidence-side checks}
+\label{sec:evidence-checks}
+The measures above look at the response. Three checks, implemented in \texttt{framework/evidence\_consistency.py}, look at the evidence instead and differ in what they need.
+\textbf{Redundancy} needs only the evidence: the share of its numbers that occur on at least two different lines (clean filings state a figure in a table and again in the text).
+\textbf{Numbers vs a trusted copy} needs a trusted copy of the source: the share of the evidence's numbers that occur in it.
+\textbf{Cells vs a trusted table} needs a trusted \emph{structured} copy: the share of the evidence's table cells, as (row label, column header, value) triples, that match it.
+We also tried arithmetic self-consistency (whether a figure is the sum, difference or percent change of two figures of one row; a figure in the text is tested against each row) and report it as a negative result.
+
 \subsection{Manipulations}
 \textbf{Corrupted evidence.} After retrieval, a fraction $p\in\{0,25,50,75,100\}\%$ of the numeric tokens in the evidence is replaced by a wrong value (the original multiplied by 0.5, 0.8, 1.25, 1.6, 2 or 3, chosen deterministically per token), preserving currency signs, percent signs, thousands separators and decimals; four-digit years are left alone.
 Every other part of the pipeline is unchanged.
-\textbf{Retrieval miss.} A natural condition: an item is a \emph{miss} when the retrieved evidence lacks at least one number of the dataset's gold evidence (all FinQA gold facts; for TAT-QA the annotated paragraphs and, if the answer uses the table, the whole table).
+\textbf{Realistic evidence errors.} Scaling every number is a blunt instrument. Two further manipulations keep every number that the document really contains and only misplace it, as a mis-parsed table or an off-by-one column does: \emph{period swap} rotates the values of a table row across its period headers (``2015: 5829 | 2014: 5735'' becomes ``2015: 5735 | 2014: 5829''), and \emph{row swap} exchanges the values of a table row with those of the next table row in the evidence. The level is the share of eligible table rows affected ($0$, $50$ and $100\%$); level $0$ is the clean evidence.
+\textbf{Retrieval miss.} A natural condition: an item is a \emph{miss} when the retrieved evidence lacks at least one number of the dataset's gold evidence (for FinQA, the annotated gold facts; for TAT-QA, the operands of the annotated derivation, with scale constants and averaging divisors removed).
 
 \subsection{Statistics}
 Every interval is a 95\% percentile bootstrap over items (2000 resamples; the rows belonging to one item stay together).
