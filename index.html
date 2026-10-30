@@ -178,6 +178,7 @@
     <div class="links">
       <a href="#tabs" id="try">Try the analyser</a>
       <a class="ghost" href="https://github.com/aaronsunny007/Financial-NRF">Source on GitHub</a>
+      <a class="ghost" href="https://github.com/aaronsunny007/Financial-NRF/blob/paper-pdf/main.pdf">Read the paper</a>
     </div>
   </div>
 </div>
@@ -203,6 +204,7 @@
 <nav id="tabs">
   <button aria-selected="true" data-t="analyser">Live analyser</button>
   <button data-t="ask">Ask a question</button>
+  <button data-t="paper">Paper findings</button>
   <button data-t="scale">Larger runs</button>
   <button data-t="e1">Exp 1 · Baseline</button>
   <button data-t="e2">Exp 2 · Hallucination</button>
@@ -281,6 +283,65 @@
 </section>
 
 <!-- LARGER RUNS -->
+<!-- PAPER FINDINGS -->
+<section id="paper" hidden>
+  <h2>Paper findings: scores that need no gold answer cannot see wrong evidence</h2>
+  <div class="note"><strong>The headline study.</strong> 16 runs on two datasets (FinQA and TAT-QA) with Qwen2.5 from 1.5B to 14B and Llama-3.1-8B,
+  100 to 200 items each, every statistic with a 95% bootstrap interval over items. Evidence was damaged in two ways and the question asked was
+  whether any score that needs no gold answer notices. The write-up is
+  <a href="https://github.com/aaronsunny007/Financial-NRF/blob/paper-pdf/main.pdf">the paper (PDF)</a>; every table is in
+  <code>results/paper/ANALYSIS.md</code>.</div>
+
+  <h3>1. Wrong numbers in the evidence collapse accuracy</h3>
+  <p>A share of the numbers in the retrieved evidence is replaced with wrong ones. Accuracy at 0%, 50% and 100% of the numbers replaced (test split):</p>
+  <div class="tw"><table><thead><tr><th>Model, dataset</th><th class="n">n</th><th class="n">0%</th><th class="n">50%</th><th class="n">100%</th></tr></thead><tbody>
+  <tr><td>Qwen2.5-7B, FinQA</td><td class="n">200</td><td class="n">0.53</td><td class="n">0.14</td><td class="n">0.06</td></tr>
+  <tr><td>Qwen2.5-7B, TAT-QA</td><td class="n">200</td><td class="n">0.59</td><td class="n">0.12</td><td class="n">0.05</td></tr>
+  <tr><td>Qwen2.5-14B, FinQA</td><td class="n">100</td><td class="n">0.57</td><td class="n">0.18</td><td class="n">0.09</td></tr>
+  <tr><td>Llama-3.1-8B, FinQA</td><td class="n">100</td><td class="n">0.47</td><td class="n">0.13</td><td class="n">0.09</td></tr>
+  </tbody></table></div>
+
+  <h3>2. Realistic errors do the same damage</h3>
+  <p>Scaled numbers are easy to spot. A mis-parsed table is not: every figure is genuine, only misplaced. <em>Periods swapped</em> rotates a row's values
+  across its period headers; <em>rows swapped</em> exchanges the values of neighbouring rows. Accuracy at 0%, 50% and 100% of eligible rows edited:</p>
+  <div class="tw"><table><thead><tr><th>Model, dataset</th><th>Error</th><th class="n">0%</th><th class="n">50%</th><th class="n">100%</th></tr></thead><tbody>
+  <tr><td>Qwen2.5-7B, TAT-QA</td><td>periods swapped</td><td class="n">0.62</td><td class="n">0.38</td><td class="n">0.15</td></tr>
+  <tr><td>Qwen2.5-7B, TAT-QA</td><td>rows swapped</td><td class="n">0.62</td><td class="n">0.31</td><td class="n">0.08</td></tr>
+  <tr><td>Llama-3.1-8B, TAT-QA</td><td>periods swapped</td><td class="n">0.56</td><td class="n">0.36</td><td class="n">0.16</td></tr>
+  <tr><td>Llama-3.1-8B, TAT-QA</td><td>rows swapped</td><td class="n">0.56</td><td class="n">0.26</td><td class="n">0.09</td></tr>
+  <tr><td>Qwen2.5-7B, FinQA</td><td>periods / rows swapped</td><td class="n">0.53</td><td class="n">0.50 / 0.44</td><td class="n">0.46 / 0.39</td></tr>
+  <tr><td>Llama-3.1-8B, FinQA</td><td>periods / rows swapped</td><td class="n">0.47</td><td class="n">0.46 / 0.43</td><td class="n">0.45 / 0.41</td></tr>
+  </tbody></table></div>
+  <p>The same two generator families agree. Accuracy falls by up to 54 points on TAT-QA, where most items have an edited table.</p>
+
+  <h3>3. No score that looks only at the response notices</h3>
+  <p>AUROC for telling an item's edited evidence from its clean evidence (0.5 is chance), across the eight swap runs:</p>
+  <div class="tw"><table><thead><tr><th>Measure</th><th>Needs</th><th class="n">AUROC range</th></tr></thead><tbody>
+  <tr><td>Numeric-overlap support, entailment, lexical groundedness, hallucination flag, verbalised confidence</td><td>the response only</td><td class="n">0.43 to 0.55</td></tr>
+  <tr><td>LLM judge (Qwen runs only)</td><td>the response only</td><td class="n">0.49 to 0.55</td></tr>
+  <tr><td>Support measured against the clean numbers</td><td>the clean evidence</td><td class="n">0.43 to 0.52</td></tr>
+  <tr><td><strong>Accuracy</strong></td><td>the gold answer</td><td class="n"><strong>0.51 to 0.77</strong></td></tr>
+  </tbody></table></div>
+  <p>The judge reads the damaged evidence, finds the response consistent with it, and has nothing else to go on. Only accuracy, which needs the gold answer, moves.</p>
+
+  <h3>4. What does notice: a check against a trusted table</h3>
+  <p>Checks on the evidence itself, AUROC at the highest edit level:</p>
+  <div class="tw"><table><thead><tr><th>Dataset</th><th>Error</th><th class="n">Redundancy</th><th class="n">Arithmetic</th><th class="n">Numbers vs trusted copy</th><th class="n">Cells vs trusted table</th></tr></thead><tbody>
+  <tr><td>FinQA</td><td>numbers scaled</td><td class="n">0.66</td><td class="n">0.46</td><td class="n">1.00</td><td class="n">1.00</td></tr>
+  <tr><td>FinQA</td><td>periods swapped</td><td class="n">0.50</td><td class="n">0.50</td><td class="n">0.50</td><td class="n"><strong>0.87</strong></td></tr>
+  <tr><td>FinQA</td><td>rows swapped</td><td class="n">0.50</td><td class="n">0.50</td><td class="n">0.50</td><td class="n"><strong>0.97</strong></td></tr>
+  <tr><td>TAT-QA</td><td>numbers scaled</td><td class="n">0.68</td><td class="n">0.55</td><td class="n">1.00</td><td class="n">1.00</td></tr>
+  <tr><td>TAT-QA</td><td>periods swapped</td><td class="n">0.50</td><td class="n">0.50</td><td class="n">0.50</td><td class="n"><strong>0.96</strong></td></tr>
+  <tr><td>TAT-QA</td><td>rows swapped</td><td class="n">0.50</td><td class="n">0.50</td><td class="n">0.50</td><td class="n"><strong>0.99</strong></td></tr>
+  </tbody></table></div>
+  <p>Comparing numbers with a trusted copy catches scaled figures but is blind to moved ones, because every number is still real. Comparing
+  <em>(row label, period, value)</em> cells with a trusted structured table catches the swaps too. Redundancy across passages helps a little for scaled
+  numbers; arithmetic self-consistency does not work (0.42 to 0.55). Cells are only available on items with a table in the evidence (31% of FinQA items, 94% of TAT-QA).</p>
+
+  <p><strong>Limits.</strong> Open models of 1.5B to 14B only, 4-bit or float32 on CPU, 100 to 200 items per run, the injected errors are synthetic,
+  and no human evaluation was done.</p>
+</section>
+
 <section id="scale" hidden>
   <h2>What the larger runs show</h2>
   <div class="note"><strong>These supersede the n = 50 results in the other tabs.</strong> After an audit found a scoring defect, the
@@ -334,7 +395,7 @@
   <h3>4. Entailment is no better than overlap</h3>
   <p>Scoring each claim in the reasoning with a small NLI model separates correct from incorrect answers no better than chance
   (AUROC 0.52 on dev, 0.56 on test); so does numeric overlap (0.64 on dev, 0.51 on test).</p>
-  <p><strong>Limits.</strong> Models of 1.5B to 3B at float32 on CPU, FinQA only, 100 to 150 items per run, and a synthetic corruption.</p>
+  <p><strong>Limits.</strong> Models of 1.5B to 3B at float32 on CPU, FinQA only, 100 to 150 items per run, and a synthetic corruption. The <em>Paper findings</em> tab extends this to 7B and 14B models, Llama-3.1-8B, TAT-QA and realistic table errors.</p>
 </section>
 
 <!-- EXP 1 -->
@@ -650,7 +711,7 @@
 
 <footer>
   MSc Research Project, School of Computing, Ulster University.
-  Generation results produced locally on an NVIDIA RTX 3050; framework logic runs in your browser.
+  Experiments 1 to 5 were generated locally on an NVIDIA RTX 3050; the larger runs on free CPU runners (GitHub Actions); framework logic runs in your browser.
 </footer>
 </div>
 
