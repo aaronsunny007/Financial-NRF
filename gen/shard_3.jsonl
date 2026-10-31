@@ -1,0 +1,2 @@
+{"_meta": {"model": "meta-llama/Llama-3.1-8B-Instruct", "precision": "Q4_K_M 4-bit GGUF (llama.cpp)"}}
+{"key": "20223e0a0ece974046707b16e49c5d6187a983d9441c844c808a95ebaa14e883", "response": "Reasoning: The question asks for the portion of the total purchase price related to stock awards, not the value of stock awards. The total purchase price is $4187.8 million. The value of stock awards is $121.4 million. Portion = 121.4 / 4187.8 * 100 = 2.90\n\nFinal Answer: 2.90%\n\nConfidence: 0.9", "seconds": 113.86}
