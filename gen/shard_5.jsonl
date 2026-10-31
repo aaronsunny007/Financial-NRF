@@ -1,0 +1,2 @@
+{"_meta": {"model": "Qwen/Qwen2.5-7B-Instruct", "precision": "Q4_K_M 4-bit GGUF (llama.cpp)"}}
+{"key": "2bb6ee5a312e938c2cc021531753f32e7f7ed8661a13258e1b53a10f264b4fcf", "response": "Reasoning: The evidence provides the net property, plant, and equipment values for 2019 and 2018. For 2019, the net value is $3,574 million, and for 2018, it is $3,497 million. The change in net property, plant, and equipment from 2018 to 2019 is calculated as 3,574 - 3,497 = 77.\n\nFinal Answer: 77\n\nConfidence: 1.0", "seconds": 113.31}
