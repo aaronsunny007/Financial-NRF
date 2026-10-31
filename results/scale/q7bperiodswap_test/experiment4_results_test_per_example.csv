@@ -1269,16 +1269,16 @@ Confidence: 0.9"
 Final Answer: 2.91%
 
 Confidence: 0.9"
-50,period_swap,1,MAS/2017/page_27.pdf-2,numeric,1.1197,67.01,0.0,True,0.8461538461538461,0.8461538461538461,0.8461538461538461,0,0.9,0.8461538461538461,"- [pre_text] performance graph the table below compares the cumulative total shareholder return on our common stock with the cumulative total return of ( i ) the standard & poor's 500 composite stock index ( ""s&p 500 index"" ) , ( ii ) the standard & poor's industrials index ( ""s&p industrials index"" ) and ( iii ) the standard & poor's consumer durables & apparel index ( ""s&p consumer durables & apparel index"" ) , from december 31 , 2012 through december 31 , 2017 , when the closing price of our common stock was $ 43.94 .
+50,period_swap,1,MAS/2017/page_27.pdf-2,numeric,1.1197,111.97,0.0,True,0.8461538461538461,0.8461538461538461,1.0,0,0.9,0.8461538461538461,"- [pre_text] performance graph the table below compares the cumulative total shareholder return on our common stock with the cumulative total return of ( i ) the standard & poor's 500 composite stock index ( ""s&p 500 index"" ) , ( ii ) the standard & poor's industrials index ( ""s&p industrials index"" ) and ( iii ) the standard & poor's consumer durables & apparel index ( ""s&p consumer durables & apparel index"" ) , from december 31 , 2012 through december 31 , 2017 , when the closing price of our common stock was $ 43.94 .
 - [pre_text] the table below sets forth the value , as of december 31 for each of the years indicated , of a $ 100 investment made on december 31 , 2012 in each of our common stock , the s&p 500 index , the s&p industrials index and the s&p consumer durables & apparel index and includes the reinvestment of dividends. .
 - [table_row] s&p 500 index -- 2013: $ 132.04 | 2014: $ 149.89 | 2015: $ 151.94 | 2016: $ 169.82 | 2017: $ 206.49
 - [post_text] $ 50.00 $ 100.00 $ 150.00 $ 200.00 $ 250.00 $ 300.00 $ 350.00 masco s&p 500 index s&p industrials index s&p consumer durables & apparel index .
-- [table_row] s&p industrials index -- 2013: $ 153.73 | 2014: $ 149.83 | 2015: $ 177.65 | 2016: $ 214.55 | 2017: $ 140.18
-- [table_row] masco -- 2013: $ 155.26 | 2014: $ 200.79 | 2015: $ 227.08 | 2016: $ 318.46 | 2017: $ 138.48
+- [table_row] s&p industrials index -- 2013: $ 140.18 | 2014: $ 153.73 | 2015: $ 149.83 | 2016: $ 177.65 | 2017: $ 214.55
+- [table_row] masco -- 2013: $ 138.48 | 2014: $ 155.26 | 2015: $ 200.79 | 2016: $ 227.08 | 2017: $ 318.46
 - [table_row] s&p consumer durables & apparel index -- 2013: $ 148.31 | 2014: $ 147.23 | 2015: $ 138.82 | 2016: $ 164.39 | 2017: $ 135.84
-- [pre_text] the graph assumes investments of $ 100 on december 31 , 2012 in our common stock and in each of the three indices and the reinvestment of dividends .","Reasoning: The cumulative total return for Masco as of December 31, 2017, is $138.48 (from the table). The cumulative total return for the S&P 500 index as of December 31, 2017, is $206.49 (from the table). The difference in percentage cumulative total shareholder return is calculated as follows: (206.49 - 138.48) / 100 * 100 = 67.01
+- [pre_text] the graph assumes investments of $ 100 on december 31 , 2012 in our common stock and in each of the three indices and the reinvestment of dividends .","Reasoning: The cumulative total shareholder return for Masco from 2013 to 2017 is $318.46 (as of December 31, 2017). The cumulative total return for the S&P 500 index over the same period is $206.49. The difference in percentage cumulative total shareholder return is calculated as follows: (318.46 - 206.49) / 100 * 100 = 111.97
 
-Final Answer: 67.01%
+Final Answer: 111.97%
 
 Confidence: 0.9"
 50,period_swap,0,SYY/2006/page_71.pdf-1,numeric,6.757000000000001%,8.61,0.0,True,0.7894736842105263,0.7894736842105263,1.0,0,0.9,0.7894736842105263,"- [pre_text] total rental expense under operating leases was $ 100690000 , $ 92710000 , and $ 86842000 in fiscal 2006 , 2005 and 2004 , respectively .
@@ -1390,16 +1390,16 @@ Confidence: 0.9"
 Final Answer: 99.01%
 
 Confidence: 0.9"
-50,period_swap,1,JKHY/2019/page_18.pdf-3,non_numeric,no,0.9,0.0,False,1.0,1.0,1.0,0,0.9,1.0,"- [table_row] 2019 peer group -- 2014: 126.23 | 2015: 142.94 | 2016: 166.15 | 2017: 224.73 | 2018: 281.09 | 2019: 100.00
+50,period_swap,0,JKHY/2019/page_18.pdf-3,non_numeric,no,23.01,0.0,True,0.8333333333333334,0.8333333333333334,0.8333333333333334,0,0.9,0.8333333333333334,"- [table_row] 2019 peer group -- 2014: 100.00 | 2015: 126.23 | 2016: 142.94 | 2017: 166.15 | 2018: 224.73 | 2019: 281.09
 - [table_row] 2018 peer group -- 2014: 100.00 | 2015: 127.40 | 2016: 151.16 | 2017: 177.26 | 2018: 228.97 | 2019: 286.22
 - [post_text] some peer participant companies were different for fiscal year ended 2019 compared to fiscal year ended 2018 .
 - [post_text] companies in the 2019 peer group are aci worldwide , inc. ; black knight , inc. ; bottomline technologies , inc. ; broadridge financial solutions , inc. ; cardtronics plc ; corelogic , inc. ; euronet worldwide , inc. ; exlservice holdings , inc. ; fair isaac corp. ; fidelity national information services , inc. ; fiserv , inc. ; fleetcor technologies , inc. ; global payments , inc. ; square , inc. ; ss&c technologies holdings , inc. ; total system services , inc. ; tyler technologies , inc. ; verint systems , inc. ; and wex , inc .
 - [post_text] companies in the 2018 peer group were aci worldwide , inc. ; bottomline technology , inc. ; broadridge financial solutions ; cardtronics , inc. ; corelogic , inc. ; euronet worldwide , inc. ; fair isaac corp. ; fidelity national information services , inc. ; fiserv , inc. ; global payments , inc. ; moneygram international , inc. ; ss&c technologies holdings , inc. ; total systems services , inc. ; tyler technologies , inc. ; verifone .
 - [post_text] total returns are calculated according to market capitalization of peer group members at the beginning of each period .
 - [post_text] the company 2019s compensation committee of the board of directors adjusted the peer participants due to consolidations within the industry during the 2019 fiscal year .
-- [pre_text] comparison of 5 year cumulative total return among jack henry & associates , inc. , the s&p 500 index , and a peer group the following information depicts a line graph with the following values: .","Reasoning: The evidence provides the total notional amounts for the 2019 and 2018 peer groups. For 2019, the total notional amount is 100.00. For 2018, the total notional amount is 228.97. To determine if the 2019 peer group's total notional amount is greater than the 2018 peer group's, I compare the two values directly: 100.00 < 228.97. Therefore, the 2019 peer group's total notional amount is not greater than the 2018 peer group's.
+- [pre_text] comparison of 5 year cumulative total return among jack henry & associates , inc. , the s&p 500 index , and a peer group the following information depicts a line graph with the following values: .","Reasoning: The question asks for the five-year total return of the 2019 peer group compared to the 2018 peer group. The evidence provides the total notional amounts for each year in the respective peer groups. For 2019, the total notional amount is 281.09, and for 2018, it is 228.97. The calculation for the percentage change is (281.09 - 228.97) / 228.97 * 100 = 23.01%.
 
-Final Answer: No
+Final Answer: 23.01%
 
 Confidence: 0.9"
 50,period_swap,0,AWK/2014/page_121.pdf-2,numeric,1.714%,1.71,1.0,True,0.6923076923076923,0.6923076923076923,1.0,0,0.9,0.6923076923076923,"- [pre_text] the acts effectively make the subsidy payments taxable in tax years beginning after december 31 , 2012 and as a result , the company followed its original accounting for the underfunded status of the other postretirement benefits for the medicare part d adjustment and recorded a reduction in deferred tax assets and an increase in its regulatory assets amounting to $ 6348 and $ 6241 at december 31 , 2014 and 2013 , respectively .
@@ -1486,16 +1486,16 @@ Confidence: 0.9"
 Final Answer: NA
 
 Confidence: 0.8"
-50,period_swap,1,FIS/2016/page_31.pdf-2,numeric,113.63000000000001%,98.18,0.0,True,0.9411764705882353,0.9411764705882353,1.0,0,0.9,0.9411764705882353,"- [pre_text] stock performance graph the graph below matches fidelity national information services , inc.'s cumulative 5-year total shareholder return on common stock with the cumulative total returns of the s&p 500 index and the s&p supercap data processing & outsourced services index.aa the graph tracks the performance of a $ 100 investment in our common stock and in each index ( with the reinvestment of all dividends ) from december 31 , 2011 to december 31 , 2016. .
+50,period_swap,1,FIS/2016/page_31.pdf-2,numeric,113.63000000000001%,-98.18,0.0,True,0.8823529411764706,0.8823529411764706,1.0,0,0.9,0.8823529411764706,"- [pre_text] stock performance graph the graph below matches fidelity national information services , inc.'s cumulative 5-year total shareholder return on common stock with the cumulative total returns of the s&p 500 index and the s&p supercap data processing & outsourced services index.aa the graph tracks the performance of a $ 100 investment in our common stock and in each index ( with the reinvestment of all dividends ) from december 31 , 2011 to december 31 , 2016. .
 - [table_row] fidelity national information services inc . -- 12/11: 134.12 | 12/12: 210.97 | 12/13: 248.68 | 12/14: 246.21 | 12/15: 311.81 | 12/16: 100.00
 - [table_row] s&p 500 -- 12/11: 100.00 | 12/12: 116.00 | 12/13: 153.58 | 12/14: 174.60 | 12/15: 177.01 | 12/16: 198.18
 - [post_text] the stock price performance included in this graph is not necessarily indicative of future stock price performance .
 - [post_text] selected financial ss the selected financial data set forth below constitutes historical financial data of fis and should be read in conjunction with ""item 7 , management 2019s discussion and analysis of financial condition and results of operations , "" and ""item 8 , financial statements and supplementary data , "" included elsewhere in this report. .
-- [table_row] s&p supercap data processing & outsourced services -- 12/11: 100.00 | 12/12: 126.06 | 12/13: 194.91 | 12/14: 218.05 | 12/15: 247.68 | 12/16: 267.14
+- [table_row] s&p supercap data processing & outsourced services -- 12/11: 126.06 | 12/12: 194.91 | 12/13: 218.05 | 12/14: 247.68 | 12/15: 267.14 | 12/16: 100.00
 - [pre_text] there were no share repurchases in 2016 .
-- [post_text] item 6 .","Reasoning: The evidence provides the cumulative total returns for Fidelity National Information Services, Inc. and the S&P 500 from December 31, 2011 to December 31, 2016. For Fidelity National Information Services, Inc., the cumulative return on December 31, 2016 is 100.00. For the S&P 500, the cumulative return on the same date is 198.18. The difference in percentage cumulative 5-year total shareholder return is calculated as (198.18 - 100.00) / 100.00 * 100 = 98.18
+- [post_text] item 6 .","Reasoning: The evidence provides the cumulative total returns for Fidelity National Information Services, Inc. and the S&P 500 from December 31, 2011 to December 31, 2016. For Fidelity National Information Services, Inc., the cumulative total return on December 31, 2016 is 100.00. For the S&P 500, the cumulative total return on December 31, 2016 is 198.18. The difference in percentage cumulative 5-year total shareholder return is calculated as follows: 198.18 - 100.00 = -98.18
 
-Final Answer: 98.18%
+Final Answer: -98.18%
 
 Confidence: 0.9"
 50,period_swap,0,AMT/2016/page_49.pdf-1,numeric,9.302000000000001%,1.0,0.0,False,1.0,1.0,1.0,0,1.0,1.0,"- [table_row] 2016: quarter ended march 31 | high: $ 102.93 | low: $ 83.07
@@ -1522,16 +1522,16 @@ Confidence: 1.0"
 Final Answer: 1.73%
 
 Confidence: 0.9"
-50,period_swap,1,AAL/2016/page_8.pdf-4,numeric,1.59172,1.46,0.0,True,0.6666666666666666,0.6666666666666666,1.0,0,0.9,0.6666666666666666,"- [table_row] flight attendants -- mainline operations: 2200 | wholly-owned regional carriers: 26900 | total: 24700
-- [table_row] maintenance personnel -- mainline operations: 14900 | wholly-owned regional carriers: 2000 | total: 16900
-- [table_row] pilots and flight crew training instructors -- mainline operations: 13400 | wholly-owned regional carriers: 3400 | total: 16800
-- [table_row] passenger service personnel -- mainline operations: 15900 | wholly-owned regional carriers: 7100 | total: 23000
+50,period_swap,1,AAL/2016/page_8.pdf-4,numeric,1.59172,1.81,0.0,True,0.6666666666666666,0.6666666666666666,1.0,0,0.9,0.6666666666666666,"- [table_row] flight attendants -- mainline operations: 24700 | wholly-owned regional carriers: 2200 | total: 26900
+- [table_row] maintenance personnel -- mainline operations: 2000 | wholly-owned regional carriers: 16900 | total: 14900
+- [table_row] pilots and flight crew training instructors -- mainline operations: 3400 | wholly-owned regional carriers: 16800 | total: 13400
+- [table_row] passenger service personnel -- mainline operations: 7100 | wholly-owned regional carriers: 23000 | total: 15900
 - [pre_text] the table below presents our approximate number of active full-time equivalent employees as of december 31 , 2016 .
 - [pre_text] employees and labor relations the airline business is labor intensive .
 - [table_row] fleet service personnel -- mainline operations: 16600 | wholly-owned regional carriers: 3500 | total: 20100
-- [pre_text] in 2016 , mainline and regional salaries , wages and benefits were our largest expense and represented approximately 35% ( 35 % ) of our total operating expenses .","Reasoning: The question asks for the ratio of total flight attendants to total maintenance personnel. From the evidence, total flight attendants = 24700 and total maintenance personnel = 16900. Ratio = 24700 / 16900 = 1.46
+- [pre_text] in 2016 , mainline and regional salaries , wages and benefits were our largest expense and represented approximately 35% ( 35 % ) of our total operating expenses .","Reasoning: The question asks for the ratio of the total flight attendants to total maintenance personnel. From the evidence, total flight attendants = 26900 and total maintenance personnel = 14900. Ratio = 26900 / 14900 = 1.81
 
-Final Answer: 1.46
+Final Answer: 1.81
 
 Confidence: 0.9"
 50,period_swap,0,ETFC/2007/page_18.pdf-1,numeric,2.63855,2.64,1.0,True,0.6666666666666666,0.6666666666666666,0.8333333333333334,0,0.9,0.6666666666666666,"- [table_row] location: alpharetta georgia | approximate square footage: 219000
@@ -1546,16 +1546,16 @@ Confidence: 0.9"
 Final Answer: 2.64
 
 Confidence: 0.9"
-50,period_swap,0,GPN/2010/page_87.pdf-3,numeric,34.807%,-34.81,0.0,True,0.6363636363636364,0.6363636363636364,1.0,0,0.9,0.6363636363636364,"- [pre_text] the total income tax benefit recognized for share-based compensation in the accompanying statements of income is also presented. .
+50,period_swap,1,GPN/2010/page_87.pdf-3,numeric,34.807%,-28.7,0.0,True,0.6363636363636364,0.6363636363636364,0.8181818181818182,0,0.9,0.6363636363636364,"- [pre_text] the total income tax benefit recognized for share-based compensation in the accompanying statements of income is also presented. .
 - [table_row] share-based compensation cost -- 2010: $ 18.1 | 2009: $ 14.6 | 2008: $ 13.8
-- [table_row] income tax benefit -- 2010: $ -6.3 ( 6.3 ) | 2009: $ -5.2 ( 5.2 ) | 2008: $ -4.9 ( 4.9 )
+- [table_row] income tax benefit -- 2010: $ -5.2 ( 5.2 ) | 2009: $ -4.9 ( 4.9 ) | 2008: $ -6.3 ( 6.3 )
 - [pre_text] for all share-based awards granted after june 1 , 2006 , compensation expense is recognized on a straight-line basis .
 - [pre_text] the fair value of share- based awards granted prior to june 1 , 2006 is amortized as compensation expense on an accelerated basis from the date of the grant .
 - [pre_text] rsus are converted to a stock grant only if the company 2019s performance during the fiscal year exceeds pre-established goals the following table summarizes the share-based compensation cost charged to income for ( i ) all stock options granted , ( ii ) our employee stock purchase plan , and ( iii ) our restricted stock program .
 - [pre_text] note 11 2014share-based awards and options as of may 31 , 2010 , we have four share-based employee compensation plans .
-- [pre_text] in addition , we have $ 13.0 million remaining under the authorization from our original share repurchase program initiated during fiscal 2007 .","Reasoning: The evidence provides the share-based compensation cost for 2010 as $18.1 million and the income tax benefit for 2010 as $-6.3 million (or -6.3). To find the percentage, I use the formula: (income tax benefit / share-based compensation cost) * 100. So, (-6.3 / 18.1) * 100 = -34.81
+- [pre_text] in addition , we have $ 13.0 million remaining under the authorization from our original share repurchase program initiated during fiscal 2007 .","Reasoning: The evidence provides the share-based compensation cost for 2010 as $18.1 million and the income tax benefit for 2010 as $-5.2 million (or -5.2). To find the percentage, I use the formula: (income tax benefit / share-based compensation cost) * 100. So, (-5.2 / 18.1) * 100 = -28.70
 
-Final Answer: -34.81%
+Final Answer: -28.70%
 
 Confidence: 0.9"
 50,period_swap,0,ADBE/2008/page_89.pdf-2,numeric,-30.851%,-0.4,0.0,True,0.7894736842105263,0.7894736842105263,1.0,0,0.9,0.7894736842105263,"- [post_text] the gross liability for unrecognized tax benefits at november 28 , 2008 of $ 139.5 million is exclusive of interest and penalties .
@@ -1623,9 +1623,9 @@ Confidence: 0.9"
 - [pre_text] as of september 30 , 2006 and september 24 , 2005 , a valuation allowance of $ 5 million was recorded against the deferred tax asset for the benefits of state operating losses that may not be realized .
 - [post_text] ( 1 ) see note 2 , 201crestatement of consolidated financial statements . 201d the company 2019s income taxes payable has been reduced by the tax benefits from employee stock options .
 - [pre_text] notes to consolidated financial statements ( continued ) note 7 2014income taxes ( continued ) as of september 30 , 2006 , the company has state and foreign tax loss and state credit carryforwards , the tax effect of which is $ 55 million .
-- [table_row] computed expected tax -- 2006: $ 633 | 2005 as restated ( 1 ): $ 129 | 2004 as restated ( 1 ): $ 987
+- [table_row] computed expected tax -- 2006: $ 987 | 2005 as restated ( 1 ): $ 633 | 2004 as restated ( 1 ): $ 129
 - [pre_text] certain of those carryforwards , the tax effect of which is $ 12 million , expire between 2016 and 2019 .
-- [pre_text] management believes it is more likely than not that forecasted income , including income that may be generated as a result of certain tax planning strategies , together with the tax effects of the deferred tax liabilities , will be sufficient to fully recover the remaining deferred tax assets .","Reasoning: The question asks for the greatest provision for income taxes among the given years. The evidence provides the provision for income taxes for 2006, 2005 (as restated), and 2004 (as restated): 2006 = $480 million, 2005 as restated = $104 million, and 2004 as restated = $829 million. The greatest value is 829.
+- [pre_text] management believes it is more likely than not that forecasted income , including income that may be generated as a result of certain tax planning strategies , together with the tax effects of the deferred tax liabilities , will be sufficient to fully recover the remaining deferred tax assets .","Reasoning: The question asks for the greatest provision for income taxes. The evidence provides the provision for income taxes for three years: 2006, 2005 (as restated), and 2004 (as restated). The values are $480 million for 2006, $104 million for 2005 as restated, and $829 million for 2004 as restated. The greatest value among these is $829 million.
 
 Final Answer: 829
 
@@ -1728,32 +1728,33 @@ Final Answer: -191
 Confidence: 0.9"
 50,period_swap,1,GS/2013/page_220.pdf-2,numeric,12.16%,12.16,1.0,True,0.8095238095238095,0.8095238095238095,1.0,0,0.9,0.8095238095238095,"- [pre_text] s&p 500 index s&p 500 financials index dec-09 dec-10 dec-11 dec-12 dec-13dec-08 the table below shows the cumulative total returns in dollars of the firm 2019s common stock , the s&p 500 index and the s&p 500 financials index for goldman sachs 2019 last five fiscal year ends , assuming $ 100 was invested on december 26 , 2008 in each of the firm 2019s common stock , the s&p 500 index and the s&p 500 financials index , and the dividends were reinvested on the date of payment without payment of any commissions .
 - [table_row] s&p 500 financials index -- 12/26/08: 124.38 | 12/31/09: 139.47 | 12/31/10: 115.67 | 12/31/11: 148.92 | 12/31/12: 201.92 | 12/31/13: 100.00
-- [table_row] s&p 500 index -- 12/26/08: 130.93 | 12/31/09: 150.65 | 12/31/10: 153.83 | 12/31/11: 178.42 | 12/31/12: 236.20 | 12/31/13: 100.00
+- [table_row] s&p 500 index -- 12/26/08: 100.00 | 12/31/09: 130.93 | 12/31/10: 150.65 | 12/31/11: 153.83 | 12/31/12: 178.42 | 12/31/13: 236.20
 - [table_row] the goldman sachs group inc . -- 12/26/08: $ 100.00 | 12/31/09: $ 224.98 | 12/31/10: $ 226.19 | 12/31/11: $ 123.05 | 12/31/12: $ 176.42 | 12/31/13: $ 248.36
 - [pre_text] supplemental financial information common stock performance the following graph compares the performance of an investment in the firm 2019s common stock from december 26 , 2008 ( the last trading day before the firm 2019s 2009 fiscal year ) through december 31 , 2013 , with the s&p 500 index and the s&p 500 financials index .
 - [post_text] 218 goldman sachs 2013 annual report .
 - [pre_text] the graph assumes $ 100 was invested on december 26 , 2008 in each of the firm 2019s common stock , the s&p 500 index and the s&p 500 financials index , and the dividends were reinvested on the date of payment without payment of any commissions .
-- [pre_text] the goldman sachs group , inc .","Reasoning: The evidence provides the cumulative total returns for Goldman Sachs Group Inc. and the S&P 500 index as of December 31, 2013. For Goldman Sachs Group Inc., the value is $248.36. For the S&P 500 index, the value is $236.20. To find the difference in percentage cumulative total return, I need to calculate the percentage returns for both and then find the difference.
+- [pre_text] the goldman sachs group , inc .","Reasoning: The evidence provides the cumulative total returns for Goldman Sachs Group Inc. and the S&P 500 Index as of December 31, 2013. For Goldman Sachs Group Inc., the value is $248.36. For the S&P 500 Index, the value is 236.20. To find the difference in percentage cumulative total return, I need to calculate the percentage returns for both and then find the difference.
 
 Percentage return for Goldman Sachs Group Inc. = (248.36 - 100) / 100 * 100 = 148.36%
-Percentage return for the S&P 500 index = (236.20 - 100) / 100 * 100 = 136.20%
+Percentage return for the S&P 500 Index = (236.20 - 100) / 100 * 100 = 136.20%
+
 Difference in percentage cumulative total return = 148.36 - 136.20 = 12.16
 
 Final Answer: 12.16%
 
 Confidence: 0.9"
-50,period_swap,1,FBHS/2017/page_83.pdf-1,numeric,9294571.92,9373039.92,1.0,True,0.75,0.75,0.75,0,0.9,0.75,"- [table_row] non-vestedat december 31 2017 -- number of performance share awards: $ 52.35 | weighted-averagegrant-datefair value: 428328
+50,period_swap,1,FBHS/2017/page_83.pdf-1,numeric,9294571.92,9373.71,0.0,True,0.75,0.75,0.75,0,0.95,0.75,"- [table_row] non-vestedat december 31 2017 -- number of performance share awards: $ 52.35 | weighted-averagegrant-datefair value: 428328
 - [table_row] granted -- number of performance share awards: 160196 | weighted-averagegrant-datefair value: 58.02
 - [pre_text] the following table summarizes information about performance share awards as of december 31 , 2017 , as well as activity during the year then ended .
-- [table_row] non-vestedat december 31 2016 -- number of performance share awards: 421600 | weighted-averagegrant-datefair value: $ 48.00
+- [table_row] non-vestedat december 31 2016 -- number of performance share awards: $ 48.00 | weighted-averagegrant-datefair value: 421600
 - [post_text] the fair value of performance share awards that vested during 2017 was $ 5.6 million ( 100580 shares ) .
-- [table_row] forfeited -- number of performance share awards: 48.22 | weighted-averagegrant-datefair value: -58285 ( 58285 )
+- [table_row] forfeited -- number of performance share awards: -58285 ( 58285 ) | weighted-averagegrant-datefair value: 48.22
 - [table_row] vested -- number of performance share awards: -95183 ( 95183 ) | weighted-averagegrant-datefair value: 45.13
-- [post_text] in 2017 , 2016 and 2015 , we awarded 15311 , 16471 and 19695 shares of company common stock to outside directors with a weighted average fair value on the date of the award of $ 63.43 , $ 57.37 and $ 46.21 , respectively .","Reasoning: The question asks for the value of the granted share awards as of December 31, 2017. From the evidence, the number of performance share awards granted is 160,196 and the weighted-average grant-date fair value is $58.02. The value of the granted share awards is calculated by multiplying the number of shares granted by the weighted-average grant-date fair value. 160,196 * 58.02 = 9,373,039.92
+- [post_text] in 2017 , 2016 and 2015 , we awarded 15311 , 16471 and 19695 shares of company common stock to outside directors with a weighted average fair value on the date of the award of $ 63.43 , $ 57.37 and $ 46.21 , respectively .","Reasoning: The question asks for the value of the granted share awards as of December 31, 2017. The relevant information is in the 'granted' row, which provides the number of performance share awards and their weighted-average grant-date fair value. The number of performance share awards granted is 160,196 and the weighted-average grant-date fair value is $58.02. Therefore, the value of the granted share awards is calculated as follows: 160,196 * 58.02 = 9,373.71
 
-Final Answer: 9,373,039.92
+Final Answer: 9373.71
 
-Confidence: 0.9"
+Confidence: 0.95"
 50,period_swap,0,ZBH/2008/page_57.pdf-2,numeric,45.103%,45.15,1.0,True,0.5714285714285714,0.5714285714285714,0.7142857142857143,0,0.9,0.5714285714285714,"- [table_row] contractual obligations: long-term debt | total: $ 460.1 | 2009: $ 2013 | 2010 and 2011: $ 2013 | 2012 and 2013: $ 460.1 | 2014 and thereafter: $ 2013
 - [table_row] contractual obligations: other long-term liabilities | total: 237.0 | 2009: 2013 | 2010 and 2011: 30.7 | 2012 and 2013: 15.1 | 2014 and thereafter: 191.2
 - [table_row] contractual obligations: total contractual obligations | total: $ 1020.1 | 2009: $ 85.9 | 2010 and 2011: $ 158.9 | 2012 and 2013: $ 531.8 | 2014 and thereafter: $ 243.5
@@ -1910,14 +1911,14 @@ Confidence: 0.9"
 Final Answer: 109.05%
 
 Confidence: 0.9"
-50,period_swap,1,FBHS/2017/page_83.pdf-2,numeric,10.563%,10.55,1.0,True,0.75,0.75,0.8333333333333334,0,0.9,0.75,"- [post_text] in 2017 , 2016 and 2015 , we awarded 15311 , 16471 and 19695 shares of company common stock to outside directors with a weighted average fair value on the date of the award of $ 63.43 , $ 57.37 and $ 46.21 , respectively .
+50,period_swap,0,FBHS/2017/page_83.pdf-2,numeric,10.563%,10.55,1.0,True,0.75,0.75,0.8333333333333334,0,0.9,0.75,"- [post_text] in 2017 , 2016 and 2015 , we awarded 15311 , 16471 and 19695 shares of company common stock to outside directors with a weighted average fair value on the date of the award of $ 63.43 , $ 57.37 and $ 46.21 , respectively .
 - [pre_text] the fair value of each performance share award is based on the average of the high and low stock price on the date of grant .
 - [post_text] the fair value of performance share awards that vested during 2017 was $ 5.6 million ( 100580 shares ) .
 - [table_row] granted -- number of performance share awards: 160196 | weighted-averagegrant-datefair value: 58.02
 - [table_row] forfeited -- number of performance share awards: -58285 ( 58285 ) | weighted-averagegrant-datefair value: 48.22
-- [table_row] vested -- number of performance share awards: 45.13 | weighted-averagegrant-datefair value: -95183 ( 95183 )
+- [table_row] vested -- number of performance share awards: -95183 ( 95183 ) | weighted-averagegrant-datefair value: 45.13
 - [table_row] non-vestedat december 31 2017 -- number of performance share awards: 428328 | weighted-averagegrant-datefair value: $ 52.35
-- [table_row] non-vestedat december 31 2016 -- number of performance share awards: $ 48.00 | weighted-averagegrant-datefair value: 421600","Reasoning: The question asks for the percentage change in the weighted average fair value on the date of the award of the common stock from 2016 to 2017. The weighted average fair value in 2016 was $57.37 and in 2017 it was $63.43. The change in value is (63.43 - 57.37) / 57.37 * 100 = 10.55
+- [table_row] non-vestedat december 31 2016 -- number of performance share awards: 421600 | weighted-averagegrant-datefair value: $ 48.00","Reasoning: The question asks for the percentage change in the weighted average fair value on the date of the award of the common stock from 2016 to 2017. The weighted average fair value in 2016 was $57.37 and in 2017 it was $63.43. The change in value is (63.43 - 57.37) / 57.37 * 100 = 10.55
 
 Final Answer: 10.55%
 
@@ -2018,16 +2019,16 @@ Confidence: 0.8"
 Final Answer: -101.57%
 
 Confidence: 0.9"
-50,period_swap,0,ABMD/2005/page_29.pdf-2,non_numeric,yes,47.37,0.0,True,0.8,0.8,1.0,0,0.9,0.8,"- [pre_text] 2005 annual report : financials page 15 notes to consolidated financial statements 2014 march 31 , 2005 in addition to compensation expense related to stock option grants , the pro forma compensation expense shown in the table above includes compensation expense related to stock issued under the company 2019s employee stock purchase plan of approximately $ 44000 , $ 19000 and $ 28000 for fiscal 2003 , 2004 and 2005 , respectively .
+50,period_swap,1,ABMD/2005/page_29.pdf-2,non_numeric,yes,9000.0,0.0,True,0.8666666666666667,0.8666666666666667,1.0,0,0.9,0.8666666666666667,"- [pre_text] 2005 annual report : financials page 15 notes to consolidated financial statements 2014 march 31 , 2005 in addition to compensation expense related to stock option grants , the pro forma compensation expense shown in the table above includes compensation expense related to stock issued under the company 2019s employee stock purchase plan of approximately $ 44000 , $ 19000 and $ 28000 for fiscal 2003 , 2004 and 2005 , respectively .
 - [pre_text] the pro forma tax effect of the employee compensation expense has not been considered due to the company 2019s reported net losses .
 - [pre_text] this pro forma compensation expense may not be representative of the amount to be expected in future years as pro forma compensation expense may vary based upon the number of options granted and shares purchased .
 - [pre_text] in december 2004 the fasb issued a revised statement of financial accounting standard ( sfas ) no .
 - [pre_text] the statement is effective for the company beginning in the first quarter of fiscal year 2007 .
 - [pre_text] in april 2005 , the the fair value per share of the options granted during fiscal 2003 , 2004 and 2005 was computed as $ 1.69 , $ 1.53 and $ 3.94 , per share , respectively , and was calculated using the black-scholes option-pricing model with the following assumptions. .
 - [table_row] expected dividend yield -- 2003: 2014 | 2004: 2014 | 2005: 2014
-- [table_row] assumed stock price volatility -- 2003: 85% ( 85 % ) | 2004: 86% ( 86 % ) | 2005: 84% ( 84 % )","Reasoning: The evidence provides the compensation expense related to the company's employee stock purchase plan for fiscal 2003, 2004, and 2005. For 2004, the value is $19,000 and for 2005, it is $28,000. To determine if the compensation expense grew from 2004 to 2005, I need to compare these two values. Growth = (28000 - 19000) / 19000 * 100 = 47.37
+- [table_row] assumed stock price volatility -- 2003: 86% ( 86 % ) | 2004: 84% ( 84 % ) | 2005: 85% ( 85 % )","Reasoning: The evidence provides the compensation expense related to the company's employee stock purchase plan for fiscal years 2003, 2004, and 2005. Specifically, for 2004, the expense was $19,000 and for 2005, it was $28,000. To determine if the expense grew from 2004 to 2005, I need to calculate the difference between these two values: 28,000 - 19,000 = 9,000. Since the result is positive, the expense did grow from 2004 to 2005.
 
-Final Answer: 47.37%
+Final Answer: 9000
 
 Confidence: 0.9"
 50,period_swap,0,NWS/2017/page_119.pdf-2,numeric,53.70399999999999%,53.7,1.0,True,0.7142857142857143,0.7142857142857143,1.0,0,0.9,0.7142857142857143,"- [post_text] the acquired intangible assets relate to the license of the realtor.com ae trademark , which has a fair value of approximately $ 116 million and an indefinite life , and customer relationships , other tradenames and certain multiple listing service agreements with an aggregate fair value of approximately $ 100 million , which are being amortized over a weighted-average useful life of approximately 15 years .
@@ -2094,11 +2095,11 @@ Confidence: 0.9"
 Final Answer: 7.28%
 
 Confidence: 0.9"
-50,period_swap,0,PM/2017/page_32.pdf-1,numeric,-17.588%,-17.59,1.0,True,0.75,0.75,1.0,0,0.9,0.75,"- [post_text] we anticipate that assumption changes will decrease 2018 pre-tax pension and postretirement expense to approximately $ 164 million as compared with approximately $ 199 million in 2017 , excluding amounts related to early retirement programs .
-- [table_row] pension plans -- 2017: 1.51% ( 1.51 % ) | 2016: 1.52% ( 1.52 % )
+50,period_swap,1,PM/2017/page_32.pdf-1,numeric,-17.588%,-17.59,1.0,True,0.75,0.75,1.0,0,0.9,0.75,"- [post_text] we anticipate that assumption changes will decrease 2018 pre-tax pension and postretirement expense to approximately $ 164 million as compared with approximately $ 199 million in 2017 , excluding amounts related to early retirement programs .
+- [table_row] pension plans -- 2017: 1.52% ( 1.52 % ) | 2016: 1.51% ( 1.51 % )
 - [post_text] a fifty-basis-point decrease in our discount rate would increase our 2018 pension and postretirement expense by approximately $ 38 million , and a fifty-basis-point increase in our discount rate would decrease our 2018 pension and postretirement expense by approximately $ 54 million .
 - [post_text] similarly , a fifty-basis-point decrease ( increase ) in the expected return on plan assets would increase ( decrease ) our 2018 pension expense by approximately $ 45 million .
-- [table_row] postretirement plans -- 2017: 3.79% ( 3.79 % ) | 2016: 3.68% ( 3.68 % )
+- [table_row] postretirement plans -- 2017: 3.68% ( 3.68 % ) | 2016: 3.79% ( 3.79 % )
 - [pre_text] weighted-average discount rate assumptions for pensions and postretirement plans are as follows: .
 - [post_text] benefit plans to our consolidated financial statements for a sensitivity discussion of the assumed health care cost trend rates. .
 - [pre_text] these calculations include various actuarial assumptions , such as discount rates , assumed rates of return on plan assets , compensation increases , mortality , turnover rates and health care cost trend rates .","Reasoning: The evidence provides the pre-tax pension and postretirement expense for 2017 and 2018. For 2017, the expense is approximately $199 million, and for 2018, it is approximately $164 million. The percentage change is calculated as ((164 - 199) / 199) * 100 = -17.59%
@@ -2118,26 +2119,26 @@ Confidence: 0.9"
 Final Answer: 99.57%
 
 Confidence: 0.95"
-50,period_swap,1,HUM/2014/page_44.pdf-1,numeric,60.8%,-20.45,0.0,True,0.8571428571428571,0.8571428571428571,0.8571428571428571,0,0.9,0.8571428571428571,"- [table_row] hum -- 12/31/2009: $ 125 | 12/31/2010: $ 201 | 12/31/2011: $ 160 | 12/31/2012: $ 244 | 12/31/2013: $ 342 | 12/31/2014: $ 100
+50,period_swap,1,HUM/2014/page_44.pdf-1,numeric,60.8%,60.8,1.0,True,0.8888888888888888,0.8888888888888888,1.0,0,0.9,0.8888888888888888,"- [table_row] hum -- 12/31/2009: $ 100 | 12/31/2010: $ 125 | 12/31/2011: $ 201 | 12/31/2012: $ 160 | 12/31/2013: $ 244 | 12/31/2014: $ 342
 - [post_text] the stock price performance included in this graph is not necessarily indicative of future stock price performance .
 - [table_row] s&p 500 -- 12/31/2009: $ 115 | 12/31/2010: $ 117 | 12/31/2011: $ 136 | 12/31/2012: $ 180 | 12/31/2013: $ 205 | 12/31/2014: $ 100
 - [pre_text] stock total return performance the following graph compares our total return to stockholders with the returns of the standard & poor 2019s composite 500 index ( 201cs&p 500 201d ) and the dow jones us select health care providers index ( 201cpeer group 201d ) for the five years ended december 31 , 2014 .
 - [pre_text] the graph assumes an investment of $ 100 in each of our common stock , the s&p 500 , and the peer group on december 31 , 2009 , and that dividends were reinvested when paid. .
-- [table_row] peer group -- 12/31/2009: $ 112 | 12/31/2010: $ 123 | 12/31/2011: $ 144 | 12/31/2012: $ 198 | 12/31/2013: $ 252 | 12/31/2014: $ 100
-- [post_text] table of contents .","Reasoning: The evidence provides the stock price for Hum for the years 2010 and 2011. For 2010, the stock price was $201, and for 2011, it was $160. The change in stock price from 2010 to 2011 is calculated as follows: (160 - 201) / 201 * 100 = -20.45
+- [table_row] peer group -- 12/31/2009: $ 100 | 12/31/2010: $ 112 | 12/31/2011: $ 123 | 12/31/2012: $ 144 | 12/31/2013: $ 198 | 12/31/2014: $ 252
+- [post_text] table of contents .","Reasoning: The question asks for the percentage change in the stock price performance for Hum from 2010 to 2011. The relevant values are the stock price for Hum on 12/31/2010 and 12/31/2011. For Hum, 2010 = $125 and 2011 = $201. The change is calculated as (201 - 125) / 125 * 100 = 60.80
 
-Final Answer: -20.45%
+Final Answer: 60.80%
 
 Confidence: 0.9"
-50,period_swap,1,VNO/2014/page_57.pdf-1,numeric,101.0,101.0,0.0,True,0.9166666666666666,0.9166666666666666,1.0,0,0.9,0.9166666666666666,"- [table_row] vornado realty trust -- 2009: $ 100 | 2010: $ 123 | 2011: $ 118 | 2012: $ 128 | 2013: $ 147 | 2014: $ 201
+50,period_swap,1,VNO/2014/page_57.pdf-1,numeric,101.0,-18.58,0.0,True,0.875,0.875,0.875,0,0.9,0.875,"- [table_row] vornado realty trust -- 2009: $ 123 | 2010: $ 118 | 2011: $ 128 | 2012: $ 147 | 2013: $ 201 | 2014: $ 100
 - [table_row] the nareit all equity index -- 2009: 128 | 2010: 139 | 2011: 166 | 2012: 171 | 2013: 218 | 2014: 100
 - [pre_text] the graph assumes that $ 100 was invested on december 31 , 2009 in our common shares , the s&p 500 index and the nareit all equity index and that all dividends were reinvested without the payment of any commissions .
 - [pre_text] performance graph the following graph is a comparison of the five-year cumulative return of our common shares , the standard & poor 2019s 500 index ( the 201cs&p 500 index 201d ) and the national association of real estate investment trusts 2019 ( 201cnareit 201d ) all equity index , a peer group index .
 - [table_row] s&p 500 index -- 2009: 115 | 2010: 117 | 2011: 136 | 2012: 180 | 2013: 205 | 2014: 100
 - [pre_text] there can be no assurance that the performance of our shares will continue in line with the same or similar trends depicted in the graph below. .
-- [post_text] .","Reasoning: The question asks for the five-year change in the Vornado Realty Trust index. The evidence provides the values for Vornado Realty Trust for each year from 2009 to 2014. The value in 2009 is $100 and in 2014 is $201. The five-year change is calculated as (201 - 100) / 100 * 100 = 101.00
+- [post_text] .","Reasoning: The question asks for the five-year change in the Vornado Realty Trust index. The evidence provides the values for Vornado Realty Trust from 2009 to 2014. The value in 2009 is $123 and in 2014 is $100. The five-year change is calculated as (2014 value - 2009 value) / 2009 value * 100 = (100 - 123) / 123 * 100 = -18.58
 
-Final Answer: 101.00%
+Final Answer: -18.58%
 
 Confidence: 0.9"
 50,period_swap,0,MSI/2014/page_76.pdf-3,numeric,12.159%,15.87,0.0,True,0.875,0.875,0.875,0,0.9,0.875,"- [pre_text] the weighted-average estimated fair value of employee stock options granted during 2014 , 2013 and 2012 was $ 11.02 , $ 9.52 and $ 9.60 , respectively , using the following weighted-average assumptions: .
@@ -2188,28 +2189,28 @@ Confidence: 0.9"
 Final Answer: 160035
 
 Confidence: 0.9"
-50,period_swap,1,BLL/2012/page_31.pdf-3,numeric,213.755%,2.87,0.0,True,0.8888888888888888,0.8888888888888888,1.0,0,0.9,0.8888888888888888,"- [table_row] s&p 500 -- 12/31/2007: $ 61.51 | 12/31/2008: $ 75.94 | 12/31/2009: $ 85.65 | 12/31/2010: $ 85.65 | 12/31/2011: $ 97.13 | 12/31/2012: $ 100.00
+50,period_swap,1,BLL/2012/page_31.pdf-3,numeric,213.755%,72.0,0.0,True,0.8333333333333334,0.8333333333333334,1.0,0,0.9,0.8333333333333334,"- [table_row] s&p 500 -- 12/31/2007: $ 61.51 | 12/31/2008: $ 75.94 | 12/31/2009: $ 85.65 | 12/31/2010: $ 85.65 | 12/31/2011: $ 97.13 | 12/31/2012: $ 100.00
 - [pre_text] shareholder return performance the line graph below compares the annual percentage change in ball corporation fffds cumulative total shareholder return on its common stock with the cumulative total return of the dow jones containers & packaging index and the s&p composite 500 stock index for the five-year period ended december 31 , 2012 .
 - [pre_text] total return to stockholders ( assumes $ 100 investment on 12/31/07 ) total return analysis .
-- [table_row] ball corporation -- 12/31/2007: $ 93.28 | 12/31/2008: $ 117.01 | 12/31/2009: $ 155.14 | 12/31/2010: $ 164.09 | 12/31/2011: $ 207.62 | 12/31/2012: $ 100.00
+- [table_row] ball corporation -- 12/31/2007: $ 100.00 | 12/31/2008: $ 93.28 | 12/31/2009: $ 117.01 | 12/31/2010: $ 155.14 | 12/31/2011: $ 164.09 | 12/31/2012: $ 207.62
 - [pre_text] it assumes $ 100 was invested on december 31 , 2007 , and that all dividends were reinvested .
 - [pre_text] the dow jones containers & packaging index total return has been weighted by market capitalization .
 - [post_text] source : bloomberg l.p .
-- [table_row] dj us containers & packaging -- 12/31/2007: $ 61.55 | 12/31/2008: $ 84.76 | 12/31/2009: $ 97.78 | 12/31/2010: $ 96.27 | 12/31/2011: $ 107.76 | 12/31/2012: $ 100.00","Reasoning: The question asks for the five-year total return for Ball Corporation and the S&P 500 as of 12/31/2012. For Ball Corporation, the total return is the value on 12/31/2012, which is $100.00. For the S&P 500, the total return is also the value on 12/31/2012, which is $97.13. The difference in total return between Ball Corporation and the S&P 500 is $100.00 - $97.13 = 2.87
+- [table_row] dj us containers & packaging -- 12/31/2007: $ 61.55 | 12/31/2008: $ 84.76 | 12/31/2009: $ 97.78 | 12/31/2010: $ 96.27 | 12/31/2011: $ 107.76 | 12/31/2012: $ 100.00","Reasoning: The five-year total return for Ball Corporation is the value on 12/31/2012 minus the value on 12/31/2007. For Ball Corporation, this is $207.62 - $100.00 = $107.62. The five-year total return for the S&P 500 is the value on 12/31/2012 minus the value on 12/31/2007. For the S&P 500, this is $97.13 - $61.51 = $35.62. The difference between these two returns is $107.62 - $35.62 = $72.00.
 
-Final Answer: 2.87
+Final Answer: 72.00
 
 Confidence: 0.9"
-50,period_swap,1,BLL/2012/page_31.pdf-4,numeric,110.49,7.76,0.0,True,0.8333333333333334,0.8333333333333334,1.0,0,0.9,0.8333333333333334,"- [pre_text] shareholder return performance the line graph below compares the annual percentage change in ball corporation fffds cumulative total shareholder return on its common stock with the cumulative total return of the dow jones containers & packaging index and the s&p composite 500 stock index for the five-year period ended december 31 , 2012 .
-- [table_row] dj us containers & packaging -- 12/31/2007: $ 100.00 | 12/31/2008: $ 61.55 | 12/31/2009: $ 84.76 | 12/31/2010: $ 97.78 | 12/31/2011: $ 96.27 | 12/31/2012: $ 107.76
-- [table_row] ball corporation -- 12/31/2007: $ 93.28 | 12/31/2008: $ 117.01 | 12/31/2009: $ 155.14 | 12/31/2010: $ 164.09 | 12/31/2011: $ 207.62 | 12/31/2012: $ 100.00
+50,period_swap,1,BLL/2012/page_31.pdf-4,numeric,110.49,107.62,0.0,True,1.0,1.0,1.0,0,0.9,1.0,"- [pre_text] shareholder return performance the line graph below compares the annual percentage change in ball corporation fffds cumulative total shareholder return on its common stock with the cumulative total return of the dow jones containers & packaging index and the s&p composite 500 stock index for the five-year period ended december 31 , 2012 .
+- [table_row] dj us containers & packaging -- 12/31/2007: $ 61.55 | 12/31/2008: $ 84.76 | 12/31/2009: $ 97.78 | 12/31/2010: $ 96.27 | 12/31/2011: $ 107.76 | 12/31/2012: $ 100.00
+- [table_row] ball corporation -- 12/31/2007: $ 100.00 | 12/31/2008: $ 93.28 | 12/31/2009: $ 117.01 | 12/31/2010: $ 155.14 | 12/31/2011: $ 164.09 | 12/31/2012: $ 207.62
 - [pre_text] total return to stockholders ( assumes $ 100 investment on 12/31/07 ) total return analysis .
 - [pre_text] the dow jones containers & packaging index total return has been weighted by market capitalization .
 - [table_row] s&p 500 -- 12/31/2007: $ 61.51 | 12/31/2008: $ 75.94 | 12/31/2009: $ 85.65 | 12/31/2010: $ 85.65 | 12/31/2011: $ 97.13 | 12/31/2012: $ 100.00
 - [pre_text] it assumes $ 100 was invested on december 31 , 2007 , and that all dividends were reinvested .
-- [post_text] source : bloomberg l.p .","Reasoning: The total return for Ball Corporation on 12/31/2012 is $100.00. The total return for the DJ US Containers & Packaging Index on 12/31/2012 is $107.76. I need to find the difference between these two values to determine how much greater the Ball Corporation return was compared to the DJ US Containers & Packaging Index return. 107.76 - 100.00 = 7.76
+- [post_text] source : bloomberg l.p .","Reasoning: The total return for Ball Corporation on 12/31/2012 is $207.62. The total return for the DJ US Containers & Packaging Index on 12/31/2012 is $100.00. The difference is 207.62 - 100.00 = 107.62
 
-Final Answer: 7.76
+Final Answer: 107.62
 
 Confidence: 0.9"
 50,period_swap,0,MRO/2007/page_136.pdf-2,numeric,26.42857,26.43,1.0,True,0.6666666666666666,0.6666666666666666,1.0,0,0.9,0.6666666666666666,"- [post_text] as of december 31 , 2007 , there was $ 37 million of unrecognized compensation cost related to restricted stock awards which is expected to be recognized over a weighted average period of 1.4 year .
@@ -2248,14 +2249,14 @@ Confidence: 0.9"
 Final Answer: 41.07%
 
 Confidence: 0.9"
-50,period_swap,0,SNA/2007/page_49.pdf-4,numeric,2.02778%,2.78,0.0,True,0.6923076923076923,0.6923076923076923,1.0,0,0.9,0.6923076923076923,"- [table_row] cash dividends paid per common share -- 2007: $ 1.11 | 2006: $ 1.08 | 2005: $ 1.00
-- [table_row] cash dividends paid as a percent of prior-year retained earnings -- 2007: 5.5% ( 5.5 % ) | 2006: 5.6% ( 5.6 % ) | 2005: 5.2% ( 5.2 % )
+50,period_swap,1,SNA/2007/page_49.pdf-4,numeric,2.02778%,2.78,0.0,True,0.6923076923076923,0.6923076923076923,1.0,0,0.9,0.6923076923076923,"- [table_row] cash dividends paid per common share -- 2007: $ 1.11 | 2006: $ 1.08 | 2005: $ 1.00
+- [table_row] cash dividends paid as a percent of prior-year retained earnings -- 2007: 5.6% ( 5.6 % ) | 2006: 5.2% ( 5.2 % ) | 2005: 5.5% ( 5.5 % )
 - [pre_text] cash dividends paid in 2007 , 2006 and 2005 totaled $ 64.8 million , $ 63.6 million and $ 57.8 million , respectively .
 - [pre_text] on november 1 , 2007 , the company announced that its board increased the quarterly cash dividend by 11.1% ( 11.1 % ) to $ 0.30 per share ( $ 1.20 per share per year ) .
 - [pre_text] at the beginning of fiscal 2006 , the company 2019s board increased the quarterly cash dividend by 8% ( 8 % ) to $ 0.27 per share ( $ 1.08 per share per year ) . .
 - [post_text] cash dividends paid as a percent of prior-year retained earnings 5.5% ( 5.5 % ) 5.6% ( 5.6 % ) 5.2% ( 5.2 % ) snap-on believes that its cash generated from operations , as well as the funds available from its credit facilities , will be sufficient to pay dividends in 2008 .
 - [pre_text] snap-on repurchased 2616618 shares of common stock for $ 109.8 million in 2006 and 912100 shares of common stock for $ 32.1 million in 2005 .
-- [pre_text] the cash used to repurchase shares of common stock was partially offset by $ 39.2 million of proceeds from stock purchase and option plan exercises and $ 6.0 million of related excess tax benefits .","Reasoning: The evidence lists the cash dividends paid per common share for 2007 and 2006. For 2007, the value is $1.11 and for 2006, it is $1.08. To find the percentage change, I use the formula: ((new value - old value) / old value) * 100. So, ((1.11 - 1.08) / 1.08) * 100 = 2.78
+- [pre_text] the cash used to repurchase shares of common stock was partially offset by $ 39.2 million of proceeds from stock purchase and option plan exercises and $ 6.0 million of related excess tax benefits .","Reasoning: The evidence lists the cash dividends paid per common share for 2007 and 2006. For 2007, the value is $1.11 and for 2006, the value is $1.08. To find the percentage change, I use the formula: ((new value - old value) / old value) * 100. So, ((1.11 - 1.08) / 1.08) * 100 = 2.78
 
 Final Answer: 2.78%
 
@@ -2272,17 +2273,17 @@ Confidence: 0.9"
 Final Answer: 100.00%
 
 Confidence: 0.9"
-50,period_swap,1,UPS/2012/page_32.pdf-4,numeric,7.756%,7.76,0.0,True,0.75,0.75,1.0,0,0.95,0.75,"- [pre_text] the comparison of the total cumulative return on investment , which is the change in the quarterly stock price plus reinvested dividends for each of the quarterly periods , assumes that $ 100 was invested on december 31 , 2007 in the standard & poor 2019s 500 index , the dow jones transportation average , and our class b common stock. .
+50,period_swap,1,UPS/2012/page_32.pdf-4,numeric,7.756%,7.75,1.0,True,0.8095238095238095,0.8095238095238095,1.0,0,0.9,0.8095238095238095,"- [pre_text] the comparison of the total cumulative return on investment , which is the change in the quarterly stock price plus reinvested dividends for each of the quarterly periods , assumes that $ 100 was invested on december 31 , 2007 in the standard & poor 2019s 500 index , the dow jones transportation average , and our class b common stock. .
 - [table_row] united parcel service inc . -- 12/31/2007: $ 100.00 | 12/31/2008: $ 80.20 | 12/31/2009: $ 86.42 | 12/31/2010: $ 112.60 | 12/31/2011: $ 116.97 | 12/31/2012: $ 121.46
-- [table_row] standard & poor 2019s 500 index -- 12/31/2007: $ 63.00 | 12/31/2008: $ 79.67 | 12/31/2009: $ 91.68 | 12/31/2010: $ 93.61 | 12/31/2011: $ 108.59 | 12/31/2012: $ 100.00
+- [table_row] standard & poor 2019s 500 index -- 12/31/2007: $ 100.00 | 12/31/2008: $ 63.00 | 12/31/2009: $ 79.67 | 12/31/2010: $ 91.68 | 12/31/2011: $ 93.61 | 12/31/2012: $ 108.59
 - [pre_text] the following graph shows a five year comparison of cumulative total shareowners 2019 returns for our class b common stock , the standard & poor 2019s 500 index , and the dow jones transportation average .
-- [table_row] dow jones transportation average -- 12/31/2007: $ 100.00 | 12/31/2008: $ 78.58 | 12/31/2009: $ 93.19 | 12/31/2010: $ 118.14 | 12/31/2011: $ 118.15 | 12/31/2012: $ 127.07
+- [table_row] dow jones transportation average -- 12/31/2007: $ 78.58 | 12/31/2008: $ 93.19 | 12/31/2009: $ 118.14 | 12/31/2010: $ 118.15 | 12/31/2011: $ 127.07 | 12/31/2012: $ 100.00
 - [pre_text] shareowner return performance graph the following performance graph and related information shall not be deemed 201csoliciting material 201d or to be 201cfiled 201d with the sec , nor shall such information be incorporated by reference into any future filing under the securities act of 1933 or securities exchange act of 1934 , each as amended , except to the extent that the company specifically incorporates such information by reference into such filing .
-- [post_text] .","Reasoning: The question asks for the return on investment (ROI) of an investment in UPS from 2008 to 2009. The ROI is calculated as the change in value from the start to the end of the period, divided by the starting value, then multiplied by 100. For UPS, the value on 12/31/2008 is $80.20 and on 12/31/2009 is $86.42. The change in value is 86.42 - 80.20 = 6.22. The ROI is then (6.22 / 80.20) * 100 = 7.7556, which rounds to 7.76.
+- [post_text] .","Reasoning: The evidence provides the stock prices for United Parcel Service Inc. (UPS) for each year. To find the return on investment (ROI) from 2008 to 2009, I need to calculate the change in the stock price from 2008 to 2009 and express it as a percentage of the 2008 price. The stock price on 12/31/2008 was $80.20 and on 12/31/2009 was $86.42. The change in price is 86.42 - 80.20 = 6.22. The ROI is then (6.22 / 80.20) * 100 = 7.75
 
-Final Answer: 7.76
+Final Answer: 7.75%
 
-Confidence: 0.95"
+Confidence: 0.9"
 50,period_swap,0,AON/2015/page_96.pdf-3,numeric,719.68334,1.0,0.0,False,1.0,1.0,1.0,0,1.0,1.0,"- [post_text] in 2015 , 2014 , and 2013 , 411636 shares , 439000 shares and 556000 shares , respectively , were issued to employees under the plan .
 - [post_text] in 2015 , 2014 , and 2013 , 2779 shares , 642 shares , and 172110 shares , respectively , were issued under the plan .
 - [pre_text] other information related to the company's share options is as follows ( in millions ) : .
@@ -2307,16 +2308,16 @@ Confidence: 1.0"
 Final Answer: 300
 
 Confidence: 1.0"
-50,period_swap,1,RSG/2018/page_94.pdf-1,numeric,-0.11825%,11.59,0.0,True,0.7857142857142857,0.7857142857142857,0.8571428571428571,0,0.9,0.7857142857142857,"- [pre_text] the following table reflects the activity in our allowance for doubtful accounts for the years ended december 31: .
+50,period_swap,1,RSG/2018/page_94.pdf-1,numeric,-0.11825%,11.91,0.0,True,0.75,0.75,0.8333333333333334,0,0.9,0.75,"- [pre_text] the following table reflects the activity in our allowance for doubtful accounts for the years ended december 31: .
 - [pre_text] we establish an allowance for doubtful accounts based on various factors including the credit risk of specific customers , age of receivables outstanding , historical trends , economic conditions and other information .
 - [pre_text] provisions for doubtful accounts are evaluated on a monthly basis and are recorded based on our historical collection experience , the age of the receivables , specific customer information and economic conditions .
-- [table_row] accounts written-off -- 2018: ( 39.4 ) | 2017: ( 35.7 ) | 2016: ( 23.1 )
+- [table_row] accounts written-off -- 2018: ( 35.7 ) | 2017: ( 23.1 ) | 2016: ( 39.4 )
 - [pre_text] the carrying value of our receivables , net of the allowance for doubtful accounts and customer credits , represents their estimated net realizable value .
 - [pre_text] past due receivable balances are written-off when our collection efforts have been unsuccessful in collecting amounts due .
 - [pre_text] we also review outstanding balances on an account-specific basis .
-- [table_row] balance at end of year -- 2018: $ 38.9 | 2017: $ 44.0 | 2016: $ 34.3","Reasoning: The question asks for the percentage decline in the allowance for doubtful accounts as of December 31, 2018. The relevant values from the evidence are the balance at the end of the year for 2018 and 2017. For 2018, the balance at the end of the year is $38.9 million, and for 2017, it is $44.0 million. The decline in the allowance for doubtful accounts is calculated as follows: (44.0 - 38.9) / 44.0 * 100 = 11.5909
+- [table_row] balance at end of year -- 2018: $ 34.3 | 2017: $ 38.9 | 2016: $ 44.0","Reasoning: The question asks for the percentage decline in the allowance for doubtful accounts as of December 31, 2018, compared to the previous year. The balance at the end of 2018 is $34.3 million, and the balance at the end of 2017 is $38.9 million. The decline in the allowance for doubtful accounts is calculated as (38.9 - 34.3) / 38.9 * 100 = 11.91%
 
-Final Answer: 11.59%
+Final Answer: 11.91%
 
 Confidence: 0.9"
 50,period_swap,1,MRO/2004/page_46.pdf-1,numeric,93.571%,93.58,1.0,True,0.5714285714285714,0.5714285714285714,0.7142857142857143,0,0.9,0.5714285714285714,"- [post_text] ( 1 ) 42749 shares were repurchased in open-market transactions under the marathon oil corporation dividend reinvestment and direct stock purchase plan ( the 2018 2018plan 2019 2019 ) by the administrator of the plan .
@@ -2326,7 +2327,7 @@ Confidence: 0.9"
 - [pre_text] the following table provides information about purchases by marathon and its affiliated purchaser during the fourth quarter ended december 31 , 2004 of equity securities that are registered by marathon pursuant to section 12 of the exchange act : issuer purchases of equity securities .
 - [pre_text] information concerning the high and low sales prices for the common stock as reported in the consolidated transaction reporting system and the frequency and amount of dividends paid during the last two years is set forth in 2018 2018selected quarterly financial data ( unaudited ) 2019 2019 on page f-41 .
 - [table_row] 11/01/04 2013 11/30/04 -- ( a ): 5145 | ( b ): $ 38.94 | ( c ): n/a | ( d ): n/a
-- [table_row] 12/01/04 2013 12/31/04 -- ( a ): $ 37.07 | ( b ): n/a | ( c ): n/a | ( d ): 34526","Reasoning: The question asks for the percentage of total number of shares purchased that were repurchased in open-market transactions. From the evidence, the total number of shares purchased (d) is 45686. The number of shares repurchased in open-market transactions (a) is 42749. The percentage is calculated as (42749 / 45686) * 100 = 93.58
+- [table_row] 12/01/04 2013 12/31/04 -- ( a ): 34526 | ( b ): $ 37.07 | ( c ): n/a | ( d ): n/a","Reasoning: The question asks for the percentage of total number of shares purchased that were repurchased in open-market transactions. From the evidence, the total number of shares purchased (d) is 45,686. The number of shares repurchased in open-market transactions (a) is 42,749. The percentage is calculated as (42,749 / 45,686) * 100 = 93.58
 
 Final Answer: 93.58%
 
@@ -2343,16 +2344,16 @@ Confidence: 0.9"
 Final Answer: Insufficient information
 
 Confidence: 0.8"
-50,period_swap,1,APD/2016/page_40.pdf-2,numeric,822.06667,822.07,1.0,True,0.8235294117647058,0.8235294117647058,0.8823529411764706,0,0.9,0.8235294117647058,"- [table_row] operating income -- 2016: 808.4 | 2015: 762.6 | 2014: 895.2
-- [table_row] operating margin -- 2016: 26.8% ( 26.8 % ) | 2015: 21.9% ( 21.9 % ) | 2014: 18.7% ( 18.7 % )
+50,period_swap,1,APD/2016/page_40.pdf-2,numeric,822.06667,813.2,1.0,True,0.8,0.8,1.0,0,0.9,0.8,"- [table_row] operating income -- 2016: 808.4 | 2015: 762.6 | 2014: 895.2
+- [table_row] operating margin -- 2016: 21.9% ( 21.9 % ) | 2015: 18.7% ( 18.7 % ) | 2014: 26.8% ( 26.8 % )
 - [table_row] equity affiliates 2019 income -- 2016: 64.6 | 2015: 60.9 | 2014: 52.7
 - [pre_text] 2014 on a gaap basis , the effective tax rate was 24.0% ( 24.0 % ) and 27.1% ( 27.1 % ) in 2015 and 2014 , respectively .
 - [pre_text] on a non-gaap basis , the effective tax rate was 24.2% ( 24.2 % ) and 24.1% ( 24.1 % ) in 2015 and 2014 , respectively .
-- [table_row] sales -- 2016: $ 3343.6 | 2015: $ 3693.9 | 2014: $ 4078.5
+- [table_row] sales -- 2016: $ 3693.9 | 2015: $ 4078.5 | 2014: $ 3343.6
 - [table_row] adjusted ebitda margin -- 2016: 34.9% ( 34.9 % ) | 2015: 30.4% ( 30.4 % ) | 2014: 41.6% ( 41.6 % )
-- [pre_text] in fiscal 2014 , our loss from discontinued operations , net of tax , was $ 2.9 .","Reasoning: The evidence provides operating income for the years 2016, 2015, and 2014. To find the average operating income, I need to sum these values and then divide by the number of years. Operating income for 2016 = 808.4, for 2015 = 762.6, and for 2014 = 895.2. Sum = 808.4 + 762.6 + 895.2 = 2466.2. Average = 2466.2 / 3 = 822.07
+- [pre_text] in fiscal 2014 , our loss from discontinued operations , net of tax , was $ 2.9 .","Reasoning: The question asks for the average operating income over the years 2014-2016. The relevant values are 2016 operating income = 808.4, 2015 operating income = 762.6, and 2014 operating income = 895.2. To find the average, I sum these values and divide by 3: (808.4 + 762.6 + 895.2) / 3 = 813.2
 
-Final Answer: 822.07
+Final Answer: 813.2
 
 Confidence: 0.9"
 50,period_swap,0,CDNS/2018/page_66.pdf-4,numeric,85929.0,-8300.0,0.0,True,0.5,0.5,0.6666666666666666,0,0.9,0.5,"- [pre_text] cumulative effect adjustments to retained earnings the following table presents the cumulative effect adjustments , net of income tax effects , to beginning retained earnings for new accounting standards adopted by cadence on the first day of fiscal 2018 : retained earnings ( in thousands ) .
@@ -2367,14 +2368,14 @@ Confidence: 0.9"
 Final Answer: -8300
 
 Confidence: 0.9"
-50,period_swap,1,CDNS/2015/page_30.pdf-2,numeric,37.9%,37.9,1.0,True,0.9047619047619048,0.9047619047619048,1.0,0,0.9,0.9047619047619048,"- [table_row] cadence design systems inc . -- 1/2/2010: 100.00 | 1/1/2011: 137.90 | 12/31/2011: 173.62 | 12/29/2012: 224.37 | 12/28/2013: 232.55 | 1/3/2015: 314.36
+50,period_swap,0,CDNS/2015/page_30.pdf-2,numeric,37.9%,37.9,1.0,True,0.9047619047619048,0.9047619047619048,1.0,0,0.9,0.9047619047619048,"- [table_row] cadence design systems inc . -- 1/2/2010: 100.00 | 1/1/2011: 137.90 | 12/31/2011: 173.62 | 12/29/2012: 224.37 | 12/28/2013: 232.55 | 1/3/2015: 314.36
 - [pre_text] the graph assumes that the value of the investment in our common stock on january 2 , 2010 and in each index on december 31 , 2009 ( including reinvestment of dividends ) was $ 100 and tracks it each year thereafter on the last day of cadence 2019s fiscal year through january 3 , 2015 and , for each index , on the last day of the calendar comparison of 5 year cumulative total return* among cadence design systems , inc. , the nasdaq composite index , and s&p 400 information technology cadence design systems , inc .
 - [pre_text] stockholder return performance graph the following graph compares the cumulative 5-year total stockholder return on our common stock relative to the cumulative total return of the nasdaq composite index and the s&p 400 information technology index .
 - [pre_text] nasdaq composite s&p 400 information technology 12/28/13 1/3/151/1/11 12/31/11 12/29/121/2/10 *$ 100 invested on 1/2/10 in stock or 12/31/09 in index , including reinvestment of dividends .
-- [table_row] s&p 400 information technology -- 1/2/2010: 128.72 | 1/1/2011: 115.22 | 12/31/2011: 135.29 | 12/29/2012: 173.25 | 12/28/2013: 187.84 | 1/3/2015: 100.00
+- [table_row] s&p 400 information technology -- 1/2/2010: 100.00 | 1/1/2011: 128.72 | 12/31/2011: 115.22 | 12/29/2012: 135.29 | 12/28/2013: 173.25 | 1/3/2015: 187.84
 - [table_row] nasdaq composite -- 1/2/2010: 100.00 | 1/1/2011: 117.61 | 12/31/2011: 118.70 | 12/29/2012: 139.00 | 12/28/2013: 196.83 | 1/3/2015: 223.74
 - [post_text] the stock price performance included in this graph is not necessarily indicative of future stock price performance. .
-- [pre_text] copyright a9 2014 s&p , a division of the mcgraw-hill companies inc .","Reasoning: The evidence provides the value of Cadence Design Systems Inc. stock on 1/2/2010 and 1/1/2011. The value on 1/2/2010 is 100.00 and on 1/1/2011 is 137.90. The rate of return is calculated as (final value - initial value) / initial value * 100. So, (137.90 - 100.00) / 100.00 * 100 = 37.90
+- [pre_text] copyright a9 2014 s&p , a division of the mcgraw-hill companies inc .","Reasoning: The evidence provides the value of Cadence Design Systems Inc. on 1/2/2010 and 1/1/2011. The value on 1/2/2010 is 100.00 and on 1/1/2011 is 137.90. The rate of return is calculated as (final value - initial value) / initial value * 100. So, (137.90 - 100.00) / 100.00 * 100 = 37.90
 
 Final Answer: 37.90%
 
@@ -2391,16 +2392,16 @@ Confidence: 0.9"
 Final Answer: 362400
 
 Confidence: 1.0"
-50,period_swap,1,L/2009/page_84.pdf-4,numeric,21.48%,21.48,1.0,True,0.8823529411764706,0.8823529411764706,1.0,0,0.9,0.8823529411764706,"- [table_row] s&p 500 index -- 2004: 100.00 | 2005: 104.91 | 2006: 121.48 | 2007: 128.16 | 2008: 80.74 | 2009: 102.11
+50,period_swap,1,L/2009/page_84.pdf-4,numeric,21.48%,22.55,0.0,True,0.6666666666666666,0.6666666666666666,0.8,0,0.9,0.6666666666666666,"- [table_row] s&p 500 index -- 2004: 104.91 | 2005: 121.48 | 2006: 128.16 | 2007: 80.74 | 2008: 102.11 | 2009: 100.00
 - [pre_text] the graph assumes that the value of the investment in our common stock , the s&p 500 index and the loews peer group was $ 100 on december 31 , 2004 and that all dividends were reinvested. .
 - [table_row] loews common stock -- 2004: 135.92 | 2005: 179.47 | 2006: 219.01 | 2007: 123.70 | 2008: 160.62 | 2009: 100.00
 - [pre_text] market for the registrant 2019s common equity , related stockholder matters and issuer purchases of equity securities the following graph compares annual total return of our common stock , the standard & poor 2019s 500 composite stock index ( 201cs&p 500 index 201d ) and our peer group ( 201cloews peer group 201d ) for the five years ended december 31 , 2009 .
 - [post_text] regular dividends of $ 0.0625 per share of loews common stock were paid in each calendar quarter of 2009 and 2008 .
 - [post_text] regular dividends of $ 0.455 per share of the former carolina group stock were paid in the first and second quarters of 2008. .
 - [post_text] dividend information we have paid quarterly cash dividends on loews common stock in each year since 1967 .
-- [post_text] we paid quarterly cash dividends on the former carolina group stock until the separation .","Reasoning: The evidence provides the S&P 500 index values for 2004, 2005, and 2006. To calculate the return on investment (ROI) from 2004 to 2006, I need to use the formula: ROI = (Final Value - Initial Value) / Initial Value * 100. The initial value is 100.00 (2004) and the final value is 121.48 (2006). So, (121.48 - 100.00) / 100.00 * 100 = 21.48
+- [post_text] we paid quarterly cash dividends on the former carolina group stock until the separation .","Reasoning: The question asks for the return on investment for the S&P 500 from 2004 to 2006. The return on investment can be calculated as the final value divided by the initial value minus 1. For the S&P 500, the value in 2004 was 104.91 and in 2006 it was 128.16. So, the return on investment = (128.16 / 104.91) - 1 = 0.2255 or 22.55%.
 
-Final Answer: 21.48%
+Final Answer: 22.55%
 
 Confidence: 0.9"
 50,period_swap,0,ECL/2016/page_52.pdf-4,numeric,192.0,554.0,0.0,True,1.0,1.0,1.0,0,0.9,1.0,"- [pre_text] approximately $ 554 million of these credit lines were available for use as of year-end 2016 .
@@ -3239,7 +3240,7 @@ Confidence: 0.9"
 - [pre_text] the statement is effective for the company beginning in the first quarter of fiscal year 2007 .
 - [pre_text] in april 2005 , the the fair value per share of the options granted during fiscal 2003 , 2004 and 2005 was computed as $ 1.69 , $ 1.53 and $ 3.94 , per share , respectively , and was calculated using the black-scholes option-pricing model with the following assumptions. .
 - [table_row] expected dividend yield -- 2003: 2014 | 2004: 2014 | 2005: 2014
-- [table_row] assumed stock price volatility -- 2003: 86% ( 86 % ) | 2004: 84% ( 84 % ) | 2005: 85% ( 85 % )","Reasoning: The evidence provides the compensation expense related to the company's employee stock purchase plan for fiscal years 2003, 2004, and 2005. Specifically, for 2004, the expense was $19,000, and for 2005, it was $28,000. To determine if the expense grew from 2004 to 2005, I need to calculate the difference between these two values: 28,000 - 19,000 = 9,000. Since the result is positive, the expense did grow from 2004 to 2005.
+- [table_row] assumed stock price volatility -- 2003: 86% ( 86 % ) | 2004: 84% ( 84 % ) | 2005: 85% ( 85 % )","Reasoning: The evidence provides the compensation expense related to the company's employee stock purchase plan for fiscal years 2003, 2004, and 2005. Specifically, for 2004, the expense was $19,000 and for 2005, it was $28,000. To determine if the expense grew from 2004 to 2005, I need to calculate the difference between these two values: 28,000 - 19,000 = 9,000. Since the result is positive, the expense did grow from 2004 to 2005.
 
 Final Answer: 9000
 
@@ -3521,16 +3522,16 @@ Confidence: 1.0"
 Final Answer: 300
 
 Confidence: 1.0"
-100,period_swap,1,RSG/2018/page_94.pdf-1,numeric,-0.11825%,11.59,0.0,True,0.8125,0.8125,0.875,0,0.9,0.8125,"- [pre_text] the following table reflects the activity in our allowance for doubtful accounts for the years ended december 31: .
+100,period_swap,1,RSG/2018/page_94.pdf-1,numeric,-0.11825%,12.5,0.0,True,0.8125,0.8125,0.875,0,0.9,0.8125,"- [pre_text] the following table reflects the activity in our allowance for doubtful accounts for the years ended december 31: .
 - [pre_text] we establish an allowance for doubtful accounts based on various factors including the credit risk of specific customers , age of receivables outstanding , historical trends , economic conditions and other information .
 - [pre_text] provisions for doubtful accounts are evaluated on a monthly basis and are recorded based on our historical collection experience , the age of the receivables , specific customer information and economic conditions .
 - [table_row] accounts written-off -- 2018: ( 35.7 ) | 2017: ( 23.1 ) | 2016: ( 39.4 )
 - [pre_text] the carrying value of our receivables , net of the allowance for doubtful accounts and customer credits , represents their estimated net realizable value .
 - [pre_text] past due receivable balances are written-off when our collection efforts have been unsuccessful in collecting amounts due .
 - [pre_text] we also review outstanding balances on an account-specific basis .
-- [table_row] balance at end of year -- 2018: $ 38.9 | 2017: $ 44.0 | 2016: $ 34.3","Reasoning: The question asks for the percentage decline in the allowance for doubtful accounts as of December 31, 2018. The relevant values from the evidence are the balance at the end of the year for 2018 and 2017. For 2018, the balance is $38.9 million, and for 2017, it is $44.0 million. The decline in the allowance for doubtful accounts from 2017 to 2018 is calculated as follows: (44.0 - 38.9) / 44.0 * 100 = 11.5909
+- [table_row] balance at end of year -- 2018: $ 38.9 | 2017: $ 44.0 | 2016: $ 34.3","Reasoning: The question asks for the percentage decline in the allowance for doubtful accounts as of December 31, 2018. The relevant values from the evidence are the balance at the end of the year for 2018 and 2017. For 2018, the balance is $38.9 million, and for 2017, it is $44.0 million. The decline in the allowance for doubtful accounts from 2017 to 2018 is calculated as follows: (44.0 - 38.9) / 44.0 * 100 = 12.5
 
-Final Answer: 11.59%
+Final Answer: 12.5%
 
 Confidence: 0.9"
 100,period_swap,1,MRO/2004/page_46.pdf-1,numeric,93.571%,93.55,1.0,True,0.5714285714285714,0.5714285714285714,0.7142857142857143,0,0.9,0.5714285714285714,"- [post_text] ( 1 ) 42749 shares were repurchased in open-market transactions under the marathon oil corporation dividend reinvestment and direct stock purchase plan ( the 2018 2018plan 2019 2019 ) by the administrator of the plan .
@@ -3557,16 +3558,16 @@ Confidence: 0.9"
 Final Answer: Insufficient information
 
 Confidence: 0.8"
-100,period_swap,1,APD/2016/page_40.pdf-2,numeric,822.06667,822.07,1.0,True,0.7777777777777778,0.7777777777777778,0.8888888888888888,0,0.9,0.7777777777777778,"- [table_row] operating income -- 2016: 808.4 | 2015: 762.6 | 2014: 895.2
+100,period_swap,1,APD/2016/page_40.pdf-2,numeric,822.06667,813.2,1.0,True,0.8,0.8,1.0,0,0.9,0.8,"- [table_row] operating income -- 2016: 808.4 | 2015: 762.6 | 2014: 895.2
 - [table_row] operating margin -- 2016: 21.9% ( 21.9 % ) | 2015: 18.7% ( 18.7 % ) | 2014: 26.8% ( 26.8 % )
 - [table_row] equity affiliates 2019 income -- 2016: 64.6 | 2015: 60.9 | 2014: 52.7
 - [pre_text] 2014 on a gaap basis , the effective tax rate was 24.0% ( 24.0 % ) and 27.1% ( 27.1 % ) in 2015 and 2014 , respectively .
 - [pre_text] on a non-gaap basis , the effective tax rate was 24.2% ( 24.2 % ) and 24.1% ( 24.1 % ) in 2015 and 2014 , respectively .
 - [table_row] sales -- 2016: $ 3693.9 | 2015: $ 4078.5 | 2014: $ 3343.6
 - [table_row] adjusted ebitda margin -- 2016: 34.9% ( 34.9 % ) | 2015: 30.4% ( 30.4 % ) | 2014: 41.6% ( 41.6 % )
-- [pre_text] in fiscal 2014 , our loss from discontinued operations , net of tax , was $ 2.9 .","Reasoning: The evidence provides operating income for the years 2016, 2015, and 2014. To find the average operating income, I need to sum these values and then divide by the number of years. Operating income for 2016 = 808.4, for 2015 = 762.6, and for 2014 = 895.2. Sum = 808.4 + 762.6 + 895.2 = 2466.2. Number of years = 3. Average = 2466.2 / 3 = 822.07
+- [pre_text] in fiscal 2014 , our loss from discontinued operations , net of tax , was $ 2.9 .","Reasoning: The question asks for the average operating income over the years 2014-2016. The relevant values are 2016 operating income = 808.4, 2015 operating income = 762.6, and 2014 operating income = 895.2. To find the average, I sum these values and divide by 3: (808.4 + 762.6 + 895.2) / 3 = 813.2
 
-Final Answer: 822.07
+Final Answer: 813.2
 
 Confidence: 0.9"
 100,period_swap,0,CDNS/2018/page_66.pdf-4,numeric,85929.0,-8300.0,0.0,True,0.5,0.5,0.6666666666666666,0,0.9,0.5,"- [pre_text] cumulative effect adjustments to retained earnings the following table presents the cumulative effect adjustments , net of income tax effects , to beginning retained earnings for new accounting standards adopted by cadence on the first day of fiscal 2018 : retained earnings ( in thousands ) .

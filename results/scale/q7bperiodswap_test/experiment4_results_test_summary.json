@@ -25,18 +25,18 @@
       "noise_level": 50,
       "injection_mode": "period_swap",
       "injected_sentences": 0,
-      "noise_reached_model_rate": 0.19,
+      "noise_reached_model_rate": 0.2,
       "n": 100,
       "n_scored_numeric": 97,
       "accuracy": 0.5154639175257731,
-      "evidence_support": 0.7822866325710751,
-      "evidence_support_strict": 0.7822866325710751,
-      "evidence_support_derived": 0.9090863776746128,
+      "evidence_support": 0.7795562404142125,
+      "evidence_support_strict": 0.7795562404142125,
+      "evidence_support_derived": 0.9062569375069371,
       "hallucination_rate": 0.02,
-      "evidence_support_vs_clean_strict": 0.7822866325710751,
+      "evidence_support_vs_clean_strict": 0.7795562404142125,
       "ece": 0.38865979381443333,
       "confidence_missing_count": 0,
-      "onrs": 0.7075932062661678
+      "onrs": 0.706774088619109
     },
     {
       "noise_level": 100,
@@ -46,14 +46,14 @@
       "n": 100,
       "n_scored_numeric": 97,
       "accuracy": 0.4742268041237113,
-      "evidence_support": 0.7813478319925686,
-      "evidence_support_strict": 0.7813478319925686,
-      "evidence_support_derived": 0.901918914418914,
+      "evidence_support": 0.7815700542147909,
+      "evidence_support_strict": 0.7815700542147909,
+      "evidence_support_derived": 0.9030300255300251,
       "hallucination_rate": 0.02,
-      "evidence_support_vs_clean_strict": 0.7813478319925686,
+      "evidence_support_vs_clean_strict": 0.7815700542147909,
       "ece": 0.4324742268041241,
       "confidence_missing_count": 0,
-      "onrs": 0.6861775454740592
+      "onrs": 0.686244212140726
     }
   ]
 }
