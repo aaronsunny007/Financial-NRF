@@ -196,13 +196,13 @@
     "pair_source": {
      "needs": "needs a trusted structured copy",
      "coverage": 0.31,
-     "auroc": 0.8064516129032258,
+     "auroc": 0.8225806451612904,
      "ci95": [
-      0.7187160326086957,
-      0.8871415770609319
+      0.7352711397058824,
+      0.9091314935064935
      ]
     },
-    "share_items_edited": 0.19
+    "share_items_edited": 0.2
    },
    "100": {
     "redundancy": {
@@ -253,19 +253,19 @@
     "redundancy": {
      "needs": "needs only the evidence",
      "coverage": 1.0,
-     "auroc": 0.44505,
+     "auroc": 0.4313,
      "ci95": [
-      0.41304375,
-      0.47435374999999996
+      0.39274749999999997,
+      0.46665875
      ]
     },
     "arithmetic": {
      "needs": "needs only the evidence",
      "coverage": 1.0,
-     "auroc": 0.5047,
+     "auroc": 0.50475,
      "ci95": [
-      0.49985,
-      0.5136
+      0.49854875,
+      0.51505
      ]
     },
     "number_source": {
@@ -280,13 +280,13 @@
     "pair_source": {
      "needs": "needs a trusted structured copy",
      "coverage": 0.31,
-     "auroc": 0.8387096774193549,
+     "auroc": 0.8870967741935484,
      "ci95": [
-      0.75,
-      0.9167229729729729
+      0.8043284161490684,
+      0.9571428571428572
      ]
     },
-    "share_items_edited": 0.24
+    "share_items_edited": 0.25
    },
    "100": {
     "redundancy": {
@@ -688,13 +688,13 @@
     "pair_source": {
      "needs": "needs a trusted structured copy",
      "coverage": 0.31,
-     "auroc": 0.8064516129032258,
+     "auroc": 0.8225806451612904,
      "ci95": [
-      0.72,
-      0.890625
+      0.7368238304093567,
+      0.9038690476190476
      ]
     },
-    "share_items_edited": 0.19
+    "share_items_edited": 0.2
    },
    "100": {
     "redundancy": {
@@ -745,19 +745,19 @@
     "redundancy": {
      "needs": "needs only the evidence",
      "coverage": 1.0,
-     "auroc": 0.44505,
+     "auroc": 0.4313,
      "ci95": [
-      0.409495,
-      0.4717025
+      0.39363625,
+      0.46395749999999997
      ]
     },
     "arithmetic": {
      "needs": "needs only the evidence",
      "coverage": 1.0,
-     "auroc": 0.5047,
+     "auroc": 0.50475,
      "ci95": [
-      0.4998,
-      0.5132512499999999
+      0.4985,
+      0.5147575
      ]
     },
     "number_source": {
@@ -772,13 +772,13 @@
     "pair_source": {
      "needs": "needs a trusted structured copy",
      "coverage": 0.31,
-     "auroc": 0.8387096774193549,
+     "auroc": 0.8870967741935484,
      "ci95": [
-      0.7567480942480943,
-      0.9167229729729729
+      0.8107991612301958,
+      0.9642857142857143
      ]
     },
-    "share_items_edited": 0.24
+    "share_items_edited": 0.25
    },
    "100": {
     "redundancy": {
@@ -1666,13 +1666,13 @@
     "pair_source": {
      "needs": "needs a trusted structured copy",
      "coverage": 0.94,
-     "auroc": 0.9202127659574468,
+     "auroc": 0.9308510638297872,
      "ci95": [
-      0.8826228171681044,
-      0.953125
+      0.8947368421052632,
+      0.9631674890350878
      ]
     },
-    "share_items_edited": 0.79
+    "share_items_edited": 0.82
    },
    "100": {
     "redundancy": {
@@ -1723,19 +1723,19 @@
     "redundancy": {
      "needs": "needs only the evidence",
      "coverage": 0.98,
-     "auroc": 0.22282382340691378,
+     "auroc": 0.180341524364848,
      "ci95": [
-      0.1739031731455974,
-      0.2657391021615445
+      0.1338077747168656,
+      0.22762289062499996
      ]
     },
     "arithmetic": {
      "needs": "needs only the evidence",
      "coverage": 0.98,
-     "auroc": 0.53009162848813,
+     "auroc": 0.509579341940858,
      "ci95": [
-      0.5107872742370649,
-      0.5538012499999999
+      0.5001535818408996,
+      0.5247124587940682
      ]
     },
     "number_source": {
@@ -1750,13 +1750,13 @@
     "pair_source": {
      "needs": "needs a trusted structured copy",
      "coverage": 0.94,
-     "auroc": 0.9574468085106383,
+     "auroc": 0.9787234042553191,
      "ci95": [
-      0.9263157894736842,
-      0.9840425531914894
+      0.9560317460317461,
+      0.9947368421052631
      ]
     },
-    "share_items_edited": 0.87
+    "share_items_edited": 0.92
    },
    "100": {
     "redundancy": {
@@ -1834,13 +1834,13 @@
     "pair_source": {
      "needs": "needs a trusted structured copy",
      "coverage": 0.94,
-     "auroc": 0.9202127659574468,
+     "auroc": 0.9308510638297872,
      "ci95": [
-      0.8829787234042553,
-      0.9555797101449276
+      0.8955827067669173,
+      0.9627757558790593
      ]
     },
-    "share_items_edited": 0.79
+    "share_items_edited": 0.82
    },
    "100": {
     "redundancy": {
@@ -1891,19 +1891,19 @@
     "redundancy": {
      "needs": "needs only the evidence",
      "coverage": 0.98,
-     "auroc": 0.22282382340691378,
+     "auroc": 0.180341524364848,
      "ci95": [
-      0.1739405877759267,
-      0.26598847534095327
+      0.13316810495626824,
+      0.22575082861989834
      ]
     },
     "arithmetic": {
      "needs": "needs only the evidence",
      "coverage": 0.98,
-     "auroc": 0.53009162848813,
+     "auroc": 0.509579341940858,
      "ci95": [
-      0.509382500095295,
-      0.5543582010242051
+      0.4992698354852145,
+      0.5268877721878475
      ]
     },
     "number_source": {
@@ -1918,13 +1918,13 @@
     "pair_source": {
      "needs": "needs a trusted structured copy",
      "coverage": 0.94,
-     "auroc": 0.9574468085106383,
+     "auroc": 0.9787234042553191,
      "ci95": [
-      0.925531914893617,
-      0.9838709677419355
+      0.9560439560439561,
+      0.9947916666666666
      ]
     },
-    "share_items_edited": 0.87
+    "share_items_edited": 0.92
    },
    "100": {
     "redundancy": {
