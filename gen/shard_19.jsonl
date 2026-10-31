@@ -1,0 +1,2 @@
+{"_meta": {"model": "Qwen/Qwen2.5-7B-Instruct", "precision": "Q4_K_M 4-bit GGUF (llama.cpp)"}}
+{"key": "ff8b93d83a207e6c11a0382c08bb04764b29bc204391fa39e07896bd518e76af", "response": "Reasoning: The evidence provides the values for 'Accounted for at cost, adjusted for observable price changes' for 2019 and 2018. For 2019, the value is $1,750, and for 2018, the value is $1,250. The percentage change is calculated as ((1750 - 1250) / 1250) * 100 = 40.00\n\nFinal Answer: 40.00%\n\nConfidence: 0.9", "seconds": 114.0}
