@@ -1,0 +1,2 @@
+{"_meta": {"model": "Qwen/Qwen2.5-7B-Instruct", "precision": "Q4_K_M 4-bit GGUF (llama.cpp)"}}
+{"key": "6ed77ea8cdee18de2c6e93583effe8577b652aa973c1c9f1098736e9eb9825ad", "response": "Reasoning: The evidence does not provide the total amount for notes payable, only the payments due by period, which is not sufficient to calculate the total amount. Therefore, I cannot calculate the ratio of total notes payable to total capital lease obligations with the given information.\n\nFinal Answer: Cannot determine\n\nConfidence: 0.8", "seconds": 125.27}

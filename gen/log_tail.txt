@@ -1,0 +1,9 @@
+shard 9
+4
+               total        used        free      shared  buff/cache   available
+Mem:              15           1           6           0           7          13
+Model name:                              AMD EPYC 7763 64-Core Processor
+::group::python -m experiments.experiment4 --split test --n 100 --injection-mode row_swap --output scratch/e4.csv
+=== 05:08:43 START python -m experiments.experiment4 --split test --n 100 --injection-mode row_swap --output scratch/e4.csv
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
