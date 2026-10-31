@@ -1,0 +1,2 @@
+{"_meta": {"model": "Qwen/Qwen2.5-7B-Instruct", "precision": "Q4_K_M 4-bit GGUF (llama.cpp)"}}
+{"key": "c075957a440143c6bc35d28f8b5e9e5f9f986cd35aa4e2570cd4041db498f189", "response": "Reasoning: The evidence lists the total notional amounts of cash flow hedges for 2011 and 2010 as $153.7 million and $139.9 million, respectively. To find the percentage change, I use the formula: ((2011 value - 2010 value) / 2010 value) * 100. So, ((153.7 - 139.9) / 139.9) * 100 = 9.86\n\nFinal Answer: 9.86%\n\nConfidence: 0.9", "seconds": 113.7}
