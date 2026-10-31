@@ -137,3 +137,11 @@ jobs:
           git add -f results/scale/${TAG}/judge_${SPLIT}.csv
           git commit -m "Judge scores for ${TAG} (run ${{ github.run_id }})"
           git push origin "judge-results-${{ github.run_id }}"
+      - name: Delete the shard branches
+        if: success()
+        env:
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          for b in $(git ls-remote --heads origin "judge-${RUN_ID}-*" | awk '{print $2}'); do
+            git push origin --delete "${b#refs/heads/}" || true
+          done
