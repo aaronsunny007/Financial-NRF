@@ -193,6 +193,34 @@ def weight_sweep():
     return df, "\n".join(lines)
 
 
+def paper_findings():
+    """Markdown for the paper-findings tab, built from results/paper/ so it follows the committed numbers."""
+    parts = []
+    md = RESULTS_DIR / "paper" / "ANALYSIS.md"
+    if md.exists():
+        parts.append(md.read_text(encoding="utf-8"))
+    checks = _load_json("paper/evidence_checks.json")
+    if checks:
+        names = ["redundancy", "arithmetic", "number_source", "pair_source"]
+        rows = ["| Run | Edit | Share of items edited | " + " | ".join(names) + " |",
+                "|---|---|---|" + "---|" * len(names)]
+        for run, info in checks.items():
+            levels = info.get("levels", {})
+            if not levels:
+                continue
+            top = levels[max(levels, key=float)]
+            cells = []
+            for n in names:
+                c = top.get(n)
+                cells.append(f"{c['auroc']:.2f}" if c and c.get("auroc") is not None else "n/a")
+            rows.append(f"| {run} | {info.get('mode', '')} | {top.get('share_items_edited', float('nan')):.2f} | "
+                        + " | ".join(cells) + " |")
+        parts.append("## 4. Checks on the evidence itself (AUROC at the highest edit level)\n\n"
+                     "`pair_source` needs a trusted structured copy of the table, `number_source` a trusted copy of the "
+                     "source text; `redundancy` and `arithmetic` need only the evidence.\n\n" + "\n".join(rows))
+    return "\n\n".join(parts) or "results/paper/ has not been generated yet (python -m experiments.paper_analysis)."
+
+
 def per_example(exp_choice, only_wrong):
     mapping = {
         "Experiment 1 — baseline": "experiment1_results_dev.csv",
@@ -323,6 +351,12 @@ with gr.Blocks(title="NRF — Financial RAG Reliability", theme=gr.themes.Soft()
         ws_df = gr.DataFrame(interactive=False, wrap=True)
         ws_md = gr.Markdown()
         demo.load(weight_sweep, outputs=[ws_df, ws_md])
+
+    with gr.Tab("Paper findings"):
+        gr.Markdown("Numbers from the paper *Reference-Free Reliability Scores Cannot See Corrupted Evidence*, "
+                    "read from `results/paper/`. Response-side scores sit near 0.5 (chance); only checks against "
+                    "a trusted structured copy see the swaps.")
+        gr.Markdown(value=paper_findings)
 
     with gr.Tab("Per-example inspection"):
         gr.Markdown("Every scored example, with the option to filter to failures only. "

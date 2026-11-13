@@ -26,6 +26,9 @@ Supervisor: Dr. Tazar Hussain.
 
 ## Modes
 
+The explorer includes a **Paper findings** tab that renders `results/paper/ANALYSIS.md` and the evidence-check table straight
+from the committed results, so it stays in step with the paper.
+
 **Results explorer** (default). Loads recorded experiment runs from `results/`.
 No model, no GPU, instant. This is the mode intended for hosted demonstration.
 

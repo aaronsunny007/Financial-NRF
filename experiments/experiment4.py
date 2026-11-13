@@ -96,7 +96,6 @@ def corrupt_evidence(evidence: str, level: int, key: str) -> str:
     Format is preserved (currency sign, percent sign, thousands commas, decimals). Four-digit
     years (1900 to 2099) are left alone so the evidence stays recognisably about the same filing.
     """
-    import hashlib
     import re
     global _CORRUPT_NUM
     if _CORRUPT_NUM is None:
@@ -137,8 +136,9 @@ REALISTIC_LEVELS = [0, 50, 100]
 EVIDENCE_EDIT_MODES = ("corrupt", "period_swap", "row_swap")
 
 
-def _row_pick(key: str, i: int, level: int) -> bool:
-    return int(hashlib.sha256(f"{key}|{i}|row".encode()).hexdigest()[:8], 16) % 100 < level
+def _row_pick(key: str, i: int, level: int, mode: str) -> bool:
+    # salted with the mode so that period_swap and row_swap draw independent row sets for the same item
+    return int(hashlib.sha256(f"{key}|{i}|{mode}|row".encode()).hexdigest()[:8], 16) % 100 < level
 
 
 def swap_periods(evidence: str, level: int, key: str) -> str:
@@ -156,7 +156,7 @@ def swap_periods(evidence: str, level: int, key: str) -> str:
                 vals = [p.split(": ", 1)[1] for p in parts]
                 if len(set(vals)) > 1:
                     eligible += 1
-                    if _row_pick(key, eligible, level):
+                    if _row_pick(key, eligible, level, "period_swap"):
                         vals = vals[1:] + vals[:1]
                         line = label + " -- " + " | ".join(f"{h}: {v}" for h, v in zip(heads, vals))
         out.append(line)
@@ -175,7 +175,7 @@ def swap_rows(evidence: str, level: int, key: str) -> str:
     payloads = [lines[i].split(" -- ", 1)[1] for i in idx]
     new = list(payloads)
     for k in range(len(idx)):
-        if _row_pick(key, k + 1, level) and payloads[k] != payloads[(k + 1) % len(idx)]:
+        if _row_pick(key, k + 1, level, "row_swap") and payloads[k] != payloads[(k + 1) % len(idx)]:
             new[k] = payloads[(k + 1) % len(idx)]
     for k, i in enumerate(idx):
         lines[i] = heads[k] + " -- " + new[k]
