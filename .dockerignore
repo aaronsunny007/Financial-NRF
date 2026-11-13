@@ -1,0 +1,6 @@
+# Keep the build context small: only deploy/ and results/ are copied into the image.
+*
+!deploy/
+!results/
+**/__pycache__
+**/*.pyc
