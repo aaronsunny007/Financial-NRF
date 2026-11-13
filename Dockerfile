@@ -10,8 +10,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-COPY deploy/requirements.txt deploy/requirements.txt
-RUN pip install --no-cache-dir -r deploy/requirements.txt
+COPY deploy/requirements-docker.txt deploy/requirements-docker.txt
+RUN pip install --no-cache-dir -r deploy/requirements-docker.txt
 
 COPY deploy/ deploy/
 COPY results/ results/
